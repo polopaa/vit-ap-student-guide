@@ -1,0 +1,96 @@
+import type { NavItem } from "../types";
+
+export const navItems: NavItem[] = [
+  {
+    id: "home",
+    path: "/",
+    title: "Home",
+    icon: "🏠",
+    description: "Start here — everything I've put together for you",
+  },
+  {
+    id: "about",
+    path: "/about",
+    title: "About VIT-AP",
+    icon: "🏫",
+    description: "My honest take on the campus — the good and the not-so-good",
+  },
+  {
+    id: "faqs",
+    path: "/faqs",
+    title: "FAQs",
+    icon: "❓",
+    description: "Questions I get asked all the time — answered straight up",
+  },
+  {
+    id: "academics",
+    path: "/academics",
+    title: "Academics",
+    icon: "📚",
+    description: "How exams, credits, and grading actually work here",
+  },
+  {
+    id: "hostel",
+    path: "/hostel",
+    title: "Hostel & Daily Life",
+    icon: "🛏️",
+    description: "What to expect from rooms, facilities, and daily routine",
+  },
+  {
+    id: "food",
+    path: "/food",
+    title: "Food",
+    icon: "🍽️",
+    description: "Mess, campus dining, and how most of us actually eat",
+  },
+  {
+    id: "essentials",
+    path: "/essentials",
+    title: "Essentials",
+    icon: "🎒",
+    description: "What to pack, what you'll need — don't show up unprepared",
+  },
+  {
+    id: "survival",
+    path: "/survival",
+    title: "Survival Guides",
+    icon: "🧭",
+    description: "Mistakes I've seen juniors make — and how to avoid them",
+  },
+  {
+    id: "portals",
+    path: "/portals",
+    title: "Systems & Portals",
+    icon: "💻",
+    description: "VTOP runs your academic life — here's how to use it well",
+  },
+  {
+    id: "data",
+    path: "/data",
+    title: "Data & Insights",
+    icon: "📊",
+    description: "Branch cutoffs and placement trends — the numbers behind it",
+  },
+  {
+    id: "resources",
+    path: "/resources",
+    title: "Resources",
+    icon: "📁",
+    description: "Links and materials I've actually found useful — not random",
+  },
+  {
+    id: "study-abroad",
+    path: "/study-abroad",
+    title: "Studying Abroad",
+    icon: "🌍",
+    description:
+      "International programs, ITP, SAP, and study abroad opportunities",
+  },
+  {
+    id: "gallery",
+    path: "/gallery",
+    title: "Gallery",
+    icon: "📸",
+    description: "Photos of campus so you know what you're walking into",
+  },
+];
