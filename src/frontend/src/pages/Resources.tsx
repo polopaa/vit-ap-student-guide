@@ -1,6 +1,45 @@
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { Layout } from "../components/Layout";
+
+function useScrollFade() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.05 },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return { ref, visible };
+}
+
+function FadeSection({
+  children,
+  className = "",
+  delay = 0,
+}: { children: React.ReactNode; className?: string; delay?: number }) {
+  const { ref, visible } = useScrollFade();
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+}
 
 const platforms = [
   {
@@ -21,7 +60,7 @@ const platforms = [
     name: "NPTEL Free Courses",
     url: "https://nptel.ac.in",
     icon: "🎓",
-    desc: "Free engineering and science courses with certificates — in my experience, NPTEL content often lines up well with the VIT-AP syllabus",
+    desc: "Free engineering and science courses with certificates — NPTEL content often lines up well with the VIT-AP syllabus",
     category: "Learning",
   },
   {
@@ -112,53 +151,59 @@ const pyqTips = [
 export default function Resources() {
   return (
     <Layout>
-      {/* Page header */}
-      <section className="section-bg-light px-6 py-10 border-b border-border">
-        <div className="max-w-4xl mx-auto">
-          <Badge
-            variant="secondary"
-            className="mb-3 text-xs font-semibold tracking-wide"
-          >
-            📁 Resources & Materials
-          </Badge>
-          <h1 className="text-section text-foreground mb-2">
-            Resources I've Actually Found Useful
+      {/* Chapter Hero */}
+      <section className="section-bg-light px-6 pt-20 pb-16 border-b border-border/30">
+        <div className="max-w-5xl mx-auto">
+          <p className="chapter-label mb-4">Chapter</p>
+          <h1 className="text-hero text-foreground mb-6 fade-in-up">
+            RESOURCES
           </h1>
-          <p className="text-muted-foreground text-sm max-w-xl">
+          <div className="gold-underline w-16 mb-8" />
+          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-1">
             Not a random list of links — these are things I or people I know
             have actually used. Bookmark what makes sense for your year and
             situation.
           </p>
+          <div className="mt-8">
+            <Badge variant="secondary" className="text-xs">
+              📁 Resources & Materials
+            </Badge>
+          </div>
         </div>
       </section>
 
-      {/* Notes & Study Material */}
+      {/* Notes */}
       <section
-        className="section-bg-muted px-6 py-10"
+        className="section-bg-muted px-6 py-16 border-b border-border/30"
         data-ocid="resources.notes_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-subsection text-foreground mb-1">
-            Where to Find Notes
-          </h2>
-          <p className="text-xs text-muted-foreground mb-5">
-            Finding good notes is a skill in itself — here's how most students
-            actually do it.
-          </p>
+        <div className="max-w-5xl mx-auto">
+          <FadeSection>
+            <p className="text-label mb-3">Where to Find Notes</p>
+            <h2 className="text-section text-foreground mb-2">
+              Study Material
+            </h2>
+            <div className="gold-underline w-12 mb-6" />
+            <p className="text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed">
+              Finding good notes is a skill in itself — here's how most students
+              actually do it.
+            </p>
+          </FadeSection>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {notesTips.map((item, i) => (
-              <div
-                key={item.icon}
-                className="card-elevated rounded-xl p-4 flex items-start gap-3"
-                data-ocid={`resources.notes_tip.${i + 1}`}
-              >
-                <span className="text-xl shrink-0 mt-0.5" aria-hidden="true">
-                  {item.icon}
-                </span>
-                <p className="text-sm text-foreground leading-relaxed">
-                  {item.tip}
-                </p>
-              </div>
+              <FadeSection key={item.icon} delay={i * 60}>
+                <div
+                  className="border border-border/40 bg-card p-5 flex items-start gap-4 transition-smooth hover:border-secondary/40"
+                  data-ocid={`resources.notes_tip.${i + 1}`}
+                >
+                  <span className="text-xl shrink-0 mt-0.5" aria-hidden="true">
+                    {item.icon}
+                  </span>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {item.tip}
+                  </p>
+                </div>
+              </FadeSection>
             ))}
           </div>
         </div>
@@ -166,89 +211,114 @@ export default function Resources() {
 
       {/* PYQs */}
       <section
-        className="section-bg-light px-6 py-10 border-t border-border"
+        className="section-bg-light px-6 py-16 border-b border-border/30"
         data-ocid="resources.pyqs_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-subsection text-foreground mb-1">
-            PYQs — Don't Skip These
-          </h2>
-          <p className="text-xs text-muted-foreground mb-5">
-            Past year question papers are probably the single most useful thing
-            you can study from. Trust me on this one.
-          </p>
-          <div className="space-y-3 mb-6">
+        <div className="max-w-5xl mx-auto">
+          <FadeSection>
+            <p className="text-label mb-3">Don't Skip These</p>
+            <h2 className="text-section text-foreground mb-2">
+              Past Year Questions
+            </h2>
+            <div className="gold-underline w-12 mb-6" />
+            <p className="text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed">
+              Past year question papers are probably the single most useful
+              thing you can study from. Trust me on this one.
+            </p>
+          </FadeSection>
+          <div className="space-y-4 mb-8">
             {pyqTips.map((tip, i) => (
-              <div
-                key={tip.slice(0, 20)}
-                className="flex items-start gap-3"
-                data-ocid={`resources.pyq_tip.${i + 1}`}
-              >
-                <span className="mt-1 shrink-0 w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold font-display">
-                  {i + 1}
-                </span>
-                <p className="text-sm text-foreground leading-relaxed">{tip}</p>
-              </div>
+              <FadeSection key={tip.slice(0, 20)} delay={i * 60}>
+                <div
+                  className="flex items-start gap-4"
+                  data-ocid={`resources.pyq_tip.${i + 1}`}
+                >
+                  <span className="mt-1 shrink-0 w-7 h-7 border border-secondary/40 text-secondary flex items-center justify-center text-xs font-bold font-display">
+                    {i + 1}
+                  </span>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {tip}
+                  </p>
+                </div>
+              </FadeSection>
             ))}
           </div>
-          <div className="p-4 rounded-xl bg-accent/10 border border-accent/20">
-            <p className="text-sm font-semibold text-foreground mb-2">
-              📌 Where to get PYQs
-            </p>
-            <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
-              <li>Department WhatsApp / Telegram groups — best source</li>
-              <li>Seniors from your branch — just ask, most will share</li>
-              <li>VTOP → Digital Library or Course Materials</li>
-              <li>Department-shared Google Drives (ask seniors for links)</li>
-            </ul>
-          </div>
+          <FadeSection delay={200}>
+            <div className="border-l-2 border-secondary/50 pl-5 py-4 bg-secondary/5">
+              <p className="text-sm font-semibold text-foreground mb-2">
+                📌 Where to get PYQs
+              </p>
+              <ul className="text-sm text-muted-foreground space-y-1">
+                {[
+                  "Department WhatsApp / Telegram groups — best source",
+                  "Seniors from your branch — just ask, most will share",
+                  "VTOP → Digital Library or Course Materials",
+                  "Department-shared Google Drives (ask seniors for links)",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <span className="text-secondary shrink-0">—</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </FadeSection>
         </div>
       </section>
 
-      {/* Useful Links */}
+      {/* Links */}
       <section
-        className="section-bg-muted px-6 py-10"
+        className="section-bg-muted px-6 py-16"
         data-ocid="resources.links_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-subsection text-foreground mb-2">Useful Links</h2>
-          <p className="text-xs text-muted-foreground mb-5">
-            Organized by what they're useful for. Use what applies to you — you
-            don't need all of them.
-          </p>
-          {linkCategories.map((cat) => (
-            <div key={cat} className="mb-7">
-              <h3 className="text-label mb-3">{cat}</h3>
+        <div className="max-w-5xl mx-auto">
+          <FadeSection>
+            <p className="text-label mb-3">Curated Links</p>
+            <h2 className="text-section text-foreground mb-2">
+              Useful Platforms
+            </h2>
+            <div className="gold-underline w-12 mb-6" />
+            <p className="text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed">
+              Organized by what they're useful for. Use what applies to you —
+              you don't need all of them.
+            </p>
+          </FadeSection>
+          {linkCategories.map((cat, catIdx) => (
+            <div key={cat} className="mb-10">
+              <FadeSection delay={catIdx * 50}>
+                <p className="text-label mb-4">{cat}</p>
+              </FadeSection>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {platforms
                   .filter((p) => p.category === cat)
                   .map((link, i) => (
-                    <a
-                      key={link.name}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      data-ocid={`resources.link.${cat.toLowerCase().replace(/\s+/g, "_")}.${i + 1}`}
-                      className="card-elevated rounded-xl p-4 flex items-start gap-3 hover:border-primary/40 hover:shadow-md transition-smooth group"
-                    >
-                      <span
-                        className="text-xl shrink-0 mt-0.5"
-                        aria-hidden="true"
+                    <FadeSection key={link.name} delay={i * 60 + catIdx * 30}>
+                      <a
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-ocid={`resources.link.${cat.toLowerCase().replace(/\s+/g, "_")}.${i + 1}`}
+                        className="border border-border/40 bg-card p-4 flex items-start gap-3 hover:border-secondary/50 transition-smooth group"
                       >
-                        {link.icon}
-                      </span>
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-1 mb-0.5">
-                          <p className="font-display font-semibold text-sm text-foreground group-hover:text-primary transition-colors truncate">
-                            {link.name}
+                        <span
+                          className="text-xl shrink-0 mt-0.5"
+                          aria-hidden="true"
+                        >
+                          {link.icon}
+                        </span>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-1 mb-0.5">
+                            <p className="font-display font-semibold text-sm text-foreground group-hover:text-secondary transition-colors truncate">
+                              {link.name}
+                            </p>
+                            <ExternalLink className="w-3 h-3 text-muted-foreground/50 shrink-0" />
+                          </div>
+                          <p className="text-xs text-muted-foreground leading-relaxed">
+                            {link.desc}
                           </p>
-                          <ExternalLink className="w-3 h-3 text-muted-foreground shrink-0" />
                         </div>
-                        <p className="text-xs text-muted-foreground leading-relaxed">
-                          {link.desc}
-                        </p>
-                      </div>
-                    </a>
+                      </a>
+                    </FadeSection>
                   ))}
               </div>
             </div>
@@ -257,18 +327,21 @@ export default function Resources() {
       </section>
 
       {/* Summary */}
-      <section className="section-bg-light px-6 py-8 border-t border-border">
-        <div className="max-w-4xl mx-auto flex items-start gap-3">
-          <span className="text-2xl shrink-0 mt-0.5" aria-hidden="true">
-            📌
-          </span>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            <span className="font-semibold text-foreground">Bottom line: </span>
-            Most of what you need is available for free — on VTOP, through
-            seniors, or on the platforms listed here. The main thing is knowing
-            where to look and actually using them instead of waiting until the
-            week before exams.
-          </p>
+      <section className="section-bg-light px-6 py-12 border-t border-border/30">
+        <div className="max-w-5xl mx-auto">
+          <FadeSection>
+            <div className="border-l-2 border-secondary/50 pl-6 py-4">
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                <span className="font-semibold text-foreground">
+                  Bottom line:{" "}
+                </span>
+                Most of what you need is available for free — on VTOP, through
+                seniors, or on the platforms listed here. The main thing is
+                knowing where to look and actually using them instead of waiting
+                until the week before exams.
+              </p>
+            </div>
+          </FadeSection>
         </div>
       </section>
     </Layout>

@@ -1,25 +1,27 @@
 {
-  "overview": "VIT-AP Student Hub is a concise, honest informational website for freshers and prospective VIT-AP students. It covers academics, hostel life, food, essentials, campus facilities, and more — helping visitors decide whether the college is right for them.",
+  "overview": "VIT-AP Student Hub is a bold, cinematic student guide for freshers and prospective students at VIT-AP University. Styled like a premium editorial magazine — dark backgrounds, bold serif typography, crimson and gold accents — it presents honest, personal advice about academics, hostel life, food, events, and studying abroad. Written in a senior-to-junior voice, it helps students decide whether VIT-AP is right for them.",
   "features": [
-    "Slot timetable for first-semester students",
-    "FFCS explanation for second semester onwards",
-    "Separate Food and Essentials sections",
-    "Move-in packing guide with campus stall tips",
-    "Health center and pharmacy info",
-    "Gallery with campus photo uploads",
-    "Pros and cons summary to help prospective students decide",
-    "Mess timings, pricing, and food quality honest review",
-    "Hostel room types and AY 2025-26 pricing"
+    "Cinematic dark editorial design inspired by donmolinico.es",
+    "Full-screen hero section with bold display typography",
+    "Chapter-like sections for each topic area",
+    "Smooth scroll animations and transitions",
+    "Minimal sticky navigation with dark theme",
+    "Complete VIT-AP student guide: academics, hostel, food, essentials, events, studying abroad",
+    "Admin gallery for campus photos",
+    "Bold accordion FAQs for prospective students",
+    "Pros & Cons section in split editorial layout",
+    "Sample mess menu and hostel pricing"
   ],
   "category": "education",
   "tags": [
-    "student-hub",
+    "student-guide",
     "vit-ap",
-    "freshers-guide",
-    "college-info",
-    "academics",
+    "university",
+    "editorial-design",
+    "dark-theme",
+    "freshers",
     "hostel",
-    "gallery"
+    "academics"
   ],
-  "last_updated": "2026-04-24T19:03:00.230Z"
+  "last_updated": "2026-04-25T09:59:55.135Z"
 }

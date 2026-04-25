@@ -2,7 +2,46 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ExternalLink } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { Layout } from "../components/Layout";
+
+function useScrollFade() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.05 },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return { ref, visible };
+}
+
+function FadeSection({
+  children,
+  className = "",
+  delay = 0,
+}: { children: React.ReactNode; className?: string; delay?: number }) {
+  const { ref, visible } = useScrollFade();
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+}
 
 interface StepCardProps {
   step: number;
@@ -12,15 +51,17 @@ interface StepCardProps {
 
 function StepCard({ step, title, desc }: StepCardProps) {
   return (
-    <div className="flex items-start gap-4 bg-card border border-border rounded-xl px-5 py-4 shadow-sm">
-      <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold font-display shrink-0">
+    <div className="flex items-start gap-4 border border-border/40 bg-card px-5 py-4 transition-smooth hover:border-border/60">
+      <div className="w-8 h-8 border border-secondary/40 text-secondary flex items-center justify-center text-sm font-bold font-display shrink-0">
         {step}
       </div>
       <div>
-        <p className="text-sm font-semibold text-foreground font-display">
+        <p className="font-display font-semibold text-foreground text-sm">
           {title}
         </p>
-        <p className="text-xs text-muted-foreground mt-0.5">{desc}</p>
+        <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">
+          {desc}
+        </p>
       </div>
     </div>
   );
@@ -135,23 +176,19 @@ const attendanceZones = [
     threshold: "≥ 80%",
     label: "Safe Zone",
     sublabel: "You're good — just keep attending normally",
-    colorClass: "text-accent",
-    bgClass: "bg-accent/10 border-accent/30",
+    colorClass: "text-secondary",
   },
   {
     threshold: "75 – 79%",
     label: "Caution Zone",
     sublabel: "One or two more absences and you're at risk — be careful",
-    colorClass: "text-yellow-600",
-    bgClass: "bg-yellow-50 border-yellow-200",
+    colorClass: "text-yellow-400",
   },
   {
     threshold: "65 – 74%",
     label: "Danger Zone",
-    sublabel:
-      "Likely debarred from next exam — talk to your proctor now, not later",
-    colorClass: "text-orange-600",
-    bgClass: "bg-orange-50 border-orange-200",
+    sublabel: "Likely debarred from next exam — talk to your proctor now",
+    colorClass: "text-orange-400",
   },
   {
     threshold: "< 65%",
@@ -159,7 +196,6 @@ const attendanceZones = [
     sublabel:
       "Already debarred from exam — you may need to re-register the subject",
     colorClass: "text-destructive",
-    bgClass: "bg-destructive/10 border-destructive/30",
   },
 ];
 
@@ -188,10 +224,10 @@ const marksComponents = [
 const vtopTips = [
   "Check attendance every week — don't wait until it drops below 75% to panic",
   "Download your timetable PDF at semester start and keep it somewhere accessible",
-  "Verify your CAT marks during the objection window — mistakes do happen, and once the window closes, you can't raise it",
+  "Verify your CAT marks during the objection window — mistakes do happen",
   "Pay all fees before the deadline — late fees are real and avoidable",
-  "If VTOP crashes during registration, note your preferred slots and get back quickly — it usually recovers",
-  "Your Proctor's contact is right there on VTOP — reach out early if something's off with your attendance or grades",
+  "If VTOP crashes during registration, note your preferred slots and get back quickly",
+  "Your Proctor's contact is right there on VTOP — reach out early if something's off",
 ];
 
 const deliveryInfo = [
@@ -220,32 +256,33 @@ const deliveryInfo = [
 export default function Portals() {
   return (
     <Layout>
-      {/* Hero */}
-      <section className="section-bg-light px-6 py-10 border-b border-border">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2" data-ocid="portals.page_label">
-            Systems & Portals
+      {/* Chapter Hero */}
+      <section className="section-bg-light px-6 pt-20 pb-16 border-b border-border/30">
+        <div className="max-w-5xl mx-auto">
+          <p className="chapter-label mb-4" data-ocid="portals.page_label">
+            Chapter
           </p>
-          <h2 className="text-hero text-foreground mb-4">
-            VTOP is basically your life here
-          </h2>
-          <p className="text-base text-muted-foreground max-w-2xl mb-6">
+          <h1 className="text-hero text-foreground mb-6 fade-in-up">
+            SYSTEMS &<br />
+            PORTALS
+          </h1>
+          <div className="gold-underline w-16 mb-8" />
+          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-1">
             Everything academic — registering courses, checking attendance,
             viewing marks, paying fees — runs through VTOP. Learn it early and
-            you'll save yourself a lot of confusion. This page also covers
-            deliveries to campus.
+            you'll save yourself a lot of confusion.
           </p>
-          <div className="flex flex-wrap gap-3 items-center">
-            <Badge variant="secondary" className="text-xs px-3 py-1">
+          <div className="flex flex-wrap gap-3 mt-8 items-center">
+            <Badge variant="secondary" className="text-xs">
               🖥️ VTOP Portal
             </Badge>
-            <Badge variant="secondary" className="text-xs px-3 py-1">
+            <Badge variant="outline" className="text-xs">
               📦 Deliveries
             </Badge>
             <Button
               variant="outline"
               size="sm"
-              className="text-xs gap-1.5 h-7"
+              className="text-xs gap-1.5"
               onClick={() => window.open("https://vtop.vitap.ac.in", "_blank")}
               data-ocid="portals.vtop_link_button"
             >
@@ -258,192 +295,217 @@ export default function Portals() {
 
       {/* VTOP Overview */}
       <section
-        className="section-bg-muted px-6 py-10 border-b border-border"
+        className="section-bg-muted px-6 py-16 border-b border-border/30"
         data-ocid="portals.vtop_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">Main Portal</p>
-          <h2 className="text-section mb-2">VTOP — What Each Section Does</h2>
-          <p className="text-sm text-muted-foreground mb-6">
-            URL:{" "}
-            <span className="font-mono text-primary">vtop.vitap.ac.in</span> —
-            Use desktop or laptop for anything important. The mobile browser
-            version is unreliable, especially during registration.
-          </p>
+        <div className="max-w-5xl mx-auto">
+          <FadeSection>
+            <p className="text-label mb-3">Main Portal</p>
+            <h2 className="text-section text-foreground mb-2">
+              VTOP — What Each Section Does
+            </h2>
+            <div className="gold-underline w-12 mb-6" />
+            <p className="text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed">
+              URL:{" "}
+              <span className="font-mono text-secondary">vtop.vitap.ac.in</span>{" "}
+              — Use desktop or laptop for anything important. The mobile browser
+              version is unreliable, especially during registration.
+            </p>
+          </FadeSection>
           <div
             className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6"
             data-ocid="portals.features_list"
           >
             {vtopFeatures.map((f, i) => (
-              <div
-                key={f.label}
-                className="bg-card border border-border rounded-xl p-4 shadow-sm flex items-start gap-3"
-                data-ocid={`portals.feature.${i + 1}`}
-              >
-                <span className="text-2xl shrink-0" aria-hidden="true">
-                  {f.icon}
-                </span>
-                <div>
-                  <p className="text-sm font-semibold text-foreground font-display">
-                    {f.label}
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-0.5">
-                    {f.desc}
-                  </p>
+              <FadeSection key={f.label} delay={i * 50}>
+                <div
+                  className="border border-border/40 bg-card p-4 flex items-start gap-3 transition-smooth hover:border-border/60"
+                  data-ocid={`portals.feature.${i + 1}`}
+                >
+                  <span className="text-2xl shrink-0" aria-hidden="true">
+                    {f.icon}
+                  </span>
+                  <div>
+                    <p className="font-display text-sm font-semibold text-foreground">
+                      {f.label}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">
+                      {f.desc}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </FadeSection>
             ))}
           </div>
-          <div className="bg-accent/10 border border-accent/30 rounded-xl p-4">
-            <p className="text-sm text-foreground">
-              <span className="font-semibold text-accent">
-                Login credentials
-              </span>{" "}
-              are handed out during admission. If you lose access, head to the
-              IT help desk on campus — they'll reset it for you.
-            </p>
-          </div>
+          <FadeSection delay={200}>
+            <div className="border-l-2 border-secondary/50 pl-5 py-3 bg-secondary/5">
+              <p className="text-sm text-muted-foreground">
+                <span className="font-semibold text-secondary">
+                  Login credentials{" "}
+                </span>
+                are handed out during admission. If you lose access, head to the
+                IT help desk on campus — they'll reset it for you.
+              </p>
+            </div>
+          </FadeSection>
         </div>
       </section>
 
-      {/* Attendance Tracking */}
+      {/* Attendance */}
       <section
-        className="section-bg-light px-6 py-10 border-b border-border"
+        className="section-bg-light px-6 py-16 border-b border-border/30"
         data-ocid="portals.attendance_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">Step-by-Step</p>
-          <h2 className="text-section mb-2">Checking Your Attendance</h2>
-          <p className="text-sm text-muted-foreground mb-6">
-            Attendance updates daily after class. Do this every week — not once
-            a month when it's already too late.
-          </p>
-          <div className="space-y-3 mb-8" data-ocid="portals.attendance_steps">
-            {attendanceSteps.map((s) => (
-              <StepCard key={s.title} {...s} />
+        <div className="max-w-5xl mx-auto">
+          <FadeSection>
+            <p className="text-label mb-3">Step-by-Step</p>
+            <h2 className="text-section text-foreground mb-2">
+              Checking Attendance
+            </h2>
+            <div className="gold-underline w-12 mb-6" />
+            <p className="text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed">
+              Attendance updates daily after class. Do this every week — not
+              once a month when it's already too late.
+            </p>
+          </FadeSection>
+          <div className="space-y-3 mb-10" data-ocid="portals.attendance_steps">
+            {attendanceSteps.map((s, i) => (
+              <FadeSection key={s.title} delay={i * 50}>
+                <StepCard {...s} />
+              </FadeSection>
             ))}
           </div>
-
-          <p className="text-label mb-3">Where You Stand</p>
+          <FadeSection delay={100}>
+            <p className="text-label mb-4">Where You Stand</p>
+          </FadeSection>
           <div
             className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
             data-ocid="portals.attendance_zones"
           >
             {attendanceZones.map((zone, i) => (
-              <div
-                key={zone.threshold}
-                className={`border rounded-xl p-4 shadow-sm ${zone.bgClass}`}
-                data-ocid={`portals.attendance_zone.${i + 1}`}
-              >
-                <p
-                  className={`text-xl font-bold font-display ${zone.colorClass}`}
+              <FadeSection key={zone.threshold} delay={i * 60}>
+                <div
+                  className="border border-border/40 bg-card p-5 transition-smooth hover:border-border/60"
+                  data-ocid={`portals.attendance_zone.${i + 1}`}
                 >
-                  {zone.threshold}
-                </p>
-                <p className={`text-sm font-semibold mt-1 ${zone.colorClass}`}>
-                  {zone.label}
-                </p>
-                <p className="text-xs text-muted-foreground mt-1">
-                  {zone.sublabel}
-                </p>
-              </div>
+                  <p
+                    className={`font-display text-2xl font-black ${zone.colorClass}`}
+                  >
+                    {zone.threshold}
+                  </p>
+                  <p
+                    className={`font-display text-sm font-semibold mt-1 ${zone.colorClass}`}
+                  >
+                    {zone.label}
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+                    {zone.sublabel}
+                  </p>
+                </div>
+              </FadeSection>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Marks and Grades */}
+      {/* Marks */}
       <section
-        className="section-bg-muted px-6 py-10 border-b border-border"
+        className="section-bg-muted px-6 py-16 border-b border-border/30"
         data-ocid="portals.marks_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">Step-by-Step</p>
-          <h2 className="text-section mb-2">Viewing Your Marks</h2>
-          <p className="text-sm text-muted-foreground mb-6">
-            CAT-I and CAT-II marks get uploaded shortly after each exam. DA
-            marks come in throughout the semester. FAT results appear after the
-            final. If something looks wrong, raise it during the objection
-            window — after that, your options are very limited.
-          </p>
-          <div className="space-y-3 mb-8" data-ocid="portals.marks_steps">
-            {marksSteps.map((s) => (
-              <StepCard key={s.title} {...s} />
+        <div className="max-w-5xl mx-auto">
+          <FadeSection>
+            <p className="text-label mb-3">Step-by-Step</p>
+            <h2 className="text-section text-foreground mb-2">
+              Viewing Your Marks
+            </h2>
+            <div className="gold-underline w-12 mb-6" />
+            <p className="text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed">
+              CAT-I and CAT-II marks get uploaded shortly after each exam. If
+              something looks wrong, raise it during the objection window —
+              after that, your options are very limited.
+            </p>
+          </FadeSection>
+          <div className="space-y-3 mb-10" data-ocid="portals.marks_steps">
+            {marksSteps.map((s, i) => (
+              <FadeSection key={s.title} delay={i * 50}>
+                <StepCard {...s} />
+              </FadeSection>
             ))}
           </div>
-
-          <div
-            className="bg-card border border-border rounded-xl p-5 shadow-sm"
-            data-ocid="portals.marks_breakdown"
-          >
-            <p className="text-label mb-4">
-              How your grade is calculated — Total: 100
-            </p>
-            <div className="grid sm:grid-cols-3 gap-3">
-              {marksComponents.map((row, i) => (
-                <div
-                  key={row.component}
-                  className={`text-center rounded-lg p-4 border ${
-                    row.highlight
-                      ? "bg-primary/8 border-primary/30"
-                      : "bg-background border-border"
-                  }`}
-                  data-ocid={`portals.marks_component.${i + 1}`}
-                >
-                  <p
-                    className={`text-2xl font-bold font-display ${
-                      row.highlight ? "text-primary" : "text-foreground"
-                    }`}
+          <FadeSection delay={100}>
+            <div
+              className="border border-border/40 bg-card p-6"
+              data-ocid="portals.marks_breakdown"
+            >
+              <p className="text-label mb-5">Grade Breakdown — Total: 100</p>
+              <div className="grid sm:grid-cols-3 gap-3">
+                {marksComponents.map((row, i) => (
+                  <div
+                    key={row.component}
+                    className={`text-center p-4 border transition-smooth ${row.highlight ? "border-secondary/40 bg-secondary/5" : "border-border/30 bg-background/40"}`}
+                    data-ocid={`portals.marks_component.${i + 1}`}
                   >
-                    {row.marks}
-                  </p>
-                  <p
-                    className={`text-sm font-semibold font-display mt-0.5 ${
-                      row.highlight ? "text-primary" : "text-foreground"
-                    }`}
-                  >
-                    {row.component}
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-0.5">
-                    {row.note}
-                  </p>
-                </div>
-              ))}
+                    <p
+                      className={`font-display text-3xl font-black ${row.highlight ? "text-secondary" : "text-foreground"}`}
+                    >
+                      {row.marks}
+                    </p>
+                    <p
+                      className={`font-display text-sm font-semibold mt-1 ${row.highlight ? "text-secondary" : "text-foreground"}`}
+                    >
+                      {row.component}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-0.5">
+                      {row.note}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-5 border-l-2 border-secondary/50 pl-5 py-3 bg-secondary/5">
+                <p className="text-xs text-muted-foreground">
+                  <span className="font-semibold text-secondary">
+                    Important to know:{" "}
+                  </span>
+                  You need at least 50% in the internal component (CAM) AND at
+                  least 50% overall to pass. Bombing your internals and banking
+                  on FAT alone won't work — I've seen people learn this the hard
+                  way.
+                </p>
+              </div>
             </div>
-            <div className="mt-4 bg-accent/10 border border-accent/30 rounded-lg p-3">
-              <p className="text-xs text-foreground">
-                <span className="font-semibold text-accent">
-                  Important to know:
-                </span>{" "}
-                You need at least 50% in the internal component (CAM) AND at
-                least 50% overall to pass. Bombing your internals and banking on
-                FAT alone won't work — I've seen people learn this the hard way.
-              </p>
-            </div>
-          </div>
+          </FadeSection>
         </div>
       </section>
 
       {/* VTOP Tips */}
       <section
-        className="section-bg-light px-6 py-10 border-b border-border"
+        className="section-bg-light px-6 py-16 border-b border-border/30"
         data-ocid="portals.student_tips_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">From experience</p>
-          <h2 className="text-section mb-6">Things worth knowing about VTOP</h2>
+        <div className="max-w-5xl mx-auto">
+          <FadeSection>
+            <p className="text-label mb-3">From Experience</p>
+            <h2 className="text-section text-foreground mb-2">
+              Things Worth Knowing
+            </h2>
+            <div className="gold-underline w-12 mb-8" />
+          </FadeSection>
           <div className="grid md:grid-cols-2 gap-3">
             {vtopTips.map((tip, i) => (
-              <div
-                key={tip}
-                className="flex items-start gap-3 bg-card border border-border rounded-xl px-4 py-3 shadow-sm"
-                data-ocid={`portals.tip.${i + 1}`}
-              >
-                <span className="text-accent font-bold text-base shrink-0 mt-0.5">
-                  →
-                </span>
-                <p className="text-sm text-foreground">{tip}</p>
-              </div>
+              <FadeSection key={tip} delay={i * 60}>
+                <div
+                  className="flex items-start gap-3 border border-border/40 bg-card px-5 py-4 transition-smooth hover:border-border/60"
+                  data-ocid={`portals.tip.${i + 1}`}
+                >
+                  <span className="text-secondary font-bold text-base shrink-0 mt-0.5">
+                    →
+                  </span>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {tip}
+                  </p>
+                </div>
+              </FadeSection>
             ))}
           </div>
         </div>
@@ -451,161 +513,169 @@ export default function Portals() {
 
       {/* Do & Don't */}
       <section
-        className="section-bg-muted px-6 py-10 border-b border-border"
+        className="section-bg-muted px-6 py-16 border-b border-border/30"
         data-ocid="portals.tips_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">Honest advice</p>
-          <h2 className="text-section mb-6">What to do and what not to do</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            <Card className="card-elevated">
-              <CardContent className="p-5">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-2xl" aria-hidden="true">
-                    ✅
-                  </span>
-                  <h3 className="text-subsection">Do this</h3>
-                </div>
-                <ul className="space-y-2">
-                  {[
-                    "Check attendance every week — not once a month",
-                    "Download and save your timetable at semester start",
-                    "Screenshot your registration confirmation as proof",
-                    "Raise mark disputes during the objection window",
-                    "Use desktop for course registration — mobile often errors",
-                    "Save your Proctor's contact number from day one",
-                  ].map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start gap-2 text-sm text-foreground"
-                    >
-                      <span className="text-accent mt-0.5 shrink-0">✓</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-            <Card className="card-elevated">
-              <CardContent className="p-5">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-2xl" aria-hidden="true">
-                    ⚠️
-                  </span>
-                  <h3 className="text-subsection">Avoid this</h3>
-                </div>
-                <ul className="space-y-2">
-                  {[
-                    "Checking attendance only at the end of semester — by then it's too late",
-                    "Sharing your VTOP login with anyone",
-                    "Ignoring fee payment deadlines listed on VTOP",
-                    "Using mobile browser during course registration",
-                    "Forgetting to log out on shared or lab computers",
-                  ].map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start gap-2 text-sm text-foreground"
-                    >
-                      <span className="text-destructive mt-0.5 shrink-0">
-                        ✗
+        <div className="max-w-5xl mx-auto">
+          <FadeSection>
+            <p className="text-label mb-3">Honest Advice</p>
+            <h2 className="text-section text-foreground mb-2">
+              Do This / Don't Do This
+            </h2>
+            <div className="gold-underline w-12 mb-8" />
+          </FadeSection>
+          <div className="grid md:grid-cols-2 gap-6">
+            {[
+              {
+                icon: "✅",
+                title: "Do this",
+                items: [
+                  "Check attendance every week — not once a month",
+                  "Download and save your timetable at semester start",
+                  "Screenshot your registration confirmation as proof",
+                  "Raise mark disputes during the objection window",
+                  "Use desktop for course registration — mobile often errors",
+                  "Save your Proctor's contact number from day one",
+                ],
+                accent: true,
+              },
+              {
+                icon: "⚠️",
+                title: "Avoid this",
+                items: [
+                  "Checking attendance only at the end of semester — by then it's too late",
+                  "Sharing your VTOP login with anyone",
+                  "Ignoring fee payment deadlines listed on VTOP",
+                  "Using mobile browser during course registration",
+                  "Forgetting to log out on shared or lab computers",
+                ],
+                accent: false,
+              },
+            ].map((group, gi) => (
+              <FadeSection key={group.title} delay={gi * 100}>
+                <Card className="card-cinema h-full">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="text-2xl" aria-hidden="true">
+                        {group.icon}
                       </span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
+                      <h3 className="font-display text-xl font-semibold text-foreground">
+                        {group.title}
+                      </h3>
+                    </div>
+                    <ul className="space-y-2">
+                      {group.items.map((item) => (
+                        <li
+                          key={item}
+                          className="flex items-start gap-2 text-sm text-muted-foreground"
+                        >
+                          <span
+                            className={`mt-0.5 shrink-0 font-bold ${group.accent ? "text-secondary" : "text-destructive"}`}
+                          >
+                            {group.accent ? "✓" : "✗"}
+                          </span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              </FadeSection>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Online Shopping & Deliveries */}
+      {/* Deliveries */}
       <section
-        className="section-bg-muted px-6 py-10 border-b border-border"
+        className="section-bg-light px-6 py-16 border-b border-border/30"
         data-ocid="portals.delivery_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">Getting stuff delivered</p>
-          <h2 className="text-section mb-2">Online Shopping & Deliveries</h2>
-          <p className="text-sm text-muted-foreground mb-6">
-            Amazon and Flipkart deliver to campus without issues. For food,
-            Swiggy works — Zomato generally doesn't. Local freelance delivery is
-            also an option that many students use. Use the address below for all
-            orders.
-          </p>
+        <div className="max-w-5xl mx-auto">
+          <FadeSection>
+            <p className="text-label mb-3">Getting Stuff Delivered</p>
+            <h2 className="text-section text-foreground mb-2">
+              Online Shopping & Deliveries
+            </h2>
+            <div className="gold-underline w-12 mb-6" />
+            <p className="text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed">
+              Amazon and Flipkart deliver to campus without issues. For food,
+              Swiggy works — Zomato generally doesn't. Use the address below for
+              all orders.
+            </p>
+          </FadeSection>
           <div
-            className="grid sm:grid-cols-2 gap-4 mb-5"
+            className="grid sm:grid-cols-2 gap-4 mb-6"
             data-ocid="portals.delivery_list"
           >
             {deliveryInfo.map((item, i) => (
-              <div
-                key={item.label}
-                className={`border rounded-xl p-4 shadow-sm flex items-start gap-3 ${
-                  item.label === "Official Campus Address"
-                    ? "bg-primary/5 border-primary/20 col-span-full sm:col-span-2"
-                    : "bg-card border-border"
-                }`}
-                data-ocid={`portals.delivery_item.${i + 1}`}
-              >
-                <span className="text-2xl shrink-0" aria-hidden="true">
-                  {item.icon}
-                </span>
-                <div>
-                  <p className="text-sm font-semibold text-foreground font-display">
-                    {item.label}
-                  </p>
-                  <p
-                    className={`text-xs mt-0.5 ${
-                      item.label === "Official Campus Address"
-                        ? "text-primary font-mono font-medium"
-                        : "text-muted-foreground"
-                    }`}
-                  >
-                    {item.desc}
-                  </p>
+              <FadeSection key={item.label} delay={i * 60}>
+                <div
+                  className={`border p-5 flex items-start gap-3 transition-smooth hover:border-border/60 ${item.label === "Official Campus Address" ? "border-secondary/30 bg-secondary/5 col-span-full sm:col-span-2" : "border-border/40 bg-card"}`}
+                  data-ocid={`portals.delivery_item.${i + 1}`}
+                >
+                  <span className="text-2xl shrink-0" aria-hidden="true">
+                    {item.icon}
+                  </span>
+                  <div>
+                    <p className="font-display font-semibold text-foreground text-sm">
+                      {item.label}
+                    </p>
+                    <p
+                      className={`text-xs mt-0.5 leading-relaxed ${item.label === "Official Campus Address" ? "text-secondary font-mono" : "text-muted-foreground"}`}
+                    >
+                      {item.desc}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </FadeSection>
             ))}
           </div>
-          <div className="bg-card border border-border rounded-xl p-4 shadow-sm">
-            <p className="text-sm font-semibold text-foreground font-display mb-2">
-              A few things that'll save you hassle
-            </p>
-            <ul className="space-y-1.5">
-              {[
-                "Add your hostel block and room number in the delivery address — reception holds it until you pick up",
-                "Packages at hostel reception are usually safe — just check regularly so they don't pile up",
-                "Swiggy/Zomato riders typically stop at the campus gate — go meet them there",
-                "COD works but having GPay or PhonePe just makes things faster and less awkward",
-              ].map((tip) => (
-                <li
-                  key={tip}
-                  className="flex items-start gap-2 text-sm text-foreground"
-                >
-                  <span className="text-accent mt-0.5 shrink-0">→</span>
-                  <span>{tip}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <FadeSection delay={200}>
+            <div className="border border-border/40 bg-card p-5">
+              <p className="font-display font-semibold text-foreground text-sm mb-3">
+                A few things that'll save you hassle
+              </p>
+              <ul className="space-y-2">
+                {[
+                  "Add your hostel block and room number in the delivery address — reception holds it until you pick up",
+                  "Packages at hostel reception are usually safe — just check regularly so they don't pile up",
+                  "Swiggy/Zomato riders typically stop at the campus gate — go meet them there",
+                  "COD works but having GPay or PhonePe just makes things faster and less awkward",
+                ].map((tip) => (
+                  <li
+                    key={tip}
+                    className="flex items-start gap-2 text-sm text-muted-foreground"
+                  >
+                    <span className="text-secondary mt-0.5 shrink-0 font-bold">
+                      →
+                    </span>
+                    <span>{tip}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </FadeSection>
         </div>
       </section>
 
       {/* Summary */}
       <section
-        className="section-bg-light px-6 py-8"
+        className="section-bg-muted px-6 py-12"
         data-ocid="portals.summary_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-primary/5 border border-primary/20 rounded-xl p-5">
-            <p className="text-label mb-1">The short version</p>
-            <p className="text-sm text-foreground">
-              VTOP is your academic control center — check it weekly for
-              attendance, marks, and deadlines. Don't wait for problems to
-              surface; stay on top of it from day one and you'll avoid 90% of
-              the stress most students create for themselves.
-            </p>
-          </div>
+        <div className="max-w-5xl mx-auto">
+          <FadeSection>
+            <div className="border-l-2 border-primary/60 pl-6 py-4">
+              <p className="text-label mb-2">The Short Version</p>
+              <p className="text-sm text-muted-foreground leading-relaxed max-w-3xl">
+                VTOP is your academic control center — check it weekly for
+                attendance, marks, and deadlines. Don't wait for problems to
+                surface; stay on top of it from day one and you'll avoid 90% of
+                the stress most students create for themselves.
+              </p>
+            </div>
+          </FadeSection>
         </div>
       </section>
     </Layout>

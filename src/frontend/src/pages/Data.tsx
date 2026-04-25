@@ -1,5 +1,44 @@
 import { Badge } from "@/components/ui/badge";
+import { useEffect, useRef, useState } from "react";
 import { Layout } from "../components/Layout";
+
+function useScrollFade() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.05 },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return { ref, visible };
+}
+
+function FadeSection({
+  children,
+  className = "",
+  delay = 0,
+}: { children: React.ReactNode; className?: string; delay?: number }) {
+  const { ref, visible } = useScrollFade();
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+}
 
 const cutoffItems = [
   {
@@ -74,156 +113,174 @@ const trends = [
   },
 ];
 
+const demandColors: Record<string, string> = {
+  "Very High": "text-primary border-primary/50 bg-primary/15",
+  High: "text-secondary border-secondary/50 bg-secondary/10",
+  Medium: "text-foreground/70 border-border/50 bg-muted/30",
+  "Low–Medium": "text-muted-foreground border-border/40 bg-muted/20",
+  Low: "text-muted-foreground/60 border-border/30 bg-muted/10",
+};
+
 export default function Data() {
   return (
     <Layout>
-      {/* Page header */}
-      <section className="section-bg-light px-6 py-10 border-b border-border">
-        <div className="max-w-4xl mx-auto">
-          <Badge
-            variant="secondary"
-            className="mb-3 text-xs font-semibold tracking-wide"
-          >
-            📊 Insider Numbers
-          </Badge>
-          <h1 className="text-section text-foreground mb-2">
-            Branch Cutoffs & What I've Observed
+      {/* Chapter Hero */}
+      <section className="section-bg-light px-6 pt-20 pb-16 border-b border-border/30">
+        <div className="max-w-5xl mx-auto">
+          <p className="chapter-label mb-4">Chapter</p>
+          <h1 className="text-hero text-foreground mb-6 fade-in-up">
+            DATA &<br />
+            INSIGHTS
           </h1>
-          <p className="text-muted-foreground text-sm max-w-xl">
+          <div className="gold-underline w-16 mb-8" />
+          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-1">
             If you're deciding which branch to pick — or trying to understand
             what the placement landscape looks like — this is the honest version
             of what I know. These are trends, not guarantees.
           </p>
+          <div className="mt-8">
+            <Badge variant="secondary" className="text-xs">
+              📊 Insider Numbers
+            </Badge>
+          </div>
         </div>
       </section>
 
-      {/* Admission Cutoffs */}
+      {/* Cutoffs */}
       <section
-        className="section-bg-muted px-6 py-10"
+        className="section-bg-muted px-6 py-16 border-b border-border/30"
         data-ocid="data.cutoffs_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-subsection text-foreground mb-1">
-            Admission Cutoffs by Branch
-          </h2>
-          <p className="text-xs text-muted-foreground mb-5">
-            Based on VITEEE rank — these are historical trends. They shift every
-            year depending on how many students apply and how the exam goes.
-          </p>
-          <div className="overflow-x-auto rounded-xl border border-border">
-            <table
-              className="w-full text-sm bg-card"
-              data-ocid="data.cutoffs_table"
-            >
-              <thead>
-                <tr className="border-b border-border">
-                  <th className="text-left px-4 py-3 font-display font-semibold text-foreground">
-                    Branch
-                  </th>
-                  <th className="text-left px-4 py-3 font-display font-semibold text-foreground">
-                    Demand
-                  </th>
-                  <th className="text-left px-4 py-3 font-display font-semibold text-foreground">
-                    Typical Rank Range
-                  </th>
-                  <th className="text-left px-4 py-3 font-display font-semibold text-foreground hidden md:table-cell">
-                    My Take
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {cutoffItems.map((row, i) => (
-                  <tr
-                    key={row.branch}
-                    className="border-b border-border last:border-0 hover:bg-muted/50 transition-colors"
-                    data-ocid={`data.cutoff_row.${i + 1}`}
-                  >
-                    <td className="px-4 py-3 font-medium text-foreground">
-                      {row.branch}
-                    </td>
-                    <td className="px-4 py-3">
-                      <Badge
-                        variant={
-                          row.demand === "Very High"
-                            ? "default"
-                            : row.demand === "High"
-                              ? "secondary"
-                              : "outline"
-                        }
-                        className="text-xs"
-                      >
-                        {row.demand}
-                      </Badge>
-                    </td>
-                    <td className="px-4 py-3 font-mono text-sm text-primary font-semibold">
-                      {row.rank}
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground hidden md:table-cell">
-                      {row.note}
-                    </td>
+        <div className="max-w-5xl mx-auto">
+          <FadeSection>
+            <p className="text-label mb-3">Admission Cutoffs by Branch</p>
+            <h2 className="text-section text-foreground mb-2">
+              Branch Cutoffs
+            </h2>
+            <div className="gold-underline w-12 mb-6" />
+            <p className="text-xs text-muted-foreground mb-8 leading-relaxed">
+              Based on VITEEE rank — these are historical trends. They shift
+              every year depending on how many students apply and how the exam
+              goes.
+            </p>
+          </FadeSection>
+          <FadeSection delay={100}>
+            <div className="overflow-x-auto border border-border/40">
+              <table
+                className="w-full text-sm bg-card"
+                data-ocid="data.cutoffs_table"
+              >
+                <thead>
+                  <tr className="border-b border-border/50">
+                    <th className="text-left px-5 py-4 font-display font-bold text-foreground tracking-wide">
+                      Branch
+                    </th>
+                    <th className="text-left px-5 py-4 font-display font-bold text-foreground tracking-wide">
+                      Demand
+                    </th>
+                    <th className="text-left px-5 py-4 font-display font-bold text-foreground tracking-wide">
+                      Typical Rank
+                    </th>
+                    <th className="text-left px-5 py-4 font-display font-bold text-foreground tracking-wide hidden md:table-cell">
+                      My Take
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="text-xs text-muted-foreground mt-3">
-            💡 A VITEEE rank under 50,000 generally opens up most branches. For
-            CSE, you want to be well under 10k to be safe — don't cut it close.
-          </p>
+                </thead>
+                <tbody>
+                  {cutoffItems.map((row, i) => (
+                    <tr
+                      key={row.branch}
+                      className="border-b border-border/30 last:border-0 hover:bg-muted/20 transition-colors"
+                      data-ocid={`data.cutoff_row.${i + 1}`}
+                    >
+                      <td className="px-5 py-4 font-display font-semibold text-foreground">
+                        {row.branch}
+                      </td>
+                      <td className="px-5 py-4">
+                        <span
+                          className={`text-xs font-bold tracking-widest uppercase border px-2.5 py-1 ${demandColors[row.demand] ?? "text-muted-foreground border-border/40"}`}
+                        >
+                          {row.demand}
+                        </span>
+                      </td>
+                      <td className="px-5 py-4 font-mono text-sm text-secondary font-bold">
+                        {row.rank}
+                      </td>
+                      <td className="px-5 py-4 text-xs text-muted-foreground hidden md:table-cell max-w-xs leading-relaxed">
+                        {row.note}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs text-muted-foreground mt-3 leading-relaxed">
+              💡 A VITEEE rank under 50,000 generally opens up most branches.
+              For CSE, you want to be well under 10k to be safe — don't cut it
+              close.
+            </p>
+          </FadeSection>
         </div>
       </section>
 
-      {/* General Trends */}
+      {/* Trends */}
       <section
-        className="section-bg-light px-6 py-10 border-t border-border"
+        className="section-bg-light px-6 py-16 border-b border-border/30"
         data-ocid="data.trends_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-subsection text-foreground mb-2">
-            What I've Seen About Placements
-          </h2>
-          <p className="text-xs text-muted-foreground mb-5">
-            These aren't official stats — they're patterns I've noticed over
-            time. Take them as context, not guarantees.
-          </p>
+        <div className="max-w-5xl mx-auto">
+          <FadeSection>
+            <p className="text-label mb-3">What I've Seen</p>
+            <h2 className="text-section text-foreground mb-2">
+              Placement Observations
+            </h2>
+            <div className="gold-underline w-12 mb-6" />
+            <p className="text-xs text-muted-foreground mb-8 leading-relaxed">
+              These aren't official stats — they're patterns I've noticed over
+              time. Take them as context, not guarantees.
+            </p>
+          </FadeSection>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {trends.map((t, i) => (
-              <div
-                key={t.title}
-                className="card-elevated rounded-xl p-4"
-                data-ocid={`data.trend_card.${i + 1}`}
-              >
-                <span className="text-2xl mb-2 block" aria-hidden="true">
-                  {t.icon}
-                </span>
-                <p className="font-display font-semibold text-sm text-foreground mb-1">
-                  {t.title}
-                </p>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  {t.desc}
-                </p>
-              </div>
+              <FadeSection key={t.title} delay={i * 70}>
+                <div
+                  className="border border-border/40 bg-card p-6 transition-smooth hover:border-secondary/40 h-full"
+                  data-ocid={`data.trend_card.${i + 1}`}
+                >
+                  <span className="text-3xl mb-4 block" aria-hidden="true">
+                    {t.icon}
+                  </span>
+                  <p className="font-display font-bold text-foreground mb-2 leading-tight">
+                    {t.title}
+                  </p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {t.desc}
+                  </p>
+                </div>
+              </FadeSection>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Summary banner */}
-      <section className="section-bg-light px-6 py-8 border-t border-border">
-        <div className="max-w-4xl mx-auto flex items-start gap-3">
-          <span className="text-2xl shrink-0 mt-0.5" aria-hidden="true">
-            📌
-          </span>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            <span className="font-semibold text-foreground">
-              Honestly, my advice:{" "}
-            </span>
-            Pick a branch you can tolerate and then put in real effort — CGPA,
-            certifications, a decent internship. Branch matters at the gate, but
-            after that, what you build for yourself matters a lot more. I've
-            seen CSE students with 6 CGPAs struggle and Mechanical students with
-            strong skills do well. The label helps, but it doesn't carry you.
-          </p>
+      {/* Summary */}
+      <section className="section-bg-muted px-6 py-12">
+        <div className="max-w-5xl mx-auto">
+          <FadeSection>
+            <div className="border-l-2 border-secondary/50 pl-6 py-4">
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                <span className="font-semibold text-foreground">
+                  Honestly, my advice:{" "}
+                </span>
+                Pick a branch you can tolerate and then put in real effort —
+                CGPA, certifications, a decent internship. Branch matters at the
+                gate, but after that, what you build for yourself matters a lot
+                more. I've seen CSE students with 6 CGPAs struggle and
+                Mechanical students with strong skills do well. The label helps,
+                but it doesn't carry you.
+              </p>
+            </div>
+          </FadeSection>
         </div>
       </section>
     </Layout>

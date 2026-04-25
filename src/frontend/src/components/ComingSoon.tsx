@@ -1,5 +1,3 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Link } from "@tanstack/react-router";
 import type { NavItem } from "../types";
 import { Layout } from "./Layout";
@@ -11,32 +9,81 @@ interface ComingSoonProps {
 export function ComingSoon({ section }: ComingSoonProps) {
   return (
     <Layout>
-      <div className="section-bg-light px-6 py-10 border-b border-border">
-        <div className="max-w-2xl">
-          <Badge variant="secondary" className="mb-3 text-xs">
+      {/* Hero area */}
+      <section
+        className="full-screen-hero relative"
+        style={{ minHeight: "60vh" }}
+      >
+        {/* Background gradient */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 60% 50% at 50% 80%, oklch(var(--primary) / 0.12) 0%, transparent 70%)",
+          }}
+        />
+
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-32 mt-16">
+          {/* Chapter label */}
+          <p className="chapter-label mb-6 animate-fade-in-up">
             {section.icon} {section.title}
-          </Badge>
-          <h1 className="text-section text-foreground mb-2">{section.title}</h1>
-          <p className="text-muted-foreground text-sm">{section.description}</p>
+          </p>
+
+          <h1
+            className="text-hero text-foreground mb-6 fade-in-up fade-in-up-delay-1"
+            style={{ maxWidth: "14ch" }}
+          >
+            {section.title}
+          </h1>
+
+          <div className="gold-underline w-16 mx-auto mb-8 fade-in-up fade-in-up-delay-2" />
+
+          <p className="text-muted-foreground font-body text-base md:text-lg max-w-md leading-relaxed fade-in-up fade-in-up-delay-3">
+            {section.description}
+          </p>
         </div>
-      </div>
-      <div className="section-bg-muted flex flex-col items-center justify-center px-6 py-20 text-center">
-        <span className="text-5xl mb-4" aria-hidden="true">
-          🚧
-        </span>
-        <h2 className="text-subsection text-foreground mb-2">
-          Content Coming Soon
-        </h2>
-        <p className="text-muted-foreground text-sm max-w-sm mb-6">
-          This section is being prepared. Check back soon for detailed,
-          student-friendly content.
-        </p>
-        <Link to="/">
-          <Button variant="default" data-ocid="coming_soon.home_link">
-            ← Back to Home
-          </Button>
-        </Link>
-      </div>
+      </section>
+
+      {/* Coming soon block */}
+      <section className="section-bg-muted py-24 px-6">
+        <div className="max-w-2xl mx-auto text-center">
+          <div
+            className="inline-flex flex-col items-center gap-6 p-10 border border-border/50 card-cinema"
+            style={{ borderRadius: "var(--radius)" }}
+          >
+            <div
+              className="w-16 h-16 rounded-full flex items-center justify-center text-2xl"
+              style={{
+                background: "oklch(var(--primary) / 0.15)",
+                border: "1px solid oklch(var(--primary) / 0.3)",
+              }}
+            >
+              🚧
+            </div>
+
+            <div>
+              <p className="text-label mb-3">Coming Soon</p>
+              <h2 className="font-display text-2xl font-bold text-foreground mb-3">
+                Content in Progress
+              </h2>
+              <p className="text-muted-foreground font-body text-sm leading-relaxed">
+                I'm putting this section together. Check back soon — it'll be
+                worth it.
+              </p>
+            </div>
+
+            <Link
+              to="/"
+              data-ocid="coming_soon.home_link"
+              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-body font-semibold transition-smooth border border-border/60 rounded-full hover:border-secondary hover:text-foreground text-muted-foreground"
+              style={{ fontFamily: "Figtree, sans-serif" }}
+            >
+              <span style={{ color: "oklch(var(--secondary))" }}>←</span>
+              Back to Home
+            </Link>
+          </div>
+        </div>
+      </section>
     </Layout>
   );
 }

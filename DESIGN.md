@@ -2,72 +2,73 @@
 
 ## Direction
 
-Cool Serene Light — Clean, modern, airy educational interface for student information and campus resources.
+Dark Editorial Cinema — Bold, commanding, luxe interface inspired by donmolinico.es. Deep near-black backgrounds, large serif typography, crimson + gold accents, full-screen chapters, minimal navigation.
 
 ## Tone
 
-Calm, approachable, accessible — no corporate stiffness; educational without being sterile; student-friendly warmth with clear hierarchy.
+Cinematic, sophisticated, authoritative — magazine editorial aesthetic; chapter-based storytelling; luxe without pretense; bold typography as primary design element.
 
 ## Differentiation
 
-Content-first layout with alternating section backgrounds for visual rhythm, clear card hierarchy with subtle shadows, and responsive mobile-first design.
+Each section is a visual "chapter" with its own composition; full-screen hero sections; bold serif headings commanding the page; minimal navigation (hamburger + logo); smooth scroll animations; crimson/gold accent hierarchy.
 
 ## Color Palette
 
 | Token      | OKLCH           | Role                                   |
 | ---------- | --------------- | -------------------------------------- |
-| background | 0.98 0.008 230  | Primary light background (cool off-white) |
-| foreground | 0.18 0.015 230  | Primary text color (cool dark)         |
-| card       | 1.0 0.004 230   | Content cards (pure white)             |
-| primary    | 0.42 0.14 240   | CTAs, links (deep ocean blue)          |
-| accent     | 0.6 0.15 170    | Secondary actions (teal)               |
-| muted      | 0.94 0.01 230   | Section backgrounds (light gray)       |
-| destructive| 0.55 0.22 25    | Warnings, errors (warm red)            |
+| background | 0.05 0.01 230   | Deep near-black primary                |
+| foreground | 0.92 0.01 230   | Cream/off-white text                   |
+| card       | 0.08 0.01 230   | Slightly lighter card containers       |
+| primary    | 0.35 0.18 25    | Crimson/maroon (Navarra red) accent    |
+| secondary  | 0.65 0.14 55    | Gold/amber highlights & dividers       |
+| muted      | 0.15 0.01 230   | Muted dark text, subtle elements       |
+| destructive| 0.55 0.22 25    | Warning state (warm red)               |
 
 ## Typography
 
-- Display: Space Grotesk — section headings, hero text, emphasis
-- Body: Figtree — paragraphs, UI labels, body copy
+- Display: Fraunces — bold serif for heroic headings, section titles, emphasis
+- Body: Figtree — paragraphs, UI labels, body copy at 16px
 - Mono: Geist Mono — code, technical content
-- Scale: Hero `text-4xl md:text-5xl font-bold`, H2 `text-2xl md:text-3xl font-bold`, label `text-xs font-semibold uppercase`, body `text-base`
+- Scale: Hero `text-5xl md:text-7xl`, H2 `text-3xl md:text-5xl`, H3 `text-xl md:text-2xl`, body `text-base`
 
 ## Elevation & Depth
 
-Subtle shadow hierarchy: cards elevated with `shadow-sm` (light 8% opacity), interactive zones with `shadow-md` (12% opacity), flat header/footer with border only. No decorative shadows or glows.
+Cinematic depth: full-width sections with deep shadows (20px 60px at 0.5 opacity), card elevation subtle (4px 12px at 0.3 opacity), header flat. Gold accent lines create visual rhythm between chapters.
 
 ## Structural Zones
 
 | Zone    | Background | Border | Notes |
 | ------- | ---------- | ------ | ----- |
-| Header  | card | border-b | Logo + navigation, white card with subtle divider |
-| Content | alternating muted/background | — | Sections alternate between background and muted; cards on white background |
-| Footer  | muted | border-t | Footer content on light gray background with top border |
+| Header  | background | none   | Minimal: logo + hamburger, sticky, no background change |
+| Hero    | background | none   | Full-screen, centered bold typography, deep depth |
+| Chapters| background | divider| Full-width sections, gold chapter dividers, varied composition |
+| Footer  | card | border-t | Slightly elevated background with top border |
 
 ## Spacing & Rhythm
 
-Spacious density: 48px section gaps, 24px card padding, 12px content groups, 4px micro-spacing. Alternating muted sections create visual rhythm without overcrowding.
+Full-screen immersion: 64px+ section gaps, 40px hero padding, 32px chapter padding, 6px accent accents. Gold dividers create chapter breaks; negative space dominates.
 
 ## Component Patterns
 
-- Buttons: primary (ocean blue bg, white text, rounded-md), secondary (muted bg, dark text), disabled (muted 50% opacity)
-- Cards: rounded-md, white background, `shadow-sm`, `border-border` for selected/interactive state
-- Badges: pill-shaped (rounded-full), muted background with dark text or primary background with white text
-- Lists: bullet points or structured cards, 16px spacing between items
+- Buttons: primary (crimson bg, cream text, no radius), secondary (gold bg, dark text), hover (shadow-lg-cinema)
+- Cards: minimal borders, dark card bg, subtle shadow, gold accent top edge optional
+- Headings: bold Fraunces serif, gold accent underline optional, tracking-tight
+- Lists: minimal bullets, 24px spacing, gold accent bullets optional
 
 ## Motion
 
-- Entrance: fade-in on scroll (0.3s ease-out), no bounce
-- Hover: subtle scale (1.02) + shadow-md on interactive elements (0.2s smooth)
-- Decorative: none — functionality over decoration for educational context
+- Entrance: fade-in-up (0.6s ease-out) on scroll, staggered sections
+- Hover: subtle lift (2px shadow increase), 0.2s smooth
+- Scroll: chapters fade in as viewport enters, smooth parallax optional
 
 ## Constraints
 
-- No full-width backgrounds except structural zones (header/footer)
-- Maximum content width 1200px with 2rem side padding
-- All interactive elements must have clear hover states
-- Text contrast minimum AA+ (7:1 for body, 4.5:1 for large text)
-- Mobile breakpoints: 640px (sm), 768px (md), 1024px (lg), 1280px (xl)
+- Full-width backgrounds only (no max-width containers for sections)
+- Minimal navigation (hamburger + logo only)
+- Text contrast minimum AA+ (all foreground on background ≥7:1)
+- Mobile breakpoints: 640px (sm), 768px (md), 1024px (lg)
+- No decorative elements except chapter dividers
 
 ## Signature Detail
 
-Clear visual hierarchy through deliberately varied section backgrounds (alternating muted/light) creates rhythm and reduces cognitive load for information-dense educational content.
+Bold serif typography filling full-screen hero sections, punctuated by crimson accents and gold chapter dividers, creates a commanding editorial presence. Minimal navigation keeps focus on content storytelling.

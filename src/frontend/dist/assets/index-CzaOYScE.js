@@ -23642,6 +23642,1677 @@ function useLocation(opts) {
     select: (state) => state.location
   });
 }
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const toKebabCase = (string) => string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+const toCamelCase = (string) => string.replace(
+  /^([A-Z])|[\s-_]+(\w)/g,
+  (match, p1, p2) => p2 ? p2.toUpperCase() : p1.toLowerCase()
+);
+const toPascalCase = (string) => {
+  const camelCase = toCamelCase(string);
+  return camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
+};
+const mergeClasses = (...classes) => classes.filter((className, index2, array) => {
+  return Boolean(className) && className.trim() !== "" && array.indexOf(className) === index2;
+}).join(" ").trim();
+const hasA11yProp = (props) => {
+  for (const prop in props) {
+    if (prop.startsWith("aria-") || prop === "role" || prop === "title") {
+      return true;
+    }
+  }
+};
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+var defaultAttributes = {
+  xmlns: "http://www.w3.org/2000/svg",
+  width: 24,
+  height: 24,
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 2,
+  strokeLinecap: "round",
+  strokeLinejoin: "round"
+};
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Icon = reactExports.forwardRef(
+  ({
+    color = "currentColor",
+    size = 24,
+    strokeWidth = 2,
+    absoluteStrokeWidth,
+    className = "",
+    children,
+    iconNode,
+    ...rest
+  }, ref) => reactExports.createElement(
+    "svg",
+    {
+      ref,
+      ...defaultAttributes,
+      width: size,
+      height: size,
+      stroke: color,
+      strokeWidth: absoluteStrokeWidth ? Number(strokeWidth) * 24 / Number(size) : strokeWidth,
+      className: mergeClasses("lucide", className),
+      ...!children && !hasA11yProp(rest) && { "aria-hidden": "true" },
+      ...rest
+    },
+    [
+      ...iconNode.map(([tag, attrs]) => reactExports.createElement(tag, attrs)),
+      ...Array.isArray(children) ? children : [children]
+    ]
+  )
+);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const createLucideIcon = (iconName, iconNode) => {
+  const Component2 = reactExports.forwardRef(
+    ({ className, ...props }, ref) => reactExports.createElement(Icon, {
+      ref,
+      iconNode,
+      className: mergeClasses(
+        `lucide-${toKebabCase(toPascalCase(iconName))}`,
+        `lucide-${iconName}`,
+        className
+      ),
+      ...props
+    })
+  );
+  Component2.displayName = toPascalCase(iconName);
+  return Component2;
+};
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$7 = [
+  [
+    "path",
+    {
+      d: "M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z",
+      key: "1tc9qg"
+    }
+  ],
+  ["circle", { cx: "12", cy: "13", r: "3", key: "1vg3eu" }]
+];
+const Camera = createLucideIcon("camera", __iconNode$7);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$6 = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
+const ChevronDown = createLucideIcon("chevron-down", __iconNode$6);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$5 = [
+  ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
+  ["path", { d: "M10 14 21 3", key: "gplh6r" }],
+  ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6", key: "a6xqqp" }]
+];
+const ExternalLink = createLucideIcon("external-link", __iconNode$5);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$4 = [
+  ["rect", { width: "18", height: "11", x: "3", y: "11", rx: "2", ry: "2", key: "1w4ew1" }],
+  ["path", { d: "M7 11V7a5 5 0 0 1 10 0v4", key: "fwvmzm" }]
+];
+const Lock = createLucideIcon("lock", __iconNode$4);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$3 = [
+  ["path", { d: "M4 12h16", key: "1lakjw" }],
+  ["path", { d: "M4 18h16", key: "19g7jn" }],
+  ["path", { d: "M4 6h16", key: "1o0s65" }]
+];
+const Menu = createLucideIcon("menu", __iconNode$3);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$2 = [
+  ["path", { d: "M3 6h18", key: "d0wm0j" }],
+  ["path", { d: "M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6", key: "4alrt4" }],
+  ["path", { d: "M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2", key: "v07s0e" }],
+  ["line", { x1: "10", x2: "10", y1: "11", y2: "17", key: "1uufr5" }],
+  ["line", { x1: "14", x2: "14", y1: "11", y2: "17", key: "xtxkd" }]
+];
+const Trash2 = createLucideIcon("trash-2", __iconNode$2);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$1 = [
+  ["path", { d: "M12 3v12", key: "1x0j5s" }],
+  ["path", { d: "m17 8-5-5-5 5", key: "7q97r8" }],
+  ["path", { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4", key: "ih7n3h" }]
+];
+const Upload = createLucideIcon("upload", __iconNode$1);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode = [
+  ["path", { d: "M18 6 6 18", key: "1bl5f8" }],
+  ["path", { d: "m6 6 12 12", key: "d8bk6v" }]
+];
+const X = createLucideIcon("x", __iconNode);
+const navItems = [
+  {
+    id: "home",
+    path: "/",
+    title: "Home",
+    icon: "🏠",
+    description: "Start here — everything I've put together for you"
+  },
+  {
+    id: "about",
+    path: "/about",
+    title: "About VIT-AP",
+    icon: "🏫",
+    description: "My honest take on the campus — the good and the not-so-good"
+  },
+  {
+    id: "faqs",
+    path: "/faqs",
+    title: "FAQs",
+    icon: "❓",
+    description: "Questions I get asked all the time — answered straight up"
+  },
+  {
+    id: "academics",
+    path: "/academics",
+    title: "Academics",
+    icon: "📚",
+    description: "How exams, credits, and grading actually work here"
+  },
+  {
+    id: "hostel",
+    path: "/hostel",
+    title: "Hostel & Daily Life",
+    icon: "🛏️",
+    description: "What to expect from rooms, facilities, and daily routine"
+  },
+  {
+    id: "food",
+    path: "/food",
+    title: "Food",
+    icon: "🍽️",
+    description: "Mess, campus dining, and how most of us actually eat"
+  },
+  {
+    id: "essentials",
+    path: "/essentials",
+    title: "Essentials",
+    icon: "🎒",
+    description: "What to pack, what you'll need — don't show up unprepared"
+  },
+  {
+    id: "survival",
+    path: "/survival",
+    title: "Survival Guides",
+    icon: "🧭",
+    description: "Mistakes I've seen juniors make — and how to avoid them"
+  },
+  {
+    id: "portals",
+    path: "/portals",
+    title: "Systems & Portals",
+    icon: "💻",
+    description: "VTOP runs your academic life — here's how to use it well"
+  },
+  {
+    id: "data",
+    path: "/data",
+    title: "Data & Insights",
+    icon: "📊",
+    description: "Branch cutoffs and placement trends — the numbers behind it"
+  },
+  {
+    id: "resources",
+    path: "/resources",
+    title: "Resources",
+    icon: "📁",
+    description: "Links and materials I've actually found useful — not random"
+  },
+  {
+    id: "study-abroad",
+    path: "/study-abroad",
+    title: "Studying Abroad",
+    icon: "🌍",
+    description: "International programs, ITP, SAP, and study abroad opportunities"
+  },
+  {
+    id: "gallery",
+    path: "/gallery",
+    title: "Gallery",
+    icon: "📸",
+    description: "Photos of campus so you know what you're walking into"
+  }
+];
+function Layout({ children }) {
+  const [menuOpen, setMenuOpen] = reactExports.useState(false);
+  const [scrolled, setScrolled] = reactExports.useState(false);
+  const location2 = useLocation();
+  const prevPath = reactExports.useRef(location2.pathname);
+  reactExports.useEffect(() => {
+    const handleScroll2 = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", handleScroll2, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll2);
+  }, []);
+  reactExports.useEffect(() => {
+    if (prevPath.current !== location2.pathname) {
+      prevPath.current = location2.pathname;
+      setMenuOpen(false);
+    }
+  });
+  reactExports.useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col min-h-screen bg-background", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      "header",
+      {
+        className: [
+          "fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-10 py-4 transition-all duration-500",
+          scrolled ? "bg-background/90 backdrop-blur-md border-b border-border/50 shadow-subtle" : "bg-transparent"
+        ].join(" "),
+        "data-ocid": "header",
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            Link,
+            {
+              to: "/",
+              className: "flex items-center gap-3 group",
+              "data-ocid": "header.logo_link",
+              "aria-label": "VIT-AP Student Hub — home",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "span",
+                  {
+                    className: "font-display font-black text-xl tracking-tight transition-smooth",
+                    style: { color: "oklch(var(--secondary))" },
+                    children: "VIT-AP"
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "hidden sm:block text-xs font-body font-medium tracking-[0.15em] uppercase text-muted-foreground group-hover:text-foreground transition-smooth", children: "Student Hub" })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "button",
+            {
+              type: "button",
+              onClick: () => setMenuOpen((v) => !v),
+              "aria-label": menuOpen ? "Close navigation menu" : "Open navigation menu",
+              "aria-expanded": menuOpen,
+              "data-ocid": "header.hamburger_button",
+              className: "relative z-50 w-10 h-10 flex items-center justify-center rounded-full transition-smooth hover:bg-muted/40",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "span",
+                  {
+                    className: [
+                      "absolute transition-all duration-300",
+                      menuOpen ? "opacity-100 rotate-0 scale-100" : "opacity-0 rotate-90 scale-75"
+                    ].join(" "),
+                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { className: "w-5 h-5 text-foreground" })
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "span",
+                  {
+                    className: [
+                      "absolute transition-all duration-300",
+                      menuOpen ? "opacity-0 -rotate-90 scale-75" : "opacity-100 rotate-0 scale-100"
+                    ].join(" "),
+                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(Menu, { className: "w-5 h-5 text-foreground" })
+                  }
+                )
+              ]
+            }
+          )
+        ]
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FullscreenMenu, { open: menuOpen, onClose: () => setMenuOpen(false) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "flex-1", id: "main-content", children }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "bg-card border-t border-border/50 px-6 md:px-10 py-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "span",
+          {
+            className: "font-display font-black text-lg",
+            style: { color: "oklch(var(--secondary))" },
+            children: "VIT-AP"
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-muted-foreground ml-2 font-body", children: "Student Hub — A senior's honest guide" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-muted-foreground text-center sm:text-right", children: [
+        "© ",
+        (/* @__PURE__ */ new Date()).getFullYear(),
+        ". Built with love using",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "a",
+          {
+            href: `https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(
+              typeof window !== "undefined" ? window.location.hostname : ""
+            )}`,
+            target: "_blank",
+            rel: "noopener noreferrer",
+            className: "transition-smooth",
+            style: { color: "oklch(var(--secondary))" },
+            children: "caffeine.ai"
+          }
+        )
+      ] })
+    ] }) })
+  ] });
+}
+function FullscreenMenu({ open, onClose }) {
+  const location2 = useLocation();
+  const half = Math.ceil(navItems.length / 2);
+  const col1 = navItems.slice(0, half);
+  const col2 = navItems.slice(half);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "div",
+    {
+      "aria-hidden": !open,
+      "data-ocid": "nav.fullscreen_menu",
+      className: [
+        "fixed inset-0 z-40 flex flex-col",
+        "transition-all duration-500 ease-in-out",
+        open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+      ].join(" "),
+      style: { backgroundColor: "oklch(0.06 0.006 60)" },
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-grain opacity-30 pointer-events-none" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-0 left-0 right-0 h-px chapter-divider" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            className: [
+              "relative flex flex-col flex-1 justify-center px-8 md:px-16 lg:px-24 py-20",
+              "transition-all duration-500",
+              open ? "translate-y-0" : "translate-y-6"
+            ].join(" "),
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-10", "data-ocid": "nav.menu_label", children: "Navigation" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { "aria-label": "Full screen navigation", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-0", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-1", children: col1.map((item, i) => {
+                  const isActive = location2.pathname === item.path;
+                  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "li",
+                    {
+                      style: { animationDelay: `${i * 0.06}s` },
+                      className: open ? "animate-fade-in-up" : "",
+                      children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                        Link,
+                        {
+                          to: item.path,
+                          onClick: onClose,
+                          "data-ocid": `nav.link.${item.id}`,
+                          className: [
+                            "nav-link-cinematic flex items-baseline gap-3 py-2 group",
+                            isActive ? "!text-foreground" : ""
+                          ].join(" "),
+                          children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "span",
+                              {
+                                className: "text-xs font-body font-semibold tracking-widest w-5 shrink-0 transition-smooth",
+                                style: { color: "oklch(var(--secondary) / 0.5)" },
+                                children: String(i + 1).padStart(2, "0")
+                              }
+                            ),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "transition-smooth group-hover:text-foreground", children: item.title }),
+                            isActive && /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "span",
+                              {
+                                className: "text-xs font-body italic ml-1",
+                                style: { color: "oklch(var(--primary))" },
+                                children: "◆"
+                              }
+                            )
+                          ]
+                        }
+                      )
+                    },
+                    item.id
+                  );
+                }) }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-1 md:mt-0 mt-1", children: col2.map((item, i) => {
+                  const isActive = location2.pathname === item.path;
+                  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "li",
+                    {
+                      style: { animationDelay: `${(i + half) * 0.06}s` },
+                      className: open ? "animate-fade-in-up" : "",
+                      children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                        Link,
+                        {
+                          to: item.path,
+                          onClick: onClose,
+                          "data-ocid": `nav.link.${item.id}`,
+                          className: [
+                            "nav-link-cinematic flex items-baseline gap-3 py-2 group",
+                            isActive ? "!text-foreground" : ""
+                          ].join(" "),
+                          children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "span",
+                              {
+                                className: "text-xs font-body font-semibold tracking-widest w-5 shrink-0 transition-smooth",
+                                style: { color: "oklch(var(--secondary) / 0.5)" },
+                                children: String(i + half + 1).padStart(2, "0")
+                              }
+                            ),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "transition-smooth group-hover:text-foreground", children: item.title }),
+                            isActive && /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "span",
+                              {
+                                className: "text-xs font-body italic ml-1",
+                                style: { color: "oklch(var(--primary))" },
+                                children: "◆"
+                              }
+                            )
+                          ]
+                        }
+                      )
+                    },
+                    item.id
+                  );
+                }) })
+              ] }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-14 chapter-divider" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-6 text-xs text-muted-foreground font-body tracking-wider italic", children: "A senior's honest guide to VIT-AP — written for you" })
+            ]
+          }
+        )
+      ]
+    }
+  );
+}
+function useScrollReveal$4() {
+  const ref = reactExports.useRef(null);
+  reactExports.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("is-visible");
+          obs.unobserve(el);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return ref;
+}
+function Reveal$3({
+  children,
+  className = "",
+  delay = 0
+}) {
+  const ref = useScrollReveal$4();
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      ref,
+      className: `reveal-block ${className}`,
+      style: { transitionDelay: `${delay}ms` },
+      children
+    }
+  );
+}
+const negatives = [
+  {
+    title: "The campus is a work in progress",
+    body: "I don't say this to complain — it's just true. Construction is ongoing, some areas are dusty and rough, and facilities that are 'coming soon' have been coming soon for a while. If a polished campus matters to you, temper your expectations."
+  },
+  {
+    title: "Management can be slow and opaque",
+    body: "University administration isn't known for being efficient or transparent. Getting things resolved — whether it's a grade issue, a hostel change, or an official letter — can take longer than it should. Learn to follow up persistently."
+  },
+  {
+    title: "Backlogs are expensive — and strict",
+    body: "If you get an F in a subject, re-registering it costs around ₹6,000. And unlike colleges where showing up and writing something gets you through, professors here can be strict. I've seen students fail when they expected to pass. Take backlogs seriously."
+  },
+  {
+    title: "Professors have a lot of power over your grade",
+    body: "Your internals, CAT marks, and sometimes FAT evaluations are all in their hands. There's limited recourse if you feel something is unfair — only the FAT can be formally re-evaluated. This is true of most colleges, but there's even less room to push back here."
+  },
+  {
+    title: "Missing a quiz can hurt more than you think",
+    body: "Quizzes and CATs often carry similar weightage. Whether a re-test happens if you miss one is entirely up to the faculty. I've seen students lose a full grade over one missed quiz with no makeup offered. There's no standardised policy."
+  }
+];
+const positives = [
+  {
+    title: "A genuinely diverse student body",
+    body: "Students come from all over India. If you're open to it, you'll meet people from completely different backgrounds and languages. That kind of exposure is actually valuable — and rarer than it sounds."
+  },
+  {
+    title: "Minimal physical bullying, in my experience",
+    body: "In three years here, I haven't witnessed the kind of ragging or bullying that's common in some colleges. Conflicts happen — that's normal — but staying calm and mature keeps you out of most of it."
+  },
+  {
+    title: "Genuinely driven people, if you look for them",
+    body: "There are students here who are serious about what they're building — in tech, research, creative fields. Find them early. They'll help you, challenge you, and show you what's actually possible."
+  },
+  {
+    title: "Real networking opportunities",
+    body: "The student community is large and diverse enough that you can build meaningful connections across departments and years. Who you know here will matter more than you expect when you're looking for your first opportunity."
+  },
+  {
+    title: "A flexible dress code",
+    body: "Full pants and a sleeved shirt is essentially all that's required. Compared to stricter campuses, this is a genuine relief for day-to-day comfort."
+  }
+];
+const realityItems = [
+  {
+    label: "Classrooms",
+    detail: "Most don't have AC. In summer it gets genuinely uncomfortable. Whiteboards, projectors — functional but basic. Labs are AC'd. You'll get used to it."
+  },
+  {
+    label: "Gym Access",
+    detail: "Free hostel gym: 5–8 AM and 5–8 PM only. Paid campus gym: ₹1,200/month — go sign up in the first week or you won't get a slot."
+  },
+  {
+    label: "Sports & Recreation",
+    detail: "Badminton courts exist but timing is competitive. Indoor activity room has TT, carrom, chess — small space. Basketball, football, cricket courts are generally accessible."
+  },
+  {
+    label: "Campus Wi-Fi",
+    detail: "Available but inconsistent by hostel block. Don't rely on it for anything important. Get an Airtel or BSNL SIM as a backup."
+  },
+  {
+    label: "Health Center",
+    detail: "On-campus, useful for basic consultations, fever, stomach issues, sick certificates. They'll refer you out for anything serious."
+  },
+  {
+    label: "Pharmacy",
+    detail: "Small campus pharmacy — paracetamol, antacids, ORS basics are there. Limited for specific prescriptions."
+  }
+];
+const transportOptions = [
+  {
+    mode: "University Shuttle",
+    tag: "Free",
+    details: "Every Sunday, Vijayawada. Departs 10 AM – 12 PM, returns 4:30 – 6:30 PM. Bring your ID card. I used this almost every weekend."
+  },
+  {
+    mode: "APSRTC Bus",
+    tag: "~₹35",
+    details: "Direct to Vijayawada. Via Guntur is ₹35 + ₹50 connecting. Best for regular, low-cost travel — not the fastest."
+  },
+  {
+    mode: "Shared Vans / Autos",
+    tag: "~₹150",
+    details: "To Vijayawada. Faster than bus, less frequent. Available near the campus gate. Good when you're carrying luggage."
+  },
+  {
+    mode: "Private Cabs (Ola / Uber)",
+    tag: "₹400–1,000",
+    details: "To Vijayawada Railway Station: ₹400–600. To Airport: ₹700–1,000. Only real option for early flights or late-night travel."
+  }
+];
+const clubsData = [
+  {
+    cat: "Technical",
+    desc: "Coding, robotics, AI/ML, IoT — most active clubs are here"
+  },
+  {
+    cat: "Cultural",
+    desc: "Music, dance, drama, fine arts — VITopia is the flagship fest"
+  },
+  {
+    cat: "Social",
+    desc: "NSS and community service — if you want to do something beyond campus"
+  },
+  {
+    cat: "Sports",
+    desc: "Inter-hostel and inter-college competitions throughout the year"
+  }
+];
+function About() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Layout, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("style", { children: `
+        .reveal-block { opacity:0; transform:translateY(2rem); transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1); }
+        .reveal-block.is-visible { opacity:1; transform:translateY(0); }
+        @media(prefers-reduced-motion:reduce){.reveal-block{opacity:1;transform:none;transition:none;}}
+      ` }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "bg-background min-h-[60vh] flex items-end px-6 pb-16 pt-32 relative overflow-hidden", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "div",
+        {
+          className: "absolute inset-0 bg-grain opacity-20 pointer-events-none",
+          "aria-hidden": "true"
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "div",
+        {
+          className: "absolute right-0 top-0 bottom-0 w-px opacity-20 pointer-events-none",
+          style: { background: "oklch(var(--secondary))" },
+          "aria-hidden": "true"
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto w-full", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fade-in-up fade-in-up-delay-1", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "chapter-label", children: "Chapter I" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "h1",
+          {
+            className: "fade-in-up fade-in-up-delay-2 font-display font-black text-foreground leading-none tracking-tighter mt-4 mb-6",
+            style: { fontSize: "clamp(3rem, 9vw, 7.5rem)" },
+            "data-ocid": "about.chapter_title",
+            children: [
+              "ABOUT",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { color: "oklch(var(--primary))" }, children: "VIT-AP" })
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "fade-in-up fade-in-up-delay-3 font-body italic text-muted-foreground text-xl max-w-2xl", children: "I'm not going to sell this place to you. Here's what I actually think — based on my time here — so you can decide for yourself whether it's the right fit." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fade-in-up fade-in-up-delay-4 chapter-divider mt-8 w-24" })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "px-6 py-20 border-t border-border",
+        style: { background: "oklch(0.10 0.008 60)" },
+        "data-ocid": "about.overview_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal$3, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "What it is" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-10", children: "The Setup" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid md:grid-cols-3 gap-px bg-border", children: [
+            {
+              n: "01",
+              h: "VIT Group",
+              b: "Private deemed university in Amaravati — part of the VIT Group, same FFCS system as VIT Vellore. Placement-focused; companies visit regularly."
+            },
+            {
+              n: "02",
+              h: "200 Acres",
+              b: "Big campus, still developing. Full hostel campus — almost everyone lives on-campus all semester."
+            },
+            {
+              n: "03",
+              h: "FFCS from Sem 2",
+              b: "First semester: college assigns your slots. From semester two, you build your own timetable. It's one of the better aspects of studying here."
+            }
+          ].map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$3, { delay: i * 80, className: "bg-background", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-8 h-full", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "span",
+              {
+                className: "font-display text-4xl font-black mb-4 block",
+                style: { color: "oklch(var(--primary) / 0.35)" },
+                children: item.n
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-bold text-xl text-foreground mb-3", children: item.h }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground leading-relaxed", children: item.b })
+          ] }) }, item.n)) })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "bg-background px-6 py-20 border-t border-border",
+        "data-ocid": "about.reality_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal$3, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "The real picture" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-section text-foreground mb-3", children: [
+              "What Campus Is",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("em", { children: "Actually" }),
+              " Like"
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-muted-foreground mb-12 max-w-xl", children: "Stuff I wish someone had told me before I joined — not what the brochure says." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-0 border-t border-border", children: realityItems.map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$3, { delay: i * 60, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col sm:flex-row gap-4 py-6 border-b border-border", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "sm:w-48 shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display font-bold text-base text-foreground", children: item.label }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "div",
+              {
+                className: "sm:w-px shrink-0",
+                style: { background: "oklch(var(--secondary) / 0.25)" },
+                "aria-hidden": "true"
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground leading-relaxed flex-1", children: item.detail })
+          ] }) }, item.label)) })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "px-6 py-20 border-t border-border",
+        style: { background: "oklch(0.10 0.008 60)" },
+        "data-ocid": "about.transport_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal$3, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "Getting here & around" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-section text-foreground mb-3", children: [
+              "Location &",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              "Transport"
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-muted-foreground mb-4 max-w-xl", children: "You're about 20 km from Vijayawada city. The campus address is G-30, Inavolu, beside AP Secretariat, Guntur District — 522237. Here's what I used." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid md:grid-cols-2 gap-px bg-border mt-10", children: transportOptions.map((t, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$3, { delay: i * 70, className: "bg-background", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: "p-8 h-full",
+              "data-ocid": `about.transport.item.${i + 1}`,
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-3 mb-3", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-bold text-lg text-foreground", children: t.mode }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "span",
+                    {
+                      className: "text-xs font-mono font-bold shrink-0 border px-2 py-1",
+                      style: {
+                        color: "oklch(var(--secondary))",
+                        borderColor: "oklch(var(--secondary) / 0.3)"
+                      },
+                      children: t.tag
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    className: "w-8 h-px mb-4",
+                    style: { background: "oklch(var(--primary))" }
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground leading-relaxed", children: t.details })
+              ]
+            }
+          ) }, t.mode)) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$3, { delay: 100, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "mt-8 border-l-2 pl-5 py-2",
+              style: { borderColor: "oklch(var(--secondary))" },
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground", children: "The free Sunday shuttle to Vijayawada is underrated — use it. For early morning trains or flights, book a cab the night before; availability at the gate can be unpredictable." })
+            }
+          ) })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "bg-background px-6 py-20 border-t border-border",
+        "data-ocid": "about.clubs_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal$3, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "Campus life" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-section text-foreground mb-3", children: [
+              "Clubs, Events",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              "& Hackathons"
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-muted-foreground mb-12 max-w-xl", children: "Joining a club in your first semester is one of the better decisions you can make. It's where you'll meet people outside your department and build connections that actually last." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid sm:grid-cols-2 gap-px bg-border mb-10", children: clubsData.map((c, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$3, { delay: i * 60, className: "bg-background", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-8 h-full", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-bold text-base text-foreground mb-2", children: c.cat }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground", children: c.desc })
+          ] }) }, c.cat)) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$3, { delay: 80, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-8", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "On-campus events" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground leading-relaxed", children: "Hackathons and events happen regularly — though they may not always be large-scale. Most are organised by student clubs: workshops, coding competitions, project showcases, small hackathons throughout the year. Joining a club early is the fastest way in — that's how most people hear about events before they're publicly announced." })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "External programs" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground leading-relaxed", children: "Bigger programs — Google Summer of Code, CTFs, recon competitions — don't happen on campus. You participate individually or in small teams. The college doesn't organise these, but students do participate. Find seniors who've done it — they'll tell you exactly how the process works." })
+            ] })
+          ] }) })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "px-6 py-20 border-t border-border",
+        style: { background: "oklch(0.10 0.008 60)" },
+        "data-ocid": "about.pros_cons_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal$3, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "My honest verdict" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-section text-foreground mb-12", children: [
+              "What Works &",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              "What Doesn't"
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-12", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$3, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-4 mb-8", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-bold text-2xl text-foreground", children: "Things that will bother you" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    className: "flex-1 h-px",
+                    style: { background: "oklch(var(--primary) / 0.3)" }
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("ol", { className: "space-y-8", children: negatives.map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex gap-5", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "span",
+                  {
+                    className: "font-display font-black text-3xl leading-none shrink-0 mt-1",
+                    style: { color: "oklch(var(--primary) / 0.4)" },
+                    children: i + 1
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-display font-bold text-base text-foreground mb-1", children: item.title }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground leading-relaxed", children: item.body })
+                ] })
+              ] }, item.title)) })
+            ] }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$3, { delay: 100, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-4 mb-8", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-bold text-2xl text-foreground", children: "Things that genuinely work" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    className: "flex-1 h-px",
+                    style: { background: "oklch(var(--secondary) / 0.3)" }
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("ol", { className: "space-y-8", children: positives.map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex gap-5", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "span",
+                  {
+                    className: "font-display font-black text-3xl leading-none shrink-0 mt-1",
+                    style: { color: "oklch(var(--secondary) / 0.5)" },
+                    children: i + 1
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-display font-bold text-base text-foreground mb-1", children: item.title }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground leading-relaxed", children: item.body })
+                ] })
+              ] }, item.title)) })
+            ] }) })
+          ] })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "bg-background px-6 py-16 border-t border-border",
+        "data-ocid": "about.verdict_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$3, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            className: "border-l-4 pl-8 py-2",
+            style: { borderColor: "oklch(var(--secondary))" },
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "My take" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-lg text-muted-foreground leading-relaxed max-w-3xl", children: "VIT-AP is a placement-focused engineering college on a 200-acre campus in Amaravati. The academic system has its quirks, the food gets repetitive, and the campus is still developing. But if you're willing to be proactive — join clubs, manage your time, build your own network — you'll get a lot out of it. It's not a perfect college. It's a decent one with real opportunities, if you use them." })
+            ]
+          }
+        ) }) })
+      }
+    )
+  ] });
+}
+function useScrollReveal$3() {
+  const ref = reactExports.useRef(null);
+  reactExports.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("is-visible");
+          obs.unobserve(el);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return ref;
+}
+function Reveal$2({
+  children,
+  className = "",
+  delay = 0
+}) {
+  const ref = useScrollReveal$3();
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      ref,
+      className: `reveal-block ${className}`,
+      style: { transitionDelay: `${delay}ms` },
+      children
+    }
+  );
+}
+const evalItems = [
+  {
+    code: "CAT-1",
+    marks: "15",
+    detail: "~50 minutes. Scripts returned after so you can see what went wrong. Use that feedback."
+  },
+  {
+    code: "CAT-2",
+    marks: "15",
+    detail: "Same format and same weight as CAT-1. Held later in the semester. Treat it identically."
+  },
+  {
+    code: "Assignments",
+    marks: "30",
+    detail: "Minimum 3 digital assignments × 10 marks each. Spread across the semester — don't leave them for the last week."
+  },
+  {
+    code: "FAT",
+    marks: "40",
+    detail: "3 hours, centrally conducted. Your single biggest component. Missing it without valid reason is a serious problem."
+  }
+];
+const semesterSteps = [
+  {
+    step: "01",
+    title: "Registration on VTOP",
+    body: "You pick your courses and time slots. Popular faculty fills up within minutes. In your first semester, this is done for you — the college assigns your slots."
+  },
+  {
+    step: "02",
+    title: "Classes Begin",
+    body: "Attendance is tracked from day one, per course. Don't skip early classes thinking they don't count yet. They do."
+  },
+  {
+    step: "03",
+    title: "CAT-1",
+    body: "Mid-semester, ~50 minutes, 15 marks. Scripts are returned — review them. These are your practice for CAT-2."
+  },
+  {
+    step: "04",
+    title: "Digital Assignments",
+    body: "At least 3, worth 30 marks total. They run throughout the semester. Steady effort here, not a last-minute rush."
+  },
+  {
+    step: "05",
+    title: "CAT-2",
+    body: "Same format as CAT-1, 15 marks, held later in the semester. Treat it with the same seriousness as CAT-1."
+  },
+  {
+    step: "06",
+    title: "FAT",
+    body: "Final Assessment Test — 3 hours, 40 marks, centrally conducted at semester end. The biggest single component."
+  }
+];
+const letterGrades = [
+  { grade: "S", points: "10", meaning: "Excellent — Pass" },
+  { grade: "A", points: "9", meaning: "Very Good — Pass" },
+  { grade: "B", points: "8", meaning: "Good — Pass" },
+  { grade: "C", points: "7", meaning: "Average — Pass" },
+  { grade: "D", points: "6", meaning: "Satisfactory" },
+  { grade: "E", points: "5", meaning: "Passed (barely)" },
+  { grade: "F", points: "0", meaning: "Fail — must re-register" },
+  { grade: "N", points: "0", meaning: "Incomplete / Debarred" },
+  { grade: "W", points: "—", meaning: "Withdrawn (not in CGPA)" }
+];
+const theorySlots = [
+  { time: "8:00 – 8:50", slots: ["A1", "F1", "D1", "TB1", "TG1"] },
+  { time: "9:00 – 9:50", slots: ["B1", "G1", "E1", "TC1", "TA1"] },
+  { time: "10:00 – 10:50", slots: ["C1", "A1", "F1", "TD1", "TB1"] },
+  { time: "11:00 – 11:50", slots: ["D1", "B1", "G1", "TE1", "TC1"] },
+  { time: "12:00 – 12:50", slots: ["E1", "C1", "A1", "TF1", "TD1"] },
+  { time: "14:00 – 14:50", slots: ["F1", "D1", "B1", "TG1", "TE1"] },
+  { time: "15:00 – 15:50", slots: ["G1", "E1", "C1", "TA1", "TF1"] }
+];
+const labSlots = [
+  {
+    time: "8:00 – 9:50",
+    slots: ["L1+L2", "L7+L8", "L13+L14", "L19+L20", "L25+L26", "L31+L32"]
+  },
+  {
+    time: "10:00 – 11:50",
+    slots: ["L3+L4", "L9+L10", "L15+L16", "L21+L22", "L27+L28", "L33+L34"]
+  },
+  {
+    time: "12:00 – 13:50",
+    slots: ["L5+L6", "L11+L12", "L17+L18", "L23+L24", "L29+L30", "L35+L36"]
+  },
+  { time: "14:00 – 15:50", slots: ["L37+L38", "L39+L40", "", "", "", ""] }
+];
+const attendanceRows = [
+  {
+    pct: "≥ 80%",
+    status: "Safe",
+    consequence: "You're fine — keep it up",
+    accent: "secondary"
+  },
+  {
+    pct: "75–79%",
+    status: "Caution",
+    consequence: "One more absence could bar you from the next exam",
+    accent: "warning"
+  },
+  {
+    pct: "< 75%",
+    status: "Debarred",
+    consequence: "Cannot sit for next CAT or FAT for that course",
+    accent: "primary"
+  },
+  {
+    pct: "Debarred from FAT",
+    status: "N Grade",
+    consequence: "Must re-register the entire course next semester",
+    accent: "primary"
+  }
+];
+function Academics() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Layout, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("style", { children: `
+        .reveal-block { opacity:0; transform:translateY(2rem); transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1); }
+        .reveal-block.is-visible { opacity:1; transform:translateY(0); }
+        @media(prefers-reduced-motion:reduce){.reveal-block{opacity:1;transform:none;transition:none;}}
+        .slot-tag { display:inline-block; padding:.15rem .5rem; font-size:.7rem; font-weight:700; letter-spacing:.05em; }
+      ` }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "bg-background min-h-[60vh] flex items-end px-6 pb-16 pt-32 relative overflow-hidden", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "div",
+        {
+          className: "absolute inset-0 bg-grain opacity-20 pointer-events-none",
+          "aria-hidden": "true"
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto w-full", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fade-in-up fade-in-up-delay-1", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "chapter-label", children: "Chapter III" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "h1",
+          {
+            className: "fade-in-up fade-in-up-delay-2 font-display font-black text-foreground leading-none tracking-tighter mt-4 mb-6",
+            style: { fontSize: "clamp(3rem, 9vw, 7.5rem)" },
+            "data-ocid": "academics.chapter_title",
+            children: [
+              "ACAD-",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { color: "oklch(var(--primary))" }, children: "EMICS" })
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "fade-in-up fade-in-up-delay-3 font-body italic text-muted-foreground text-xl max-w-2xl", children: "I'll walk you through how the semester runs, what the exams are like, how grades are decided, and what you actually need to watch out for." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fade-in-up fade-in-up-delay-4 chapter-divider mt-8 w-24" })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "px-6 py-20 border-t border-border",
+        style: { background: "oklch(0.10 0.008 60)" },
+        "data-ocid": "academics.overview_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal$2, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "The flow" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-section text-foreground mb-12", children: [
+              "Your Semester,",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              "Step by Step"
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-0 border-t border-border", children: semesterSteps.map((s, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$2, { delay: i * 60, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-8 py-8 border-b border-border", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "span",
+              {
+                className: "font-display font-black text-5xl leading-none shrink-0 w-16 text-right",
+                style: { color: "oklch(var(--primary) / 0.25)" },
+                children: s.step
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-bold text-xl text-foreground mb-2", children: s.title }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground leading-relaxed", children: s.body })
+            ] })
+          ] }) }, s.step)) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$2, { delay: 100, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "mt-8 border-l-2 pl-5 py-2",
+              style: { borderColor: "oklch(var(--secondary))" },
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground", children: "Internals (CAT-1 + CAT-2 + Assignments = 60 marks) + FAT (40 marks) = 100 total. Grades are assigned relative to how your class performs — not a fixed percentage cutoff." })
+            }
+          ) })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "bg-background px-6 py-20 border-t border-border",
+        "data-ocid": "academics.evaluation_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal$2, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "What's worth what" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-section text-foreground mb-3", children: [
+              "Marks",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              "Breakdown"
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-muted-foreground mb-12 max-w-xl", children: "Knowing this early helps you prioritise. Here's how the 100 marks are split." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border-t border-border", children: [
+            evalItems.map((row, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+              Reveal$2,
+              {
+                delay: i * 70,
+                "data-ocid": `academics.eval.${row.code.toLowerCase().replace("-", "")}`,
+                children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col sm:flex-row gap-6 items-start sm:items-center py-8 border-b border-border", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "sm:w-32 shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "span",
+                    {
+                      className: "font-display font-black text-3xl",
+                      style: {
+                        color: i < 2 ? "oklch(var(--primary))" : "oklch(var(--foreground))"
+                      },
+                      children: row.code
+                    }
+                  ) }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    "div",
+                    {
+                      className: "shrink-0 text-right",
+                      style: { color: "oklch(var(--secondary))" },
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display font-black text-5xl leading-none", children: row.marks }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-body text-xs text-muted-foreground ml-1 align-middle", children: "marks" })
+                      ]
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "div",
+                    {
+                      className: "w-px h-8 shrink-0 hidden sm:block",
+                      style: { background: "oklch(var(--border))" }
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground leading-relaxed flex-1", children: row.detail })
+                ] })
+              },
+              row.code
+            )),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$2, { delay: 200, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col sm:flex-row gap-6 items-start sm:items-center py-8", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "sm:w-32 shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display font-black text-3xl text-foreground", children: "TOTAL" }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { color: "oklch(var(--secondary))" }, children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display font-black text-5xl leading-none", children: "100" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-body text-xs text-muted-foreground ml-1 align-middle", children: "marks" })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "div",
+                {
+                  className: "w-px h-8 shrink-0 hidden sm:block",
+                  style: { background: "oklch(var(--border))" }
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground leading-relaxed flex-1", children: "Your grade is relative to your class — performing near the average gets you a C/D range." })
+            ] }) })
+          ] })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "px-6 py-20 border-t border-border",
+        style: { background: "oklch(0.10 0.008 60)" },
+        "data-ocid": "academics.ffcs_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal$2, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "Timetable system" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-section text-foreground mb-3", children: [
+              "FFCS &",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              "How It Works"
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-16 mt-10", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal$2, { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-muted-foreground leading-relaxed mb-6", children: "FFCS — Fully Flexible Credit System — means you build your own timetable. Every student picks their own time slots during the registration window on VTOP. No two students need to have the same schedule." }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-body text-muted-foreground leading-relaxed", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-foreground", children: "Your first semester is the exception." }),
+                " ",
+                "The college assigns your slots for you — FFCS kicks in from semester 2. And trust me, once you have the control, you'll appreciate it."
+              ] })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal$2, { delay: 80, children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-5", children: [
+                "Each course has multiple slot options (A1, B1, C1…) — fixed time blocks spread across the week",
+                "Theory and lab are registered separately with different slot codes",
+                "You can avoid 8 AM slots if you want — but popular faculty fills up within minutes",
+                "Minimum: 16 credits per semester. Maximum: 27 credits",
+                "No one will remind you — registration is entirely your responsibility"
+              ].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "li",
+                {
+                  className: "flex items-start gap-4 text-sm font-body text-muted-foreground",
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "span",
+                      {
+                        className: "shrink-0 mt-1 w-4 h-4 border flex items-center justify-center",
+                        style: { borderColor: "oklch(var(--secondary) / 0.4)" },
+                        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          "span",
+                          {
+                            style: { color: "oklch(var(--secondary))" },
+                            className: "text-xs",
+                            children: "✓"
+                          }
+                        )
+                      }
+                    ),
+                    item
+                  ]
+                },
+                item
+              )) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "div",
+                {
+                  className: "mt-6 border-l-2 pl-4 py-1",
+                  style: { borderColor: "oklch(var(--secondary))" },
+                  children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-xs text-muted-foreground", children: "Before registration opens, note your top 3 slot choices per course. The window can close before you figure it out for the first time." })
+                }
+              )
+            ] })
+          ] })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "bg-background px-6 py-20 border-t border-border",
+        "data-ocid": "academics.timetable_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal$2, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "First semester" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-section text-foreground mb-3", children: [
+              "Your Assigned",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              "Timetable"
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-muted-foreground mb-10 max-w-xl", children: "In your first sem, you won't get to pick your slots — the college assigns them. This is the slot structure you'll follow as a fresher." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$2, { delay: 50, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-10", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "Theory Slots — Monday to Friday" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "overflow-x-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "table",
+              {
+                className: "w-full border-collapse",
+                style: { borderColor: "oklch(var(--border))" },
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("thead", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { style: { background: "oklch(0.12 0.01 60)" }, children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "py-3 px-4 text-left font-mono text-xs text-muted-foreground border border-border min-w-[110px]", children: "Time" }),
+                    ["Mon", "Tue", "Wed", "Thu", "Fri"].map((d) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "th",
+                      {
+                        className: "py-3 px-4 text-center font-display font-bold text-sm text-foreground border border-border min-w-[72px]",
+                        children: d
+                      },
+                      d
+                    ))
+                  ] }) }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("tbody", { children: theorySlots.map((row, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    "tr",
+                    {
+                      style: {
+                        background: i % 2 === 0 ? "oklch(var(--background))" : "oklch(0.10 0.008 60)"
+                      },
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "py-3 px-4 font-mono text-xs text-muted-foreground border border-border whitespace-nowrap", children: row.time }),
+                        row.slots.map((slot, j) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          "td",
+                          {
+                            className: "py-3 px-4 border border-border text-center",
+                            children: slot ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "span",
+                              {
+                                className: "slot-tag font-display font-bold",
+                                style: {
+                                  background: "oklch(var(--primary) / 0.12)",
+                                  color: "oklch(var(--primary))",
+                                  border: "1px solid oklch(var(--primary) / 0.3)"
+                                },
+                                children: slot
+                              }
+                            ) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground opacity-30", children: "—" })
+                          },
+                          `theory-${row.time}-${j}`
+                        ))
+                      ]
+                    },
+                    row.time
+                  )) })
+                ]
+              }
+            ) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-xs text-muted-foreground mt-3", children: "T-slots (TA1–TG1) are tutorial slots that come with some theory courses — extra class hours." })
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$2, { delay: 100, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "Lab Slots — Monday to Saturday" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "overflow-x-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("table", { className: "w-full border-collapse", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("thead", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { style: { background: "oklch(0.12 0.01 60)" }, children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "py-3 px-4 text-left font-mono text-xs text-muted-foreground border border-border min-w-[110px]", children: "Time" }),
+                ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "th",
+                  {
+                    className: "py-3 px-4 text-center font-display font-bold text-sm text-foreground border border-border min-w-[72px]",
+                    children: d
+                  },
+                  d
+                ))
+              ] }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("tbody", { children: labSlots.map((row, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "tr",
+                {
+                  style: {
+                    background: i % 2 === 0 ? "oklch(var(--background))" : "oklch(0.10 0.008 60)"
+                  },
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "py-3 px-4 font-mono text-xs text-muted-foreground border border-border whitespace-nowrap", children: row.time }),
+                    row.slots.map((slot, j) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "td",
+                      {
+                        className: "py-3 px-4 border border-border text-center",
+                        children: slot ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          "span",
+                          {
+                            className: "slot-tag font-display font-bold",
+                            style: {
+                              background: "oklch(var(--secondary) / 0.08)",
+                              color: "oklch(var(--secondary))",
+                              border: "1px solid oklch(var(--secondary) / 0.25)"
+                            },
+                            children: slot
+                          }
+                        ) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground opacity-30", children: "—" })
+                      },
+                      `lab-${row.time}-${j}`
+                    ))
+                  ]
+                },
+                row.time
+              )) })
+            ] }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-xs text-muted-foreground mt-3", children: "Lab slots are 2 hours each. Your lab course occupies two consecutive L-slots (e.g., L1+L2)." })
+          ] }) })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "px-6 py-20 border-t border-border",
+        style: { background: "oklch(0.10 0.008 60)" },
+        "data-ocid": "academics.attendance_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal$2, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "Attendance rules" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-section text-foreground mb-3", children: [
+              "Don't Play",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              "Games With This"
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-muted-foreground mb-12 max-w-xl", children: "75% is the minimum — don't treat it as a target. Aim for 85%+ to give yourself a real buffer. Each course is tracked separately, not combined." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border-t border-border", children: attendanceRows.map((row, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$2, { delay: i * 60, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col sm:flex-row gap-6 items-start sm:items-center py-6 border-b border-border", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "code",
+              {
+                className: "font-mono font-black text-xl shrink-0 sm:w-44",
+                style: {
+                  color: row.accent === "secondary" ? "oklch(var(--secondary))" : "oklch(var(--primary))"
+                },
+                children: row.pct
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "span",
+              {
+                className: "font-display font-bold text-sm uppercase tracking-wide shrink-0 sm:w-24",
+                style: {
+                  color: row.accent === "secondary" ? "oklch(var(--secondary))" : "oklch(var(--primary))"
+                },
+                children: row.status
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground", children: row.consequence })
+          ] }) }, row.pct)) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$2, { delay: 150, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "mt-6 border-l-2 pl-4 py-1",
+              style: { borderColor: "oklch(var(--secondary))" },
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-xs text-muted-foreground", children: "Check your attendance on VTOP at least once a week. By the time you're at 74%, it's usually too late." })
+            }
+          ) })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "bg-background px-6 py-20 border-t border-border",
+        "data-ocid": "academics.grading_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal$2, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "Grades & GPA" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-section text-foreground mb-3", children: [
+              "How Your",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              "Grade Is Decided"
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-body text-muted-foreground mb-10 max-w-xl", children: [
+              "VIT-AP uses",
+              " ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-foreground", children: "relative grading" }),
+              " for most theory courses. Your grade depends on how you performed compared to everyone else in your class — not a fixed percentage. A 70% score might get you a B in one batch and a C in another. It works both ways."
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal$2, { delay: 60, children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "overflow-x-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("table", { className: "w-full border-collapse", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("thead", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "tr",
+                {
+                  style: {
+                    background: "oklch(0.12 0.01 60)",
+                    borderBottom: "1px solid oklch(var(--border))"
+                  },
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "py-3 px-6 text-left font-display font-bold text-sm text-foreground", children: "Grade" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "py-3 px-6 text-right font-display font-bold text-sm text-foreground", children: "Points" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "py-3 px-6 text-left font-display font-bold text-sm text-foreground", children: "What it means" })
+                  ]
+                }
+              ) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("tbody", { children: letterGrades.map((row, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "tr",
+                {
+                  style: {
+                    background: i % 2 === 0 ? "oklch(var(--background))" : "oklch(0.10 0.008 60)"
+                  },
+                  className: "border-b border-border",
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "py-3 px-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "span",
+                      {
+                        className: "font-display font-black text-2xl",
+                        style: {
+                          color: row.grade === "F" || row.grade === "N" ? "oklch(var(--primary))" : row.grade === "S" || row.grade === "A" ? "oklch(var(--secondary))" : "oklch(var(--foreground))"
+                        },
+                        children: row.grade
+                      }
+                    ) }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "py-3 px-6 text-right font-mono font-bold text-foreground", children: row.points }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "py-3 px-6 font-body text-sm text-muted-foreground", children: row.meaning })
+                  ]
+                },
+                row.grade
+              )) })
+            ] }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "div",
+              {
+                className: "mt-6 p-5 border border-border font-mono text-sm",
+                style: { background: "oklch(0.10 0.008 60)" },
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: "CGPA = " }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-foreground font-bold", children: "Σ(Credits × Grade Points) ÷ Σ(Total Credits)" })
+                ]
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "div",
+              {
+                className: "mt-4 border-l-2 pl-4 py-1",
+                style: { borderColor: "oklch(var(--secondary))" },
+                children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-xs text-muted-foreground", children: "Most placement companies have CGPA cutoffs — typically 6.5 or 7.0. Keep that in mind from day one. Converting to percentage: CGPA × 10." })
+              }
+            )
+          ] })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "px-6 py-20 border-t border-border",
+        style: { background: "oklch(0.10 0.008 60)" },
+        "data-ocid": "academics.backlogs_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal$2, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "If you fail" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-3", children: "Backlogs" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-muted-foreground mb-10 max-w-xl", children: "A backlog isn't the end of the world — but it's expensive and inconvenient." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-px bg-border", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$2, { className: "bg-background", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-8 h-full", "data-ocid": "academics.fail_card", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "div",
+                {
+                  className: "w-8 h-px mb-6",
+                  style: { background: "oklch(var(--primary))" }
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-bold text-xl text-foreground mb-4", children: "F Grade — Full Failure" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "space-y-3 font-body text-sm text-muted-foreground", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "You failed the course overall" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Must re-register the full course in a future semester" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Re-registration fee applies — around ₹6,000. It's not cheap" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "F stays in your CGPA calculation until you clear it" })
+              ] })
+            ] }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$2, { delay: 80, className: "bg-background", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-8 h-full", "data-ocid": "academics.n_grade_card", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "div",
+                {
+                  className: "w-8 h-px mb-6",
+                  style: { background: "oklch(var(--secondary))" }
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-bold text-xl text-foreground mb-4", children: "N Grade — Incomplete" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "space-y-3 font-body text-sm text-muted-foreground", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "You were barred from an exam due to low attendance, or missed the FAT" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Can re-register only the failed component, not the full course" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Re-registration fee still applies" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Clear it fast — placement filters often catch open backlogs" })
+              ] })
+            ] }) })
+          ] })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "bg-background px-6 py-16 border-t border-border",
+        "data-ocid": "academics.summary_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$2, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            className: "border-l-4 pl-8 py-2",
+            style: { borderColor: "oklch(var(--secondary))" },
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "The short version" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-lg text-muted-foreground leading-relaxed max-w-3xl", children: "Each semester: CAT-1 (15) + CAT-2 (15) + Assignments (30) + FAT (40) = 100 marks. Maintain 75%+ attendance per course — aim higher. Grades are relative to your class. Your first semester slots are assigned by the college; from semester two, FFCS gives you the flexibility to build your own schedule. Keep your CGPA above 7.0 and clear any backlogs fast — placement eligibility depends on it." })
+            ]
+          }
+        ) }) })
+      }
+    )
+  ] });
+}
 function setRef(ref, value) {
   if (typeof ref === "function") {
     return ref(value);
@@ -26290,14 +27961,14 @@ function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 const badgeVariants = cva(
-  "inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden",
+  "inline-flex items-center justify-center rounded-none border px-2.5 py-1 text-xs font-semibold tracking-widest uppercase w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] transition-all overflow-hidden",
   {
     variants: {
       variant: {
-        default: "border-transparent bg-primary text-primary-foreground [a&]:hover:bg-primary/90",
-        secondary: "border-transparent bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90",
-        destructive: "border-transparent bg-destructive text-destructive-foreground [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
-        outline: "text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground"
+        default: "border-primary/60 bg-primary/20 text-primary [a&]:hover:bg-primary/30",
+        secondary: "border-secondary/40 bg-secondary/10 text-secondary [a&]:hover:bg-secondary/20",
+        destructive: "border-destructive/60 bg-destructive/20 text-destructive [a&]:hover:bg-destructive/30",
+        outline: "border-border/60 text-muted-foreground bg-transparent [a&]:hover:bg-muted/30"
       }
     },
     defaultVariants: {
@@ -26321,2589 +27992,41 @@ function Badge({
     }
   );
 }
-function Card({ className, ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    "div",
-    {
-      "data-slot": "card",
-      className: cn(
-        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
-        className
-      ),
-      ...props
-    }
-  );
-}
-function CardContent({ className, ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    "div",
-    {
-      "data-slot": "card-content",
-      className: cn("px-6", className),
-      ...props
-    }
-  );
-}
-const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
-  {
-    variants: {
-      variant: {
-        default: "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
-        destructive: "bg-destructive text-destructive-foreground shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
-        outline: "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
-        secondary: "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-        link: "text-primary underline-offset-4 hover:underline"
+function useScrollFade$6() {
+  const ref = reactExports.useRef(null);
+  const [visible, setVisible] = reactExports.useState(false);
+  reactExports.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
       },
-      size: {
-        default: "h-9 px-4 py-2 has-[>svg]:px-3",
-        sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
-        icon: "size-9"
-      }
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default"
-    }
-  }
-);
-function Button({
-  className,
-  variant,
-  size,
-  asChild = false,
-  ...props
-}) {
-  const Comp = asChild ? Slot$1 : "button";
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    Comp,
-    {
-      "data-slot": "button",
-      className: cn(buttonVariants({ variant, size, className })),
-      ...props
-    }
-  );
-}
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const toKebabCase = (string) => string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
-const toCamelCase = (string) => string.replace(
-  /^([A-Z])|[\s-_]+(\w)/g,
-  (match, p1, p2) => p2 ? p2.toUpperCase() : p1.toLowerCase()
-);
-const toPascalCase = (string) => {
-  const camelCase = toCamelCase(string);
-  return camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
-};
-const mergeClasses = (...classes) => classes.filter((className, index2, array) => {
-  return Boolean(className) && className.trim() !== "" && array.indexOf(className) === index2;
-}).join(" ").trim();
-const hasA11yProp = (props) => {
-  for (const prop in props) {
-    if (prop.startsWith("aria-") || prop === "role" || prop === "title") {
-      return true;
-    }
-  }
-};
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-var defaultAttributes = {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: 24,
-  height: 24,
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  strokeWidth: 2,
-  strokeLinecap: "round",
-  strokeLinejoin: "round"
-};
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const Icon = reactExports.forwardRef(
-  ({
-    color = "currentColor",
-    size = 24,
-    strokeWidth = 2,
-    absoluteStrokeWidth,
-    className = "",
-    children,
-    iconNode,
-    ...rest
-  }, ref) => reactExports.createElement(
-    "svg",
-    {
-      ref,
-      ...defaultAttributes,
-      width: size,
-      height: size,
-      stroke: color,
-      strokeWidth: absoluteStrokeWidth ? Number(strokeWidth) * 24 / Number(size) : strokeWidth,
-      className: mergeClasses("lucide", className),
-      ...!children && !hasA11yProp(rest) && { "aria-hidden": "true" },
-      ...rest
-    },
-    [
-      ...iconNode.map(([tag, attrs]) => reactExports.createElement(tag, attrs)),
-      ...Array.isArray(children) ? children : [children]
-    ]
-  )
-);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const createLucideIcon = (iconName, iconNode) => {
-  const Component2 = reactExports.forwardRef(
-    ({ className, ...props }, ref) => reactExports.createElement(Icon, {
-      ref,
-      iconNode,
-      className: mergeClasses(
-        `lucide-${toKebabCase(toPascalCase(iconName))}`,
-        `lucide-${iconName}`,
-        className
-      ),
-      ...props
-    })
-  );
-  Component2.displayName = toPascalCase(iconName);
-  return Component2;
-};
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$7 = [
-  [
-    "path",
-    {
-      d: "M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z",
-      key: "1tc9qg"
-    }
-  ],
-  ["circle", { cx: "12", cy: "13", r: "3", key: "1vg3eu" }]
-];
-const Camera = createLucideIcon("camera", __iconNode$7);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$6 = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
-const ChevronDown = createLucideIcon("chevron-down", __iconNode$6);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$5 = [
-  ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
-  ["path", { d: "M10 14 21 3", key: "gplh6r" }],
-  ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6", key: "a6xqqp" }]
-];
-const ExternalLink = createLucideIcon("external-link", __iconNode$5);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$4 = [
-  ["rect", { width: "18", height: "11", x: "3", y: "11", rx: "2", ry: "2", key: "1w4ew1" }],
-  ["path", { d: "M7 11V7a5 5 0 0 1 10 0v4", key: "fwvmzm" }]
-];
-const Lock = createLucideIcon("lock", __iconNode$4);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$3 = [
-  ["path", { d: "M4 12h16", key: "1lakjw" }],
-  ["path", { d: "M4 18h16", key: "19g7jn" }],
-  ["path", { d: "M4 6h16", key: "1o0s65" }]
-];
-const Menu = createLucideIcon("menu", __iconNode$3);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$2 = [
-  ["path", { d: "M3 6h18", key: "d0wm0j" }],
-  ["path", { d: "M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6", key: "4alrt4" }],
-  ["path", { d: "M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2", key: "v07s0e" }],
-  ["line", { x1: "10", x2: "10", y1: "11", y2: "17", key: "1uufr5" }],
-  ["line", { x1: "14", x2: "14", y1: "11", y2: "17", key: "xtxkd" }]
-];
-const Trash2 = createLucideIcon("trash-2", __iconNode$2);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$1 = [
-  ["path", { d: "M12 3v12", key: "1x0j5s" }],
-  ["path", { d: "m17 8-5-5-5 5", key: "7q97r8" }],
-  ["path", { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4", key: "ih7n3h" }]
-];
-const Upload = createLucideIcon("upload", __iconNode$1);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode = [
-  ["path", { d: "M18 6 6 18", key: "1bl5f8" }],
-  ["path", { d: "m6 6 12 12", key: "d8bk6v" }]
-];
-const X = createLucideIcon("x", __iconNode);
-// @__NO_SIDE_EFFECTS__
-function createSlot(ownerName) {
-  const SlotClone = /* @__PURE__ */ createSlotClone(ownerName);
-  const Slot2 = reactExports.forwardRef((props, forwardedRef) => {
-    const { children, ...slotProps } = props;
-    const childrenArray = reactExports.Children.toArray(children);
-    const slottable = childrenArray.find(isSlottable);
-    if (slottable) {
-      const newElement = slottable.props.children;
-      const newChildren = childrenArray.map((child) => {
-        if (child === slottable) {
-          if (reactExports.Children.count(newElement) > 1) return reactExports.Children.only(null);
-          return reactExports.isValidElement(newElement) ? newElement.props.children : null;
-        } else {
-          return child;
-        }
-      });
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: reactExports.isValidElement(newElement) ? reactExports.cloneElement(newElement, void 0, newChildren) : null });
-    }
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children });
-  });
-  Slot2.displayName = `${ownerName}.Slot`;
-  return Slot2;
-}
-// @__NO_SIDE_EFFECTS__
-function createSlotClone(ownerName) {
-  const SlotClone = reactExports.forwardRef((props, forwardedRef) => {
-    const { children, ...slotProps } = props;
-    if (reactExports.isValidElement(children)) {
-      const childrenRef = getElementRef$1(children);
-      const props2 = mergeProps(slotProps, children.props);
-      if (children.type !== reactExports.Fragment) {
-        props2.ref = forwardedRef ? composeRefs(forwardedRef, childrenRef) : childrenRef;
-      }
-      return reactExports.cloneElement(children, props2);
-    }
-    return reactExports.Children.count(children) > 1 ? reactExports.Children.only(null) : null;
-  });
-  SlotClone.displayName = `${ownerName}.SlotClone`;
-  return SlotClone;
-}
-var SLOTTABLE_IDENTIFIER = Symbol("radix.slottable");
-function isSlottable(child) {
-  return reactExports.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER;
-}
-function mergeProps(slotProps, childProps) {
-  const overrideProps = { ...childProps };
-  for (const propName in childProps) {
-    const slotPropValue = slotProps[propName];
-    const childPropValue = childProps[propName];
-    const isHandler = /^on[A-Z]/.test(propName);
-    if (isHandler) {
-      if (slotPropValue && childPropValue) {
-        overrideProps[propName] = (...args) => {
-          const result = childPropValue(...args);
-          slotPropValue(...args);
-          return result;
-        };
-      } else if (slotPropValue) {
-        overrideProps[propName] = slotPropValue;
-      }
-    } else if (propName === "style") {
-      overrideProps[propName] = { ...slotPropValue, ...childPropValue };
-    } else if (propName === "className") {
-      overrideProps[propName] = [slotPropValue, childPropValue].filter(Boolean).join(" ");
-    }
-  }
-  return { ...slotProps, ...overrideProps };
-}
-function getElementRef$1(element) {
-  var _a2, _b2;
-  let getter = (_a2 = Object.getOwnPropertyDescriptor(element.props, "ref")) == null ? void 0 : _a2.get;
-  let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
-  if (mayWarn) {
-    return element.ref;
-  }
-  getter = (_b2 = Object.getOwnPropertyDescriptor(element, "ref")) == null ? void 0 : _b2.get;
-  mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
-  if (mayWarn) {
-    return element.props.ref;
-  }
-  return element.props.ref || element.ref;
-}
-var NODES$1 = [
-  "a",
-  "button",
-  "div",
-  "form",
-  "h2",
-  "h3",
-  "img",
-  "input",
-  "label",
-  "li",
-  "nav",
-  "ol",
-  "p",
-  "select",
-  "span",
-  "svg",
-  "ul"
-];
-var Primitive$1 = NODES$1.reduce((primitive, node) => {
-  const Slot2 = /* @__PURE__ */ createSlot(`Primitive.${node}`);
-  const Node2 = reactExports.forwardRef((props, forwardedRef) => {
-    const { asChild, ...primitiveProps } = props;
-    const Comp = asChild ? Slot2 : node;
-    if (typeof window !== "undefined") {
-      window[Symbol.for("radix-ui")] = true;
-    }
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Comp, { ...primitiveProps, ref: forwardedRef });
-  });
-  Node2.displayName = `Primitive.${node}`;
-  return { ...primitive, [node]: Node2 };
-}, {});
-function dispatchDiscreteCustomEvent(target, event) {
-  if (target) reactDomExports.flushSync(() => target.dispatchEvent(event));
-}
-var useLayoutEffect2 = (globalThis == null ? void 0 : globalThis.document) ? reactExports.useLayoutEffect : () => {
-};
-function useStateMachine$1(initialState, machine) {
-  return reactExports.useReducer((state, event) => {
-    const nextState = machine[state][event];
-    return nextState ?? state;
-  }, initialState);
-}
-var Presence = (props) => {
-  const { present, children } = props;
-  const presence = usePresence(present);
-  const child = typeof children === "function" ? children({ present: presence.isPresent }) : reactExports.Children.only(children);
-  const ref = useComposedRefs(presence.ref, getElementRef(child));
-  const forceMount = typeof children === "function";
-  return forceMount || presence.isPresent ? reactExports.cloneElement(child, { ref }) : null;
-};
-Presence.displayName = "Presence";
-function usePresence(present) {
-  const [node, setNode] = reactExports.useState();
-  const stylesRef = reactExports.useRef(null);
-  const prevPresentRef = reactExports.useRef(present);
-  const prevAnimationNameRef = reactExports.useRef("none");
-  const initialState = present ? "mounted" : "unmounted";
-  const [state, send] = useStateMachine$1(initialState, {
-    mounted: {
-      UNMOUNT: "unmounted",
-      ANIMATION_OUT: "unmountSuspended"
-    },
-    unmountSuspended: {
-      MOUNT: "mounted",
-      ANIMATION_END: "unmounted"
-    },
-    unmounted: {
-      MOUNT: "mounted"
-    }
-  });
-  reactExports.useEffect(() => {
-    const currentAnimationName = getAnimationName(stylesRef.current);
-    prevAnimationNameRef.current = state === "mounted" ? currentAnimationName : "none";
-  }, [state]);
-  useLayoutEffect2(() => {
-    const styles = stylesRef.current;
-    const wasPresent = prevPresentRef.current;
-    const hasPresentChanged = wasPresent !== present;
-    if (hasPresentChanged) {
-      const prevAnimationName = prevAnimationNameRef.current;
-      const currentAnimationName = getAnimationName(styles);
-      if (present) {
-        send("MOUNT");
-      } else if (currentAnimationName === "none" || (styles == null ? void 0 : styles.display) === "none") {
-        send("UNMOUNT");
-      } else {
-        const isAnimating = prevAnimationName !== currentAnimationName;
-        if (wasPresent && isAnimating) {
-          send("ANIMATION_OUT");
-        } else {
-          send("UNMOUNT");
-        }
-      }
-      prevPresentRef.current = present;
-    }
-  }, [present, send]);
-  useLayoutEffect2(() => {
-    if (node) {
-      let timeoutId;
-      const ownerWindow = node.ownerDocument.defaultView ?? window;
-      const handleAnimationEnd = (event) => {
-        const currentAnimationName = getAnimationName(stylesRef.current);
-        const isCurrentAnimation = currentAnimationName.includes(CSS.escape(event.animationName));
-        if (event.target === node && isCurrentAnimation) {
-          send("ANIMATION_END");
-          if (!prevPresentRef.current) {
-            const currentFillMode = node.style.animationFillMode;
-            node.style.animationFillMode = "forwards";
-            timeoutId = ownerWindow.setTimeout(() => {
-              if (node.style.animationFillMode === "forwards") {
-                node.style.animationFillMode = currentFillMode;
-              }
-            });
-          }
-        }
-      };
-      const handleAnimationStart = (event) => {
-        if (event.target === node) {
-          prevAnimationNameRef.current = getAnimationName(stylesRef.current);
-        }
-      };
-      node.addEventListener("animationstart", handleAnimationStart);
-      node.addEventListener("animationcancel", handleAnimationEnd);
-      node.addEventListener("animationend", handleAnimationEnd);
-      return () => {
-        ownerWindow.clearTimeout(timeoutId);
-        node.removeEventListener("animationstart", handleAnimationStart);
-        node.removeEventListener("animationcancel", handleAnimationEnd);
-        node.removeEventListener("animationend", handleAnimationEnd);
-      };
-    } else {
-      send("ANIMATION_END");
-    }
-  }, [node, send]);
-  return {
-    isPresent: ["mounted", "unmountSuspended"].includes(state),
-    ref: reactExports.useCallback((node2) => {
-      stylesRef.current = node2 ? getComputedStyle(node2) : null;
-      setNode(node2);
-    }, [])
-  };
-}
-function getAnimationName(styles) {
-  return (styles == null ? void 0 : styles.animationName) || "none";
-}
-function getElementRef(element) {
-  var _a2, _b2;
-  let getter = (_a2 = Object.getOwnPropertyDescriptor(element.props, "ref")) == null ? void 0 : _a2.get;
-  let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
-  if (mayWarn) {
-    return element.ref;
-  }
-  getter = (_b2 = Object.getOwnPropertyDescriptor(element, "ref")) == null ? void 0 : _b2.get;
-  mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
-  if (mayWarn) {
-    return element.props.ref;
-  }
-  return element.props.ref || element.ref;
-}
-function createContext2(rootComponentName, defaultContext) {
-  const Context = reactExports.createContext(defaultContext);
-  const Provider = (props) => {
-    const { children, ...context } = props;
-    const value = reactExports.useMemo(() => context, Object.values(context));
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Context.Provider, { value, children });
-  };
-  Provider.displayName = rootComponentName + "Provider";
-  function useContext2(consumerName) {
-    const context = reactExports.useContext(Context);
-    if (context) return context;
-    if (defaultContext !== void 0) return defaultContext;
-    throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
-  }
-  return [Provider, useContext2];
-}
-function createContextScope(scopeName, createContextScopeDeps = []) {
-  let defaultContexts = [];
-  function createContext3(rootComponentName, defaultContext) {
-    const BaseContext = reactExports.createContext(defaultContext);
-    const index2 = defaultContexts.length;
-    defaultContexts = [...defaultContexts, defaultContext];
-    const Provider = (props) => {
-      var _a2;
-      const { scope, children, ...context } = props;
-      const Context = ((_a2 = scope == null ? void 0 : scope[scopeName]) == null ? void 0 : _a2[index2]) || BaseContext;
-      const value = reactExports.useMemo(() => context, Object.values(context));
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(Context.Provider, { value, children });
-    };
-    Provider.displayName = rootComponentName + "Provider";
-    function useContext2(consumerName, scope) {
-      var _a2;
-      const Context = ((_a2 = scope == null ? void 0 : scope[scopeName]) == null ? void 0 : _a2[index2]) || BaseContext;
-      const context = reactExports.useContext(Context);
-      if (context) return context;
-      if (defaultContext !== void 0) return defaultContext;
-      throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
-    }
-    return [Provider, useContext2];
-  }
-  const createScope = () => {
-    const scopeContexts = defaultContexts.map((defaultContext) => {
-      return reactExports.createContext(defaultContext);
-    });
-    return function useScope(scope) {
-      const contexts = (scope == null ? void 0 : scope[scopeName]) || scopeContexts;
-      return reactExports.useMemo(
-        () => ({ [`__scope${scopeName}`]: { ...scope, [scopeName]: contexts } }),
-        [scope, contexts]
-      );
-    };
-  };
-  createScope.scopeName = scopeName;
-  return [createContext3, composeContextScopes(createScope, ...createContextScopeDeps)];
-}
-function composeContextScopes(...scopes) {
-  const baseScope = scopes[0];
-  if (scopes.length === 1) return baseScope;
-  const createScope = () => {
-    const scopeHooks = scopes.map((createScope2) => ({
-      useScope: createScope2(),
-      scopeName: createScope2.scopeName
-    }));
-    return function useComposedScopes(overrideScopes) {
-      const nextScopes = scopeHooks.reduce((nextScopes2, { useScope, scopeName }) => {
-        const scopeProps = useScope(overrideScopes);
-        const currentScope = scopeProps[`__scope${scopeName}`];
-        return { ...nextScopes2, ...currentScope };
-      }, {});
-      return reactExports.useMemo(() => ({ [`__scope${baseScope.scopeName}`]: nextScopes }), [nextScopes]);
-    };
-  };
-  createScope.scopeName = baseScope.scopeName;
-  return createScope;
-}
-function useCallbackRef$1(callback) {
-  const callbackRef = reactExports.useRef(callback);
-  reactExports.useEffect(() => {
-    callbackRef.current = callback;
-  });
-  return reactExports.useMemo(() => (...args) => {
-    var _a2;
-    return (_a2 = callbackRef.current) == null ? void 0 : _a2.call(callbackRef, ...args);
+      { threshold: 0.05 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
   }, []);
+  return { ref, visible };
 }
-var DirectionContext = reactExports.createContext(void 0);
-function useDirection(localDir) {
-  const globalDir = reactExports.useContext(DirectionContext);
-  return localDir || globalDir || "ltr";
-}
-function clamp(value, [min, max]) {
-  return Math.min(max, Math.max(min, value));
-}
-function composeEventHandlers(originalEventHandler, ourEventHandler, { checkForDefaultPrevented = true } = {}) {
-  return function handleEvent(event) {
-    originalEventHandler == null ? void 0 : originalEventHandler(event);
-    if (checkForDefaultPrevented === false || !event.defaultPrevented) {
-      return ourEventHandler == null ? void 0 : ourEventHandler(event);
-    }
-  };
-}
-function useStateMachine(initialState, machine) {
-  return reactExports.useReducer((state, event) => {
-    const nextState = machine[state][event];
-    return nextState ?? state;
-  }, initialState);
-}
-var SCROLL_AREA_NAME = "ScrollArea";
-var [createScrollAreaContext] = createContextScope(SCROLL_AREA_NAME);
-var [ScrollAreaProvider, useScrollAreaContext] = createScrollAreaContext(SCROLL_AREA_NAME);
-var ScrollArea$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const {
-      __scopeScrollArea,
-      type = "hover",
-      dir,
-      scrollHideDelay = 600,
-      ...scrollAreaProps
-    } = props;
-    const [scrollArea, setScrollArea] = reactExports.useState(null);
-    const [viewport, setViewport] = reactExports.useState(null);
-    const [content, setContent] = reactExports.useState(null);
-    const [scrollbarX, setScrollbarX] = reactExports.useState(null);
-    const [scrollbarY, setScrollbarY] = reactExports.useState(null);
-    const [cornerWidth, setCornerWidth] = reactExports.useState(0);
-    const [cornerHeight, setCornerHeight] = reactExports.useState(0);
-    const [scrollbarXEnabled, setScrollbarXEnabled] = reactExports.useState(false);
-    const [scrollbarYEnabled, setScrollbarYEnabled] = reactExports.useState(false);
-    const composedRefs = useComposedRefs(forwardedRef, (node) => setScrollArea(node));
-    const direction = useDirection(dir);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      ScrollAreaProvider,
-      {
-        scope: __scopeScrollArea,
-        type,
-        dir: direction,
-        scrollHideDelay,
-        scrollArea,
-        viewport,
-        onViewportChange: setViewport,
-        content,
-        onContentChange: setContent,
-        scrollbarX,
-        onScrollbarXChange: setScrollbarX,
-        scrollbarXEnabled,
-        onScrollbarXEnabledChange: setScrollbarXEnabled,
-        scrollbarY,
-        onScrollbarYChange: setScrollbarY,
-        scrollbarYEnabled,
-        onScrollbarYEnabledChange: setScrollbarYEnabled,
-        onCornerWidthChange: setCornerWidth,
-        onCornerHeightChange: setCornerHeight,
-        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Primitive$1.div,
-          {
-            dir: direction,
-            ...scrollAreaProps,
-            ref: composedRefs,
-            style: {
-              position: "relative",
-              // Pass corner sizes as CSS vars to reduce re-renders of context consumers
-              ["--radix-scroll-area-corner-width"]: cornerWidth + "px",
-              ["--radix-scroll-area-corner-height"]: cornerHeight + "px",
-              ...props.style
-            }
-          }
-        )
-      }
-    );
-  }
-);
-ScrollArea$1.displayName = SCROLL_AREA_NAME;
-var VIEWPORT_NAME = "ScrollAreaViewport";
-var ScrollAreaViewport = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeScrollArea, children, nonce, ...viewportProps } = props;
-    const context = useScrollAreaContext(VIEWPORT_NAME, __scopeScrollArea);
-    const ref = reactExports.useRef(null);
-    const composedRefs = useComposedRefs(forwardedRef, ref, context.onViewportChange);
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "style",
-        {
-          dangerouslySetInnerHTML: {
-            __html: `[data-radix-scroll-area-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}[data-radix-scroll-area-viewport]::-webkit-scrollbar{display:none}`
-          },
-          nonce
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Primitive$1.div,
-        {
-          "data-radix-scroll-area-viewport": "",
-          ...viewportProps,
-          ref: composedRefs,
-          style: {
-            /**
-             * We don't support `visible` because the intention is to have at least one scrollbar
-             * if this component is used and `visible` will behave like `auto` in that case
-             * https://developer.mozilla.org/en-US/docs/Web/CSS/overflow#description
-             *
-             * We don't handle `auto` because the intention is for the native implementation
-             * to be hidden if using this component. We just want to ensure the node is scrollable
-             * so could have used either `scroll` or `auto` here. We picked `scroll` to prevent
-             * the browser from having to work out whether to render native scrollbars or not,
-             * we tell it to with the intention of hiding them in CSS.
-             */
-            overflowX: context.scrollbarXEnabled ? "scroll" : "hidden",
-            overflowY: context.scrollbarYEnabled ? "scroll" : "hidden",
-            ...props.style
-          },
-          children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref: context.onContentChange, style: { minWidth: "100%", display: "table" }, children })
-        }
-      )
-    ] });
-  }
-);
-ScrollAreaViewport.displayName = VIEWPORT_NAME;
-var SCROLLBAR_NAME = "ScrollAreaScrollbar";
-var ScrollAreaScrollbar = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { forceMount, ...scrollbarProps } = props;
-    const context = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
-    const { onScrollbarXEnabledChange, onScrollbarYEnabledChange } = context;
-    const isHorizontal = props.orientation === "horizontal";
-    reactExports.useEffect(() => {
-      isHorizontal ? onScrollbarXEnabledChange(true) : onScrollbarYEnabledChange(true);
-      return () => {
-        isHorizontal ? onScrollbarXEnabledChange(false) : onScrollbarYEnabledChange(false);
-      };
-    }, [isHorizontal, onScrollbarXEnabledChange, onScrollbarYEnabledChange]);
-    return context.type === "hover" ? /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollAreaScrollbarHover, { ...scrollbarProps, ref: forwardedRef, forceMount }) : context.type === "scroll" ? /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollAreaScrollbarScroll, { ...scrollbarProps, ref: forwardedRef, forceMount }) : context.type === "auto" ? /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollAreaScrollbarAuto, { ...scrollbarProps, ref: forwardedRef, forceMount }) : context.type === "always" ? /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollAreaScrollbarVisible, { ...scrollbarProps, ref: forwardedRef }) : null;
-  }
-);
-ScrollAreaScrollbar.displayName = SCROLLBAR_NAME;
-var ScrollAreaScrollbarHover = reactExports.forwardRef((props, forwardedRef) => {
-  const { forceMount, ...scrollbarProps } = props;
-  const context = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
-  const [visible, setVisible] = reactExports.useState(false);
-  reactExports.useEffect(() => {
-    const scrollArea = context.scrollArea;
-    let hideTimer = 0;
-    if (scrollArea) {
-      const handlePointerEnter = () => {
-        window.clearTimeout(hideTimer);
-        setVisible(true);
-      };
-      const handlePointerLeave = () => {
-        hideTimer = window.setTimeout(() => setVisible(false), context.scrollHideDelay);
-      };
-      scrollArea.addEventListener("pointerenter", handlePointerEnter);
-      scrollArea.addEventListener("pointerleave", handlePointerLeave);
-      return () => {
-        window.clearTimeout(hideTimer);
-        scrollArea.removeEventListener("pointerenter", handlePointerEnter);
-        scrollArea.removeEventListener("pointerleave", handlePointerLeave);
-      };
-    }
-  }, [context.scrollArea, context.scrollHideDelay]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || visible, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-    ScrollAreaScrollbarAuto,
-    {
-      "data-state": visible ? "visible" : "hidden",
-      ...scrollbarProps,
-      ref: forwardedRef
-    }
-  ) });
-});
-var ScrollAreaScrollbarScroll = reactExports.forwardRef((props, forwardedRef) => {
-  const { forceMount, ...scrollbarProps } = props;
-  const context = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
-  const isHorizontal = props.orientation === "horizontal";
-  const debounceScrollEnd = useDebounceCallback(() => send("SCROLL_END"), 100);
-  const [state, send] = useStateMachine("hidden", {
-    hidden: {
-      SCROLL: "scrolling"
-    },
-    scrolling: {
-      SCROLL_END: "idle",
-      POINTER_ENTER: "interacting"
-    },
-    interacting: {
-      SCROLL: "interacting",
-      POINTER_LEAVE: "idle"
-    },
-    idle: {
-      HIDE: "hidden",
-      SCROLL: "scrolling",
-      POINTER_ENTER: "interacting"
-    }
-  });
-  reactExports.useEffect(() => {
-    if (state === "idle") {
-      const hideTimer = window.setTimeout(() => send("HIDE"), context.scrollHideDelay);
-      return () => window.clearTimeout(hideTimer);
-    }
-  }, [state, context.scrollHideDelay, send]);
-  reactExports.useEffect(() => {
-    const viewport = context.viewport;
-    const scrollDirection = isHorizontal ? "scrollLeft" : "scrollTop";
-    if (viewport) {
-      let prevScrollPos = viewport[scrollDirection];
-      const handleScroll2 = () => {
-        const scrollPos = viewport[scrollDirection];
-        const hasScrollInDirectionChanged = prevScrollPos !== scrollPos;
-        if (hasScrollInDirectionChanged) {
-          send("SCROLL");
-          debounceScrollEnd();
-        }
-        prevScrollPos = scrollPos;
-      };
-      viewport.addEventListener("scroll", handleScroll2);
-      return () => viewport.removeEventListener("scroll", handleScroll2);
-    }
-  }, [context.viewport, isHorizontal, send, debounceScrollEnd]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || state !== "hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-    ScrollAreaScrollbarVisible,
-    {
-      "data-state": state === "hidden" ? "hidden" : "visible",
-      ...scrollbarProps,
-      ref: forwardedRef,
-      onPointerEnter: composeEventHandlers(props.onPointerEnter, () => send("POINTER_ENTER")),
-      onPointerLeave: composeEventHandlers(props.onPointerLeave, () => send("POINTER_LEAVE"))
-    }
-  ) });
-});
-var ScrollAreaScrollbarAuto = reactExports.forwardRef((props, forwardedRef) => {
-  const context = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
-  const { forceMount, ...scrollbarProps } = props;
-  const [visible, setVisible] = reactExports.useState(false);
-  const isHorizontal = props.orientation === "horizontal";
-  const handleResize = useDebounceCallback(() => {
-    if (context.viewport) {
-      const isOverflowX = context.viewport.offsetWidth < context.viewport.scrollWidth;
-      const isOverflowY = context.viewport.offsetHeight < context.viewport.scrollHeight;
-      setVisible(isHorizontal ? isOverflowX : isOverflowY);
-    }
-  }, 10);
-  useResizeObserver(context.viewport, handleResize);
-  useResizeObserver(context.content, handleResize);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || visible, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-    ScrollAreaScrollbarVisible,
-    {
-      "data-state": visible ? "visible" : "hidden",
-      ...scrollbarProps,
-      ref: forwardedRef
-    }
-  ) });
-});
-var ScrollAreaScrollbarVisible = reactExports.forwardRef((props, forwardedRef) => {
-  const { orientation = "vertical", ...scrollbarProps } = props;
-  const context = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
-  const thumbRef = reactExports.useRef(null);
-  const pointerOffsetRef = reactExports.useRef(0);
-  const [sizes, setSizes] = reactExports.useState({
-    content: 0,
-    viewport: 0,
-    scrollbar: { size: 0, paddingStart: 0, paddingEnd: 0 }
-  });
-  const thumbRatio = getThumbRatio(sizes.viewport, sizes.content);
-  const commonProps = {
-    ...scrollbarProps,
-    sizes,
-    onSizesChange: setSizes,
-    hasThumb: Boolean(thumbRatio > 0 && thumbRatio < 1),
-    onThumbChange: (thumb) => thumbRef.current = thumb,
-    onThumbPointerUp: () => pointerOffsetRef.current = 0,
-    onThumbPointerDown: (pointerPos) => pointerOffsetRef.current = pointerPos
-  };
-  function getScrollPosition(pointerPos, dir) {
-    return getScrollPositionFromPointer(pointerPos, pointerOffsetRef.current, sizes, dir);
-  }
-  if (orientation === "horizontal") {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      ScrollAreaScrollbarX,
-      {
-        ...commonProps,
-        ref: forwardedRef,
-        onThumbPositionChange: () => {
-          if (context.viewport && thumbRef.current) {
-            const scrollPos = context.viewport.scrollLeft;
-            const offset = getThumbOffsetFromScroll(scrollPos, sizes, context.dir);
-            thumbRef.current.style.transform = `translate3d(${offset}px, 0, 0)`;
-          }
-        },
-        onWheelScroll: (scrollPos) => {
-          if (context.viewport) context.viewport.scrollLeft = scrollPos;
-        },
-        onDragScroll: (pointerPos) => {
-          if (context.viewport) {
-            context.viewport.scrollLeft = getScrollPosition(pointerPos, context.dir);
-          }
-        }
-      }
-    );
-  }
-  if (orientation === "vertical") {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      ScrollAreaScrollbarY,
-      {
-        ...commonProps,
-        ref: forwardedRef,
-        onThumbPositionChange: () => {
-          if (context.viewport && thumbRef.current) {
-            const scrollPos = context.viewport.scrollTop;
-            const offset = getThumbOffsetFromScroll(scrollPos, sizes);
-            thumbRef.current.style.transform = `translate3d(0, ${offset}px, 0)`;
-          }
-        },
-        onWheelScroll: (scrollPos) => {
-          if (context.viewport) context.viewport.scrollTop = scrollPos;
-        },
-        onDragScroll: (pointerPos) => {
-          if (context.viewport) context.viewport.scrollTop = getScrollPosition(pointerPos);
-        }
-      }
-    );
-  }
-  return null;
-});
-var ScrollAreaScrollbarX = reactExports.forwardRef((props, forwardedRef) => {
-  const { sizes, onSizesChange, ...scrollbarProps } = props;
-  const context = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
-  const [computedStyle, setComputedStyle] = reactExports.useState();
-  const ref = reactExports.useRef(null);
-  const composeRefs2 = useComposedRefs(forwardedRef, ref, context.onScrollbarXChange);
-  reactExports.useEffect(() => {
-    if (ref.current) setComputedStyle(getComputedStyle(ref.current));
-  }, [ref]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    ScrollAreaScrollbarImpl,
-    {
-      "data-orientation": "horizontal",
-      ...scrollbarProps,
-      ref: composeRefs2,
-      sizes,
-      style: {
-        bottom: 0,
-        left: context.dir === "rtl" ? "var(--radix-scroll-area-corner-width)" : 0,
-        right: context.dir === "ltr" ? "var(--radix-scroll-area-corner-width)" : 0,
-        ["--radix-scroll-area-thumb-width"]: getThumbSize(sizes) + "px",
-        ...props.style
-      },
-      onThumbPointerDown: (pointerPos) => props.onThumbPointerDown(pointerPos.x),
-      onDragScroll: (pointerPos) => props.onDragScroll(pointerPos.x),
-      onWheelScroll: (event, maxScrollPos) => {
-        if (context.viewport) {
-          const scrollPos = context.viewport.scrollLeft + event.deltaX;
-          props.onWheelScroll(scrollPos);
-          if (isScrollingWithinScrollbarBounds(scrollPos, maxScrollPos)) {
-            event.preventDefault();
-          }
-        }
-      },
-      onResize: () => {
-        if (ref.current && context.viewport && computedStyle) {
-          onSizesChange({
-            content: context.viewport.scrollWidth,
-            viewport: context.viewport.offsetWidth,
-            scrollbar: {
-              size: ref.current.clientWidth,
-              paddingStart: toInt(computedStyle.paddingLeft),
-              paddingEnd: toInt(computedStyle.paddingRight)
-            }
-          });
-        }
-      }
-    }
-  );
-});
-var ScrollAreaScrollbarY = reactExports.forwardRef((props, forwardedRef) => {
-  const { sizes, onSizesChange, ...scrollbarProps } = props;
-  const context = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
-  const [computedStyle, setComputedStyle] = reactExports.useState();
-  const ref = reactExports.useRef(null);
-  const composeRefs2 = useComposedRefs(forwardedRef, ref, context.onScrollbarYChange);
-  reactExports.useEffect(() => {
-    if (ref.current) setComputedStyle(getComputedStyle(ref.current));
-  }, [ref]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    ScrollAreaScrollbarImpl,
-    {
-      "data-orientation": "vertical",
-      ...scrollbarProps,
-      ref: composeRefs2,
-      sizes,
-      style: {
-        top: 0,
-        right: context.dir === "ltr" ? 0 : void 0,
-        left: context.dir === "rtl" ? 0 : void 0,
-        bottom: "var(--radix-scroll-area-corner-height)",
-        ["--radix-scroll-area-thumb-height"]: getThumbSize(sizes) + "px",
-        ...props.style
-      },
-      onThumbPointerDown: (pointerPos) => props.onThumbPointerDown(pointerPos.y),
-      onDragScroll: (pointerPos) => props.onDragScroll(pointerPos.y),
-      onWheelScroll: (event, maxScrollPos) => {
-        if (context.viewport) {
-          const scrollPos = context.viewport.scrollTop + event.deltaY;
-          props.onWheelScroll(scrollPos);
-          if (isScrollingWithinScrollbarBounds(scrollPos, maxScrollPos)) {
-            event.preventDefault();
-          }
-        }
-      },
-      onResize: () => {
-        if (ref.current && context.viewport && computedStyle) {
-          onSizesChange({
-            content: context.viewport.scrollHeight,
-            viewport: context.viewport.offsetHeight,
-            scrollbar: {
-              size: ref.current.clientHeight,
-              paddingStart: toInt(computedStyle.paddingTop),
-              paddingEnd: toInt(computedStyle.paddingBottom)
-            }
-          });
-        }
-      }
-    }
-  );
-});
-var [ScrollbarProvider, useScrollbarContext] = createScrollAreaContext(SCROLLBAR_NAME);
-var ScrollAreaScrollbarImpl = reactExports.forwardRef((props, forwardedRef) => {
-  const {
-    __scopeScrollArea,
-    sizes,
-    hasThumb,
-    onThumbChange,
-    onThumbPointerUp,
-    onThumbPointerDown,
-    onThumbPositionChange,
-    onDragScroll,
-    onWheelScroll,
-    onResize,
-    ...scrollbarProps
-  } = props;
-  const context = useScrollAreaContext(SCROLLBAR_NAME, __scopeScrollArea);
-  const [scrollbar, setScrollbar] = reactExports.useState(null);
-  const composeRefs2 = useComposedRefs(forwardedRef, (node) => setScrollbar(node));
-  const rectRef = reactExports.useRef(null);
-  const prevWebkitUserSelectRef = reactExports.useRef("");
-  const viewport = context.viewport;
-  const maxScrollPos = sizes.content - sizes.viewport;
-  const handleWheelScroll = useCallbackRef$1(onWheelScroll);
-  const handleThumbPositionChange = useCallbackRef$1(onThumbPositionChange);
-  const handleResize = useDebounceCallback(onResize, 10);
-  function handleDragScroll(event) {
-    if (rectRef.current) {
-      const x = event.clientX - rectRef.current.left;
-      const y = event.clientY - rectRef.current.top;
-      onDragScroll({ x, y });
-    }
-  }
-  reactExports.useEffect(() => {
-    const handleWheel = (event) => {
-      const element = event.target;
-      const isScrollbarWheel = scrollbar == null ? void 0 : scrollbar.contains(element);
-      if (isScrollbarWheel) handleWheelScroll(event, maxScrollPos);
-    };
-    document.addEventListener("wheel", handleWheel, { passive: false });
-    return () => document.removeEventListener("wheel", handleWheel, { passive: false });
-  }, [viewport, scrollbar, maxScrollPos, handleWheelScroll]);
-  reactExports.useEffect(handleThumbPositionChange, [sizes, handleThumbPositionChange]);
-  useResizeObserver(scrollbar, handleResize);
-  useResizeObserver(context.content, handleResize);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    ScrollbarProvider,
-    {
-      scope: __scopeScrollArea,
-      scrollbar,
-      hasThumb,
-      onThumbChange: useCallbackRef$1(onThumbChange),
-      onThumbPointerUp: useCallbackRef$1(onThumbPointerUp),
-      onThumbPositionChange: handleThumbPositionChange,
-      onThumbPointerDown: useCallbackRef$1(onThumbPointerDown),
-      children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Primitive$1.div,
-        {
-          ...scrollbarProps,
-          ref: composeRefs2,
-          style: { position: "absolute", ...scrollbarProps.style },
-          onPointerDown: composeEventHandlers(props.onPointerDown, (event) => {
-            const mainPointer = 0;
-            if (event.button === mainPointer) {
-              const element = event.target;
-              element.setPointerCapture(event.pointerId);
-              rectRef.current = scrollbar.getBoundingClientRect();
-              prevWebkitUserSelectRef.current = document.body.style.webkitUserSelect;
-              document.body.style.webkitUserSelect = "none";
-              if (context.viewport) context.viewport.style.scrollBehavior = "auto";
-              handleDragScroll(event);
-            }
-          }),
-          onPointerMove: composeEventHandlers(props.onPointerMove, handleDragScroll),
-          onPointerUp: composeEventHandlers(props.onPointerUp, (event) => {
-            const element = event.target;
-            if (element.hasPointerCapture(event.pointerId)) {
-              element.releasePointerCapture(event.pointerId);
-            }
-            document.body.style.webkitUserSelect = prevWebkitUserSelectRef.current;
-            if (context.viewport) context.viewport.style.scrollBehavior = "";
-            rectRef.current = null;
-          })
-        }
-      )
-    }
-  );
-});
-var THUMB_NAME = "ScrollAreaThumb";
-var ScrollAreaThumb = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { forceMount, ...thumbProps } = props;
-    const scrollbarContext = useScrollbarContext(THUMB_NAME, props.__scopeScrollArea);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || scrollbarContext.hasThumb, children: /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollAreaThumbImpl, { ref: forwardedRef, ...thumbProps }) });
-  }
-);
-var ScrollAreaThumbImpl = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeScrollArea, style: style2, ...thumbProps } = props;
-    const scrollAreaContext = useScrollAreaContext(THUMB_NAME, __scopeScrollArea);
-    const scrollbarContext = useScrollbarContext(THUMB_NAME, __scopeScrollArea);
-    const { onThumbPositionChange } = scrollbarContext;
-    const composedRef = useComposedRefs(
-      forwardedRef,
-      (node) => scrollbarContext.onThumbChange(node)
-    );
-    const removeUnlinkedScrollListenerRef = reactExports.useRef(void 0);
-    const debounceScrollEnd = useDebounceCallback(() => {
-      if (removeUnlinkedScrollListenerRef.current) {
-        removeUnlinkedScrollListenerRef.current();
-        removeUnlinkedScrollListenerRef.current = void 0;
-      }
-    }, 100);
-    reactExports.useEffect(() => {
-      const viewport = scrollAreaContext.viewport;
-      if (viewport) {
-        const handleScroll2 = () => {
-          debounceScrollEnd();
-          if (!removeUnlinkedScrollListenerRef.current) {
-            const listener = addUnlinkedScrollListener(viewport, onThumbPositionChange);
-            removeUnlinkedScrollListenerRef.current = listener;
-            onThumbPositionChange();
-          }
-        };
-        onThumbPositionChange();
-        viewport.addEventListener("scroll", handleScroll2);
-        return () => viewport.removeEventListener("scroll", handleScroll2);
-      }
-    }, [scrollAreaContext.viewport, debounceScrollEnd, onThumbPositionChange]);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Primitive$1.div,
-      {
-        "data-state": scrollbarContext.hasThumb ? "visible" : "hidden",
-        ...thumbProps,
-        ref: composedRef,
-        style: {
-          width: "var(--radix-scroll-area-thumb-width)",
-          height: "var(--radix-scroll-area-thumb-height)",
-          ...style2
-        },
-        onPointerDownCapture: composeEventHandlers(props.onPointerDownCapture, (event) => {
-          const thumb = event.target;
-          const thumbRect = thumb.getBoundingClientRect();
-          const x = event.clientX - thumbRect.left;
-          const y = event.clientY - thumbRect.top;
-          scrollbarContext.onThumbPointerDown({ x, y });
-        }),
-        onPointerUp: composeEventHandlers(props.onPointerUp, scrollbarContext.onThumbPointerUp)
-      }
-    );
-  }
-);
-ScrollAreaThumb.displayName = THUMB_NAME;
-var CORNER_NAME = "ScrollAreaCorner";
-var ScrollAreaCorner = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const context = useScrollAreaContext(CORNER_NAME, props.__scopeScrollArea);
-    const hasBothScrollbarsVisible = Boolean(context.scrollbarX && context.scrollbarY);
-    const hasCorner = context.type !== "scroll" && hasBothScrollbarsVisible;
-    return hasCorner ? /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollAreaCornerImpl, { ...props, ref: forwardedRef }) : null;
-  }
-);
-ScrollAreaCorner.displayName = CORNER_NAME;
-var ScrollAreaCornerImpl = reactExports.forwardRef((props, forwardedRef) => {
-  const { __scopeScrollArea, ...cornerProps } = props;
-  const context = useScrollAreaContext(CORNER_NAME, __scopeScrollArea);
-  const [width, setWidth] = reactExports.useState(0);
-  const [height, setHeight] = reactExports.useState(0);
-  const hasSize = Boolean(width && height);
-  useResizeObserver(context.scrollbarX, () => {
-    var _a2;
-    const height2 = ((_a2 = context.scrollbarX) == null ? void 0 : _a2.offsetHeight) || 0;
-    context.onCornerHeightChange(height2);
-    setHeight(height2);
-  });
-  useResizeObserver(context.scrollbarY, () => {
-    var _a2;
-    const width2 = ((_a2 = context.scrollbarY) == null ? void 0 : _a2.offsetWidth) || 0;
-    context.onCornerWidthChange(width2);
-    setWidth(width2);
-  });
-  return hasSize ? /* @__PURE__ */ jsxRuntimeExports.jsx(
-    Primitive$1.div,
-    {
-      ...cornerProps,
-      ref: forwardedRef,
-      style: {
-        width,
-        height,
-        position: "absolute",
-        right: context.dir === "ltr" ? 0 : void 0,
-        left: context.dir === "rtl" ? 0 : void 0,
-        bottom: 0,
-        ...props.style
-      }
-    }
-  ) : null;
-});
-function toInt(value) {
-  return value ? parseInt(value, 10) : 0;
-}
-function getThumbRatio(viewportSize, contentSize) {
-  const ratio = viewportSize / contentSize;
-  return isNaN(ratio) ? 0 : ratio;
-}
-function getThumbSize(sizes) {
-  const ratio = getThumbRatio(sizes.viewport, sizes.content);
-  const scrollbarPadding = sizes.scrollbar.paddingStart + sizes.scrollbar.paddingEnd;
-  const thumbSize = (sizes.scrollbar.size - scrollbarPadding) * ratio;
-  return Math.max(thumbSize, 18);
-}
-function getScrollPositionFromPointer(pointerPos, pointerOffset, sizes, dir = "ltr") {
-  const thumbSizePx = getThumbSize(sizes);
-  const thumbCenter = thumbSizePx / 2;
-  const offset = pointerOffset || thumbCenter;
-  const thumbOffsetFromEnd = thumbSizePx - offset;
-  const minPointerPos = sizes.scrollbar.paddingStart + offset;
-  const maxPointerPos = sizes.scrollbar.size - sizes.scrollbar.paddingEnd - thumbOffsetFromEnd;
-  const maxScrollPos = sizes.content - sizes.viewport;
-  const scrollRange = dir === "ltr" ? [0, maxScrollPos] : [maxScrollPos * -1, 0];
-  const interpolate = linearScale([minPointerPos, maxPointerPos], scrollRange);
-  return interpolate(pointerPos);
-}
-function getThumbOffsetFromScroll(scrollPos, sizes, dir = "ltr") {
-  const thumbSizePx = getThumbSize(sizes);
-  const scrollbarPadding = sizes.scrollbar.paddingStart + sizes.scrollbar.paddingEnd;
-  const scrollbar = sizes.scrollbar.size - scrollbarPadding;
-  const maxScrollPos = sizes.content - sizes.viewport;
-  const maxThumbPos = scrollbar - thumbSizePx;
-  const scrollClampRange = dir === "ltr" ? [0, maxScrollPos] : [maxScrollPos * -1, 0];
-  const scrollWithoutMomentum = clamp(scrollPos, scrollClampRange);
-  const interpolate = linearScale([0, maxScrollPos], [0, maxThumbPos]);
-  return interpolate(scrollWithoutMomentum);
-}
-function linearScale(input, output) {
-  return (value) => {
-    if (input[0] === input[1] || output[0] === output[1]) return output[0];
-    const ratio = (output[1] - output[0]) / (input[1] - input[0]);
-    return output[0] + ratio * (value - input[0]);
-  };
-}
-function isScrollingWithinScrollbarBounds(scrollPos, maxScrollPos) {
-  return scrollPos > 0 && scrollPos < maxScrollPos;
-}
-var addUnlinkedScrollListener = (node, handler = () => {
-}) => {
-  let prevPosition = { left: node.scrollLeft, top: node.scrollTop };
-  let rAF = 0;
-  (function loop() {
-    const position = { left: node.scrollLeft, top: node.scrollTop };
-    const isHorizontalScroll = prevPosition.left !== position.left;
-    const isVerticalScroll = prevPosition.top !== position.top;
-    if (isHorizontalScroll || isVerticalScroll) handler();
-    prevPosition = position;
-    rAF = window.requestAnimationFrame(loop);
-  })();
-  return () => window.cancelAnimationFrame(rAF);
-};
-function useDebounceCallback(callback, delay) {
-  const handleCallback = useCallbackRef$1(callback);
-  const debounceTimerRef = reactExports.useRef(0);
-  reactExports.useEffect(() => () => window.clearTimeout(debounceTimerRef.current), []);
-  return reactExports.useCallback(() => {
-    window.clearTimeout(debounceTimerRef.current);
-    debounceTimerRef.current = window.setTimeout(handleCallback, delay);
-  }, [handleCallback, delay]);
-}
-function useResizeObserver(element, onResize) {
-  const handleResize = useCallbackRef$1(onResize);
-  useLayoutEffect2(() => {
-    let rAF = 0;
-    if (element) {
-      const resizeObserver = new ResizeObserver(() => {
-        cancelAnimationFrame(rAF);
-        rAF = window.requestAnimationFrame(handleResize);
-      });
-      resizeObserver.observe(element);
-      return () => {
-        window.cancelAnimationFrame(rAF);
-        resizeObserver.unobserve(element);
-      };
-    }
-  }, [element, handleResize]);
-}
-var Root$3 = ScrollArea$1;
-var Viewport = ScrollAreaViewport;
-var Corner = ScrollAreaCorner;
-function ScrollArea({
-  className,
+function FadeSection$6({
   children,
-  ...props
+  className = "",
+  delay = 0
 }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-    Root$3,
-    {
-      "data-slot": "scroll-area",
-      className: cn("relative", className),
-      ...props,
-      children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Viewport,
-          {
-            "data-slot": "scroll-area-viewport",
-            className: "focus-visible:ring-ring/50 size-full rounded-[inherit] transition-[color,box-shadow] outline-none focus-visible:ring-[3px] focus-visible:outline-1",
-            children
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollBar, {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Corner, {})
-      ]
-    }
-  );
-}
-function ScrollBar({
-  className,
-  orientation = "vertical",
-  ...props
-}) {
+  const { ref, visible } = useScrollFade$6();
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    ScrollAreaScrollbar,
+    "div",
     {
-      "data-slot": "scroll-area-scrollbar",
-      orientation,
-      className: cn(
-        "flex touch-none p-px transition-colors select-none",
-        orientation === "vertical" && "h-full w-2.5 border-l border-l-transparent",
-        orientation === "horizontal" && "h-2.5 flex-col border-t border-t-transparent",
-        className
-      ),
-      ...props,
-      children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        ScrollAreaThumb,
-        {
-          "data-slot": "scroll-area-thumb",
-          className: "bg-border relative flex-1 rounded-full"
-        }
-      )
+      ref,
+      className: `transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`,
+      style: { transitionDelay: `${delay}ms` },
+      children
     }
   );
-}
-const navItems = [
-  {
-    id: "home",
-    path: "/",
-    title: "Home",
-    icon: "🏠",
-    description: "Start here — everything I've put together for you"
-  },
-  {
-    id: "about",
-    path: "/about",
-    title: "About VIT-AP",
-    icon: "🏫",
-    description: "My honest take on the campus — the good and the not-so-good"
-  },
-  {
-    id: "faqs",
-    path: "/faqs",
-    title: "FAQs",
-    icon: "❓",
-    description: "Questions I get asked all the time — answered straight up"
-  },
-  {
-    id: "academics",
-    path: "/academics",
-    title: "Academics",
-    icon: "📚",
-    description: "How exams, credits, and grading actually work here"
-  },
-  {
-    id: "hostel",
-    path: "/hostel",
-    title: "Hostel & Daily Life",
-    icon: "🛏️",
-    description: "What to expect from rooms, facilities, and daily routine"
-  },
-  {
-    id: "food",
-    path: "/food",
-    title: "Food",
-    icon: "🍽️",
-    description: "Mess, campus dining, and how most of us actually eat"
-  },
-  {
-    id: "essentials",
-    path: "/essentials",
-    title: "Essentials",
-    icon: "🎒",
-    description: "What to pack, what you'll need — don't show up unprepared"
-  },
-  {
-    id: "survival",
-    path: "/survival",
-    title: "Survival Guides",
-    icon: "🧭",
-    description: "Mistakes I've seen juniors make — and how to avoid them"
-  },
-  {
-    id: "portals",
-    path: "/portals",
-    title: "Systems & Portals",
-    icon: "💻",
-    description: "VTOP runs your academic life — here's how to use it well"
-  },
-  {
-    id: "data",
-    path: "/data",
-    title: "Data & Insights",
-    icon: "📊",
-    description: "Branch cutoffs and placement trends — the numbers behind it"
-  },
-  {
-    id: "resources",
-    path: "/resources",
-    title: "Resources",
-    icon: "📁",
-    description: "Links and materials I've actually found useful — not random"
-  },
-  {
-    id: "study-abroad",
-    path: "/study-abroad",
-    title: "Studying Abroad",
-    icon: "🌍",
-    description: "International programs, ITP, SAP, and study abroad opportunities"
-  },
-  {
-    id: "gallery",
-    path: "/gallery",
-    title: "Gallery",
-    icon: "📸",
-    description: "Photos of campus so you know what you're walking into"
-  }
-];
-function Sidebar({ open, onClose }) {
-  const location2 = useLocation();
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-    open && /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "div",
-      {
-        className: "fixed inset-0 z-30 bg-foreground/20 backdrop-blur-sm md:hidden",
-        onClick: onClose,
-        onKeyUp: (e) => e.key === "Escape" && onClose(),
-        "aria-hidden": "true",
-        role: "presentation"
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      "aside",
-      {
-        className: [
-          "fixed inset-y-0 left-0 z-40 flex flex-col w-64 bg-card border-r border-border shadow-lg",
-          "transition-transform duration-300 ease-in-out",
-          "md:relative md:translate-x-0 md:shadow-none md:z-auto",
-          open ? "translate-x-0" : "-translate-x-full"
-        ].join(" "),
-        "aria-label": "Sidebar navigation",
-        children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between px-4 py-4 border-b border-border shrink-0", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { to: "/", onClick: onClose, className: "flex items-center gap-2", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xl", children: "🎓" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-display font-bold text-primary text-base leading-tight", children: [
-                "VIT-AP",
-                /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-medium text-muted-foreground", children: "Student Hub" })
-              ] })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              Button,
-              {
-                variant: "ghost",
-                size: "icon",
-                className: "md:hidden",
-                onClick: onClose,
-                "aria-label": "Close sidebar",
-                "data-ocid": "sidebar.close_button",
-                children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { className: "w-4 h-4" })
-              }
-            )
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollArea, { className: "flex-1 py-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { "aria-label": "Main navigation", children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-0.5 px-2", children: navItems.map((item) => {
-            const isActive = location2.pathname === item.path;
-            return /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              Link,
-              {
-                to: item.path,
-                onClick: onClose,
-                "data-ocid": `sidebar.nav.${item.id}`,
-                className: [
-                  "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-smooth",
-                  isActive ? "bg-primary text-primary-foreground shadow-sm" : "text-foreground hover:bg-muted hover:text-foreground"
-                ].join(" "),
-                "aria-current": isActive ? "page" : void 0,
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-base shrink-0", "aria-hidden": "true", children: item.icon }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "truncate", children: item.title })
-                ]
-              }
-            ) }, item.id);
-          }) }) }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "px-4 py-3 border-t border-border text-xs text-muted-foreground shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-            "© ",
-            (/* @__PURE__ */ new Date()).getFullYear(),
-            " VIT-AP Student Hub"
-          ] }) })
-        ]
-      }
-    )
-  ] });
-}
-function Layout({ children }) {
-  const [sidebarOpen, setSidebarOpen] = reactExports.useState(false);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-screen overflow-hidden bg-background", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Sidebar, { open: sidebarOpen, onClose: () => setSidebarOpen(false) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col flex-1 min-w-0 overflow-hidden", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "flex items-center gap-3 px-4 py-3 bg-card border-b border-border shadow-sm shrink-0", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Button,
-          {
-            variant: "ghost",
-            size: "icon",
-            className: "md:hidden",
-            onClick: () => setSidebarOpen(true),
-            "aria-label": "Open navigation menu",
-            "data-ocid": "header.menu_toggle",
-            children: /* @__PURE__ */ jsxRuntimeExports.jsx(Menu, { className: "w-5 h-5" })
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xl", "aria-hidden": "true", children: "🎓" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-display font-bold text-foreground text-base leading-tight", children: "VIT-AP Student Hub" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground hidden sm:block", children: "Everything you need to survive and thrive" })
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "ml-auto flex items-center gap-2", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-muted-foreground hidden md:block bg-muted px-2 py-1 rounded-full", children: "📅 2024–25" }) })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "flex-1 overflow-y-auto", id: "main-content", children }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("footer", { className: "shrink-0 border-t border-border bg-muted/40 px-6 py-3 text-center text-xs text-muted-foreground", children: [
-        "© ",
-        (/* @__PURE__ */ new Date()).getFullYear(),
-        ". Built with love using",
-        " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "a",
-          {
-            href: `https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(
-              typeof window !== "undefined" ? window.location.hostname : ""
-            )}`,
-            target: "_blank",
-            rel: "noopener noreferrer",
-            className: "text-primary hover:underline",
-            children: "caffeine.ai"
-          }
-        )
-      ] })
-    ] })
-  ] });
-}
-function InfoCard({ icon, title, items }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: icon }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: title })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: items.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      "li",
-      {
-        className: "flex items-start gap-2 text-sm text-foreground",
-        children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "•" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item })
-        ]
-      },
-      item
-    )) })
-  ] }) });
-}
-function TransportCard({
-  icon,
-  mode,
-  tag,
-  tagVariant,
-  details,
-  ocid
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated h-full", "data-ocid": ocid, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between mb-3", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: icon }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: mode })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: tagVariant, className: "text-xs shrink-0", children: tag })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: details.map((d) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      "li",
-      {
-        className: "flex items-start gap-2 text-sm text-foreground",
-        children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "•" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: d })
-        ]
-      },
-      d
-    )) })
-  ] }) });
-}
-const negatives = [
-  "Gym access is genuinely frustrating if fitness matters to you. The hostel gyms are only open 5–8am and 5–8pm — miss those windows and you're out of luck. The paid gym books up fast; if you wait a week after joining, you might not get a slot at all.",
-  "In your first semester, you have zero control over your schedule. The college assigns your slots — you don't pick anything. FFCS (the flexible system everyone talks about) only kicks in from semester two. Just know that going in.",
-  "By week six or seven, you'll be ordering Swiggy almost daily. The mess food isn't terrible — it's just the same rotation every week. Honestly, monotony is the real issue, not quality.",
-  "If you miss even one quiz, it can hurt you more than you'd expect. There's no standardized re-test policy — it's entirely the professor's call whether one happens. I've seen students lose a full grade because of one missed quiz with no make-up.",
-  "Food Street and Rock Plaza are the main food spots, but the campus population is huge relative to the capacity. During peak hours — right after class — expect a wait or expect to miss out. It gets better once you figure out the timing."
-];
-const positives = [
-  "There's a health center and a small pharmacy right on campus. It's nothing fancy, but for a fever, cold medicine, or a basic consultation — you won't have to leave campus. When you're sick and just want to rest, this matters more than you'd think.",
-  "Night canteens and petty shops inside the hostels are genuinely a lifesaver. At 11pm when you're hungry and the mess is closed, those shops are right there. I relied on them more than I expected, especially during exam season.",
-  "Swiggy delivers to campus and local freelance delivery options are available too. The food ecosystem around campus is decent enough to fill the gaps when the mess gets old — and it will get old.",
-  "There's a room for almost every budget. 2-bed AC rooms, dormitories with 15–20 students, apartment-style options — you can pick what makes sense for you financially. Not many colleges give you this much flexibility on housing.",
-  "Once semester two starts, FFCS actually gives you real control over your timetable. You can avoid 8am slots, cluster your classes, get long weekends — it takes some planning, but it's genuinely one of the better things about studying here."
-];
-const realityCards = [
-  {
-    icon: "🌡️",
-    title: "Classrooms — What to Expect",
-    items: [
-      "Honestly, most classrooms don't have AC. In March–May, it gets uncomfortable — I'd say bring a handheld fan if you're heat-sensitive",
-      "Whiteboards and projectors in all classrooms — nothing fancy, but functional",
-      "Labs are air-conditioned, which is a relief",
-      "You get used to it, but fair warning: the heat is real"
-    ]
-  },
-  {
-    icon: "🏋️",
-    title: "Gym & Fitness",
-    items: [
-      "Free hostel gyms are available in most blocks — basic equipment, but it works",
-      "Gym timings are 5–8am and 5–8pm only. If you're not a morning person, your window is tight",
-      "The paid campus gym is better equipped but costs ₹1,200/month and slots go fast",
-      "My advice: go sign up for the paid gym in the first week if fitness is a priority"
-    ]
-  },
-  {
-    icon: "🏸",
-    title: "Sports & Recreation",
-    items: [
-      "Badminton courts exist — but you have to be on time, every time. Show up 10 minutes late and someone else has your slot",
-      "Indoor activity room has TT, carrom, chess — it's small, so expect to wait during peak hours",
-      "Basketball, volleyball, football, and cricket courts are available and generally less crowded",
-      "Outdoor courts are your best bet for a casual game without too much hassle"
-    ]
-  },
-  {
-    icon: "📶",
-    title: "Day-to-Day Campus Life",
-    items: [
-      "Campus Wi-Fi is there but speeds vary a lot by hostel block — in my experience, don't rely on it for heavy downloads",
-      "VTOP is your single point for everything: attendance, grades, timetable, registration",
-      "Campus is walkable, but summer heat makes it tiring — figure out the covered routes early",
-      "Night canteens in select hostels are open late — great for post-study snack runs"
-    ]
-  }
-];
-const keyDistances = [
-  { place: "Vijayawada City Center", distance: "20 km" },
-  { place: "Vijayawada Railway Station", distance: "17 km" },
-  { place: "Vijayawada International Airport", distance: "38 km" },
-  { place: "Guntur City Center", distance: "33 km" },
-  { place: "Guntur Railway Station", distance: "32 km" }
-];
-const transportOptions = [
-  {
-    icon: "🚌",
-    mode: "University Shuttle",
-    tag: "Free",
-    tagVariant: "secondary",
-    ocid: "about.transport.item.1",
-    details: [
-      "Every Sunday — departs 10:00 AM to 12:00 PM towards Vijayawada",
-      "Return: 4:30 PM – 6:30 PM back to campus",
-      "Students only — carry your ID card",
-      "I used this almost every weekend. Check VTOP for schedule updates"
-    ]
-  },
-  {
-    icon: "🚍",
-    mode: "APSRTC Bus",
-    tag: "Budget",
-    tagVariant: "outline",
-    ocid: "about.transport.item.2",
-    details: [
-      "Direct bus to Vijayawada: ~₹35",
-      "Via Guntur: ₹35 + ₹50 connecting bus",
-      "Departs from main road near campus",
-      "Best for regular, low-cost travel — not the fastest, but gets the job done"
-    ]
-  },
-  {
-    icon: "🚐",
-    mode: "Shared Vans / Autos",
-    tag: "Shared",
-    tagVariant: "outline",
-    ocid: "about.transport.item.3",
-    details: [
-      "~₹150 per person to Vijayawada",
-      "Faster than the bus, less frequent",
-      "Available near the campus gate",
-      "Good call when you're carrying luggage"
-    ]
-  },
-  {
-    icon: "🚖",
-    mode: "Private Cabs (Ola / Uber)",
-    tag: "Convenient",
-    tagVariant: "secondary",
-    ocid: "about.transport.item.4",
-    details: [
-      "To Vijayawada Railway Station: ₹400–600",
-      "To Vijayawada Airport: ₹700–1,000",
-      "Only real option for early morning flights or late-night travel",
-      "Book in advance — availability near campus can be patchy"
-    ]
-  }
-];
-function About() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Layout, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 py-10 border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", "data-ocid": "about.section_label", children: "About VIT-AP" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-hero text-foreground mb-4", children: "Should You Join VIT-AP?" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base text-muted-foreground max-w-2xl mb-6", children: "I'm not going to sell this place to you. Here's what I actually think about VIT-AP — based on my time here — so you can decide for yourself whether it's the right fit." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-2", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "📍 Amaravati, AP" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "🎓 Est. 2017" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "🏛️ Deemed University" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "📚 B.Tech, M.Tech, MBA, MCA, PhD" })
-      ] })
-    ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-muted px-6 py-8 border-b border-border",
-        "data-ocid": "about.snapshot_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Quick Overview" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-4", children: "What VIT-AP Is" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-3", children: [
-              "Private deemed university on a 200-acre campus in Amaravati — it's big, but still growing",
-              "Part of the VIT Group — same FFCS system, similar academic culture to VIT Vellore",
-              "Placement-focused — companies visit regularly; that's one of the genuine selling points"
-            ].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              "li",
-              {
-                className: "flex items-start gap-2 text-sm text-foreground",
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-primary mt-0.5 shrink-0 font-bold", children: "→" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item })
-                ]
-              },
-              item
-            )) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-3", children: [
-              "FFCS from semester 2 — you build your own timetable. First semester is assigned for you.",
-              "Full hostel campus — almost everyone lives on campus all semester",
-              "Active student clubs: technical, cultural, sports, and social — worth joining early"
-            ].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              "li",
-              {
-                className: "flex items-start gap-2 text-sm text-foreground",
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-primary mt-0.5 shrink-0 font-bold", children: "→" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item })
-                ]
-              },
-              item
-            )) })
-          ] })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-light px-6 py-10 border-b border-border",
-        "data-ocid": "about.reality_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "The Real Picture" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "What Campus Life Is Actually Like" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-6", children: "Stuff I wish someone had told me before I joined — not what the brochure says." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid md:grid-cols-2 gap-5", children: realityCards.map((card) => /* @__PURE__ */ jsxRuntimeExports.jsx(InfoCard, { ...card }, card.title)) })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
-        "data-ocid": "about.location_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Getting Here" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-6", children: "Location & Address" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-6", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-4", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: "📍" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: "Campus Address" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("address", { className: "not-italic text-sm text-foreground leading-relaxed mb-4", children: [
-                "G-30, Inavolu,",
-                /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-                "beside AP Secretariat,",
-                /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-                "Guntur District,",
-                /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-                "Andhra Pradesh – 522237"
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-muted/50 rounded-lg px-4 py-3", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mb-1", children: "Campus Area" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-foreground", children: "200 Acres" })
-              ] })
-            ] }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-4", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: "🗺️" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: "Key Distances" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-3", children: keyDistances.map((d) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "li",
-                {
-                  className: "flex items-center justify-between text-sm",
-                  "data-ocid": `about.distance.${d.place.toLowerCase().replace(/\s+/g, "-")}`,
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-foreground", children: d.place }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      Badge,
-                      {
-                        variant: "outline",
-                        className: "text-xs font-mono shrink-0 ml-2",
-                        children: d.distance
-                      }
-                    )
-                  ]
-                },
-                d.place
-              )) })
-            ] }) })
-          ] })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-light px-6 py-10 border-b border-border",
-        "data-ocid": "about.transport_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Getting Around" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "How to Get In and Out of Campus" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-6", children: "You're about 20 km from Vijayawada city. Here's what I used and what worked." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid md:grid-cols-2 gap-5", children: transportOptions.map((t) => /* @__PURE__ */ jsxRuntimeExports.jsx(TransportCard, { ...t }, t.mode)) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-4", children: "💡 Honestly, the free Sunday shuttle to Vijayawada is underrated — use it. For early morning trains or flights, book a cab the night before; availability at the gate can be unpredictable." })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
-        "data-ocid": "about.facilities_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "On-Campus Support" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-6", children: "Health & Medical Facilities" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-5", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: "🏥" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: "Health Center" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground", children: "There's an on-campus health center and in my experience it's more useful than it sounds. For a fever, stomach issue, or basic consultation — you don't need to leave campus. They also issue sick certificates, which matters for attendance. For anything serious, they'll refer you to a hospital in Vijayawada." })
-            ] }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: "💊" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: "Campus Pharmacy" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground", children: "There's a small pharmacy on campus — paracetamol, antacids, ORS, the basics are all there. It's limited, so for specific prescriptions you may still need to go off-campus. But for common stuff at odd hours, it saves you a trip." })
-            ] }) })
-          ] })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-light px-6 py-10 border-b border-border",
-        "data-ocid": "about.campus_life_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Campus Life" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "Clubs, Events & Hackathons" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-6", children: "Honestly, joining a club in your first semester is one of the better decisions you can make. It's where you'll meet people outside your department and build connections that actually last." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-5 mb-5", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: "🎉" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: "Annual Cultural Fest — VITopia" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: "VIT-AP's flagship inter-college cultural festival. Students from across India come for it — competitions in music, dance, drama, art, and more. It's genuinely one of the better experiences of your time here if you get involved." })
-            ] }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: "🤝" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: "Student Clubs" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: [
-                "Technical — coding, robotics, AI/ML, IoT",
-                "Cultural — music, dance, drama, fine arts",
-                "Social — NSS, community service",
-                "Sports — inter-hostel and inter-college competitions"
-              ].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "li",
-                {
-                  className: "flex items-start gap-2 text-sm text-foreground",
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "•" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item })
-                  ]
-                },
-                item
-              )) })
-            ] }) })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-5", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: "💻" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: "On-Campus Hackathons & Events" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-3", children: "Hackathons and events happen regularly on campus — though they may not always be large-scale. Most are organized by student clubs: workshops, coding competitions, project showcases, and small hackathons throughout the year." }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground", children: "If you want to be involved, joining a club early is the fastest way in. That's how most people find out about events before they're publicly announced." })
-            ] }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: "🌐" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: "External Competitions — GSoC, CTFs & More" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-3", children: "Bigger programs — Google Summer of Code (GSoC), competitive hackathons, CTFs, reconnaissance competitions — don't happen on campus. You participate individually or in small teams, online or by traveling to the venue." }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground", children: "The college doesn't organize these, but students do participate. In my experience, the real shortcut is finding seniors who've done it — they'll tell you exactly how to get started and what the process actually looks like." })
-            ] }) })
-          ] })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
-        "data-ocid": "about.pros_cons_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "My Honest Verdict" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "What I Think Works and What Doesn't" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-6", children: "This is based on real experience, not marketing. Take it as advice from someone who's been through it." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-6", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated h-full border-destructive/20", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-4", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: "⚠️" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection text-foreground", children: "Things that will bother you" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("ol", { className: "space-y-4", children: negatives.map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "li",
-                {
-                  className: "flex items-start gap-3 text-sm text-foreground",
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "shrink-0 mt-0.5 font-semibold text-destructive/80 font-mono text-xs w-4", children: [
-                      i + 1,
-                      "."
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "leading-relaxed", children: item })
-                  ]
-                },
-                item.slice(0, 40)
-              )) })
-            ] }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated h-full border-primary/20", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-4", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: "✅" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection text-foreground", children: "Things that genuinely work" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("ol", { className: "space-y-4", children: positives.map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "li",
-                {
-                  className: "flex items-start gap-3 text-sm text-foreground",
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "shrink-0 mt-0.5 font-semibold text-primary font-mono text-xs w-4", children: [
-                      i + 1,
-                      "."
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "leading-relaxed", children: item })
-                  ]
-                },
-                item.slice(0, 40)
-              )) })
-            ] }) })
-          ] })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-light px-6 py-8",
-        "data-ocid": "about.summary_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-4xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-primary/5 border border-primary/20 rounded-xl p-5", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-1", children: "My Take" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground", children: "VIT-AP is a placement-focused engineering college on a 200-acre campus in Amaravati — about 20 km from Vijayawada. The academic system has its quirks, the food gets repetitive, and the campus is still developing. But if you're someone who's willing to be proactive — join clubs, manage your time, build your own network — you'll get a lot out of it. It's not a perfect college. It's a decent one with real opportunities, if you use them." })
-        ] }) })
-      }
-    )
-  ] });
-}
-function Note({ children }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 bg-primary/5 border border-primary/20 rounded-lg px-4 py-3 text-sm text-muted-foreground", children: [
-    "💡 ",
-    children
-  ] });
-}
-function SectionHeading({ children }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "text-sm font-semibold text-foreground mt-5 mb-2 uppercase tracking-wide text-primary/80", children });
-}
-function StepList({ steps }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("ol", { className: "space-y-2 mt-3", children: steps.map((step, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-    "li",
-    {
-      className: "flex items-start gap-2 text-sm text-foreground",
-      children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mt-0.5 shrink-0 w-5 h-5 rounded-full bg-primary/15 text-primary text-xs font-bold flex items-center justify-center", children: i + 1 }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: step })
-      ]
-    },
-    step
-  )) });
-}
-function BulletList({
-  items,
-  accent = false
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2 mt-3", children: items.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-    "li",
-    {
-      className: "flex items-start gap-2 text-sm text-foreground",
-      children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "span",
-          {
-            className: `mt-0.5 shrink-0 font-bold ${accent ? "text-accent" : "text-primary"}`,
-            children: "•"
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item })
-      ]
-    },
-    item
-  )) });
-}
-const letterGrades = [
-  {
-    grade: "S",
-    points: "10",
-    meaning: "Excellent — Pass",
-    variant: "default"
-  },
-  {
-    grade: "A",
-    points: "9",
-    meaning: "Very Good — Pass",
-    variant: "secondary"
-  },
-  {
-    grade: "B",
-    points: "8",
-    meaning: "Good — Pass",
-    variant: "secondary"
-  },
-  {
-    grade: "C",
-    points: "7",
-    meaning: "Average — Pass",
-    variant: "secondary"
-  },
-  {
-    grade: "D",
-    points: "6",
-    meaning: "Satisfactory",
-    variant: "secondary"
-  },
-  {
-    grade: "E",
-    points: "5",
-    meaning: "Passed (barely)",
-    variant: "secondary"
-  },
-  {
-    grade: "F",
-    points: "0",
-    meaning: "Fail — must re-register",
-    variant: "destructive"
-  },
-  {
-    grade: "N",
-    points: "0",
-    meaning: "Incomplete / Debarred",
-    variant: "destructive"
-  },
-  {
-    grade: "W",
-    points: "—",
-    meaning: "Withdrawn (not in CGPA)",
-    variant: "outline"
-  }
-];
-const attendanceImpact = [
-  {
-    pct: "≥ 80%",
-    status: "Safe",
-    consequence: "You're fine — keep it up",
-    color: "text-green-600 dark:text-green-400",
-    bg: "bg-green-500/10 border-green-500/25"
-  },
-  {
-    pct: "75–79%",
-    status: "Caution",
-    consequence: "One more absence and you could be barred from the next exam",
-    color: "text-yellow-600 dark:text-yellow-400",
-    bg: "bg-yellow-500/10 border-yellow-500/25"
-  },
-  {
-    pct: "< 75%",
-    status: "Debarred",
-    consequence: "You can't sit for the next CAT or FAT for that course",
-    color: "text-red-600 dark:text-red-400",
-    bg: "bg-red-500/10 border-red-500/25"
-  },
-  {
-    pct: "Debarred from FAT",
-    status: "N Grade",
-    consequence: "You have to re-register the entire course next semester",
-    color: "text-red-700 dark:text-red-300",
-    bg: "bg-red-500/15 border-red-500/30"
-  }
-];
-const theorySlots = [
-  { time: "8:00 – 8:50", slots: ["A1", "F1", "D1", "TB1", "TG1"] },
-  { time: "9:00 – 9:50", slots: ["B1", "G1", "E1", "TC1", "TA1"] },
-  { time: "10:00 – 10:50", slots: ["C1", "A1", "F1", "TD1", "TB1"] },
-  { time: "11:00 – 11:50", slots: ["D1", "B1", "G1", "TE1", "TC1"] },
-  { time: "12:00 – 12:50", slots: ["E1", "C1", "A1", "TF1", "TD1"] },
-  { time: "14:00 – 14:50", slots: ["F1", "D1", "B1", "TG1", "TE1"] },
-  { time: "15:00 – 15:50", slots: ["G1", "E1", "C1", "TA1", "TF1"] }
-];
-const labSlots = [
-  {
-    time: "8:00 – 9:50",
-    slots: ["L1+L2", "L7+L8", "L13+L14", "L19+L20", "L25+L26", "L31+L32"]
-  },
-  {
-    time: "10:00 – 11:50",
-    slots: ["L3+L4", "L9+L10", "L15+L16", "L21+L22", "L27+L28", "L33+L34"]
-  },
-  {
-    time: "12:00 – 13:50",
-    slots: ["L5+L6", "L11+L12", "L17+L18", "L23+L24", "L29+L30", "L35+L36"]
-  },
-  { time: "14:00 – 15:50", slots: ["L37+L38", "L39+L40", "", "", "", ""] }
-];
-function Academics() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Layout, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 py-10 border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", "data-ocid": "academics.section_label", children: "Academics" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-hero text-foreground mb-3", children: "How Academics Actually Work at VIT-AP" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base text-muted-foreground max-w-2xl mb-4", children: "I'll walk you through how the semester runs, what the exams are like, how grades are decided, and what you actually need to watch out for. No jargon — just what you need to know before you walk in." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-2", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "🗂️ FFCS from Semester 2" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "📝 CAT-1 + CAT-2 + FAT" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "📊 Relative Grading" })
-      ] })
-    ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
-        "data-ocid": "academics.overview_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "How a Semester Works" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-4", children: "Your Semester, Step by Step" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-6", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              StepList,
-              {
-                steps: [
-                  "Registration opens on VTOP — you pick your courses and time slots. Popular faculty and slots fill up within minutes, so have a backup plan ready. (In your first semester, this part is done for you — the college assigns your slots.)",
-                  "Classes begin. Attendance is tracked from day one — each course is tracked separately. Don't skip early classes thinking they don't count yet.",
-                  "CAT-1 happens mid-semester. It's worth 15 marks — roughly 50 minutes. Your scripts are returned after so you can see where you went wrong.",
-                  "CAT-2 comes later in the semester. Same format and same weightage as CAT-1 — 15 marks, ~50 minutes. Treat it with the same seriousness.",
-                  "Digital Assignments run throughout the semester — at least 3, worth 30 marks total. Don't leave these for the last week.",
-                  "FAT (Final Assessment Test) — 3 hours, conducted centrally at the end of the semester. This is your biggest single component at 40 marks. Missing it without valid reason is a serious problem."
-                ]
-              }
-            ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Note, { children: "Your internal marks — CAT-1 + CAT-2 + Assignments = 60 marks — plus your FAT (40 marks) = 100 total. Grades are assigned relative to how your class performs, not a fixed percentage cutoff." })
-          ] }) })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-light px-6 py-10 border-b border-border",
-        "data-ocid": "academics.evaluation_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Marks Breakdown" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "What's Worth What" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-5", children: "Here's how the 100 marks are split. Knowing this early helps you prioritize." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", "data-ocid": "academics.eval_list", children: [
-            {
-              label: "CAT-1",
-              marks: "15",
-              detail: "~50 minutes, closed book. Scripts returned after — review them, they help.",
-              bg: "bg-primary/8 border-primary/20",
-              ocid: "academics.eval.cat1"
-            },
-            {
-              label: "CAT-2",
-              marks: "15",
-              detail: "Same format as CAT-1 — ~50 minutes, closed book, held later in the semester.",
-              bg: "bg-primary/8 border-primary/20",
-              ocid: "academics.eval.cat2"
-            },
-            {
-              label: "Digital Assignments",
-              marks: "30",
-              detail: "Minimum 3 assignments × 10 marks each. Spread across the semester — do them on time.",
-              bg: "bg-muted border-border",
-              ocid: "academics.eval.da"
-            },
-            {
-              label: "FAT (Final Exam)",
-              marks: "40",
-              detail: "3 hours, closed book, centrally conducted. The single biggest component — don't underestimate it.",
-              bg: "bg-muted border-border",
-              ocid: "academics.eval.fat"
-            },
-            {
-              label: "Total",
-              marks: "100",
-              detail: "Your grade is relative to your class — performing near the average gets you a C/D range.",
-              bg: "bg-primary/5 border-primary/30",
-              ocid: "academics.eval.total"
-            }
-          ].map((row) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "div",
-            {
-              className: `flex flex-wrap items-center gap-3 px-4 py-3 rounded-lg border ${row.bg}`,
-              "data-ocid": row.ocid,
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-semibold text-foreground min-w-0 flex-1", children: row.label }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { variant: "outline", className: "font-mono shrink-0", children: [
-                  row.marks,
-                  " marks"
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-muted-foreground w-full sm:w-auto sm:flex-1", children: row.detail })
-              ]
-            },
-            row.label
-          )) })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
-        "data-ocid": "academics.ffcs_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Timetable System" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-4", children: "FFCS — How You Pick Your Courses" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-6", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-3", children: "FFCS — Fully Flexible Credit System — means you build your own timetable. Every student picks their own time slots during the registration window on VTOP. No two students need to have the same schedule. In your first semester, the college handles this for you — FFCS kicks in from semester 2." }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              BulletList,
-              {
-                items: [
-                  "Each course has multiple slot options (A1, B1, C1, etc.) — fixed time blocks spread across the week",
-                  "Theory and lab are registered separately with different slot codes",
-                  "You can avoid 8am slots if you want — but popular faculty and convenient timings fill up within minutes of the window opening",
-                  "Minimum: 16 credits per semester. Maximum: 27 credits",
-                  "No one will remind you — registration is entirely your responsibility"
-                ]
-              }
-            ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Note, { children: "Before registration opens, note your top 3 slot choices per course. The window can close before you figure it out for the first time — trust me on this one." })
-          ] }) })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-light px-6 py-10 border-b border-border",
-        "data-ocid": "academics.timetable_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "First Semester" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "Your Assigned Timetable" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-5", children: "In your first sem, you won't get to pick your slots — the college assigns them. FFCS kicks in from second sem, and trust me, you'll appreciate the control once you have it. This is the slot structure you'll follow as a fresher." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated mb-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3", children: "Theory Slots — Monday to Friday" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "overflow-x-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("table", { className: "w-full text-xs border-collapse", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("thead", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { className: "bg-muted", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "py-2 px-3 font-semibold text-muted-foreground border border-border text-left min-w-[90px]", children: "Time" }),
-                ["Mon", "Tue", "Wed", "Thu", "Fri"].map((day) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "th",
-                  {
-                    className: "py-2 px-3 font-semibold text-muted-foreground border border-border text-center min-w-[64px]",
-                    children: day
-                  },
-                  day
-                ))
-              ] }) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("tbody", { children: theorySlots.map((row, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "tr",
-                {
-                  className: i % 2 === 0 ? "bg-background" : "bg-muted/30",
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "py-2 px-3 border border-border font-mono text-xs text-muted-foreground whitespace-nowrap", children: row.time }),
-                    row.slots.map((slot, j) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      "td",
-                      {
-                        className: "py-2 px-3 border border-border text-center",
-                        children: slot ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-block bg-primary/10 text-primary font-semibold rounded px-2 py-0.5 text-xs", children: slot }) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground/40", children: "—" })
-                      },
-                      `theory-${row.time}-${j}`
-                    ))
-                  ]
-                },
-                row.time
-              )) })
-            ] }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-3", children: "T-slots (TA1–TG1) are tutorial slots that come with some theory courses — think of them as extra class hours." })
-          ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated mb-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3", children: "Lab Slots — Monday to Saturday" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "overflow-x-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("table", { className: "w-full text-xs border-collapse", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("thead", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { className: "bg-muted", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "py-2 px-3 font-semibold text-muted-foreground border border-border text-left min-w-[90px]", children: "Time" }),
-                ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "th",
-                  {
-                    className: "py-2 px-3 font-semibold text-muted-foreground border border-border text-center min-w-[64px]",
-                    children: day
-                  },
-                  day
-                ))
-              ] }) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("tbody", { children: labSlots.map((row, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "tr",
-                {
-                  className: i % 2 === 0 ? "bg-background" : "bg-muted/30",
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "py-2 px-3 border border-border font-mono text-xs text-muted-foreground whitespace-nowrap", children: row.time }),
-                    row.slots.map((slot, j) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      "td",
-                      {
-                        className: "py-2 px-3 border border-border text-center",
-                        children: slot ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-block bg-accent/10 text-accent font-semibold rounded px-1.5 py-0.5 text-xs", children: slot }) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground/40", children: "—" })
-                      },
-                      `lab-${row.time}-${j}`
-                    ))
-                  ]
-                },
-                row.time
-              )) })
-            ] }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-3", children: "Lab slots are 2 hours each. Your lab course will occupy two consecutive L-slots (e.g., L1+L2)." })
-          ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Note, { children: "From semester 2, FFCS lets you build your own timetable — you choose the theory and lab slots that work for your schedule. No two students need to have the same timetable, and that flexibility is genuinely one of the better aspects of studying here." })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
-        "data-ocid": "academics.attendance_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Attendance" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-4", children: "Don't Play Games With Attendance" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-6", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-3", children: "75% is the minimum — don't treat it as a target. I'd aim for at least 85% to give yourself a real buffer. Here's what you need to know:" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              BulletList,
-              {
-                items: [
-                  "75% attendance per course — each course is tracked separately, not combined",
-                  "That 25% buffer covers everything: illness, travel, personal reasons, events. There is no separate medical leave.",
-                  "Drop below 75% → you're barred from the next CAT or FAT for that specific course",
-                  "Barred from FAT → you get an N grade → you have to re-register the entire course next semester",
-                  "If your CGPA is ≥ 9.0 and you have no backlogs, you're exempt from attendance rules (not applicable in summer semester)"
-                ]
-              }
-            ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(SectionHeading, { children: "What the Numbers Mean" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-2", children: attendanceImpact.map((row) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              "div",
-              {
-                className: `flex flex-wrap items-center gap-3 px-4 py-3 rounded-lg border ${row.bg}`,
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    "code",
-                    {
-                      className: `font-mono text-sm font-bold w-36 shrink-0 ${row.color}`,
-                      children: row.pct
-                    }
-                  ),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    Badge,
-                    {
-                      variant: "outline",
-                      className: `text-xs ${row.color} border-current`,
-                      children: row.status
-                    }
-                  ),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm text-foreground", children: row.consequence })
-                ]
-              },
-              row.pct
-            )) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Note, { children: "Check your attendance on VTOP at least once a week. Don't wait until you're already below 75% — by then it's usually too late to recover without consequences." })
-          ] }) })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-light px-6 py-10 border-b border-border",
-        "data-ocid": "academics.grading_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Grades & GPA" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-4", children: "How Your Grade Is Decided" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-6", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground mb-4", children: [
-              "VIT-AP uses",
-              " ",
-              /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-foreground", children: "relative grading" }),
-              " ",
-              "for most theory courses. Your grade depends on how you performed compared to everyone else in your class — not on hitting a fixed percentage. This means a 70% score might get you a B in one batch and a C in another. It works both ways."
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "overflow-x-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("table", { className: "w-full text-sm border-collapse", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("thead", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "py-2 px-3 font-semibold text-muted-foreground bg-muted border-b border-border text-left", children: "Grade" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "py-2 px-3 font-semibold text-muted-foreground bg-muted border-b border-border text-right", children: "Points" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "py-2 px-3 font-semibold text-muted-foreground bg-muted border-b border-border text-left", children: "What it means" })
-              ] }) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("tbody", { children: letterGrades.map((row) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "tr",
-                {
-                  className: "hover:bg-muted/40 transition-colors",
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "py-2 px-3 border-b border-border/60", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      Badge,
-                      {
-                        variant: row.variant,
-                        className: "font-mono w-8 justify-center",
-                        children: row.grade
-                      }
-                    ) }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "py-2 px-3 border-b border-border/60 text-right font-mono text-foreground", children: row.points }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "py-2 px-3 border-b border-border/60 text-foreground", children: row.meaning })
-                  ]
-                },
-                row.grade
-              )) })
-            ] }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-muted rounded-lg px-4 py-3 font-mono text-sm mt-4", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: "CGPA = " }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-foreground font-semibold", children: "Σ(Credits × Grade Points) ÷ Σ(Total Credits)" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              BulletList,
-              {
-                items: [
-                  "CGPA is calculated across all semesters — F grades drag it down and stay in the calculation",
-                  "To convert to percentage: CGPA × 10 (e.g., CGPA 8.5 = 85%)",
-                  "Most placement companies have CGPA cutoffs — typically 6.5 or 7.0. Keep that in mind from day one."
-                ]
-              }
-            )
-          ] }) })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
-        "data-ocid": "academics.backlogs_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Backlogs" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "If You Fail a Course" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-5", children: "Honestly, a backlog isn't the end of the world — but it's expensive and inconvenient. Here's what happens in each case." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid sm:grid-cols-2 gap-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated", "data-ocid": "academics.fail_card", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground mb-2", children: "❌ F Grade — Full Failure" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "space-y-1 text-sm text-foreground", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-start gap-2", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "•" }),
-                  "You failed the course overall"
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-start gap-2", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "•" }),
-                  "Must re-register the full course in a future semester"
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-start gap-2", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "•" }),
-                  "A re-registration fee applies — it's not cheap"
-                ] })
-              ] })
-            ] }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated", "data-ocid": "academics.n_grade_card", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground mb-2", children: "⚠️ N Grade — Incomplete" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "space-y-1 text-sm text-foreground", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-start gap-2", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "•" }),
-                  "You were barred from an exam due to low attendance, or missed the FAT"
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-start gap-2", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "•" }),
-                  "Can re-register only the failed component — not the full course"
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-start gap-2", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "•" }),
-                  "A re-registration fee still applies"
-                ] })
-              ] })
-            ] }) })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Note, { children: "Many placement companies filter out candidates with active backlogs. Clear them as early as you can — Summer and Weekend semesters exist specifically for this purpose. Don't let them pile up." })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-light px-6 py-8",
-        "data-ocid": "academics.summary_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-4xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-primary/5 border border-primary/20 rounded-xl p-5", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-1", children: "The Short Version" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground", children: "Each semester: CAT-1 (15) + CAT-2 (15) + Assignments (30) + FAT (40) = 100 marks total. Maintain 75%+ attendance per course — I'd honestly aim higher. Grades are relative to your class, not a fixed cutoff. Your first semester slots are assigned by the college; from semester two, FFCS gives you the flexibility to build your own schedule. Keep your CGPA above 7.0 and clear any backlogs fast — placement eligibility depends on it." })
-        ] }) })
-      }
-    )
-  ] });
 }
 const cutoffItems = [
   {
@@ -28976,103 +28099,138 @@ const trends = [
     desc: "Being active in a technical club or working on real projects shows up in interviews. It's not just for resume padding — the skills are real."
   }
 ];
+const demandColors = {
+  "Very High": "text-primary border-primary/50 bg-primary/15",
+  High: "text-secondary border-secondary/50 bg-secondary/10",
+  Medium: "text-foreground/70 border-border/50 bg-muted/30",
+  "Low–Medium": "text-muted-foreground border-border/40 bg-muted/20",
+  Low: "text-muted-foreground/60 border-border/30 bg-muted/10"
+};
 function Data() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Layout, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 py-10 border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Badge,
-        {
-          variant: "secondary",
-          className: "mb-3 text-xs font-semibold tracking-wide",
-          children: "📊 Insider Numbers"
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-section text-foreground mb-2", children: "Branch Cutoffs & What I've Observed" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-sm max-w-xl", children: "If you're deciding which branch to pick — or trying to understand what the placement landscape looks like — this is the honest version of what I know. These are trends, not guarantees." })
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 pt-20 pb-16 border-b border-border/30", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "chapter-label mb-4", children: "Chapter" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "text-hero text-foreground mb-6 fade-in-up", children: [
+        "DATA &",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "INSIGHTS"
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-16 mb-8" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-1", children: "If you're deciding which branch to pick — or trying to understand what the placement landscape looks like — this is the honest version of what I know. These are trends, not guarantees." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs", children: "📊 Insider Numbers" }) })
     ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-muted px-6 py-10",
+        className: "section-bg-muted px-6 py-16 border-b border-border/30",
         "data-ocid": "data.cutoffs_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-subsection text-foreground mb-1", children: "Admission Cutoffs by Branch" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mb-5", children: "Based on VITEEE rank — these are historical trends. They shift every year depending on how many students apply and how the exam goes." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "overflow-x-auto rounded-xl border border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "table",
-            {
-              className: "w-full text-sm bg-card",
-              "data-ocid": "data.cutoffs_table",
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("thead", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { className: "border-b border-border", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-left px-4 py-3 font-display font-semibold text-foreground", children: "Branch" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-left px-4 py-3 font-display font-semibold text-foreground", children: "Demand" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-left px-4 py-3 font-display font-semibold text-foreground", children: "Typical Rank Range" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-left px-4 py-3 font-display font-semibold text-foreground hidden md:table-cell", children: "My Take" })
-                ] }) }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("tbody", { children: cutoffItems.map((row, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                  "tr",
-                  {
-                    className: "border-b border-border last:border-0 hover:bg-muted/50 transition-colors",
-                    "data-ocid": `data.cutoff_row.${i + 1}`,
-                    children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3 font-medium text-foreground", children: row.branch }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        Badge,
-                        {
-                          variant: row.demand === "Very High" ? "default" : row.demand === "High" ? "secondary" : "outline",
-                          className: "text-xs",
-                          children: row.demand
-                        }
-                      ) }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3 font-mono text-sm text-primary font-semibold", children: row.rank }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3 text-muted-foreground hidden md:table-cell", children: row.note })
-                    ]
-                  },
-                  row.branch
-                )) })
-              ]
-            }
-          ) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-3", children: "💡 A VITEEE rank under 50,000 generally opens up most branches. For CSE, you want to be well under 10k to be safe — don't cut it close." })
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection$6, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "Admission Cutoffs by Branch" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "Branch Cutoffs" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-6" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mb-8 leading-relaxed", children: "Based on VITEEE rank — these are historical trends. They shift every year depending on how many students apply and how the exam goes." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection$6, { delay: 100, children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "overflow-x-auto border border-border/40", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "table",
+              {
+                className: "w-full text-sm bg-card",
+                "data-ocid": "data.cutoffs_table",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("thead", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { className: "border-b border-border/50", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-left px-5 py-4 font-display font-bold text-foreground tracking-wide", children: "Branch" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-left px-5 py-4 font-display font-bold text-foreground tracking-wide", children: "Demand" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-left px-5 py-4 font-display font-bold text-foreground tracking-wide", children: "Typical Rank" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-left px-5 py-4 font-display font-bold text-foreground tracking-wide hidden md:table-cell", children: "My Take" })
+                  ] }) }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("tbody", { children: cutoffItems.map((row, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    "tr",
+                    {
+                      className: "border-b border-border/30 last:border-0 hover:bg-muted/20 transition-colors",
+                      "data-ocid": `data.cutoff_row.${i + 1}`,
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-5 py-4 font-display font-semibold text-foreground", children: row.branch }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-5 py-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          "span",
+                          {
+                            className: `text-xs font-bold tracking-widest uppercase border px-2.5 py-1 ${demandColors[row.demand] ?? "text-muted-foreground border-border/40"}`,
+                            children: row.demand
+                          }
+                        ) }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-5 py-4 font-mono text-sm text-secondary font-bold", children: row.rank }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-5 py-4 text-xs text-muted-foreground hidden md:table-cell max-w-xs leading-relaxed", children: row.note })
+                      ]
+                    },
+                    row.branch
+                  )) })
+                ]
+              }
+            ) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-3 leading-relaxed", children: "💡 A VITEEE rank under 50,000 generally opens up most branches. For CSE, you want to be well under 10k to be safe — don't cut it close." })
+          ] })
         ] })
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-light px-6 py-10 border-t border-border",
+        className: "section-bg-light px-6 py-16 border-b border-border/30",
         "data-ocid": "data.trends_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-subsection text-foreground mb-2", children: "What I've Seen About Placements" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mb-5", children: "These aren't official stats — they're patterns I've noticed over time. Take them as context, not guarantees." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4", children: trends.map((t, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection$6, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "What I've Seen" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "Placement Observations" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-6" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mb-8 leading-relaxed", children: "These aren't official stats — they're patterns I've noticed over time. Take them as context, not guarantees." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4", children: trends.map((t, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$6, { delay: i * 70, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "div",
             {
-              className: "card-elevated rounded-xl p-4",
+              className: "border border-border/40 bg-card p-6 transition-smooth hover:border-secondary/40 h-full",
               "data-ocid": `data.trend_card.${i + 1}`,
               children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl mb-2 block", "aria-hidden": "true", children: t.icon }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display font-semibold text-sm text-foreground mb-1", children: t.title }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-3xl mb-4 block", "aria-hidden": "true", children: t.icon }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display font-bold text-foreground mb-2 leading-tight", children: t.title }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground leading-relaxed", children: t.desc })
               ]
-            },
-            t.title
-          )) })
+            }
+          ) }, t.title)) })
         ] })
       }
     ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 py-8 border-t border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto flex items-start gap-3", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl shrink-0 mt-0.5", "aria-hidden": "true", children: "📌" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground leading-relaxed", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-semibold text-foreground", children: [
-          "Honestly, my advice:",
-          " "
-        ] }),
-        "Pick a branch you can tolerate and then put in real effort — CGPA, certifications, a decent internship. Branch matters at the gate, but after that, what you build for yourself matters a lot more. I've seen CSE students with 6 CGPAs struggle and Mechanical students with strong skills do well. The label helps, but it doesn't carry you."
-      ] })
-    ] }) })
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-muted px-6 py-12", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$6, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border-l-2 border-secondary/50 pl-6 py-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground leading-relaxed", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-semibold text-foreground", children: [
+        "Honestly, my advice:",
+        " "
+      ] }),
+      "Pick a branch you can tolerate and then put in real effort — CGPA, certifications, a decent internship. Branch matters at the gate, but after that, what you build for yourself matters a lot more. I've seen CSE students with 6 CGPAs struggle and Mechanical students with strong skills do well. The label helps, but it doesn't carry you."
+    ] }) }) }) }) })
   ] });
+}
+function Card({ className, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      "data-slot": "card",
+      className: cn(
+        "bg-card text-card-foreground flex flex-col gap-6 rounded-none border border-border/60 py-6",
+        "shadow-[0_4px_24px_rgba(0,0,0,0.35)]",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function CardContent({ className, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      "data-slot": "card-content",
+      className: cn("px-6", className),
+      ...props
+    }
+  );
 }
 const campusFood = [
   {
@@ -29337,10 +28495,46 @@ const calculators = [
     note: "Cheaper, slightly slower — budget pick"
   }
 ];
-function SummaryBox$2({ text }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-primary/5 border border-primary/20 rounded-xl p-4 mt-6", children: [
+function useScrollFade$5() {
+  const ref = reactExports.useRef(null);
+  const [visible, setVisible] = reactExports.useState(false);
+  reactExports.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.08 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return { ref, visible };
+}
+function FadeSection$5({
+  children,
+  className = "",
+  delay = 0
+}) {
+  const { ref, visible } = useScrollFade$5();
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      ref,
+      className: `transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`,
+      style: { transitionDelay: `${delay}ms` },
+      children
+    }
+  );
+}
+function CalloutBox({ text }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border-l-2 border-secondary/50 pl-5 py-3 mt-8 bg-secondary/5", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-1", children: "My Take" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground", children: text })
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground leading-relaxed", children: text })
   ] });
 }
 function ChecklistGroup({
@@ -29349,96 +28543,102 @@ function ChecklistGroup({
   items,
   ocid
 }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated", "data-ocid": ocid, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-4", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-border/40 bg-card p-5", "data-ocid": ocid, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-4", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xl", "aria-hidden": "true", children: icon }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-sm font-semibold font-display text-foreground", children: title })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-base font-semibold text-foreground", children: title })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-1.5", children: items.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: items.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
       "li",
       {
-        className: "flex items-start gap-2 text-xs text-foreground",
+        className: "flex items-start gap-2 text-xs text-muted-foreground",
         children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "✓" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-secondary mt-0.5 shrink-0 font-bold", children: "—" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item })
         ]
       },
       item
     )) })
-  ] }) });
+  ] });
 }
 function Essentials() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Layout, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 py-10 border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", "data-ocid": "essentials.page_label", children: "Essentials" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-hero text-foreground mb-4", children: "What to Bring — Move-In Guide" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base text-muted-foreground max-w-2xl mb-6", children: "I've been through move-in day and I know how chaotic it can get. This is everything I wish someone had laid out clearly for me before I arrived — documents, what to pack, what to skip, and what to just buy on campus." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-2", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "📄 Documents Checklist" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "🎒 Packing Guide" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "💻 Tech Essentials" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "🏠 Move-In Tips" })
-      ] })
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 pt-20 pb-16 border-b border-border/30", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "chapter-label mb-4", "data-ocid": "essentials.page_label", children: "Chapter" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-hero text-foreground mb-6 fade-in-up", children: "ESSENTIALS" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-16 mb-8" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-1", children: "I've been through move-in day and I know how chaotic it can get. This is everything I wish someone had laid out clearly for me — documents, what to pack, what to skip, and what to just buy on campus." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-3 mt-8", children: [
+        "📄 Documents",
+        "🎒 Packing",
+        "💻 Tech Essentials",
+        "🏠 Move-In Tips"
+      ].map((tag) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", className: "text-xs", children: tag }, tag)) })
     ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
+        className: "section-bg-muted px-6 py-16 border-b border-border/30",
         "data-ocid": "essentials.documents_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Before You Leave Home" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "Documents — Don't Skip This" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-6", children: "Don't forget your originals — not just photocopies. I know it sounds obvious, but people still show up without them and end up scrambling. Bring originals plus at least 10 photocopies of every document. You'll be asked for documents multiple times in the first week alone." }),
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection$5, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "Before You Leave Home" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "Documents — Don't Skip This" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-6" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed", children: "Don't forget your originals — not just photocopies. Bring originals plus at least 10 photocopies of every document. You'll be asked for documents multiple times in the first week alone." })
+          ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-6", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
+            /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$5, { delay: 100, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               Card,
               {
-                className: "card-elevated",
+                className: "card-cinema h-full",
                 "data-ocid": "essentials.docs_originals_card",
-                children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
+                children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-6", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mb-4", children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: "📄" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: "Original Documents" })
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-xl font-semibold text-foreground", children: "Original Documents" })
                   ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-1.5", children: originalDocuments.map((doc) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: originalDocuments.map((doc) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
                     "li",
                     {
-                      className: "flex items-start gap-2 text-sm text-foreground",
+                      className: "flex items-start gap-2 text-sm text-muted-foreground",
                       children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "✓" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-secondary mt-0.5 shrink-0 font-bold", children: "—" }),
                         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: doc })
                       ]
                     },
                     doc
                   )) }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 bg-muted/60 rounded-lg p-3", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-muted-foreground", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-foreground", children: "Also bring:" }),
-                    " ",
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-5 border-t border-border/40 pt-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-muted-foreground", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-semibold text-foreground", children: [
+                      "Also bring:",
+                      " "
+                    ] }),
                     "10 photocopies of every document above. Keep them in a separate folder from your originals."
                   ] }) })
                 ] })
               }
-            ),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-4", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
+            ) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-5", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$5, { delay: 200, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 Card,
                 {
-                  className: "card-elevated",
+                  className: "card-cinema",
                   "data-ocid": "essentials.docs_nri_card",
-                  children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
+                  children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-6", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mb-4", children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: "🌍" }),
                       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: "NRI / Foreign Students" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-lg font-semibold text-foreground", children: "NRI / Foreign Students" }),
                         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "You'll also need these" })
                       ] })
                     ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-1.5", children: nriDocuments.map((doc) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: nriDocuments.map((doc) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "li",
                       {
-                        className: "flex items-start gap-2 text-sm text-foreground",
+                        className: "flex items-start gap-2 text-sm text-muted-foreground",
                         children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "✓" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-secondary mt-0.5 shrink-0 font-bold", children: "—" }),
                           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: doc })
                         ]
                       },
@@ -29446,11 +28646,11 @@ function Essentials() {
                     )) })
                   ] })
                 }
-              ),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-primary/5 border border-primary/20 rounded-xl p-4", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold text-foreground mb-1", children: "💡 Practical Tip" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Use a dedicated folder and keep one full set of photocopies completely separate from your originals. In my experience, you'll be asked for documents at hostel check-in, fee counter, and registration — sometimes all on the same day." })
-              ] })
+              ) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$5, { delay: 300, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border-l-2 border-secondary/50 pl-5 py-3 bg-secondary/5", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold text-secondary mb-1", children: "💡 Practical Tip" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground leading-relaxed", children: "Use a dedicated folder and keep one full set of photocopies completely separate from your originals. In my experience, you'll be asked for documents at hostel check-in, fee counter, and registration — sometimes all on the same day." })
+              ] }) })
             ] })
           ] })
         ] })
@@ -29459,35 +28659,37 @@ function Essentials() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-light px-6 py-10 border-b border-border",
+        className: "section-bg-light px-6 py-16 border-b border-border/30",
         "data-ocid": "essentials.movein_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Things That Catch People Off Guard" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "Move-In Day — What to Know" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-6", children: "These are the things I wish someone had told me before I showed up. Read through these before you start packing — it'll save you stress." }),
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection$5, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "Things That Catch People Off Guard" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "Move-In Day" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-6" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed", children: "These are the things I wish someone had told me before I showed up. Read through these before you start packing — it'll save you stress." })
+          ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "div",
             {
               className: "flex flex-col gap-4",
               "data-ocid": "essentials.movein_list",
-              children: moveInNotes.map((note, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              children: moveInNotes.map((note, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$5, { delay: i * 80, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "div",
                 {
                   className: [
-                    "rounded-xl border p-5 flex items-start gap-4",
-                    note.highlight ? "bg-primary/5 border-primary/25" : "bg-card border-border shadow-sm"
+                    "border p-5 flex items-start gap-4 transition-smooth hover:border-secondary/40",
+                    note.highlight ? "border-secondary/30 bg-secondary/5" : "border-border/40 bg-card"
                   ].join(" "),
                   "data-ocid": `essentials.movein_note.${i + 1}`,
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl shrink-0 mt-0.5", "aria-hidden": "true", children: note.icon }),
                     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground text-sm font-display mb-1", children: note.title }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display font-semibold text-foreground mb-1", children: note.title }),
                       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground leading-relaxed", children: note.note })
                     ] })
                   ]
-                },
-                note.title
-              ))
+                }
+              ) }, note.title))
             }
           )
         ] })
@@ -29496,75 +28698,80 @@ function Essentials() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
+        className: "section-bg-muted px-6 py-16 border-b border-border/30",
         "data-ocid": "essentials.packing_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Pack Before You Leave" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "What to Actually Bring" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-6", children: "Vijayawada is hot — pack accordingly. Get these sorted before you leave home. Shops near campus aren't always convenient or cheap, and you won't want to be running around during your first week." }),
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection$5, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "Pack Before You Leave" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "What to Actually Bring" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-6" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed", children: "Vijayawada is hot — pack accordingly. Get these sorted before you leave home. Shops near campus aren't always convenient or cheap." })
+          ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "div",
             {
               className: "grid sm:grid-cols-2 lg:grid-cols-3 gap-4",
               "data-ocid": "essentials.packing_list",
-              children: packingGroups.map((group, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+              children: packingGroups.map((group, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$5, { delay: i * 60, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 ChecklistGroup,
                 {
                   icon: group.icon,
                   title: group.title,
                   items: group.items,
                   ocid: `essentials.packing_card.${i + 1}`
-                },
-                group.title
-              ))
+                }
+              ) }, group.title))
             }
           ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryBox$2, { text: "Pack for all seasons but prepare mainly for heat — Vijayawada is no joke in summer. Bring your personal care basics, bedding, and an ISI-marked extension board. Don't skip the medicine kit. And remember — mattresses, buckets, and room basics are available at campus stalls during move-in week. No need to drag all of that from home." })
+          /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$5, { delay: 200, children: /* @__PURE__ */ jsxRuntimeExports.jsx(CalloutBox, { text: "Pack for all seasons but prepare mainly for heat — Vijayawada is no joke in summer. Bring your personal care basics, bedding, and an ISI-marked extension board. Don't skip the medicine kit. And remember — mattresses, buckets, and room basics are available at campus stalls during move-in week." }) })
         ] })
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-light px-6 py-10 border-b border-border",
+        className: "section-bg-light px-6 py-16 border-b border-border/30",
         "data-ocid": "essentials.tech_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Before You Buy Anything" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "Tech — What You Actually Need" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-6", children: "For college, I'd go with at least an i5 / Ryzen 7 processor, 16GB RAM, and a 512GB SSD. Anything less and you'll feel it by third year — especially when running IDEs, VMs, and browser tabs all at once." }),
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection$5, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "Before You Buy Anything" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "Tech — What You Need" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-6" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed", children: "For college, I'd go with at least an i5 / Ryzen 7 processor, 16GB RAM, and a 512GB SSD. Anything less and you'll feel it by third year — especially when running IDEs, VMs, and browser tabs all at once." })
+          ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-6", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
+            /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$5, { delay: 100, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               Card,
               {
-                className: "card-elevated",
+                className: "card-cinema h-full",
                 "data-ocid": "essentials.tech_laptop_card",
-                children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
+                children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-6", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mb-4", children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: "💻" }),
                     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: "Laptop — Minimum Specs" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-xl font-semibold text-foreground", children: "Laptop — Minimum Specs" }),
                       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Non-negotiable for all branches" })
                     ] })
                   ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: laptopSpecs.map((spec) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-3", children: laptopSpecs.map((spec) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
                     "li",
                     {
-                      className: "flex items-start gap-3 text-sm",
+                      className: "flex items-start gap-3 text-sm border-b border-border/30 pb-2 last:border-0",
                       children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground shrink-0 w-24 text-xs pt-0.5", children: spec.label }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground shrink-0 w-24 text-xs pt-0.5 font-mono", children: spec.label }),
                         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-foreground font-medium", children: spec.value })
                       ]
                     },
                     spec.label
                   )) }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 pt-4 border-t border-border", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold text-foreground mb-2", children: "Nice to Have" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 pt-4 border-t border-border/40", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold text-secondary mb-2", children: "Nice to Have" }),
                     /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-1", children: laptopExtras.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "li",
                       {
                         className: "flex items-start gap-2 text-xs text-muted-foreground",
                         children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "+" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-secondary mt-0.5 shrink-0", children: "+" }),
                           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item })
                         ]
                       },
@@ -29573,28 +28780,28 @@ function Essentials() {
                   ] })
                 ] })
               }
-            ),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-4", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
+            ) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-5", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$5, { delay: 200, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 Card,
                 {
-                  className: "card-elevated",
+                  className: "card-cinema",
                   "data-ocid": "essentials.tech_phone_card",
-                  children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
+                  children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-6", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mb-4", children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: "📱" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: "Phone" })
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-xl font-semibold text-foreground", children: "Phone" })
                     ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-1.5", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: [
                       "Any Android or iOS with 128 GB+ storage will do",
                       "Power bank — 10,000 mAh or above. Long days on campus drain your phone fast.",
                       "Make sure UPI and digital payments are set up before you arrive"
                     ].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "li",
                       {
-                        className: "flex items-start gap-2 text-sm text-foreground",
+                        className: "flex items-start gap-2 text-sm text-muted-foreground",
                         children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "•" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-secondary mt-0.5 shrink-0", children: "—" }),
                           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item })
                         ]
                       },
@@ -29602,18 +28809,18 @@ function Essentials() {
                     )) })
                   ] })
                 }
-              ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
+              ) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$5, { delay: 300, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 Card,
                 {
-                  className: "card-elevated",
+                  className: "card-cinema",
                   "data-ocid": "essentials.tech_calculator_card",
-                  children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
+                  children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-6", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mb-4", children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: "🧮" }),
                       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: "Scientific Calculator" }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Required for B.Tech / M.Tech exams — get one before joining" })
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-lg font-semibold text-foreground", children: "Scientific Calculator" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Required for B.Tech / M.Tech exams" })
                       ] })
                     ] }),
                     /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: calculators.map((calc) => /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "text-sm", children: [
@@ -29625,25 +28832,183 @@ function Essentials() {
                     ] }, calc.model)) })
                   ] })
                 }
-              )
+              ) })
             ] })
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryBox$2, { text: "A laptop meeting those minimum specs is non-negotiable — don't compromise on it. Get a Casio fx-991 series calculator before joining; you'll need it for exams. And bring a power bank — long days on campus with classes, labs, and club activities will drain your phone by evening." })
+          /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$5, { delay: 200, children: /* @__PURE__ */ jsxRuntimeExports.jsx(CalloutBox, { text: "A laptop meeting those minimum specs is non-negotiable — don't compromise on it. Get a Casio fx-991 series calculator before joining; you'll need it for exams. And bring a power bank — long days on campus with classes, labs, and club activities will drain your phone by evening." }) })
         ] })
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-muted px-6 py-8",
+        className: "section-bg-muted px-6 py-12",
         "data-ocid": "essentials.summary_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-4xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-primary/5 border border-primary/20 rounded-xl p-5", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-1", children: "Before You Pack" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground", children: "Arrive with all original documents and at least 10 photocopies of each — you'll need them more than you expect. Mattresses aren't provided, but don't stress about hauling one from home — stalls are set up on campus during move-in week. Electric kettles are technically not allowed, but checking is usually minimal. Pack smart — clothing for the heat, personal care basics, bedding, and a medicine kit. Most importantly: get a laptop meeting minimum specs and a Casio fx-991 calculator sorted before you show up." })
-        ] }) })
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$5, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border-l-2 border-primary/60 pl-6 py-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Before You Pack" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground leading-relaxed max-w-3xl", children: "Arrive with all original documents and at least 10 photocopies of each — you'll need them more than you expect. Mattresses aren't provided, but don't stress about hauling one from home — stalls are set up on campus during move-in week. Electric kettles are technically not allowed, but checking is usually minimal. Pack smart — clothing for the heat, personal care basics, bedding, and a medicine kit." })
+        ] }) }) })
       }
     )
   ] });
+}
+function createContext2(rootComponentName, defaultContext) {
+  const Context = reactExports.createContext(defaultContext);
+  const Provider = (props) => {
+    const { children, ...context } = props;
+    const value = reactExports.useMemo(() => context, Object.values(context));
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Context.Provider, { value, children });
+  };
+  Provider.displayName = rootComponentName + "Provider";
+  function useContext2(consumerName) {
+    const context = reactExports.useContext(Context);
+    if (context) return context;
+    if (defaultContext !== void 0) return defaultContext;
+    throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
+  }
+  return [Provider, useContext2];
+}
+function createContextScope(scopeName, createContextScopeDeps = []) {
+  let defaultContexts = [];
+  function createContext3(rootComponentName, defaultContext) {
+    const BaseContext = reactExports.createContext(defaultContext);
+    const index2 = defaultContexts.length;
+    defaultContexts = [...defaultContexts, defaultContext];
+    const Provider = (props) => {
+      var _a2;
+      const { scope, children, ...context } = props;
+      const Context = ((_a2 = scope == null ? void 0 : scope[scopeName]) == null ? void 0 : _a2[index2]) || BaseContext;
+      const value = reactExports.useMemo(() => context, Object.values(context));
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(Context.Provider, { value, children });
+    };
+    Provider.displayName = rootComponentName + "Provider";
+    function useContext2(consumerName, scope) {
+      var _a2;
+      const Context = ((_a2 = scope == null ? void 0 : scope[scopeName]) == null ? void 0 : _a2[index2]) || BaseContext;
+      const context = reactExports.useContext(Context);
+      if (context) return context;
+      if (defaultContext !== void 0) return defaultContext;
+      throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
+    }
+    return [Provider, useContext2];
+  }
+  const createScope = () => {
+    const scopeContexts = defaultContexts.map((defaultContext) => {
+      return reactExports.createContext(defaultContext);
+    });
+    return function useScope(scope) {
+      const contexts = (scope == null ? void 0 : scope[scopeName]) || scopeContexts;
+      return reactExports.useMemo(
+        () => ({ [`__scope${scopeName}`]: { ...scope, [scopeName]: contexts } }),
+        [scope, contexts]
+      );
+    };
+  };
+  createScope.scopeName = scopeName;
+  return [createContext3, composeContextScopes(createScope, ...createContextScopeDeps)];
+}
+function composeContextScopes(...scopes) {
+  const baseScope = scopes[0];
+  if (scopes.length === 1) return baseScope;
+  const createScope = () => {
+    const scopeHooks = scopes.map((createScope2) => ({
+      useScope: createScope2(),
+      scopeName: createScope2.scopeName
+    }));
+    return function useComposedScopes(overrideScopes) {
+      const nextScopes = scopeHooks.reduce((nextScopes2, { useScope, scopeName }) => {
+        const scopeProps = useScope(overrideScopes);
+        const currentScope = scopeProps[`__scope${scopeName}`];
+        return { ...nextScopes2, ...currentScope };
+      }, {});
+      return reactExports.useMemo(() => ({ [`__scope${baseScope.scopeName}`]: nextScopes }), [nextScopes]);
+    };
+  };
+  createScope.scopeName = baseScope.scopeName;
+  return createScope;
+}
+// @__NO_SIDE_EFFECTS__
+function createSlot(ownerName) {
+  const SlotClone = /* @__PURE__ */ createSlotClone(ownerName);
+  const Slot2 = reactExports.forwardRef((props, forwardedRef) => {
+    const { children, ...slotProps } = props;
+    const childrenArray = reactExports.Children.toArray(children);
+    const slottable = childrenArray.find(isSlottable);
+    if (slottable) {
+      const newElement = slottable.props.children;
+      const newChildren = childrenArray.map((child) => {
+        if (child === slottable) {
+          if (reactExports.Children.count(newElement) > 1) return reactExports.Children.only(null);
+          return reactExports.isValidElement(newElement) ? newElement.props.children : null;
+        } else {
+          return child;
+        }
+      });
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: reactExports.isValidElement(newElement) ? reactExports.cloneElement(newElement, void 0, newChildren) : null });
+    }
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children });
+  });
+  Slot2.displayName = `${ownerName}.Slot`;
+  return Slot2;
+}
+// @__NO_SIDE_EFFECTS__
+function createSlotClone(ownerName) {
+  const SlotClone = reactExports.forwardRef((props, forwardedRef) => {
+    const { children, ...slotProps } = props;
+    if (reactExports.isValidElement(children)) {
+      const childrenRef = getElementRef$1(children);
+      const props2 = mergeProps(slotProps, children.props);
+      if (children.type !== reactExports.Fragment) {
+        props2.ref = forwardedRef ? composeRefs(forwardedRef, childrenRef) : childrenRef;
+      }
+      return reactExports.cloneElement(children, props2);
+    }
+    return reactExports.Children.count(children) > 1 ? reactExports.Children.only(null) : null;
+  });
+  SlotClone.displayName = `${ownerName}.SlotClone`;
+  return SlotClone;
+}
+var SLOTTABLE_IDENTIFIER = Symbol("radix.slottable");
+function isSlottable(child) {
+  return reactExports.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER;
+}
+function mergeProps(slotProps, childProps) {
+  const overrideProps = { ...childProps };
+  for (const propName in childProps) {
+    const slotPropValue = slotProps[propName];
+    const childPropValue = childProps[propName];
+    const isHandler = /^on[A-Z]/.test(propName);
+    if (isHandler) {
+      if (slotPropValue && childPropValue) {
+        overrideProps[propName] = (...args) => {
+          const result = childPropValue(...args);
+          slotPropValue(...args);
+          return result;
+        };
+      } else if (slotPropValue) {
+        overrideProps[propName] = slotPropValue;
+      }
+    } else if (propName === "style") {
+      overrideProps[propName] = { ...slotPropValue, ...childPropValue };
+    } else if (propName === "className") {
+      overrideProps[propName] = [slotPropValue, childPropValue].filter(Boolean).join(" ");
+    }
+  }
+  return { ...slotProps, ...overrideProps };
+}
+function getElementRef$1(element) {
+  var _a2, _b2;
+  let getter = (_a2 = Object.getOwnPropertyDescriptor(element.props, "ref")) == null ? void 0 : _a2.get;
+  let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  if (mayWarn) {
+    return element.ref;
+  }
+  getter = (_b2 = Object.getOwnPropertyDescriptor(element, "ref")) == null ? void 0 : _b2.get;
+  mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  if (mayWarn) {
+    return element.props.ref;
+  }
+  return element.props.ref || element.ref;
 }
 function createCollection(name) {
   const PROVIDER_NAME = name + "CollectionProvider";
@@ -29707,6 +29072,16 @@ function createCollection(name) {
     createCollectionScope2
   ];
 }
+function composeEventHandlers(originalEventHandler, ourEventHandler, { checkForDefaultPrevented = true } = {}) {
+  return function handleEvent(event) {
+    originalEventHandler == null ? void 0 : originalEventHandler(event);
+    if (checkForDefaultPrevented === false || !event.defaultPrevented) {
+      return ourEventHandler == null ? void 0 : ourEventHandler(event);
+    }
+  };
+}
+var useLayoutEffect2 = (globalThis == null ? void 0 : globalThis.document) ? reactExports.useLayoutEffect : () => {
+};
 var useInsertionEffect = React$5[" useInsertionEffect ".trim().toString()] || useLayoutEffect2;
 function useControllableState({
   prop,
@@ -29772,6 +29147,164 @@ function useUncontrolledState({
 }
 function isFunction(value) {
   return typeof value === "function";
+}
+var NODES$1 = [
+  "a",
+  "button",
+  "div",
+  "form",
+  "h2",
+  "h3",
+  "img",
+  "input",
+  "label",
+  "li",
+  "nav",
+  "ol",
+  "p",
+  "select",
+  "span",
+  "svg",
+  "ul"
+];
+var Primitive$1 = NODES$1.reduce((primitive, node) => {
+  const Slot2 = /* @__PURE__ */ createSlot(`Primitive.${node}`);
+  const Node2 = reactExports.forwardRef((props, forwardedRef) => {
+    const { asChild, ...primitiveProps } = props;
+    const Comp = asChild ? Slot2 : node;
+    if (typeof window !== "undefined") {
+      window[Symbol.for("radix-ui")] = true;
+    }
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Comp, { ...primitiveProps, ref: forwardedRef });
+  });
+  Node2.displayName = `Primitive.${node}`;
+  return { ...primitive, [node]: Node2 };
+}, {});
+function dispatchDiscreteCustomEvent(target, event) {
+  if (target) reactDomExports.flushSync(() => target.dispatchEvent(event));
+}
+function useStateMachine(initialState, machine) {
+  return reactExports.useReducer((state, event) => {
+    const nextState = machine[state][event];
+    return nextState ?? state;
+  }, initialState);
+}
+var Presence = (props) => {
+  const { present, children } = props;
+  const presence = usePresence(present);
+  const child = typeof children === "function" ? children({ present: presence.isPresent }) : reactExports.Children.only(children);
+  const ref = useComposedRefs(presence.ref, getElementRef(child));
+  const forceMount = typeof children === "function";
+  return forceMount || presence.isPresent ? reactExports.cloneElement(child, { ref }) : null;
+};
+Presence.displayName = "Presence";
+function usePresence(present) {
+  const [node, setNode] = reactExports.useState();
+  const stylesRef = reactExports.useRef(null);
+  const prevPresentRef = reactExports.useRef(present);
+  const prevAnimationNameRef = reactExports.useRef("none");
+  const initialState = present ? "mounted" : "unmounted";
+  const [state, send] = useStateMachine(initialState, {
+    mounted: {
+      UNMOUNT: "unmounted",
+      ANIMATION_OUT: "unmountSuspended"
+    },
+    unmountSuspended: {
+      MOUNT: "mounted",
+      ANIMATION_END: "unmounted"
+    },
+    unmounted: {
+      MOUNT: "mounted"
+    }
+  });
+  reactExports.useEffect(() => {
+    const currentAnimationName = getAnimationName(stylesRef.current);
+    prevAnimationNameRef.current = state === "mounted" ? currentAnimationName : "none";
+  }, [state]);
+  useLayoutEffect2(() => {
+    const styles = stylesRef.current;
+    const wasPresent = prevPresentRef.current;
+    const hasPresentChanged = wasPresent !== present;
+    if (hasPresentChanged) {
+      const prevAnimationName = prevAnimationNameRef.current;
+      const currentAnimationName = getAnimationName(styles);
+      if (present) {
+        send("MOUNT");
+      } else if (currentAnimationName === "none" || (styles == null ? void 0 : styles.display) === "none") {
+        send("UNMOUNT");
+      } else {
+        const isAnimating = prevAnimationName !== currentAnimationName;
+        if (wasPresent && isAnimating) {
+          send("ANIMATION_OUT");
+        } else {
+          send("UNMOUNT");
+        }
+      }
+      prevPresentRef.current = present;
+    }
+  }, [present, send]);
+  useLayoutEffect2(() => {
+    if (node) {
+      let timeoutId;
+      const ownerWindow = node.ownerDocument.defaultView ?? window;
+      const handleAnimationEnd = (event) => {
+        const currentAnimationName = getAnimationName(stylesRef.current);
+        const isCurrentAnimation = currentAnimationName.includes(CSS.escape(event.animationName));
+        if (event.target === node && isCurrentAnimation) {
+          send("ANIMATION_END");
+          if (!prevPresentRef.current) {
+            const currentFillMode = node.style.animationFillMode;
+            node.style.animationFillMode = "forwards";
+            timeoutId = ownerWindow.setTimeout(() => {
+              if (node.style.animationFillMode === "forwards") {
+                node.style.animationFillMode = currentFillMode;
+              }
+            });
+          }
+        }
+      };
+      const handleAnimationStart = (event) => {
+        if (event.target === node) {
+          prevAnimationNameRef.current = getAnimationName(stylesRef.current);
+        }
+      };
+      node.addEventListener("animationstart", handleAnimationStart);
+      node.addEventListener("animationcancel", handleAnimationEnd);
+      node.addEventListener("animationend", handleAnimationEnd);
+      return () => {
+        ownerWindow.clearTimeout(timeoutId);
+        node.removeEventListener("animationstart", handleAnimationStart);
+        node.removeEventListener("animationcancel", handleAnimationEnd);
+        node.removeEventListener("animationend", handleAnimationEnd);
+      };
+    } else {
+      send("ANIMATION_END");
+    }
+  }, [node, send]);
+  return {
+    isPresent: ["mounted", "unmountSuspended"].includes(state),
+    ref: reactExports.useCallback((node2) => {
+      stylesRef.current = node2 ? getComputedStyle(node2) : null;
+      setNode(node2);
+    }, [])
+  };
+}
+function getAnimationName(styles) {
+  return (styles == null ? void 0 : styles.animationName) || "none";
+}
+function getElementRef(element) {
+  var _a2, _b2;
+  let getter = (_a2 = Object.getOwnPropertyDescriptor(element.props, "ref")) == null ? void 0 : _a2.get;
+  let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  if (mayWarn) {
+    return element.ref;
+  }
+  getter = (_b2 = Object.getOwnPropertyDescriptor(element, "ref")) == null ? void 0 : _b2.get;
+  mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  if (mayWarn) {
+    return element.props.ref;
+  }
+  return element.props.ref || element.ref;
 }
 var useReactId = React$5[" useId ".trim().toString()] || (() => void 0);
 var count$1 = 0;
@@ -29914,6 +29447,11 @@ function getState$2(open) {
 var Root$2 = Collapsible;
 var Trigger = CollapsibleTrigger;
 var Content$1 = CollapsibleContent;
+var DirectionContext = reactExports.createContext(void 0);
+function useDirection(localDir) {
+  const globalDir = reactExports.useContext(DirectionContext);
+  return localDir || globalDir || "ltr";
+}
 var ACCORDION_NAME = "Accordion";
 var ACCORDION_KEYS = ["Home", "End", "ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight"];
 var [Collection, useCollection, createCollectionScope] = createCollection(ACCORDION_NAME);
@@ -30222,7 +29760,7 @@ function AccordionItem({
     Item,
     {
       "data-slot": "accordion-item",
-      className: cn("border-b last:border-b-0", className),
+      className: cn("border-b border-border/60 last:border-b-0", className),
       ...props
     }
   );
@@ -30237,13 +29775,18 @@ function AccordionTrigger({
     {
       "data-slot": "accordion-trigger",
       className: cn(
-        "focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 items-start justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180",
+        "flex flex-1 items-start justify-between gap-4 py-5 text-left font-display font-semibold transition-all outline-none",
+        "text-foreground hover:text-secondary",
+        "focus-visible:ring-2 focus-visible:ring-ring/50 rounded-sm",
+        "disabled:pointer-events-none disabled:opacity-50",
+        "[&[data-state=open]>span.chevron-icon]:rotate-180",
+        "[&[data-state=open]]:text-secondary",
         className
       ),
       ...props,
       children: [
         children,
-        /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronDown, { className: "text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200" })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "chevron-icon shrink-0 mt-1 transition-transform duration-300", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronDown, { className: "size-5 text-secondary/70" }) })
       ]
     }
   ) });
@@ -30259,7 +29802,52 @@ function AccordionContent({
       "data-slot": "accordion-content",
       className: "data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm",
       ...props,
-      children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: cn("pt-0 pb-4", className), children })
+      children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "div",
+        {
+          className: cn(
+            "pt-0 pb-5 text-muted-foreground leading-relaxed",
+            className
+          ),
+          children
+        }
+      )
+    }
+  );
+}
+function useScrollFade$4() {
+  const ref = reactExports.useRef(null);
+  const [visible, setVisible] = reactExports.useState(false);
+  reactExports.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.05 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return { ref, visible };
+}
+function FadeSection$4({
+  children,
+  className = "",
+  delay = 0
+}) {
+  const { ref, visible } = useScrollFade$4();
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      ref,
+      className: `transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`,
+      style: { transitionDelay: `${delay}ms` },
+      children
     }
   );
 }
@@ -30293,7 +29881,7 @@ const faqData = [
       },
       {
         q: "Is VIT-AP good for placements and career growth?",
-        a: "Decent — but don't expect the college to do the heavy lifting. Companies do come for campus placements, and the numbers aren't bad if you keep your CGPA above 7.5 and build relevant skills. The bigger wins I've seen are from students who used the campus ecosystem — clubs, coding competitions, hackathons, and internship drives — to build a real profile. If you're in tech, being around motivated peers and having access to events like Google Summer of Code participants, coding clubs, and IEEE chapters genuinely helps. The placement cell exists, but your profile matters more than their efforts."
+        a: "Decent — but don't expect the college to do the heavy lifting. Companies do come for campus placements, and the numbers aren't bad if you keep your CGPA above 7.5 and build relevant skills. The bigger wins I've seen are from students who used the campus ecosystem — clubs, coding competitions, hackathons, and internship drives — to build a real profile. If you're in tech, being around motivated peers and having access to events like Google Summer of Code participants, coding clubs, and IEEE chapters genuinely helps."
       },
       {
         q: "What are the biggest downsides I should know before joining?",
@@ -30387,11 +29975,11 @@ const faqData = [
       },
       {
         q: "Are professors strict?",
-        a: "It varies — there's no single answer. Some professors are excellent and genuinely engaging; others are disorganized or hard to follow. What I'd flag is that professors here have significant control over your internals — quiz marks, assignment grades, CAT evaluations, and sometimes the general vibe of the class. Only FAT marks can be formally re-evaluated by another faculty member. For everything else, there's limited scope to raise concerns if something feels unfair. It's not unique to VIT-AP, but worth knowing going in."
+        a: "It varies — there's no single answer. Some professors are excellent and genuinely engaging; others are disorganized or hard to follow. What I'd flag is that professors here have significant control over your internals — quiz marks, assignment grades, CAT evaluations, and sometimes the general vibe of the class. Only FAT marks can be formally re-evaluated by another faculty member. For everything else, there's limited scope to raise concerns if something feels unfair."
       },
       {
         q: "What happens if I fail a subject or get a backlog?",
-        a: "Getting a backlog means you have to re-register and retake the full course — it costs around ₹6,000 per subject. Unlike some colleges where just turning up might get you through, professors here can and do fail students who aren't performing. The subject will show on your transcript, and it affects your CGPA. My advice: take every course seriously from day one, especially in first year when most students are still adjusting. A backlog in semester 1 is a frustrating way to start."
+        a: "Getting a backlog means you have to re-register and retake the full course — it costs around ₹6,000 per subject. Unlike some colleges where just turning up might get you through, professors here can and do fail students who aren't performing. The subject will show on your transcript, and it affects your CGPA. My advice: take every course seriously from day one, especially in first year when most students are still adjusting."
       }
     ]
   },
@@ -30415,15 +30003,15 @@ const faqData = [
       },
       {
         q: "Is the campus Wi-Fi reliable?",
-        a: "It's okay — not great, not terrible. Wi-Fi covers most of the campus, and hostel rooms also have wired LAN ports which are noticeably more stable. In my experience, Wi-Fi during peak hours (evenings especially) can slow down significantly when everyone's online. If you're doing anything bandwidth-heavy like video calls or large downloads, a LAN cable is worth having. The infrastructure has improved over the years, but it's still not consistently reliable."
+        a: "It's okay — not great, not terrible. Wi-Fi covers most of the campus, and hostel rooms also have wired LAN ports which are noticeably more stable. In my experience, Wi-Fi during peak hours (evenings especially) can slow down significantly when everyone's online. If you're doing anything bandwidth-heavy like video calls or large downloads, a LAN cable is worth having."
       },
       {
         q: "Are clubs and activities worth joining?",
-        a: "Yes — and I genuinely mean that, not as a PR line. VIT-AP has a solid number of clubs across technical, cultural, sports, and social categories. Multiple clubs actively organize events and hackathons throughout the year. In my experience, the students who got the most out of this place were the ones who joined a club or two early on. It's how you meet interesting people, build skills outside the classroom, and have something concrete to put on your resume. Don't wait until third year to explore."
+        a: "Yes — and I genuinely mean that, not as a PR line. VIT-AP has a solid number of clubs across technical, cultural, sports, and social categories. Multiple clubs actively organize events and hackathons throughout the year. In my experience, the students who got the most out of this place were the ones who joined a club or two early on. It's how you meet interesting people, build skills outside the classroom, and have something concrete to put on your resume."
       },
       {
         q: "How are hackathons and events here?",
-        a: "Hackathons and events happen regularly on campus — though I'd say they're more frequent than they are large-scale. Campus-level competitions and club events run throughout the year, and they're a great starting point. Bigger programs like Google Summer of Code, Recon, and other national/international hackathons are things students participate in individually or in small teams — the campus doesn't run those, but there are communities here that prep and participate together. If you're serious about competitive programming or open source, you'll find your people."
+        a: "Hackathons and events happen regularly on campus — though I'd say they're more frequent than they are large-scale. Campus-level competitions and club events run throughout the year, and they're a great starting point. Bigger programs like Google Summer of Code, Recon, and other national/international hackathons are things students participate in individually or in small teams — the campus doesn't run those, but there are communities here that prep and participate together."
       },
       {
         q: "Can I study abroad from VIT-AP?",
@@ -30445,19 +30033,20 @@ function Faqs() {
     0
   );
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Layout, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 py-10 border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-3xl mx-auto", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", "data-ocid": "faqs.section_label", children: "FAQs" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-hero text-foreground mb-3", children: "Questions I Wish I'd Asked Before Joining" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-base text-muted-foreground", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 pt-20 pb-16 border-b border-border/30", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "chapter-label mb-4", "data-ocid": "faqs.section_label", children: "Chapter" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-hero text-foreground mb-6 fade-in-up", children: "FAQ" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-16 mb-8" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-1", children: [
         totalQuestions,
         " honest answers to what you're probably wondering right now — whether this place is worth it, what daily life is actually like, and what no one puts in the brochure."
       ] })
     ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-muted px-6 py-4 border-b border-border sticky top-0 z-10", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-3xl mx-auto flex flex-wrap gap-2", children: faqData.map((cat) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-muted px-6 py-4 border-b border-border/30 sticky top-0 z-10 backdrop-blur-sm", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-4xl mx-auto flex flex-wrap gap-2", children: faqData.map((cat) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
       "a",
       {
         href: `#faq-${cat.id}`,
-        className: "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border border-border bg-background hover:bg-primary hover:text-primary-foreground hover:border-primary transition-smooth",
+        className: "inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold tracking-widest uppercase border border-border/40 text-muted-foreground hover:border-secondary/50 hover:text-secondary transition-smooth",
         "data-ocid": `faqs.category_link.${cat.id}`,
         children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "aria-hidden": "true", children: cat.icon }),
@@ -30466,303 +30055,524 @@ function Faqs() {
       },
       cat.id
     )) }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-3xl mx-auto px-6", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto px-6", children: [
       faqData.map((cat, catIdx) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
         "section",
         {
           id: `faq-${cat.id}`,
-          className: `py-8 ${catIdx < faqData.length - 1 ? "border-b border-border" : ""}`,
+          className: `py-14 ${catIdx < faqData.length - 1 ? "border-b border-border/30" : ""}`,
           "data-ocid": `faqs.${cat.id}_section`,
           children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-4", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: cat.icon }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section", children: cat.label }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { variant: "outline", className: "ml-auto text-xs", children: [
-                cat.items.length,
-                " questions"
-              ] })
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection$4, { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mb-2", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xl", "aria-hidden": "true", children: cat.icon }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label", children: cat.label }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { variant: "outline", className: "ml-auto text-xs", children: [
+                  cat.items.length,
+                  " questions"
+                ] })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: cat.label }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-8" })
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Accordion, { type: "multiple", className: "space-y-2", children: cat.items.map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Accordion, { type: "multiple", className: "space-y-0", children: cat.items.map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$4, { delay: i * 60, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
               AccordionItem,
               {
                 value: `${cat.id}-${i}`,
-                className: "card-elevated rounded-lg px-4 border",
+                className: "border-b border-border/40 last:border-b-0",
                 "data-ocid": `faqs.${cat.id}.item.${i + 1}`,
                 children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(
                     AccordionTrigger,
                     {
-                      className: "text-sm font-semibold text-foreground hover:no-underline py-4 text-left",
+                      className: "text-xl md:text-2xl font-display font-semibold py-6",
                       "data-ocid": `faqs.${cat.id}.trigger.${i + 1}`,
                       children: item.q
                     }
                   ),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs(AccordionContent, { className: "text-sm text-muted-foreground pb-4 leading-relaxed", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-2", children: item.a }),
-                    item.bullets && item.bullets.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-1 mt-2", children: item.bullets.map((bullet) => /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-start gap-2", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        "span",
-                        {
-                          className: "mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/60",
-                          "aria-hidden": "true"
-                        }
-                      ),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: bullet })
-                    ] }, bullet)) })
-                  ] })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionContent, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "pb-6 pl-1", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-sm leading-relaxed mb-3", children: item.a }),
+                    item.bullets && item.bullets.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2 mt-3 border-l-2 border-secondary/30 pl-4", children: item.bullets.map((bullet) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      "li",
+                      {
+                        className: "flex items-start gap-2 text-sm text-muted-foreground",
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-secondary shrink-0 mt-0.5 font-bold", children: "—" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: bullet })
+                        ]
+                      },
+                      bullet
+                    )) })
+                  ] }) })
                 ]
-              },
-              item.q
-            )) })
+              }
+            ) }, item.q)) })
           ]
         },
         cat.id
       )),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-8", "data-ocid": "faqs.summary_section", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-primary/5 border border-primary/20 rounded-xl p-5", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-1", children: "One Last Thing" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground", children: "Everything here is based on real student experience — mine and others I've talked to. Things change, rules get updated, and your experience will be your own. If something here doesn't match what you're hearing from the college officially, go with the official source. But for the day-to-day reality of what it's like here? This is as honest as it gets." })
-      ] }) })
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "section",
+        {
+          className: "py-12 border-t border-border/30",
+          "data-ocid": "faqs.summary_section",
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$4, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border-l-2 border-secondary/50 pl-6 py-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "One Last Thing" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground leading-relaxed", children: "Everything here is based on real student experience — mine and others I've talked to. Things change, rules get updated, and your experience will be your own. If something here doesn't match what you're hearing from the college officially, go with the official source. But for the day-to-day reality of what it's like here? This is as honest as it gets." })
+          ] }) })
+        }
+      )
     ] })
   ] });
 }
-function SummaryBox$1({ text }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-primary/5 border border-primary/20 rounded-xl p-4 mt-6", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-1", children: "My Take" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground", children: text })
-  ] });
+function useScrollReveal$2() {
+  const ref = reactExports.useRef(null);
+  reactExports.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("is-visible");
+          obs.unobserve(el);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return ref;
+}
+function Reveal$1({
+  children,
+  className = "",
+  delay = 0
+}) {
+  const ref = useScrollReveal$2();
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      ref,
+      className: `reveal-block ${className}`,
+      style: { transitionDelay: `${delay}ms` },
+      children
+    }
+  );
 }
 function Food() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Layout, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 py-10 border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", "data-ocid": "food.page_label", children: "Food" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-hero text-foreground mb-4", children: "Food at VIT-AP" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base text-muted-foreground max-w-2xl mb-6", children: "Let me be honest with you — food is one of those things that will affect your day-to-day more than you expect. Here's everything I wish someone had told me before I arrived." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-2", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "🕐 Mess Timings" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "🍽️ Campus Options" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "🛵 Delivery" })
+    /* @__PURE__ */ jsxRuntimeExports.jsx("style", { children: `
+        .reveal-block { opacity:0; transform:translateY(2rem); transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1); }
+        .reveal-block.is-visible { opacity:1; transform:translateY(0); }
+        @media(prefers-reduced-motion:reduce){.reveal-block{opacity:1;transform:none;transition:none;}}
+      ` }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "bg-background min-h-[60vh] flex items-end px-6 pb-16 pt-32 relative overflow-hidden", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "div",
+        {
+          className: "absolute inset-0 bg-grain opacity-20 pointer-events-none",
+          "aria-hidden": "true"
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto w-full", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fade-in-up fade-in-up-delay-1", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "chapter-label", children: "Chapter V" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "h1",
+          {
+            className: "fade-in-up fade-in-up-delay-2 font-display font-black text-foreground leading-none tracking-tighter mt-4 mb-6",
+            style: { fontSize: "clamp(3rem, 9vw, 7.5rem)" },
+            "data-ocid": "food.chapter_title",
+            children: "FOOD"
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "fade-in-up fade-in-up-delay-3 font-body italic text-muted-foreground text-xl max-w-2xl", children: "Let me be honest with you — food is one of those things that will affect your day-to-day more than you expect. Here's everything I wish someone had told me before I arrived." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fade-in-up fade-in-up-delay-4 chapter-divider mt-8 w-24" })
       ] })
-    ] }) }),
+    ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
+        className: "px-6 py-20 border-t border-border",
+        style: { background: "oklch(0.10 0.008 60)" },
         "data-ocid": "food.mess_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Every Single Day" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "Mess Timings" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-6", children: "These timings are fixed and strictly followed. Miss a meal window and you're waiting for the next one — there's no flexibility here. Trust me, you'll learn this the hard way once before it sticks." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6", children: messTimings$1.map((entry) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Card,
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal$1, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "Every single day" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-3", children: "Mess Timings" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-muted-foreground mb-12 max-w-xl", children: "These timings are fixed and strictly followed. Miss a window and you're waiting for the next one — there's no flexibility. Trust me, you'll learn this the hard way once before it sticks." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border", children: messTimings$1.map((entry, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$1, { delay: i * 60, className: "bg-background", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
             {
-              className: "card-elevated text-center",
+              className: "p-8 text-center",
               "data-ocid": `food.mess_timing.${entry.meal.toLowerCase()}`,
-              children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-4", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl mb-2", "aria-hidden": "true", children: entry.icon }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground text-sm font-display mb-1", children: entry.meal }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground leading-relaxed", children: entry.time })
-              ] })
-            },
-            entry.meal
-          )) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-border rounded-xl p-4 shadow-sm", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold text-foreground mb-2", children: "📋 How the Menu Works" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-1.5", children: [
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl mb-4", "aria-hidden": "true", children: entry.icon }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display font-black text-xl text-foreground mb-2", children: entry.meal }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    className: "w-6 h-px mx-auto mb-3",
+                    style: { background: "oklch(var(--secondary))" }
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-xs text-muted-foreground", children: entry.time })
+              ]
+            }
+          ) }, entry.meal)) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$1, { delay: 120, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-8 border-t border-border pt-8", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "How the menu works" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-3", children: [
               "Menus rotate monthly — put together by the student mess committee",
               "Both veg and non-veg options are available at every meal",
-              "There's a Special Mess option (extra cost) with an upgraded menu — some students find it worth it",
+              "Special Mess option (extra cost) has an upgraded menu — some students find it worth it",
               "In my experience, breakfast tends to be the most consistent meal across hostels"
             ].map((point) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
               "li",
               {
-                className: "flex items-start gap-2 text-xs text-foreground",
+                className: "flex items-start gap-4 font-body text-sm text-muted-foreground",
                 children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "•" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: point })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "span",
+                    {
+                      className: "shrink-0 mt-1",
+                      style: { color: "oklch(var(--secondary))" },
+                      children: "—"
+                    }
+                  ),
+                  point
                 ]
               },
               point
             )) })
-          ] })
+          ] }) })
         ] })
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-light px-6 py-10 border-b border-border",
+        className: "bg-background px-6 py-20 border-t border-border",
         "data-ocid": "food.weekly_menu_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "So You Know What You're Getting Into" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "Sample Week Menu" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground mb-6", children: [
-            "Here's a sample week based on April 2026 mess data.",
-            " ",
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium text-foreground", children: "Menus rotate monthly" }),
-            " ",
-            "— this is just to give you an idea of what a typical week looks like."
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal$1, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "So you know what you're getting into" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-section text-foreground mb-3", children: [
+              "Sample",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              "Week Menu"
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-body text-muted-foreground mb-12 max-w-xl", children: [
+              "Here's a sample week based on April 2026 mess data.",
+              " ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-foreground", children: "Menus rotate monthly" }),
+              " ",
+              "— this is just to give you an idea of what a typical week looks like."
+            ] })
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", "data-ocid": "food.weekly_menu_list", children: weeklyMessMenu.map((day, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Card,
-            {
-              className: "card-elevated",
-              "data-ocid": `food.menu_day.${i + 1}`,
-              children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-0", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-3 px-4 py-3 border-b border-border bg-muted/30 rounded-t-lg", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display font-semibold text-sm text-foreground w-24 shrink-0", children: day.day }) }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-2 sm:grid-cols-4 divide-x divide-border", children: [
-                  { label: "Breakfast", icon: "🌅", data: day.breakfast },
-                  { label: "Lunch", icon: "☀️", data: day.lunch },
-                  { label: "Snacks", icon: "🍵", data: day.snacks },
-                  { label: "Dinner", icon: "🌙", data: day.dinner }
-                ].map((meal) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-3 py-3 min-w-0", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs font-semibold text-muted-foreground mb-1.5 flex items-center gap-1", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "aria-hidden": "true", children: meal.icon }),
-                    meal.label
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-foreground leading-relaxed", children: meal.data.veg }),
-                  meal.data.nonVeg && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-muted-foreground leading-relaxed mt-1 flex items-center gap-1", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      Badge,
-                      {
-                        variant: "outline",
-                        className: "text-[10px] px-1 py-0 h-4 shrink-0",
-                        children: "NV"
-                      }
-                    ),
-                    meal.data.nonVeg
-                  ] })
-                ] }, meal.label)) })
-              ] })
-            },
-            day.day
-          )) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-4", children: "NV = Non-Veg option. Veg options are available at every meal. Special Mess (paid upgrade) has a separate menu not shown here." })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-light px-6 py-10 border-b border-border",
-        "data-ocid": "food.quality_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "My Honest Take" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "What to Actually Expect" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-6", children: "I'm not going to sugarcoat this. Here's what I've seen and experienced firsthand." }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "div",
             {
-              className: "bg-card border border-border rounded-xl p-5 shadow-sm",
-              "data-ocid": "food.reality_card",
-              children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl shrink-0", "aria-hidden": "true", children: "💬" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground text-sm font-display mb-3", children: "From someone who's been there" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: foodRealityPoints.map((point) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                    "li",
-                    {
-                      className: "flex items-start gap-2 text-sm text-foreground",
-                      children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "•" }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: point })
-                      ]
-                    },
-                    point
-                  )) })
-                ] })
-              ] })
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryBox$1, { text: "Food is average overall. You'll survive on mess food, but you won't love it. If your hostel's mess turns out to be one of the better ones — honestly, consider yourself lucky. Either way, budget for outside food. You'll need it." })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
-        "data-ocid": "food.campus_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Your Other Options" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "Where Else to Eat on Campus" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-6", children: "Beyond your hostel mess, here's where you can eat. I've spent time at all of these — here's what you need to know." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "div",
-            {
-              className: "grid sm:grid-cols-2 gap-4",
-              "data-ocid": "food.campus_options_list",
-              children: campusFood.map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              className: "space-y-0 border-t border-border",
+              "data-ocid": "food.weekly_menu_list",
+              children: weeklyMessMenu.map((day, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$1, { delay: i * 50, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "div",
                 {
-                  className: "bg-card border border-border rounded-xl p-4 shadow-sm flex items-start gap-3",
-                  "data-ocid": `food.campus_option.${i + 1}`,
+                  className: "border-b border-border",
+                  "data-ocid": `food.menu_day.${i + 1}`,
                   children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-3xl shrink-0", "aria-hidden": "true", children: item.icon }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 flex-wrap mb-1", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground text-sm font-display", children: item.name }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: item.badge, className: "text-xs", children: item.tag })
-                      ] }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: item.desc })
-                    ] })
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      "div",
+                      {
+                        className: "flex items-center gap-4 px-6 py-4",
+                        style: {
+                          background: "oklch(0.10 0.008 60)",
+                          borderBottom: "1px solid oklch(var(--border))"
+                        },
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display font-black text-2xl text-foreground w-32 shrink-0", children: day.day }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(
+                            "div",
+                            {
+                              className: "flex-1 h-px",
+                              style: { background: "oklch(var(--primary) / 0.2)" }
+                            }
+                          )
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-2 sm:grid-cols-4 divide-x divide-border", children: [
+                      { label: "Breakfast", icon: "🌅", data: day.breakfast },
+                      { label: "Lunch", icon: "☀️", data: day.lunch },
+                      { label: "Snacks", icon: "🍵", data: day.snacks },
+                      { label: "Dinner", icon: "🌙", data: day.dinner }
+                    ].map((meal) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      "div",
+                      {
+                        className: "px-5 py-5 min-w-0 bg-background",
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-display font-bold text-xs uppercase tracking-wide text-muted-foreground mb-3 flex items-center gap-2", children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "aria-hidden": "true", children: meal.icon }),
+                            meal.label
+                          ] }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-xs text-foreground leading-relaxed", children: meal.data.veg }),
+                          meal.data.nonVeg && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-body text-xs text-muted-foreground leading-relaxed mt-2 flex items-start gap-2", children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "span",
+                              {
+                                className: "shrink-0 text-[9px] font-mono font-bold border px-1 mt-0.5",
+                                style: {
+                                  borderColor: "oklch(var(--primary) / 0.4)",
+                                  color: "oklch(var(--primary))"
+                                },
+                                children: "NV"
+                              }
+                            ),
+                            meal.data.nonVeg
+                          ] })
+                        ]
+                      },
+                      meal.label
+                    )) })
                   ]
-                },
-                item.name
-              ))
+                }
+              ) }, day.day))
             }
           ),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 bg-primary/5 border border-primary/20 rounded-xl p-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold text-foreground mb-1", children: "⚠️ Heads Up — Timing Matters" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Campus food capacity doesn't really match the size of the student population. If you go to Food Street during peak lunch or dinner hours, expect a wait. I've personally missed meals because I went at the wrong time. Go slightly before or after peak hours — it makes a huge difference." })
-          ] })
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$1, { delay: 80, children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-xs text-muted-foreground mt-6", children: "NV = Non-Veg option. Veg options are available at every meal. Special Mess (paid upgrade) has a separate menu not shown here." }) })
         ] })
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-light px-6 py-10 border-b border-border",
-        "data-ocid": "food.delivery_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "When You're Done with the Mess" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-6", children: "Ordering Food From Outside" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-col gap-4", "data-ocid": "food.delivery_list", children: deliveryPoints.map((entry, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        className: "px-6 py-20 border-t border-border",
+        style: { background: "oklch(0.10 0.008 60)" },
+        "data-ocid": "food.quality_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal$1, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "My honest take" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-section text-foreground mb-3", children: [
+              "What to Actually",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              "Expect"
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-muted-foreground mb-12 max-w-xl", children: "I'm not going to sugarcoat this. Here's what I've seen and experienced firsthand." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border-t border-border", "data-ocid": "food.reality_card", children: foodRealityPoints.map((point, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$1, { delay: i * 50, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-8 py-6 border-b border-border", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "span",
+              {
+                className: "font-display font-black text-4xl leading-none shrink-0 w-10 text-right",
+                style: { color: "oklch(var(--primary) / 0.3)" },
+                children: i + 1
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground leading-relaxed pt-2", children: point })
+          ] }) }, point)) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$1, { delay: 100, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "div",
             {
-              className: [
-                "rounded-xl border p-4 flex items-start gap-4",
-                entry.positive ? "bg-card border-border shadow-sm" : "bg-destructive/5 border-destructive/25"
-              ].join(" "),
-              "data-ocid": `food.delivery_option.${i + 1}`,
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl shrink-0 mt-0.5", "aria-hidden": "true", children: entry.icon }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 flex-wrap mb-1", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground text-sm font-display", children: entry.app }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      Badge,
-                      {
-                        variant: entry.positive ? "secondary" : "destructive",
-                        className: "text-xs",
-                        children: entry.status
-                      }
-                    )
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: entry.note })
-                ] })
-              ]
-            },
-            entry.app
-          )) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 bg-muted/60 border border-border rounded-xl p-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold text-foreground mb-1", children: "💡 Worth Knowing" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Order in groups whenever you can — it splits the delivery cost and is just more fun. Delivery takes longer here than in a city, so if you're ordering for dinner, don't wait until you're already starving. Plan ahead by 30–40 minutes." })
+              className: "mt-8 border-l-4 pl-6 py-2",
+              style: { borderColor: "oklch(var(--secondary))" },
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-muted-foreground leading-relaxed", children: "Food is average overall. You'll survive on mess food, but you won't love it. If your hostel's mess turns out to be one of the better ones — honestly, consider yourself lucky. Either way, budget for outside food. You'll need it." })
+            }
+          ) })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "bg-background px-6 py-20 border-t border-border",
+        "data-ocid": "food.campus_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal$1, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "Your other options" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-section text-foreground mb-3", children: [
+              "Where Else",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              "to Eat on Campus"
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-muted-foreground mb-12 max-w-xl", children: "Beyond your hostel mess, here's where you can eat. I've spent time at all of these." })
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryBox$1, { text: "Swiggy is your go-to for outside food. Zomato simply doesn't work here — I've tried. For local delivery options, ask seniors after you arrive, as those contacts keep changing. Most students I know order outside food regularly — it's practically a part of hostel life." })
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "grid sm:grid-cols-2 gap-px bg-border",
+              "data-ocid": "food.campus_options_list",
+              children: campusFood.map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$1, { delay: i * 60, className: "bg-background", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "div",
+                {
+                  className: "p-8 h-full",
+                  "data-ocid": `food.campus_option.${i + 1}`,
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-4 mb-4", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-3xl shrink-0", "aria-hidden": "true", children: item.icon }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-bold text-lg text-foreground mb-1", children: item.name }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          "span",
+                          {
+                            className: "text-xs font-mono border px-2 py-0.5",
+                            style: {
+                              borderColor: "oklch(var(--secondary) / 0.3)",
+                              color: "oklch(var(--secondary))"
+                            },
+                            children: item.tag
+                          }
+                        )
+                      ] })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "div",
+                      {
+                        className: "w-8 h-px mb-4",
+                        style: { background: "oklch(var(--primary) / 0.4)" }
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground", children: item.desc })
+                  ]
+                }
+              ) }, item.name))
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$1, { delay: 100, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "mt-8 border-l-2 pl-4 py-1",
+              style: { borderColor: "oklch(var(--primary))" },
+              children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-body text-sm text-muted-foreground", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-foreground", children: "Heads up — timing matters." }),
+                " ",
+                "Campus food capacity doesn't match the student population. If you go to Food Street during peak lunch or dinner hours, expect a wait. Go slightly before or after peak hours — it makes a huge difference."
+              ] })
+            }
+          ) })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "px-6 py-20 border-t border-border",
+        style: { background: "oklch(0.10 0.008 60)" },
+        "data-ocid": "food.delivery_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal$1, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "When you're done with the mess" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-section text-foreground mb-3", children: [
+              "Ordering",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              "From Outside"
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-muted-foreground mb-12 max-w-xl", children: "Most students order outside food regularly — it's practically a part of hostel life." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "space-y-0 border-t border-border",
+              "data-ocid": "food.delivery_list",
+              children: deliveryPoints.map((entry, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$1, { delay: i * 60, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "div",
+                {
+                  className: "flex flex-col sm:flex-row gap-6 items-start sm:items-center py-8 border-b border-border",
+                  "data-ocid": `food.delivery_option.${i + 1}`,
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "sm:w-48 shrink-0 flex items-center gap-4", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: entry.icon }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-bold text-lg text-foreground", children: entry.app }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          "span",
+                          {
+                            className: "text-xs font-mono font-bold",
+                            style: {
+                              color: entry.positive ? "oklch(var(--secondary))" : "oklch(var(--primary))"
+                            },
+                            children: entry.status
+                          }
+                        )
+                      ] })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "div",
+                      {
+                        className: "w-px h-8 shrink-0 hidden sm:block",
+                        style: { background: "oklch(var(--border))" }
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground leading-relaxed", children: entry.note })
+                  ]
+                }
+              ) }, entry.app))
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal$1, { delay: 100, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "mt-8 border-l-4 pl-6 py-2",
+              style: { borderColor: "oklch(var(--secondary))" },
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-muted-foreground leading-relaxed", children: "Order in groups whenever you can — it splits the delivery cost and is more fun. Delivery takes longer here than in a city, so if you're ordering for dinner, don't wait until you're already starving. Plan ahead by 30–40 minutes." })
+            }
+          ) })
         ] })
       }
     )
   ] });
+}
+const buttonVariants = cva(
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold tracking-wider uppercase transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground border border-primary/80 hover:bg-primary/80 hover:border-primary",
+        destructive: "bg-destructive/20 text-destructive border border-destructive/50 hover:bg-destructive/30",
+        outline: "border border-border/60 bg-transparent text-foreground hover:border-secondary/60 hover:text-secondary",
+        secondary: "bg-secondary/15 text-secondary border border-secondary/40 hover:bg-secondary/25",
+        ghost: "text-foreground border border-transparent hover:border-border/40 hover:bg-muted/30",
+        link: "text-secondary underline-offset-4 hover:underline"
+      },
+      size: {
+        default: "h-9 px-5 py-2 has-[>svg]:px-3",
+        sm: "h-8 rounded-none gap-1.5 px-4 text-xs has-[>svg]:px-3",
+        lg: "h-11 px-8 text-base has-[>svg]:px-6",
+        icon: "size-9"
+      }
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default"
+    }
+  }
+);
+function Button({
+  className,
+  variant,
+  size,
+  asChild = false,
+  ...props
+}) {
+  const Comp = asChild ? Slot$1 : "button";
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    Comp,
+    {
+      "data-slot": "button",
+      className: cn(buttonVariants({ variant, size, className })),
+      ...props
+    }
+  );
+}
+function useCallbackRef$1(callback) {
+  const callbackRef = reactExports.useRef(callback);
+  reactExports.useEffect(() => {
+    callbackRef.current = callback;
+  });
+  return reactExports.useMemo(() => (...args) => {
+    var _a2;
+    return (_a2 = callbackRef.current) == null ? void 0 : _a2.call(callbackRef, ...args);
+  }, []);
 }
 function useEscapeKeydown(onEscapeKeyDownProp, ownerDocument = globalThis == null ? void 0 : globalThis.document) {
   const onEscapeKeyDown = useCallbackRef$1(onEscapeKeyDownProp);
@@ -32313,7 +32123,7 @@ function DialogOverlay({
     {
       "data-slot": "dialog-overlay",
       className: cn(
-        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50",
+        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/80 backdrop-blur-sm",
         className
       ),
       ...props
@@ -32333,7 +32143,11 @@ function DialogContent({
       {
         "data-slot": "dialog-content",
         className: cn(
-          "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 sm:max-w-lg",
+          "bg-card border border-border/60 text-foreground",
+          "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
+          "fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-none p-6",
+          "shadow-[0_24px_64px_rgba(0,0,0,0.7)]",
+          "duration-200 sm:max-w-lg",
           className
         ),
         ...props,
@@ -32343,9 +32157,9 @@ function DialogContent({
             Close,
             {
               "data-slot": "dialog-close",
-              className: "ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+              className: "absolute top-4 right-4 text-muted-foreground transition-smooth hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring/50",
               children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(X, {}),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(X, { className: "size-4" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "sr-only", children: "Close" })
               ]
             }
@@ -32362,9 +32176,15 @@ function Input({ className, type, ...props }) {
       type,
       "data-slot": "input",
       className: cn(
-        "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
-        "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+        "file:text-foreground placeholder:text-muted-foreground/50",
+        "border-border/60 bg-background/60",
+        "flex h-10 w-full min-w-0 rounded-none border px-3 py-2 text-base text-foreground",
+        "shadow-none transition-all outline-none",
+        "file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium",
+        "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+        "focus:border-secondary/60 focus:bg-card",
+        "focus-visible:ring-2 focus-visible:ring-secondary/20",
+        "aria-invalid:border-destructive/60",
         className
       ),
       ...props
@@ -32464,12 +32284,12 @@ function EmptyState({ isAdmin }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "div",
     {
-      className: "flex flex-col items-center justify-center py-20 px-6 text-center",
+      className: "flex flex-col items-center justify-center py-28 px-6 text-center",
       "data-ocid": "gallery.empty_state",
       children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-16 h-16 rounded-full bg-muted flex items-center justify-center mb-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Camera, { className: "w-8 h-8 text-muted-foreground" }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection text-foreground mb-2", children: "Nothing here yet" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground max-w-sm", children: isAdmin ? "Upload the first photo using the button above — drag and drop or click to select." : "I'll be adding photos of campus, key locations, and hostel blocks here soon. Check back." })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-20 h-20 border border-border/40 flex items-center justify-center mb-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Camera, { className: "w-10 h-10 text-muted-foreground/50" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-2xl font-semibold text-foreground mb-3", children: "Nothing here yet" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground max-w-sm leading-relaxed", children: isAdmin ? "Upload the first photo using the button above — drag and drop or click to select." : "I'll be adding photos of campus, key locations, and hostel blocks here soon. Check back." })
       ]
     }
   );
@@ -32485,31 +32305,31 @@ function ImageCard({
     "button",
     {
       type: "button",
-      className: "group relative w-full rounded-xl overflow-hidden border border-border bg-card shadow-sm cursor-pointer transition-smooth hover:shadow-md hover:scale-[1.01] text-left",
+      className: "group relative w-full overflow-hidden border border-border/40 bg-card cursor-pointer transition-all duration-500 hover:border-secondary/50 text-left",
       "data-ocid": `gallery.item.${index2}`,
       onClick,
       "aria-label": `View photo: ${image.caption || image.tag}`,
       children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "aspect-[4/3] overflow-hidden bg-muted", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "aspect-[4/3] overflow-hidden bg-muted/20", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
           "img",
           {
             src: image.dataUrl,
             alt: image.caption || image.tag,
-            className: "w-full h-full object-cover transition-smooth group-hover:scale-105",
+            className: "w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-90 group-hover:brightness-100",
             loading: "lazy"
           }
         ) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-3", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 border-t border-border/30", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-2", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0 flex-1", children: [
-            image.caption && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-foreground truncate font-display", children: image.caption }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs mt-1", children: image.tag })
+            image.caption && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-sm font-semibold text-foreground truncate", children: image.caption }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", className: "text-xs mt-1", children: image.tag })
           ] }),
           isAdmin && /* @__PURE__ */ jsxRuntimeExports.jsx(
             Button,
             {
               variant: "ghost",
               size: "icon",
-              className: "h-7 w-7 shrink-0 text-muted-foreground hover:text-destructive",
+              className: "h-7 w-7 shrink-0 text-muted-foreground hover:text-destructive hover:border-destructive/40",
               onClick: (e) => {
                 e.stopPropagation();
                 onDelete(image.id);
@@ -32546,17 +32366,24 @@ function AdminLoginDialog({
     {
       className: "max-w-sm",
       "data-ocid": "gallery.admin_login_dialog",
-      children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-5 pt-2", children: [
+      children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-6 pt-2", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Lock, { className: "w-5 h-5 text-primary" }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 border border-primary/40 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Lock, { className: "w-5 h-5 text-primary" }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground font-display", children: "Admin Access" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display font-semibold text-foreground", children: "Admin Access" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Enter the password to manage photos" })
           ] })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleSubmit, className: "flex flex-col gap-3", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-1.5", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Label, { htmlFor: "admin-password", children: "Password" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleSubmit, className: "flex flex-col gap-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              Label,
+              {
+                htmlFor: "admin-password",
+                className: "text-xs text-muted-foreground uppercase tracking-widest",
+                children: "Password"
+              }
+            ),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               Input,
               {
@@ -32657,9 +32484,9 @@ function UploadDialog({
     handleClose();
   }
   const uploadTags = TAGS.filter((t) => t !== "All");
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Dialog, { open, onOpenChange: (v) => !v && handleClose(), children: /* @__PURE__ */ jsxRuntimeExports.jsx(DialogContent, { className: "max-w-md", "data-ocid": "gallery.upload_dialog", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-4 pt-2", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Dialog, { open, onOpenChange: (v) => !v && handleClose(), children: /* @__PURE__ */ jsxRuntimeExports.jsx(DialogContent, { className: "max-w-md", "data-ocid": "gallery.upload_dialog", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-5 pt-2", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground font-display text-base", children: "Add a Photo" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display font-semibold text-foreground text-base", children: "Add a Photo" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Pick a photo, give it a caption, and tag the category" })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleSubmit, className: "flex flex-col gap-4", children: [
@@ -32668,8 +32495,8 @@ function UploadDialog({
         {
           type: "button",
           className: [
-            "rounded-xl border-2 border-dashed transition-smooth flex flex-col items-center justify-center p-6 cursor-pointer min-h-[140px] w-full",
-            dragging ? "border-primary bg-primary/5" : "border-border hover:border-primary/50 hover:bg-muted/30"
+            "border-2 border-dashed transition-smooth flex flex-col items-center justify-center p-6 cursor-pointer min-h-[140px] w-full",
+            dragging ? "border-secondary/60 bg-secondary/5" : "border-border/40 hover:border-secondary/40 hover:bg-muted/20"
           ].join(" "),
           onDragOver: (e) => {
             e.preventDefault();
@@ -32700,16 +32527,16 @@ function UploadDialog({
               {
                 src: preview,
                 alt: "Preview",
-                className: "max-h-32 rounded-lg object-contain"
+                className: "max-h-32 object-contain"
               }
             ) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Upload, { className: "w-8 h-8 text-muted-foreground mb-2" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Upload, { className: "w-8 h-8 text-muted-foreground/50 mb-2" }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground text-center", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-primary font-medium", children: "Click to select" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-secondary font-medium", children: "Click to select" }),
                 " ",
                 "or drag and drop"
               ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-1", children: "JPG, PNG, WEBP supported" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground/60 mt-1", children: "JPG, PNG, WEBP supported" })
             ] })
           ]
         }
@@ -32720,7 +32547,7 @@ function UploadDialog({
           type: "button",
           variant: "ghost",
           size: "sm",
-          className: "self-start text-muted-foreground",
+          className: "self-start text-muted-foreground text-xs",
           onClick: () => {
             setPreview(null);
             if (fileRef.current) fileRef.current.value = "";
@@ -32731,8 +32558,15 @@ function UploadDialog({
           ]
         }
       ),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-1.5", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Label, { htmlFor: "caption", children: "Caption / Location name" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Label,
+          {
+            htmlFor: "caption",
+            className: "text-xs text-muted-foreground uppercase tracking-widest",
+            children: "Caption / Location name"
+          }
+        ),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           Input,
           {
@@ -32744,16 +32578,16 @@ function UploadDialog({
           }
         )
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-1.5", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Label, { children: "Category" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Label, { className: "text-xs text-muted-foreground uppercase tracking-widest", children: "Category" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: uploadTags.map((t) => /* @__PURE__ */ jsxRuntimeExports.jsx(
           "button",
           {
             type: "button",
             onClick: () => setTag(t),
             className: [
-              "px-3 py-1 rounded-full text-xs font-medium transition-smooth border",
-              tag === t ? "bg-primary text-primary-foreground border-primary" : "bg-muted text-foreground border-border hover:border-primary/40"
+              "px-3 py-1 text-xs font-medium tracking-wider uppercase border transition-smooth",
+              tag === t ? "bg-primary/20 text-primary border-primary/50" : "bg-transparent text-muted-foreground border-border/40 hover:border-secondary/40 hover:text-secondary"
             ].join(" "),
             "data-ocid": `gallery.tag_button.${t.toLowerCase().replace(" ", "_")}`,
             children: t
@@ -32795,7 +32629,7 @@ function LightboxDialog({
   return /* @__PURE__ */ jsxRuntimeExports.jsx(Dialog, { open: !!image, onOpenChange: (v) => !v && onClose(), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
     DialogContent,
     {
-      className: "max-w-3xl p-0 overflow-hidden bg-card",
+      className: "max-w-4xl p-0 overflow-hidden bg-black border-border/30",
       "data-ocid": "gallery.lightbox_dialog",
       children: image && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -32803,12 +32637,12 @@ function LightboxDialog({
           {
             src: image.dataUrl,
             alt: image.caption || image.tag,
-            className: "w-full object-contain max-h-[70vh]"
+            className: "w-full object-contain max-h-[75vh]"
           }
         ),
-        (image.caption || image.tag) && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "px-5 py-4 flex items-center gap-3 border-t border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 min-w-0", children: [
-          image.caption && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground font-display truncate", children: image.caption }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs mt-1", children: image.tag })
+        (image.caption || image.tag) && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "px-6 py-4 flex items-center gap-3 border-t border-border/30 bg-card", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 min-w-0", children: [
+          image.caption && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display font-semibold text-foreground truncate", children: image.caption }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", className: "text-xs mt-1", children: image.tag })
         ] }) })
       ] })
     }
@@ -32837,12 +32671,13 @@ function Gallery() {
   }
   const filtered = activeTag === "All" ? images : images.filter((img) => img.tag === activeTag);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Layout, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 py-10 border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", "data-ocid": "gallery.page_label", children: "Gallery" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-hero text-foreground mb-4", children: "See the Campus Before You Arrive" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base text-muted-foreground max-w-2xl mb-6", children: "Photos of campus, hostels, food areas, and key spots — so you actually know what you're walking into. I'll keep adding more as I take them." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center gap-3", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 pt-20 pb-16 border-b border-border/30", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "chapter-label mb-4", "data-ocid": "gallery.page_label", children: "Chapter" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-hero text-foreground mb-6 fade-in-up", children: "GALLERY" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-16 mb-8" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-1", children: "Photos of campus, hostels, food areas, and key spots — so you actually know what you're walking into. I'll keep adding more as I take them." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center gap-3 mt-8", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { variant: "secondary", className: "text-xs", children: [
           "📸 ",
           images.length,
           " photo",
@@ -32886,7 +32721,7 @@ function Gallery() {
         )
       ] })
     ] }) }),
-    images.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-muted px-6 py-4 border-b border-border sticky top-0 z-10", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-4xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    images.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-muted px-6 py-4 border-b border-border/30 sticky top-0 z-10 backdrop-blur-sm", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
       "div",
       {
         className: "flex flex-wrap gap-2",
@@ -32901,13 +32736,13 @@ function Gallery() {
             "aria-selected": activeTag === tag,
             onClick: () => setActiveTag(tag),
             className: [
-              "px-3 py-1.5 rounded-full text-xs font-medium transition-smooth border",
-              activeTag === tag ? "bg-primary text-primary-foreground border-primary shadow-sm" : "bg-card text-foreground border-border hover:border-primary/40 hover:bg-muted"
+              "px-4 py-1.5 text-xs font-semibold tracking-widest uppercase border transition-smooth",
+              activeTag === tag ? "bg-primary/20 text-primary border-primary/50" : "bg-transparent text-muted-foreground border-border/40 hover:border-secondary/40 hover:text-secondary"
             ].join(" "),
             "data-ocid": `gallery.filter.${tag.toLowerCase().replace(" ", "_")}`,
             children: [
               tag,
-              tag !== "All" && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "ml-1 opacity-60", children: [
+              tag !== "All" && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "ml-1.5 opacity-50", children: [
                 "(",
                 images.filter((i) => i.tag === tag).length,
                 ")"
@@ -32921,13 +32756,13 @@ function Gallery() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-light px-6 py-10",
+        className: "section-bg-light px-6 py-12",
         "data-ocid": "gallery.grid_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
           filtered.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx(EmptyState, { isAdmin }) : /* @__PURE__ */ jsxRuntimeExports.jsx(
             "div",
             {
-              className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4",
+              className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5",
               "data-ocid": "gallery.photo_list",
               children: filtered.map((image, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
                 ImageCard,
@@ -32945,15 +32780,15 @@ function Gallery() {
           activeTag !== "All" && filtered.length === 0 && images.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "div",
             {
-              className: "text-center py-10",
+              className: "text-center py-12",
               "data-ocid": "gallery.no_filter_results",
               children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: "No photos in this category yet." }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-3", children: "No photos in this category yet." }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "button",
                   {
                     type: "button",
-                    className: "text-sm text-primary hover:underline mt-2",
+                    className: "text-sm text-secondary hover:underline",
                     onClick: () => setActiveTag("All"),
                     children: "View all photos"
                   }
@@ -32992,149 +32827,331 @@ function Gallery() {
     )
   ] });
 }
-const highlights = [
-  { label: "Sections", value: "12", icon: "📋" },
-  { label: "FAQs", value: "20+", icon: "❓" },
-  { label: "Survival Tips", value: "50+", icon: "💡" },
-  { label: "Campus Guides", value: "5+", icon: "🗺️" }
-];
+function useScrollReveal$1() {
+  const ref = reactExports.useRef(null);
+  reactExports.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("is-visible");
+          obs.unobserve(el);
+        }
+      },
+      { threshold: 0.12 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return ref;
+}
+function RevealBlock({
+  children,
+  className = "",
+  delay = 0
+}) {
+  const ref = useScrollReveal$1();
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      ref,
+      className: `reveal-block ${className}`,
+      style: { transitionDelay: `${delay}ms` },
+      children
+    }
+  );
+}
 const sectionCards = navItems.filter((item) => item.id !== "home");
+const chapterMap = {
+  about: "I",
+  faqs: "II",
+  academics: "III",
+  hostel: "IV",
+  food: "V",
+  essentials: "VI",
+  survival: "VII",
+  portals: "VIII",
+  data: "IX",
+  resources: "X",
+  "study-abroad": "XI",
+  gallery: "XII"
+};
 function Home() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Layout, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 py-12 md:py-16 border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-3xl mx-auto text-center", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Badge,
-        {
-          variant: "secondary",
-          className: "mb-4 text-xs font-semibold tracking-wide",
-          children: "🎓 From a student, for students"
+    /* @__PURE__ */ jsxRuntimeExports.jsx("style", { children: `
+        .reveal-block {
+          opacity: 0;
+          transform: translateY(2.5rem);
+          transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1);
         }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "h1",
-        {
-          className: "text-hero mb-4 text-foreground",
-          "data-ocid": "home.hero_heading",
-          children: "VIT-AP Student Hub"
+        .reveal-block.is-visible {
+          opacity: 1;
+          transform: translateY(0);
         }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-lg text-muted-foreground mb-3 font-body", children: "Hey — if you're trying to figure out whether VIT-AP is worth it, or you've already gotten in and want to know what to expect, you're in the right place." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-8 font-body", children: "I put this together based on my own experience here. No brochure talk, no institutional fluff — just honest, practical info I wish someone had handed me when I was in your position." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-2 md:grid-cols-4 gap-4 mt-8", children: highlights.map((h) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-        "div",
-        {
-          className: "card-elevated rounded-xl p-4 flex flex-col items-center gap-1",
-          children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: h.icon }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display font-bold text-xl text-primary", children: h.value }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-muted-foreground", children: h.label })
-          ]
-        },
-        h.label
-      )) })
+        @media (prefers-reduced-motion: reduce) {
+          .reveal-block { opacity: 1; transform: none; transition: none; }
+        }
+      ` }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      "section",
+      {
+        className: "full-screen-hero bg-background relative px-6 py-0",
+        "data-ocid": "home.hero_section",
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "absolute inset-0 bg-grain opacity-30 pointer-events-none",
+              "aria-hidden": "true"
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "absolute left-6 sm:left-12 top-1/4 bottom-1/4 w-px opacity-30 pointer-events-none",
+              style: { background: "oklch(var(--secondary))" },
+              "aria-hidden": "true"
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative max-w-5xl mx-auto w-full flex flex-col justify-center py-24", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fade-in-up fade-in-up-delay-1 mb-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "chapter-label", children: "From a student, for students" }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "h1",
+              {
+                className: "fade-in-up fade-in-up-delay-2 font-display font-black leading-none tracking-tighter text-foreground mb-6",
+                style: { fontSize: "clamp(3rem, 10vw, 8rem)" },
+                "data-ocid": "home.hero_heading",
+                children: [
+                  "THE HONEST",
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { color: "oklch(var(--primary))" }, children: "GUIDE" }),
+                  " TO",
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+                  "VIT-AP"
+                ]
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "fade-in-up fade-in-up-delay-3 font-body italic text-muted-foreground text-lg sm:text-2xl max-w-2xl mb-10", children: "Everything I wish someone had told me before I joined — written like a senior talking to a junior. No brochures, no institutional talk. Just the real stuff." }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fade-in-up fade-in-up-delay-4 chapter-divider w-32 mb-10" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "div",
+              {
+                className: "fade-in-up fade-in-up-delay-5 flex flex-wrap gap-8",
+                "data-ocid": "home.stats_row",
+                children: [
+                  { value: "12", label: "Chapters" },
+                  { value: "20+", label: "FAQs Answered" },
+                  { value: "5+", label: "Campus Guides" },
+                  { value: "100%", label: "Honest" }
+                ].map((stat) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-1", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "span",
+                    {
+                      className: "font-display font-black text-4xl",
+                      style: { color: "oklch(var(--secondary))" },
+                      children: stat.value
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs uppercase tracking-widest text-muted-foreground font-body", children: stat.label })
+                ] }, stat.label))
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 fade-in-up fade-in-up-delay-5", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs tracking-[0.25em] uppercase font-body text-muted-foreground", children: "scroll down" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "div",
+              {
+                className: "w-px h-8 animate-bounce",
+                style: { background: "oklch(var(--secondary) / 0.5)" },
+                "aria-hidden": "true"
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "svg",
+              {
+                width: "14",
+                height: "8",
+                viewBox: "0 0 14 8",
+                fill: "none",
+                "aria-hidden": "true",
+                style: { color: "oklch(var(--secondary))" },
+                children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "path",
+                  {
+                    d: "M1 1l6 6 6-6",
+                    stroke: "currentColor",
+                    strokeWidth: "1.5",
+                    strokeLinecap: "round",
+                    strokeLinejoin: "round"
+                  }
+                )
+              }
+            )
+          ] })
+        ]
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "bg-background px-6 py-20 border-t border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(RevealBlock, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "What this is" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-section text-foreground mb-6 max-w-3xl", children: [
+          "A guide built from",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("em", { style: { color: "oklch(var(--primary))" }, children: "real experience" })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(RevealBlock, { delay: 100, children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-muted-foreground text-lg leading-relaxed max-w-2xl", children: "I put this together because I couldn't find a single honest resource about VIT-AP when I was deciding whether to join. Everything online was either a brochure or a complaint forum. This is neither. It's a structured guide written like I'm sitting across from you, answering every question I know you have." }) })
     ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-muted px-6 py-10",
-        "data-ocid": "home.sections_grid",
+        className: "px-6 py-20",
+        style: { background: "oklch(0.10 0.008 60)" },
+        "data-ocid": "home.chapters_section",
         children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-subsection text-foreground mb-2", children: "What's inside" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mb-6", children: "Pick whatever's most relevant to where you are right now." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4", children: sectionCards.map((section, index2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(RevealBlock, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "The guide" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-3", children: "Twelve Chapters" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground font-body mb-12 max-w-xl", children: "Pick whatever's most relevant to where you are right now." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border", children: sectionCards.map((section, index2) => /* @__PURE__ */ jsxRuntimeExports.jsx(RevealBlock, { delay: Math.min(index2 * 40, 300), children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
             Link,
             {
               to: section.path,
-              "data-ocid": `home.section_card.${index2 + 1}`,
-              className: "group",
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "h-full transition-smooth hover:shadow-md hover:border-primary/40 cursor-pointer bg-card", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-5", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3", children: [
+              "data-ocid": `home.chapter_card.${index2 + 1}`,
+              className: "group block bg-background p-6 h-full transition-smooth hover:bg-card",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mb-4", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    "span",
+                    {
+                      className: "font-display font-bold text-xs tracking-widest uppercase",
+                      style: { color: "oklch(var(--primary))" },
+                      children: [
+                        "Ch. ",
+                        chapterMap[section.id] ?? index2 + 1
+                      ]
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "div",
+                    {
+                      className: "flex-1 h-px",
+                      style: { background: "oklch(var(--primary) / 0.25)" }
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "h3",
+                  {
+                    className: "font-display font-bold text-xl text-foreground mb-3 group-hover:text-secondary transition-colors duration-300",
+                    style: { "--tw-text-opacity": "1" },
+                    children: section.title
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-body text-muted-foreground leading-relaxed mb-4", children: section.description }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "span",
                   {
-                    className: "text-2xl shrink-0 mt-0.5 group-hover:scale-110 transition-transform duration-200",
-                    "aria-hidden": "true",
-                    children: section.icon
+                    className: "text-xs uppercase tracking-widest font-body transition-smooth group-hover:translate-x-1 inline-block",
+                    style: { color: "oklch(var(--secondary))" },
+                    children: "Read →"
                   }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-semibold text-foreground text-sm mb-1 group-hover:text-primary transition-colors duration-200", children: section.title }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground leading-relaxed", children: section.description })
-                ] })
-              ] }) }) })
-            },
-            section.id
-          )) })
+                )
+              ]
+            }
+          ) }, section.id)) })
         ] })
       }
     ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 py-8 border-t border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-3xl mx-auto flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-3xl shrink-0", "aria-hidden": "true", children: "💡" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display font-semibold text-foreground text-sm", children: "One thing I'd tell my fresher self" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-muted-foreground mt-1", children: [
-          "Register for FFCS slots early — good faculty fills up fast, trust me. And read the",
-          " ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "px-6 py-16 border-t border-border",
+        style: { background: "oklch(var(--card))" },
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx(RevealBlock, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col md:flex-row items-start md:items-center gap-6", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Link,
+            "div",
             {
-              to: "/academics",
-              className: "text-primary hover:underline font-medium",
-              children: "Academics guide"
+              className: "shrink-0 w-12 h-12 flex items-center justify-center border",
+              style: { borderColor: "oklch(var(--secondary) / 0.4)" },
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "span",
+                {
+                  style: { color: "oklch(var(--secondary))" },
+                  className: "text-xl",
+                  "aria-hidden": "true",
+                  children: "✦"
+                }
+              )
             }
           ),
-          " ",
-          "before your first registration so you actually understand what you're signing up for."
-        ] })
-      ] })
-    ] }) })
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display font-bold text-xl text-foreground mb-1", children: "One thing I'd tell my fresher self" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-body text-muted-foreground text-sm leading-relaxed max-w-2xl", children: [
+              "Register for FFCS slots early — good faculty fills up fast, trust me. And read the",
+              " ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                Link,
+                {
+                  to: "/academics",
+                  className: "transition-colors duration-200",
+                  style: { color: "oklch(var(--secondary))" },
+                  "data-ocid": "home.academics_link",
+                  children: "Academics guide"
+                }
+              ),
+              " ",
+              "before your first registration so you actually know what you're signing up for."
+            ] })
+          ] })
+        ] }) }) })
+      }
+    )
   ] });
 }
-function BulletCard$1({ icon, title, items }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: icon }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: title })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: items.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      "li",
-      {
-        className: "flex items-start gap-2 text-sm text-foreground",
-        children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "•" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item })
-        ]
+function useScrollReveal() {
+  const ref = reactExports.useRef(null);
+  reactExports.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("is-visible");
+          obs.unobserve(el);
+        }
       },
-      item
-    )) })
-  ] }) });
+      { threshold: 0.1 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return ref;
 }
-function SummaryBox({ text }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-primary/5 border border-primary/20 rounded-xl p-4 mt-6", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-1", children: "Summary" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground", children: text })
-  ] });
+function Reveal({
+  children,
+  className = "",
+  delay = 0
+}) {
+  const ref = useScrollReveal();
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      ref,
+      className: `reveal-block ${className}`,
+      style: { transitionDelay: `${delay}ms` },
+      children
+    }
+  );
 }
-const hostelBlocks = [
-  {
-    icon: "🏢",
-    label: "Men's Hostels (MH)",
-    desc: "MH1 – MH6 operational; MH7 under construction",
-    badge: "6 Active",
-    badgeVariant: "secondary"
-  },
-  {
-    icon: "🏠",
-    label: "Ladies' Hostels (LH)",
-    desc: "LH1 – LH3 operational; LH4 under construction",
-    badge: "3 Active",
-    badgeVariant: "secondary"
-  }
-];
-const sharingRooms = [
+const roomTypes = [
   {
     beds: "2 Bed",
     tag: "AC / NAC",
-    note: "Best privacy for a sharing room — popular, goes fast during allotment"
+    note: "Best privacy — popular, goes fast during allotment"
   },
   {
     beds: "3 Bed",
@@ -33154,53 +33171,38 @@ const sharingRooms = [
   {
     beds: "6 Bed",
     tag: "AC / NAC",
-    note: "Budget-friendly; you'll have company whether you want it or not"
+    note: "Budget-friendly; company whether you want it or not"
   },
   {
     beds: "7 Bed",
     tag: "AC / NAC",
-    note: "Large shared room — cheaper, but less personal space"
-  }
-];
-const dormRooms = [
-  {
-    beds: "8 Bed",
-    tag: "Dormitory",
-    note: "Entry-level dorm — AC / NAC options available"
+    note: "Large shared room — cheaper, less personal space"
   },
   {
-    beds: "10 Bed",
+    beds: "8–10 Bed",
     tag: "Dormitory",
-    note: "Standard dorm — AC / NAC options available"
+    note: "Entry-level dorm — AC / NAC options available"
   },
   { beds: "12 Bed", tag: "Dormitory", note: "Large dorm — NAC only" },
   {
     beds: "15–20 Bed",
     tag: "Dormitory",
     note: "Largest and cheapest option — NAC only"
-  }
-];
-const aptRooms = [
-  {
-    config: "2 Bed APT",
-    tag: "AC / NAC",
-    desc: "Apartment-style with a shared living area — the best privacy you'll find in the hostel system",
-    badge: "Premium",
-    badgeVariant: "default"
   },
   {
-    config: "4 Bed APT",
-    tag: "AC / NAC",
-    desc: "Popular apartment config — good balance of space and cost",
-    badge: "Popular",
-    badgeVariant: "secondary"
+    beds: "2 Bed APT",
+    tag: "Apartment",
+    note: "Apartment-style with shared living area — best privacy in the hostel system"
   },
   {
-    config: "5 Bed APT",
-    tag: "AC / NAC",
-    desc: "Spacious common area shared among five — mid-range pricing",
-    badge: "Mid-range",
-    badgeVariant: "outline"
+    beds: "4 Bed APT",
+    tag: "Apartment",
+    note: "Popular config — good balance of space and cost"
+  },
+  {
+    beds: "5 Bed APT",
+    tag: "Apartment",
+    note: "Spacious common area shared among five"
   }
 ];
 const pricingRows = [
@@ -33349,597 +33351,133 @@ const pricingRows = [
     special: "1,09,700"
   }
 ];
-const furnishingItems = [
-  "Bed with mattress",
-  "Study table and chair",
-  "Cupboard with personal locker",
-  "Study lamp",
-  "Plug board (power sockets)",
-  "Bookshelf",
-  "Common washrooms on each floor (not attached)"
-];
 const messTimings = [
-  { meal: "Breakfast", time: "7:15 – 9:00 AM", icon: "🍳" },
-  { meal: "Lunch", time: "12:30 – 2:15 PM", icon: "🍱" },
-  { meal: "Snacks", time: "4:45 – 6:15 PM", icon: "☕" },
-  { meal: "Dinner", time: "7:30 – 9:00 PM", icon: "🍛" }
-];
-const messPlans = [
-  {
-    plan: "Veg Mess",
-    icon: "🥦",
-    desc: "Vegetarian-only menu; most widely available across hostel blocks"
-  },
-  {
-    plan: "Non-Veg Mess",
-    icon: "🍗",
-    desc: "Includes non-veg dishes on select days — chicken/paneer 4 days a week, eggs daily"
-  },
-  {
-    plan: "Special Mess",
-    icon: "⭐",
-    desc: "More variety and generally better quality — costs more but worth it if the mess is your primary food source"
-  }
-];
-const facilities = [
-  {
-    icon: "🔒",
-    label: "24/7 Security",
-    desc: "Security at all times; nightly attendance checks in hostels — yes, they do actually come around"
-  },
-  {
-    icon: "📶",
-    label: "Campus Wi-Fi",
-    desc: "Available across campus but speeds vary by hostel block. In my experience, get a good SIM as backup — Airtel or BSNL worked better than Jio"
-  },
-  {
-    icon: "👕",
-    label: "Laundry",
-    desc: "Manual washing available, plus paid washing machines — you'll figure out your preference in the first week"
-  },
-  {
-    icon: "🏋️",
-    label: "Hostel Gym (Free)",
-    desc: "Free gym in every hostel block. Open 5:00–8:00 AM and 5:00–8:00 PM — those are the only windows, so plan accordingly"
-  },
-  {
-    icon: "💪",
-    label: "Campus Gym (Paid)",
-    desc: "Better equipment at Rock Plaza 1st floor (near AB-2). ₹1,200/month — goes fast, sign up in the first week if you're serious about it"
-  },
-  {
-    icon: "🛒",
-    label: "Petty Shops",
-    desc: "Daily essentials and snacks in every hostel block — open during the day. They close at night, so don't count on them for a late-night run"
-  },
-  {
-    icon: "🌙",
-    label: "Night Canteen",
-    desc: "Open 10:30 PM – 12:00 AM in selected hostels. Separate from the main mess — genuinely useful when you're hungry after curfew and everything else is shut"
-  },
-  {
-    icon: "📺",
-    label: "Common Room",
-    desc: "TV and recreation space in each hostel block — good for unwinding after exams"
-  },
-  {
-    icon: "🏥",
-    label: "Health Center & Pharmacy",
-    desc: "On-campus, open 24/7 for emergencies. Small pharmacy with basics — paracetamol, antacids, ORS. For anything serious, they'll refer you out"
-  },
-  { icon: "🏧", label: "ATM", desc: "Bank ATM available on campus" }
+  { meal: "Breakfast", time: "7:15 – 9:00 AM" },
+  { meal: "Lunch", time: "12:30 – 2:15 PM" },
+  { meal: "Snacks", time: "4:45 – 6:15 PM" },
+  { meal: "Dinner", time: "7:30 – 9:00 PM" }
 ];
 const dailyRoutine = [
   {
-    time: "7:15 – 9:00 AM",
-    activity: "Breakfast — don't skip it, especially before CAT exams"
+    time: "7:15 AM",
+    activity: "Breakfast opens — don't skip it, especially before exams"
   },
   {
-    time: "8:30 AM – 1:30 PM",
-    activity: "Morning classes — varies by your slot assignments"
+    time: "8:30 AM",
+    activity: "Morning classes begin — timings vary by your slot assignments"
   },
-  { time: "12:30 – 2:15 PM", activity: "Lunch break" },
+  { time: "12:30 PM", activity: "Lunch break — go before the peak rush" },
   {
-    time: "2:30 – 5:30 PM",
-    activity: "Afternoon classes or free time depending on your timetable"
-  },
-  {
-    time: "4:45 – 6:15 PM",
+    time: "4:45 PM",
     activity: "Evening snacks, sports, club activities — get outside"
   },
   {
-    time: "6:15 – 7:30 PM",
-    activity: "Self-study or rest — I usually reviewed lecture notes here"
+    time: "5:00–8:00 PM",
+    activity: "Hostel gym window — the only free time slot"
   },
   {
-    time: "7:30 – 9:00 PM",
+    time: "7:30–9:00 PM",
     activity: "Dinner — go before 8:30 if you want decent options"
   },
   {
     time: "8:30 PM",
-    activity: "Curfew — you should be back in your hostel by this time. Ladies hostel is strict about it; men's hostels are more lenient in practice, but don't push it"
+    activity: "Curfew — be back inside your hostel. Ladies hostel strictly enforced."
   },
   {
-    time: "8:00 – 11:00 PM",
-    activity: "Study time or extracurriculars — most productive hours"
+    time: "10:30 PM",
+    activity: "Night canteen opens in select hostels — useful when everything else is shut"
   },
-  {
-    time: "10:30 PM – 12:00 AM",
-    activity: "Night canteen opens (select hostels) — useful if you skipped dinner or just need something before bed"
-  },
-  {
-    time: "11:00 PM",
-    activity: "Quiet hours — the hostel settles down around this time"
-  }
+  { time: "12:00 AM", activity: "Night canteen closes. Quiet hours." }
 ];
 function Hostel() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Layout, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 py-10 border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", "data-ocid": "hostel.page_label", children: "Hostel & Daily Life" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-hero text-foreground mb-4", children: "What Living on Campus Is Actually Like" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base text-muted-foreground max-w-2xl mb-6", children: "Hostel, rooms, food, facilities — I'll tell you what to expect and what to watch out for. The basics are solid; some things will frustrate you. Here's the honest version." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-2", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "🏢 6 MH + 3 LH Blocks" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "🛏️ 2-Bed to Dormitory" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "🍽️ Bundled Mess Plans" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "🔒 24/7 Security" })
+    /* @__PURE__ */ jsxRuntimeExports.jsx("style", { children: `
+        .reveal-block { opacity:0; transform:translateY(2rem); transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1); }
+        .reveal-block.is-visible { opacity:1; transform:translateY(0); }
+        @media(prefers-reduced-motion:reduce){.reveal-block{opacity:1;transform:none;transition:none;}}
+      ` }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "bg-background min-h-[60vh] flex items-end px-6 pb-16 pt-32 relative overflow-hidden", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "div",
+        {
+          className: "absolute inset-0 bg-grain opacity-20 pointer-events-none",
+          "aria-hidden": "true"
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto w-full", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fade-in-up fade-in-up-delay-1", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "chapter-label", children: "Chapter IV" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "h1",
+          {
+            className: "fade-in-up fade-in-up-delay-2 font-display font-black text-foreground leading-none tracking-tighter mt-4 mb-6",
+            style: { fontSize: "clamp(3rem, 9vw, 7.5rem)" },
+            "data-ocid": "hostel.chapter_title",
+            children: [
+              "HOSTEL &",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { color: "oklch(var(--primary))" }, children: "DAILY LIFE" })
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "fade-in-up fade-in-up-delay-3 font-body italic text-muted-foreground text-xl max-w-2xl", children: "Hostel, rooms, food, facilities — I'll tell you what to expect and what to watch out for. The basics are solid; some things will frustrate you. Here's the honest version." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fade-in-up fade-in-up-delay-4 chapter-divider mt-8 w-24" })
       ] })
-    ] }) }),
+    ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
+        className: "px-6 py-20 border-t border-border",
+        style: { background: "oklch(0.10 0.008 60)" },
         "data-ocid": "hostel.overview_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Housing Overview" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "Hostel Blocks" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-6", children: "Boys and girls are in separate blocks. Each block has its own mess, gym, and petty shop — you won't need to cross blocks for the basics." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "div",
-            {
-              className: "grid sm:grid-cols-2 gap-4 mb-6",
-              "data-ocid": "hostel.blocks_list",
-              children: hostelBlocks.map((block, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-                Card,
-                {
-                  className: "card-elevated",
-                  "data-ocid": `hostel.block_card.${i + 1}`,
-                  children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-2 mb-2", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: block.icon }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: block.label })
-                      ] }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        Badge,
-                        {
-                          variant: block.badgeVariant,
-                          className: "text-xs shrink-0",
-                          children: block.badge
-                        }
-                      )
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: block.desc })
-                  ] })
-                },
-                block.label
-              ))
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              BulletCard$1,
-              {
-                icon: "🏗️",
-                title: "Block Details",
-                items: [
-                  "MH1–MH6 are operational for male students",
-                  "LH1–LH3 are operational for female students",
-                  "MH7 and LH4 are under construction — the campus is still expanding",
-                  "I'd recommend checking which block you're assigned to early — quality can vary between blocks"
-                ]
-              }
-            ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              BulletCard$1,
-              {
-                icon: "🛒",
-                title: "What's Inside Each Block",
-                items: [
-                  "Petty shops in every hostel for daily essentials and snacks",
-                  "Night canteen in selected blocks — check yours when you arrive",
-                  "Free gym in all hostels — open 5:00–8:00 AM and 5:00–8:00 PM",
-                  "Paid gym at Rock Plaza (near AB-2) — ₹1,200/month, better equipment"
-                ]
-              }
-            )
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryBox, { text: "VIT-AP has 6 men's and 3 ladies' hostels, each with a dedicated mess, gym, and petty shop. MH7 and LH4 are under construction. The blocks vary a bit in quality — find out which one you've been assigned and talk to people who've lived there." })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-light px-6 py-10 border-b border-border",
-        "data-ocid": "hostel.rooms_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Room Options" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "Room Types" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-6", children: "All rooms come furnished — you don't need to bring furniture. Every sharing type comes in AC and Non-AC unless noted. The AC rooms cost more, but during summer, trust me, they're worth every rupee." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-border rounded-xl p-5 mb-8 shadow-sm", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xl", "aria-hidden": "true", children: "🪑" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: "What Comes With the Room" })
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "Housing overview" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-section text-foreground mb-3", children: [
+              "The Hostel",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              "Blocks"
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "grid sm:grid-cols-2 gap-x-6 gap-y-1.5", children: furnishingItems.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              "li",
-              {
-                className: "flex items-start gap-2 text-sm text-foreground",
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "✓" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item })
-                ]
-              },
-              item
-            )) })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-muted-foreground mb-12 max-w-xl", children: "Boys and girls are in separate blocks. Each block has its own mess, gym, and petty shop." })
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection mb-3", children: "Standard Sharing Rooms" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "div",
-            {
-              className: "grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8",
-              "data-ocid": "hostel.sharing_rooms_list",
-              children: sharingRooms.map((room, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-px bg-border", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal, { className: "bg-background", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-8 h-full", "data-ocid": "hostel.block_card.1", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "div",
                 {
-                  className: "bg-card border border-border rounded-xl p-4 shadow-sm",
-                  "data-ocid": `hostel.sharing_room.${i + 1}`,
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between mb-1", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground text-sm font-display", children: room.beds }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", className: "text-xs", children: room.tag })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: room.note })
-                  ]
-                },
-                room.beds
-              ))
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection mb-3", children: "Dormitory Rooms" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "div",
-            {
-              className: "grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-8",
-              "data-ocid": "hostel.dorm_rooms_list",
-              children: dormRooms.map((room, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "div",
+                  className: "w-8 h-px mb-6",
+                  style: { background: "oklch(var(--primary))" }
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-bold text-2xl text-foreground mb-2", children: "Men's Hostels" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "p",
                 {
-                  className: "bg-card border border-border rounded-xl p-4 shadow-sm",
-                  "data-ocid": `hostel.dorm_room.${i + 1}`,
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between mb-1", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground text-sm font-display", children: room.beds }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs", children: room.tag })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: room.note })
-                  ]
-                },
-                room.beds
-              ))
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection mb-1", children: "Apartment-Style Rooms (APT)" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-3", children: "These have a shared living/common area — available in AC and Non-AC. If your budget allows, the 2 or 4-bed APT is a noticeably better experience than a standard room." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "div",
-            {
-              className: "grid sm:grid-cols-3 gap-4 mb-2",
-              "data-ocid": "hostel.apt_rooms_list",
-              children: aptRooms.map((room, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-                Card,
-                {
-                  className: "card-elevated",
-                  "data-ocid": `hostel.apt_room.${i + 1}`,
-                  children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-2 mb-2", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold text-foreground font-display", children: room.config }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        Badge,
-                        {
-                          variant: room.badgeVariant,
-                          className: "text-xs shrink-0",
-                          children: room.badge
-                        }
-                      )
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", className: "text-xs mb-2", children: room.tag }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: room.desc })
-                  ] })
-                },
-                room.config
-              ))
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryBox, { text: "Rooms range from 2-bed sharing to 20-bed dormitories — most in AC and Non-AC. Apartment-style rooms (2, 4, and 5-bed) give you more space and privacy. All rooms are furnished. The AC rooms cost more, but during summer you'll appreciate them." })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
-        "data-ocid": "hostel.pricing_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "What It Costs" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "Hostel Fees — AY 2025–26" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-1", children: "These are combined charges for Fall + Winter semesters — the full academic year. Mess plan is bundled with your room, so what you see is what you pay." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-muted/60 border border-border rounded-lg px-3 py-2 mb-5 flex items-start gap-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm shrink-0", "aria-hidden": "true", children: "ℹ️" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Prices include room rent + mess for the full year. Double-check on the official VIT-AP admission or hostel portal before you pay — fees can change year to year." })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "div",
-            {
-              className: "overflow-x-auto rounded-xl border border-border shadow-sm",
-              "data-ocid": "hostel.pricing_table",
-              children: /* @__PURE__ */ jsxRuntimeExports.jsxs("table", { className: "w-full text-sm", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("thead", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { className: "bg-muted/80 border-b border-border", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-left px-4 py-3 font-semibold text-foreground font-display", children: "Room Type" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-right px-4 py-3 font-semibold text-foreground font-display", children: "🥦 Veg" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-right px-4 py-3 font-semibold text-foreground font-display", children: "🍗 Non-Veg" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "text-right px-4 py-3 font-semibold text-foreground font-display", children: "⭐ Special" })
-                ] }) }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("tbody", { children: pricingRows.map((row, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                  "tr",
-                  {
-                    className: `border-b border-border last:border-0 transition-colors hover:bg-muted/30 ${i % 2 === 0 ? "bg-card" : "bg-background"}`,
-                    "data-ocid": `hostel.pricing_row.${i + 1}`,
-                    children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3 font-medium text-foreground", children: row.room }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("td", { className: "px-4 py-3 text-right text-muted-foreground font-mono text-xs", children: [
-                        "₹",
-                        row.veg
-                      ] }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("td", { className: "px-4 py-3 text-right text-muted-foreground font-mono text-xs", children: [
-                        "₹",
-                        row.nonVeg
-                      ] }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("td", { className: "px-4 py-3 text-right text-muted-foreground font-mono text-xs", children: [
-                        "₹",
-                        row.special
-                      ] })
-                    ]
-                  },
-                  row.room
-                )) })
-              ] })
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryBox, { text: "Most affordable: 15–20 Bed Dorm NAC from ₹92,700/year (veg). Most premium: 2 Bed APT AC at ₹2,70,700/year (special mess). AC rooms cost roughly ₹56,000 more per year than their NAC equivalent — in my experience, worth it for the comfort, especially in summer." })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-light px-6 py-10 border-b border-border",
-        "data-ocid": "hostel.mess_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Food" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-6", children: "The Mess System" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection mb-3", children: "Meal Timings" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "div",
-            {
-              className: "grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8",
-              "data-ocid": "hostel.mess_timings",
-              children: messTimings.map((m, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "div",
-                {
-                  className: "bg-card border border-border rounded-xl p-4 text-center shadow-sm",
-                  "data-ocid": `hostel.mess_timing.${i + 1}`,
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl mb-2", "aria-hidden": "true", children: m.icon }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground text-sm font-display", children: m.meal }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-1", children: m.time })
-                  ]
-                },
-                m.meal
-              ))
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection mb-3", children: "Mess Plans" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-4", children: "Your mess plan is bundled with your room allocation — you pick it during the allotment process. Choose carefully; switching later is not always easy." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "div",
-            {
-              className: "grid sm:grid-cols-3 gap-4 mb-8",
-              "data-ocid": "hostel.mess_plans_list",
-              children: messPlans.map((plan, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "div",
-                {
-                  className: "bg-card border border-border rounded-xl p-4 shadow-sm flex items-start gap-3",
-                  "data-ocid": `hostel.mess_plan.${i + 1}`,
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl shrink-0", "aria-hidden": "true", children: plan.icon }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground text-sm font-display", children: plan.plan }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-0.5", children: plan.desc })
-                    ] })
-                  ]
-                },
-                plan.plan
-              ))
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection mb-3", children: "What the Food Is Actually Like" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-4 mb-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              BulletCard$1,
-              {
-                icon: "🍽️",
-                title: "Honest Assessment",
-                items: [
-                  "The food isn't bad — it's just repetitive. By month two, most people start supplementing with outside delivery",
-                  "Quality depends heavily on your hostel block and the caterer assigned to it. Some messes are noticeably better than others",
-                  "Special Mess is usually worth the extra cost if the mess is your main food source",
-                  "Veg and non-veg menus rotate weekly — the pattern becomes familiar fast"
-                ]
-              }
-            ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              BulletCard$1,
-              {
-                icon: "💡",
-                title: "Things Worth Knowing",
-                items: [
-                  "Apply for a rebate before you leave campus — there's no retroactive refund process",
-                  "Carry your ID card to the mess at all times — they check",
-                  "The timings are strict. If you miss the window, the mess is closed. Plan your schedule around them",
-                  "Swiggy delivers on campus. Zomato doesn't. Local freelance delivery is also available — ask around"
-                ]
-              }
-            )
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-muted/60 border border-border rounded-xl p-4 flex items-start gap-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-base shrink-0", "aria-hidden": "true", children: "ℹ️" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-semibold text-foreground", children: [
-                "About the Menu:",
-                " "
-              ] }),
-              "The menu is managed by the student mess committee and rotates weekly each month. It's posted on hostel notice boards. The variety isn't huge — after a few weeks, you'll know exactly what's coming on which day."
-            ] })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryBox, { text: "Mess timings: Breakfast 7:15–9:00 AM, Lunch 12:30–2:15 PM, Snacks 4:45–6:15 PM, Dinner 7:30–9:00 PM. Food quality varies by hostel and caterer. It's average, not bad — but repetitive. Most students supplement with Swiggy or local delivery by month two." })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
-        "data-ocid": "hostel.facilities_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "What's Available" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-6", children: "Hostel Facilities" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "div",
-            {
-              className: "grid sm:grid-cols-2 lg:grid-cols-3 gap-4",
-              "data-ocid": "hostel.facilities_list",
-              children: facilities.map((fac, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "div",
-                {
-                  className: "bg-card border border-border rounded-xl p-4 shadow-sm flex items-start gap-3",
-                  "data-ocid": `hostel.facility.${i + 1}`,
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl shrink-0", "aria-hidden": "true", children: fac.icon }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground text-sm font-display", children: fac.label }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-0.5", children: fac.desc })
-                    ] })
-                  ]
-                },
-                fac.label
-              ))
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryBox, { text: "Free gym (5:00–8:00 AM / 5:00–8:00 PM), petty shop (day only — closes at night), night canteen (10:30 PM–12:00 AM in select hostels), common room, and 24/7 security in every hostel. Paid gym at Rock Plaza — ₹1,200/month. Health center and pharmacy on campus. Campus Wi-Fi available — get an Airtel or BSNL SIM as backup." })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-light px-6 py-10 border-b border-border",
-        "data-ocid": "hostel.routine_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "A Typical Day" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "What Your Day Looks Like" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-6", children: "This isn't a rigid schedule — it's roughly how the day flows when you're actually living on campus. Your classes will vary, but the mess timings and hostel hours are fixed." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-2", "data-ocid": "hostel.routine_list", children: dailyRoutine.map((slot, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "div",
-            {
-              className: "flex items-start gap-4 bg-card border border-border rounded-xl px-5 py-3 shadow-sm",
-              "data-ocid": `hostel.routine.${i + 1}`,
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-mono text-primary font-semibold shrink-0 mt-0.5 w-32", children: slot.time }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm text-foreground", children: slot.activity })
-              ]
-            },
-            slot.time
-          )) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryBox, { text: "The hostel day is structured around fixed mess timings and an 8:30 PM curfew — plan everything else around those. Night canteens open at 10:30 PM for late-night hunger. Evenings are your best window for clubs, sports, or study. Once you settle into the rhythm, it's actually manageable." })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
-        "data-ocid": "hostel.rules_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Things to Know" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "Rules, Curfew & Fines" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-6", children: "I'll be honest — the rules at VIT-AP are real, and so are the fines. As a fresher, knowing this upfront will save you a lot of trouble." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-5 mb-6", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated", "data-ocid": "hostel.curfew_card", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: "🕐" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: "Curfew" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: [
-                "Curfew is at 8:30 PM — be back inside your hostel by then",
-                "Ladies hostel authorities are strict. The rules are taken seriously and enforcement is consistent — don't test it",
-                "Men's hostels are more lenient in practice, but that doesn't mean the rule doesn't exist. Getting caught has consequences",
-                "Night canteens open at 10:30 PM (in select hostels), so late-night food is still accessible without leaving the building"
-              ].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "li",
-                {
-                  className: "flex items-start gap-2 text-sm text-foreground",
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "•" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item })
-                  ]
-                },
-                item
-              )) })
+                  className: "text-label mb-4",
+                  style: { color: "oklch(var(--secondary))" },
+                  children: "MH1 – MH6"
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground leading-relaxed", children: "6 blocks operational. MH7 under construction — campus is still expanding. Each block has its own dedicated mess, gym, petty shop, and night canteen (select blocks). Rules are enforced but comparatively more lenient than ladies' hostels." })
             ] }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated", "data-ocid": "hostel.fines_card", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: "⚠️" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: "Campus Fines" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: [
-                "VIT-AP has a lot of fines — for hostel violations, being out after curfew, dress code issues, and more. They're real and they add up",
-                "Petty shops close at night — they're not 24/7. Plan ahead; don't be surprised when they're shut at 10 PM",
-                "In my experience, knowing the rules early saves you money. Many freshers get caught off-guard in their first month",
-                "Check the hostel handbook when you arrive — it lists all fines and violation categories"
-              ].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "li",
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal, { delay: 80, className: "bg-background", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-8 h-full", "data-ocid": "hostel.block_card.2", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "div",
                 {
-                  className: "flex items-start gap-2 text-sm text-foreground",
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "•" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item })
-                  ]
-                },
-                item
-              )) })
+                  className: "w-8 h-px mb-6",
+                  style: { background: "oklch(var(--secondary))" }
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-bold text-2xl text-foreground mb-2", children: "Ladies' Hostels" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "p",
+                {
+                  className: "text-label mb-4",
+                  style: { color: "oklch(var(--secondary))" },
+                  children: "LH1 – LH3"
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground leading-relaxed", children: "3 blocks operational. LH4 under construction. Authorities are strict — curfew is enforced consistently. If you're in LH, treat the rules as non-negotiable from day one. Quality varies between blocks — ask around when you arrive." })
             ] }) })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-muted/60 border border-border rounded-xl p-4 flex items-start gap-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-base shrink-0", "aria-hidden": "true", children: "💡" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-semibold text-foreground", children: [
-                "Quick note:",
-                " "
-              ] }),
-              "The strictness gap between ladies hostel and men's hostel is real. If you're in LH, treat the rules as non-negotiable from day one. In MH, the culture is more relaxed, but accumulating fines or getting flagged can still affect you — it's not worth the risk."
-            ] })
           ] })
         ] })
       }
@@ -33947,22 +33485,467 @@ function Hostel() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-muted px-6 py-8",
+        className: "bg-background px-6 py-20 border-t border-border",
+        "data-ocid": "hostel.rooms_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "Room options" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-3", children: "Room Types" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-muted-foreground mb-4 max-w-xl", children: "All rooms come furnished — bed with mattress, study table, cupboard with locker, study lamp, plug board, and bookshelf. Common washrooms per floor (not attached)." }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-muted-foreground mb-12 max-w-xl", children: "Every sharing type comes in AC and Non-AC. The AC rooms cost more, but during summer, trust me, they're worth it." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border", children: roomTypes.map((room, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Reveal,
+            {
+              delay: Math.min(i * 40, 300),
+              className: "bg-background",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "div",
+                {
+                  className: "p-6 h-full",
+                  "data-ocid": `hostel.room_type.${i + 1}`,
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-3 mb-3", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-bold text-lg text-foreground", children: room.beds }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "span",
+                        {
+                          className: "text-xs font-mono shrink-0 border px-2 py-1 mt-0.5",
+                          style: {
+                            color: room.tag === "Apartment" ? "oklch(var(--secondary))" : "oklch(var(--foreground) / 0.5)",
+                            borderColor: room.tag === "Apartment" ? "oklch(var(--secondary) / 0.4)" : "oklch(var(--border))"
+                          },
+                          children: room.tag
+                        }
+                      )
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "div",
+                      {
+                        className: "w-6 h-px mb-3",
+                        style: { background: "oklch(var(--primary) / 0.4)" }
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground", children: room.note })
+                  ]
+                }
+              )
+            },
+            room.beds
+          )) })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "px-6 py-20 border-t border-border",
+        style: { background: "oklch(0.10 0.008 60)" },
+        "data-ocid": "hostel.pricing_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "What it costs" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-section text-foreground mb-3", children: [
+              "Hostel Fees",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              "AY 2025–26"
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-muted-foreground mb-4 max-w-xl", children: "Combined Fall + Winter semesters — the full academic year. Mess plan is bundled with your room." }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "div",
+              {
+                className: "border-l-2 pl-4 mb-10",
+                style: { borderColor: "oklch(var(--primary) / 0.5)" },
+                children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-xs text-muted-foreground", children: "Always double-check on the official VIT-AP admission or hostel portal before you pay — fees can change year to year." })
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal, { delay: 60, children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "overflow-x-auto", "data-ocid": "hostel.pricing_table", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("table", { className: "w-full border-collapse", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("thead", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "tr",
+                {
+                  style: {
+                    borderBottom: "1px solid oklch(var(--border))",
+                    background: "oklch(0.08 0.008 60)"
+                  },
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "py-4 px-5 text-left font-display font-bold text-sm text-foreground", children: "Room Type" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "th",
+                      {
+                        className: "py-4 px-5 text-right font-display font-bold text-sm",
+                        style: { color: "oklch(var(--secondary))" },
+                        children: "Veg"
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "py-4 px-5 text-right font-display font-bold text-sm text-foreground", children: "Non-Veg" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "py-4 px-5 text-right font-display font-bold text-sm text-foreground", children: "Special" })
+                  ]
+                }
+              ) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("tbody", { children: pricingRows.map((row, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "tr",
+                {
+                  className: "border-b border-border transition-colors",
+                  style: {
+                    background: i % 2 === 0 ? "oklch(var(--background))" : "oklch(0.10 0.008 60)"
+                  },
+                  "data-ocid": `hostel.pricing_row.${i + 1}`,
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "py-3 px-5 font-body text-sm text-foreground", children: row.room }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      "td",
+                      {
+                        className: "py-3 px-5 text-right font-mono text-xs",
+                        style: { color: "oklch(var(--secondary))" },
+                        children: [
+                          "₹",
+                          row.veg
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("td", { className: "py-3 px-5 text-right font-mono text-xs text-muted-foreground", children: [
+                      "₹",
+                      row.nonVeg
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("td", { className: "py-3 px-5 text-right font-mono text-xs text-muted-foreground", children: [
+                      "₹",
+                      row.special
+                    ] })
+                  ]
+                },
+                row.room
+              )) })
+            ] }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "div",
+              {
+                className: "mt-6 border-l-2 pl-4 py-1",
+                style: { borderColor: "oklch(var(--secondary))" },
+                children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-xs text-muted-foreground", children: "Most affordable: 15–20 Bed Dorm NAC from ₹92,700/year (veg). Most premium: 2 Bed APT AC at ₹2,70,700/year (special mess). AC rooms cost roughly ₹56,000 more per year than NAC — worth it for the comfort, especially in summer." })
+              }
+            )
+          ] })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "bg-background px-6 py-20 border-t border-border",
+        "data-ocid": "hostel.mess_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "Food system" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-section text-foreground mb-12", children: [
+              "Mess Timings",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              "& Plans"
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border mb-12", children: messTimings.map((m, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal, { delay: i * 60, className: "bg-background", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: "p-8 text-center",
+              "data-ocid": `hostel.mess_timing.${i + 1}`,
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display font-black text-2xl text-foreground mb-2", children: m.meal }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    className: "w-6 h-px mx-auto mb-3",
+                    style: { background: "oklch(var(--secondary))" }
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-xs text-muted-foreground", children: m.time })
+              ]
+            }
+          ) }, m.meal)) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal, { delay: 80, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid md:grid-cols-3 gap-px bg-border", children: [
+            {
+              plan: "Veg Mess",
+              desc: "Vegetarian-only menu. Most widely available across hostel blocks.",
+              accent: false
+            },
+            {
+              plan: "Non-Veg Mess",
+              desc: "Non-veg dishes on select days — chicken/paneer 4 days/week, eggs daily.",
+              accent: false
+            },
+            {
+              plan: "Special Mess",
+              desc: "More variety, generally better quality. Worth it if the mess is your primary food source.",
+              accent: true
+            }
+          ].map((p, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: "bg-background p-6",
+              "data-ocid": `hostel.mess_plan.${i + 1}`,
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    className: "w-6 h-px mb-4",
+                    style: {
+                      background: p.accent ? "oklch(var(--secondary))" : "oklch(var(--primary) / 0.5)"
+                    }
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-bold text-base text-foreground mb-2", children: p.plan }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground", children: p.desc })
+              ]
+            },
+            p.plan
+          )) }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal, { delay: 100, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "mt-8 border-l-2 pl-4 py-1",
+              style: { borderColor: "oklch(var(--secondary))" },
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground leading-relaxed", children: "Food quality varies by hostel block and caterer. The food isn't bad — it's just repetitive. By month two, most students supplement with Swiggy or local delivery. Miss a meal window and the mess is closed — timings are strict." })
+            }
+          ) })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "px-6 py-20 border-t border-border",
+        style: { background: "oklch(0.10 0.008 60)" },
+        "data-ocid": "hostel.routine_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "A typical day" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-section text-foreground mb-3", children: [
+              "What Your",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              "Day Looks Like"
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-muted-foreground mb-12 max-w-xl", children: "This isn't a rigid schedule — it's roughly how the day flows when you're actually living on campus. Your classes vary, but mess timings and hostel hours are fixed." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "space-y-0 border-t border-border",
+              "data-ocid": "hostel.routine_list",
+              children: dailyRoutine.map((slot, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal, { delay: i * 40, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "div",
+                {
+                  className: "flex gap-8 py-5 border-b border-border",
+                  "data-ocid": `hostel.routine.${i + 1}`,
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "span",
+                      {
+                        className: "font-mono text-xs shrink-0 w-24 mt-1",
+                        style: { color: "oklch(var(--secondary))" },
+                        children: slot.time
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground leading-relaxed", children: slot.activity })
+                  ]
+                }
+              ) }, slot.time))
+            }
+          )
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "bg-background px-6 py-20 border-t border-border",
+        "data-ocid": "hostel.rules_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "Things to know upfront" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-section text-foreground mb-3", children: [
+              "Rules, Curfew",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              "& Fines"
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-muted-foreground mb-12 max-w-xl", children: "I'll be honest — the rules at VIT-AP are real, and so are the fines. Knowing this as a fresher will save you a lot of money and trouble." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-px bg-border", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal, { className: "bg-background", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-8 h-full", "data-ocid": "hostel.curfew_card", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "div",
+                {
+                  className: "w-8 h-px mb-6",
+                  style: { background: "oklch(var(--primary))" }
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-bold text-xl text-foreground mb-6", children: "Curfew — 8:30 PM" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "space-y-4 font-body text-sm text-muted-foreground", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Be back inside your hostel by 8:30 PM" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-foreground", children: "Ladies hostel:" }),
+                  " ",
+                  "Strictly enforced, consistently. Treat it as non-negotiable from day one."
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-foreground", children: "Men's hostels:" }),
+                  " ",
+                  "More lenient in practice — but the rule still exists and getting caught has consequences."
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Night canteens open at 10:30 PM in select hostels — late-night food is still accessible without leaving the building." })
+              ] })
+            ] }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal, { delay: 80, className: "bg-background", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-8 h-full", "data-ocid": "hostel.fines_card", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "div",
+                {
+                  className: "w-8 h-px mb-6",
+                  style: { background: "oklch(var(--secondary))" }
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-bold text-xl text-foreground mb-6", children: "Campus Fines" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "space-y-4 font-body text-sm text-muted-foreground", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "VIT-AP has a lot of fines — for hostel violations, being out after curfew, dress code issues, and more. They add up fast." }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Petty shops close at night — not 24/7. Plan ahead; don't be surprised when they're shut at 10 PM." }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Many freshers get caught off-guard in their first month. Read the hostel handbook when you arrive — it lists all violation categories." }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "In my experience, knowing the rules early saves you real money." })
+              ] })
+            ] }) })
+          ] })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "px-6 py-20 border-t border-border",
+        style: { background: "oklch(0.10 0.008 60)" },
+        "data-ocid": "hostel.facilities_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Reveal, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "What's available" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-12", children: "Hostel Facilities" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-0 border-t border-border", children: [
+            {
+              label: "24/7 Security",
+              detail: "Security at all times. Nightly attendance checks in hostels — yes, they do actually come around."
+            },
+            {
+              label: "Campus Wi-Fi",
+              detail: "Available across campus but speeds vary by block. Get an Airtel or BSNL SIM as backup — trust me on this."
+            },
+            {
+              label: "Hostel Gym (Free)",
+              detail: "In every hostel block. Open 5:00–8:00 AM and 5:00–8:00 PM only. Those are your only windows."
+            },
+            {
+              label: "Campus Gym (Paid)",
+              detail: "Better equipment at Rock Plaza 1st floor (near AB-2). ₹1,200/month — goes fast, sign up in week one."
+            },
+            {
+              label: "Petty Shops",
+              detail: "Daily essentials and snacks in every hostel block. Open during the day. Closed at night."
+            },
+            {
+              label: "Night Canteen",
+              detail: "Open 10:30 PM – 12:00 AM in selected hostels. Genuinely useful when you're hungry after curfew."
+            },
+            {
+              label: "Health Center",
+              detail: "On-campus, 24/7 for emergencies. For fever, stomach issue, basic consultation — you don't need to leave campus."
+            },
+            {
+              label: "Campus Pharmacy",
+              detail: "Small pharmacy — paracetamol, antacids, ORS basics. Limited for specific prescriptions."
+            },
+            {
+              label: "Laundry",
+              detail: "Manual washing available plus paid washing machines. You'll figure out your preference in the first week."
+            },
+            { label: "ATM", detail: "Bank ATM available on campus." }
+          ].map((fac, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal, { delay: i * 40, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: "flex flex-col sm:flex-row gap-6 py-6 border-b border-border",
+              "data-ocid": `hostel.facility.${i + 1}`,
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "sm:w-48 shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display font-bold text-base text-foreground", children: fac.label }) }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    className: "w-px shrink-0 hidden sm:block",
+                    style: { background: "oklch(var(--secondary) / 0.2)" }
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-sm text-muted-foreground leading-relaxed", children: fac.detail })
+              ]
+            }
+          ) }, fac.label)) })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "bg-background px-6 py-16 border-t border-border",
         "data-ocid": "hostel.summary_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-4xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-primary/5 border border-primary/20 rounded-xl p-5", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-1", children: "My Overall Take" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground", children: "Hostel life at VIT-AP is self-sufficient — everything you need is on campus. With 9 active blocks (6 MH, 3 LH), room options from 2-bed to large dormitories, and bundled mess plans, there's something for most budgets. Curfew is at 8:30 PM — ladies hostel is strict about this, men's is more relaxed but the rule still applies. Petty shops close at night, but night canteens (10:30 PM–12:00 AM) fill the gap. There are fines on campus for violations, so read the hostel handbook early. The mess food gets repetitive, but Swiggy works and the night canteen helps. Health center and pharmacy on campus mean you don't need to leave for minor issues. It's not a luxury setup, but it's functional and you'll get used to it faster than you'd think." })
-        ] }) })
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            className: "border-l-4 pl-8 py-2",
+            style: { borderColor: "oklch(var(--secondary))" },
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "My overall take" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-body text-lg text-muted-foreground leading-relaxed max-w-3xl", children: "Hostel life at VIT-AP is self-sufficient — everything you need is on campus. 9 active blocks, room options from 2-bed to large dormitories, bundled mess plans. Curfew at 8:30 PM — ladies hostel strict, men's more relaxed but still enforced. Mess food gets repetitive but Swiggy works and the night canteen fills gaps. Health center and pharmacy mean you don't need to leave for minor issues. Not luxury — but functional, and you'll get used to it faster than you'd think." })
+            ]
+          }
+        ) }) })
       }
     )
   ] });
 }
+function useScrollFade$3() {
+  const ref = reactExports.useRef(null);
+  const [visible, setVisible] = reactExports.useState(false);
+  reactExports.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.05 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return { ref, visible };
+}
+function FadeSection$3({
+  children,
+  className = "",
+  delay = 0
+}) {
+  const { ref, visible } = useScrollFade$3();
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      ref,
+      className: `transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`,
+      style: { transitionDelay: `${delay}ms` },
+      children
+    }
+  );
+}
 function StepCard({ step, title, desc }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-4 bg-card border border-border rounded-xl px-5 py-4 shadow-sm", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold font-display shrink-0", children: step }),
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-4 border border-border/40 bg-card px-5 py-4 transition-smooth hover:border-border/60", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-8 h-8 border border-secondary/40 text-secondary flex items-center justify-center text-sm font-bold font-display shrink-0", children: step }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-foreground font-display", children: title }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-0.5", children: desc })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display font-semibold text-foreground text-sm", children: title }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-0.5 leading-relaxed", children: desc })
     ] })
   ] });
 }
@@ -34072,29 +34055,25 @@ const attendanceZones = [
     threshold: "≥ 80%",
     label: "Safe Zone",
     sublabel: "You're good — just keep attending normally",
-    colorClass: "text-accent",
-    bgClass: "bg-accent/10 border-accent/30"
+    colorClass: "text-secondary"
   },
   {
     threshold: "75 – 79%",
     label: "Caution Zone",
     sublabel: "One or two more absences and you're at risk — be careful",
-    colorClass: "text-yellow-600",
-    bgClass: "bg-yellow-50 border-yellow-200"
+    colorClass: "text-yellow-400"
   },
   {
     threshold: "65 – 74%",
     label: "Danger Zone",
-    sublabel: "Likely debarred from next exam — talk to your proctor now, not later",
-    colorClass: "text-orange-600",
-    bgClass: "bg-orange-50 border-orange-200"
+    sublabel: "Likely debarred from next exam — talk to your proctor now",
+    colorClass: "text-orange-400"
   },
   {
     threshold: "< 65%",
     label: "Critical",
     sublabel: "Already debarred from exam — you may need to re-register the subject",
-    colorClass: "text-destructive",
-    bgClass: "bg-destructive/10 border-destructive/30"
+    colorClass: "text-destructive"
   }
 ];
 const marksComponents = [
@@ -34121,10 +34100,10 @@ const marksComponents = [
 const vtopTips = [
   "Check attendance every week — don't wait until it drops below 75% to panic",
   "Download your timetable PDF at semester start and keep it somewhere accessible",
-  "Verify your CAT marks during the objection window — mistakes do happen, and once the window closes, you can't raise it",
+  "Verify your CAT marks during the objection window — mistakes do happen",
   "Pay all fees before the deadline — late fees are real and avoidable",
-  "If VTOP crashes during registration, note your preferred slots and get back quickly — it usually recovers",
-  "Your Proctor's contact is right there on VTOP — reach out early if something's off with your attendance or grades"
+  "If VTOP crashes during registration, note your preferred slots and get back quickly",
+  "Your Proctor's contact is right there on VTOP — reach out early if something's off"
 ];
 const deliveryInfo = [
   {
@@ -34150,19 +34129,24 @@ const deliveryInfo = [
 ];
 function Portals() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Layout, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 py-10 border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", "data-ocid": "portals.page_label", children: "Systems & Portals" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-hero text-foreground mb-4", children: "VTOP is basically your life here" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base text-muted-foreground max-w-2xl mb-6", children: "Everything academic — registering courses, checking attendance, viewing marks, paying fees — runs through VTOP. Learn it early and you'll save yourself a lot of confusion. This page also covers deliveries to campus." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-3 items-center", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "🖥️ VTOP Portal" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "📦 Deliveries" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 pt-20 pb-16 border-b border-border/30", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "chapter-label mb-4", "data-ocid": "portals.page_label", children: "Chapter" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "text-hero text-foreground mb-6 fade-in-up", children: [
+        "SYSTEMS &",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "PORTALS"
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-16 mb-8" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-1", children: "Everything academic — registering courses, checking attendance, viewing marks, paying fees — runs through VTOP. Learn it early and you'll save yourself a lot of confusion." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-3 mt-8 items-center", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs", children: "🖥️ VTOP Portal" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", className: "text-xs", children: "📦 Deliveries" }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(
           Button,
           {
             variant: "outline",
             size: "sm",
-            className: "text-xs gap-1.5 h-7",
+            className: "text-xs gap-1.5",
             onClick: () => window.open("https://vtop.vitap.ac.in", "_blank"),
             "data-ocid": "portals.vtop_link_button",
             children: [
@@ -34176,82 +34160,95 @@ function Portals() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
+        className: "section-bg-muted px-6 py-16 border-b border-border/30",
         "data-ocid": "portals.vtop_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Main Portal" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "VTOP — What Each Section Does" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground mb-6", children: [
-            "URL:",
-            " ",
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-mono text-primary", children: "vtop.vitap.ac.in" }),
-            " — Use desktop or laptop for anything important. The mobile browser version is unreliable, especially during registration."
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection$3, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "Main Portal" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "VTOP — What Each Section Does" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-6" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed", children: [
+              "URL:",
+              " ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-mono text-secondary", children: "vtop.vitap.ac.in" }),
+              " ",
+              "— Use desktop or laptop for anything important. The mobile browser version is unreliable, especially during registration."
+            ] })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "div",
             {
               className: "grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6",
               "data-ocid": "portals.features_list",
-              children: vtopFeatures.map((f, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              children: vtopFeatures.map((f, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$3, { delay: i * 50, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "div",
                 {
-                  className: "bg-card border border-border rounded-xl p-4 shadow-sm flex items-start gap-3",
+                  className: "border border-border/40 bg-card p-4 flex items-start gap-3 transition-smooth hover:border-border/60",
                   "data-ocid": `portals.feature.${i + 1}`,
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl shrink-0", "aria-hidden": "true", children: f.icon }),
                     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-foreground font-display", children: f.label }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-0.5", children: f.desc })
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-sm font-semibold text-foreground", children: f.label }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-0.5 leading-relaxed", children: f.desc })
                     ] })
                   ]
-                },
-                f.label
-              ))
+                }
+              ) }, f.label))
             }
           ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-accent/10 border border-accent/30 rounded-xl p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-foreground", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-accent", children: "Login credentials" }),
-            " ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$3, { delay: 200, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border-l-2 border-secondary/50 pl-5 py-3 bg-secondary/5", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-semibold text-secondary", children: [
+              "Login credentials",
+              " "
+            ] }),
             "are handed out during admission. If you lose access, head to the IT help desk on campus — they'll reset it for you."
-          ] }) })
+          ] }) }) })
         ] })
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-light px-6 py-10 border-b border-border",
+        className: "section-bg-light px-6 py-16 border-b border-border/30",
         "data-ocid": "portals.attendance_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Step-by-Step" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "Checking Your Attendance" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-6", children: "Attendance updates daily after class. Do this every week — not once a month when it's already too late." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3 mb-8", "data-ocid": "portals.attendance_steps", children: attendanceSteps.map((s) => /* @__PURE__ */ jsxRuntimeExports.jsx(StepCard, { ...s }, s.title)) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "Where You Stand" }),
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection$3, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "Step-by-Step" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "Checking Attendance" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-6" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed", children: "Attendance updates daily after class. Do this every week — not once a month when it's already too late." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3 mb-10", "data-ocid": "portals.attendance_steps", children: attendanceSteps.map((s, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$3, { delay: i * 50, children: /* @__PURE__ */ jsxRuntimeExports.jsx(StepCard, { ...s }) }, s.title)) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$3, { delay: 100, children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "Where You Stand" }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "div",
             {
               className: "grid sm:grid-cols-2 lg:grid-cols-4 gap-4",
               "data-ocid": "portals.attendance_zones",
-              children: attendanceZones.map((zone, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              children: attendanceZones.map((zone, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$3, { delay: i * 60, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "div",
                 {
-                  className: `border rounded-xl p-4 shadow-sm ${zone.bgClass}`,
+                  className: "border border-border/40 bg-card p-5 transition-smooth hover:border-border/60",
                   "data-ocid": `portals.attendance_zone.${i + 1}`,
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsx(
                       "p",
                       {
-                        className: `text-xl font-bold font-display ${zone.colorClass}`,
+                        className: `font-display text-2xl font-black ${zone.colorClass}`,
                         children: zone.threshold
                       }
                     ),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: `text-sm font-semibold mt-1 ${zone.colorClass}`, children: zone.label }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-1", children: zone.sublabel })
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "p",
+                      {
+                        className: `font-display text-sm font-semibold mt-1 ${zone.colorClass}`,
+                        children: zone.label
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-1 leading-relaxed", children: zone.sublabel })
                   ]
-                },
-                zone.threshold
-              ))
+                }
+              ) }, zone.threshold))
             }
           )
         ] })
@@ -34260,37 +34257,40 @@ function Portals() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
+        className: "section-bg-muted px-6 py-16 border-b border-border/30",
         "data-ocid": "portals.marks_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Step-by-Step" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "Viewing Your Marks" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-6", children: "CAT-I and CAT-II marks get uploaded shortly after each exam. DA marks come in throughout the semester. FAT results appear after the final. If something looks wrong, raise it during the objection window — after that, your options are very limited." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3 mb-8", "data-ocid": "portals.marks_steps", children: marksSteps.map((s) => /* @__PURE__ */ jsxRuntimeExports.jsx(StepCard, { ...s }, s.title)) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection$3, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "Step-by-Step" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "Viewing Your Marks" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-6" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed", children: "CAT-I and CAT-II marks get uploaded shortly after each exam. If something looks wrong, raise it during the objection window — after that, your options are very limited." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3 mb-10", "data-ocid": "portals.marks_steps", children: marksSteps.map((s, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$3, { delay: i * 50, children: /* @__PURE__ */ jsxRuntimeExports.jsx(StepCard, { ...s }) }, s.title)) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$3, { delay: 100, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "div",
             {
-              className: "bg-card border border-border rounded-xl p-5 shadow-sm",
+              className: "border border-border/40 bg-card p-6",
               "data-ocid": "portals.marks_breakdown",
               children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: "How your grade is calculated — Total: 100" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-5", children: "Grade Breakdown — Total: 100" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid sm:grid-cols-3 gap-3", children: marksComponents.map((row, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "div",
                   {
-                    className: `text-center rounded-lg p-4 border ${row.highlight ? "bg-primary/8 border-primary/30" : "bg-background border-border"}`,
+                    className: `text-center p-4 border transition-smooth ${row.highlight ? "border-secondary/40 bg-secondary/5" : "border-border/30 bg-background/40"}`,
                     "data-ocid": `portals.marks_component.${i + 1}`,
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsx(
                         "p",
                         {
-                          className: `text-2xl font-bold font-display ${row.highlight ? "text-primary" : "text-foreground"}`,
+                          className: `font-display text-3xl font-black ${row.highlight ? "text-secondary" : "text-foreground"}`,
                           children: row.marks
                         }
                       ),
                       /* @__PURE__ */ jsxRuntimeExports.jsx(
                         "p",
                         {
-                          className: `text-sm font-semibold font-display mt-0.5 ${row.highlight ? "text-primary" : "text-foreground"}`,
+                          className: `font-display text-sm font-semibold mt-1 ${row.highlight ? "text-secondary" : "text-foreground"}`,
                           children: row.component
                         }
                       ),
@@ -34299,140 +34299,149 @@ function Portals() {
                   },
                   row.component
                 )) }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 bg-accent/10 border border-accent/30 rounded-lg p-3", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-foreground", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-accent", children: "Important to know:" }),
-                  " ",
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-5 border-l-2 border-secondary/50 pl-5 py-3 bg-secondary/5", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-muted-foreground", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-semibold text-secondary", children: [
+                    "Important to know:",
+                    " "
+                  ] }),
                   "You need at least 50% in the internal component (CAM) AND at least 50% overall to pass. Bombing your internals and banking on FAT alone won't work — I've seen people learn this the hard way."
                 ] }) })
               ]
             }
-          )
+          ) })
         ] })
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-light px-6 py-10 border-b border-border",
+        className: "section-bg-light px-6 py-16 border-b border-border/30",
         "data-ocid": "portals.student_tips_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "From experience" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-6", children: "Things worth knowing about VTOP" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid md:grid-cols-2 gap-3", children: vtopTips.map((tip, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection$3, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "From Experience" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "Things Worth Knowing" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-8" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid md:grid-cols-2 gap-3", children: vtopTips.map((tip, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$3, { delay: i * 60, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "div",
             {
-              className: "flex items-start gap-3 bg-card border border-border rounded-xl px-4 py-3 shadow-sm",
+              className: "flex items-start gap-3 border border-border/40 bg-card px-5 py-4 transition-smooth hover:border-border/60",
               "data-ocid": `portals.tip.${i + 1}`,
               children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent font-bold text-base shrink-0 mt-0.5", children: "→" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground", children: tip })
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-secondary font-bold text-base shrink-0 mt-0.5", children: "→" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground leading-relaxed", children: tip })
               ]
-            },
-            tip
-          )) })
+            }
+          ) }, tip)) })
         ] })
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
+        className: "section-bg-muted px-6 py-16 border-b border-border/30",
         "data-ocid": "portals.tips_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Honest advice" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-6", children: "What to do and what not to do" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: "✅" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: "Do this" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: [
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection$3, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "Honest Advice" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "Do This / Don't Do This" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-8" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid md:grid-cols-2 gap-6", children: [
+            {
+              icon: "✅",
+              title: "Do this",
+              items: [
                 "Check attendance every week — not once a month",
                 "Download and save your timetable at semester start",
                 "Screenshot your registration confirmation as proof",
                 "Raise mark disputes during the objection window",
                 "Use desktop for course registration — mobile often errors",
                 "Save your Proctor's contact number from day one"
-              ].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "li",
-                {
-                  className: "flex items-start gap-2 text-sm text-foreground",
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "✓" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item })
-                  ]
-                },
-                item
-              )) })
-            ] }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: "⚠️" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: "Avoid this" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: [
+              ],
+              accent: true
+            },
+            {
+              icon: "⚠️",
+              title: "Avoid this",
+              items: [
                 "Checking attendance only at the end of semester — by then it's too late",
                 "Sharing your VTOP login with anyone",
                 "Ignoring fee payment deadlines listed on VTOP",
                 "Using mobile browser during course registration",
                 "Forgetting to log out on shared or lab computers"
-              ].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "li",
-                {
-                  className: "flex items-start gap-2 text-sm text-foreground",
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-destructive mt-0.5 shrink-0", children: "✗" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item })
-                  ]
-                },
-                item
-              )) })
-            ] }) })
-          ] })
+              ],
+              accent: false
+            }
+          ].map((group, gi) => /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$3, { delay: gi * 100, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-cinema h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-6", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mb-4", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: group.icon }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-xl font-semibold text-foreground", children: group.title })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: group.items.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "li",
+              {
+                className: "flex items-start gap-2 text-sm text-muted-foreground",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "span",
+                    {
+                      className: `mt-0.5 shrink-0 font-bold ${group.accent ? "text-secondary" : "text-destructive"}`,
+                      children: group.accent ? "✓" : "✗"
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item })
+                ]
+              },
+              item
+            )) })
+          ] }) }) }, group.title)) })
         ] })
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
+        className: "section-bg-light px-6 py-16 border-b border-border/30",
         "data-ocid": "portals.delivery_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Getting stuff delivered" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "Online Shopping & Deliveries" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-6", children: "Amazon and Flipkart deliver to campus without issues. For food, Swiggy works — Zomato generally doesn't. Local freelance delivery is also an option that many students use. Use the address below for all orders." }),
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection$3, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "Getting Stuff Delivered" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "Online Shopping & Deliveries" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-6" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed", children: "Amazon and Flipkart deliver to campus without issues. For food, Swiggy works — Zomato generally doesn't. Use the address below for all orders." })
+          ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "div",
             {
-              className: "grid sm:grid-cols-2 gap-4 mb-5",
+              className: "grid sm:grid-cols-2 gap-4 mb-6",
               "data-ocid": "portals.delivery_list",
-              children: deliveryInfo.map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              children: deliveryInfo.map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$3, { delay: i * 60, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "div",
                 {
-                  className: `border rounded-xl p-4 shadow-sm flex items-start gap-3 ${item.label === "Official Campus Address" ? "bg-primary/5 border-primary/20 col-span-full sm:col-span-2" : "bg-card border-border"}`,
+                  className: `border p-5 flex items-start gap-3 transition-smooth hover:border-border/60 ${item.label === "Official Campus Address" ? "border-secondary/30 bg-secondary/5 col-span-full sm:col-span-2" : "border-border/40 bg-card"}`,
                   "data-ocid": `portals.delivery_item.${i + 1}`,
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl shrink-0", "aria-hidden": "true", children: item.icon }),
                     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-foreground font-display", children: item.label }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display font-semibold text-foreground text-sm", children: item.label }),
                       /* @__PURE__ */ jsxRuntimeExports.jsx(
                         "p",
                         {
-                          className: `text-xs mt-0.5 ${item.label === "Official Campus Address" ? "text-primary font-mono font-medium" : "text-muted-foreground"}`,
+                          className: `text-xs mt-0.5 leading-relaxed ${item.label === "Official Campus Address" ? "text-secondary font-mono" : "text-muted-foreground"}`,
                           children: item.desc
                         }
                       )
                     ] })
                   ]
-                },
-                item.label
-              ))
+                }
+              ) }, item.label))
             }
           ),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-border rounded-xl p-4 shadow-sm", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-foreground font-display mb-2", children: "A few things that'll save you hassle" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-1.5", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$3, { delay: 200, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-border/40 bg-card p-5", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display font-semibold text-foreground text-sm mb-3", children: "A few things that'll save you hassle" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: [
               "Add your hostel block and room number in the delivery address — reception holds it until you pick up",
               "Packages at hostel reception are usually safe — just check regularly so they don't pile up",
               "Swiggy/Zomato riders typically stop at the campus gate — go meet them there",
@@ -34440,30 +34449,66 @@ function Portals() {
             ].map((tip) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
               "li",
               {
-                className: "flex items-start gap-2 text-sm text-foreground",
+                className: "flex items-start gap-2 text-sm text-muted-foreground",
                 children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "→" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-secondary mt-0.5 shrink-0 font-bold", children: "→" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: tip })
                 ]
               },
               tip
             )) })
-          ] })
+          ] }) })
         ] })
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-light px-6 py-8",
+        className: "section-bg-muted px-6 py-12",
         "data-ocid": "portals.summary_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-4xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-primary/5 border border-primary/20 rounded-xl p-5", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-1", children: "The short version" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground", children: "VTOP is your academic control center — check it weekly for attendance, marks, and deadlines. Don't wait for problems to surface; stay on top of it from day one and you'll avoid 90% of the stress most students create for themselves." })
-        ] }) })
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$3, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border-l-2 border-primary/60 pl-6 py-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "The Short Version" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground leading-relaxed max-w-3xl", children: "VTOP is your academic control center — check it weekly for attendance, marks, and deadlines. Don't wait for problems to surface; stay on top of it from day one and you'll avoid 90% of the stress most students create for themselves." })
+        ] }) }) })
       }
     )
   ] });
+}
+function useScrollFade$2() {
+  const ref = reactExports.useRef(null);
+  const [visible, setVisible] = reactExports.useState(false);
+  reactExports.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.05 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return { ref, visible };
+}
+function FadeSection$2({
+  children,
+  className = "",
+  delay = 0
+}) {
+  const { ref, visible } = useScrollFade$2();
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      ref,
+      className: `transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`,
+      style: { transitionDelay: `${delay}ms` },
+      children
+    }
+  );
 }
 const platforms = [
   {
@@ -34484,7 +34529,7 @@ const platforms = [
     name: "NPTEL Free Courses",
     url: "https://nptel.ac.in",
     icon: "🎓",
-    desc: "Free engineering and science courses with certificates — in my experience, NPTEL content often lines up well with the VIT-AP syllabus",
+    desc: "Free engineering and science courses with certificates — NPTEL content often lines up well with the VIT-AP syllabus",
     category: "Learning"
   },
   {
@@ -34570,91 +34615,99 @@ const pyqTips = [
 ];
 function Resources() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Layout, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 py-10 border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Badge,
-        {
-          variant: "secondary",
-          className: "mb-3 text-xs font-semibold tracking-wide",
-          children: "📁 Resources & Materials"
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-section text-foreground mb-2", children: "Resources I've Actually Found Useful" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-sm max-w-xl", children: "Not a random list of links — these are things I or people I know have actually used. Bookmark what makes sense for your year and situation." })
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 pt-20 pb-16 border-b border-border/30", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "chapter-label mb-4", children: "Chapter" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-hero text-foreground mb-6 fade-in-up", children: "RESOURCES" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-16 mb-8" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-1", children: "Not a random list of links — these are things I or people I know have actually used. Bookmark what makes sense for your year and situation." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs", children: "📁 Resources & Materials" }) })
     ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-muted px-6 py-10",
+        className: "section-bg-muted px-6 py-16 border-b border-border/30",
         "data-ocid": "resources.notes_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-subsection text-foreground mb-1", children: "Where to Find Notes" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mb-5", children: "Finding good notes is a skill in itself — here's how most students actually do it." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-4", children: notesTips.map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection$2, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "Where to Find Notes" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "Study Material" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-6" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed", children: "Finding good notes is a skill in itself — here's how most students actually do it." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-4", children: notesTips.map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$2, { delay: i * 60, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "div",
             {
-              className: "card-elevated rounded-xl p-4 flex items-start gap-3",
+              className: "border border-border/40 bg-card p-5 flex items-start gap-4 transition-smooth hover:border-secondary/40",
               "data-ocid": `resources.notes_tip.${i + 1}`,
               children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xl shrink-0 mt-0.5", "aria-hidden": "true", children: item.icon }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground leading-relaxed", children: item.tip })
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground leading-relaxed", children: item.tip })
               ]
-            },
-            item.icon
-          )) })
+            }
+          ) }, item.icon)) })
         ] })
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-light px-6 py-10 border-t border-border",
+        className: "section-bg-light px-6 py-16 border-b border-border/30",
         "data-ocid": "resources.pyqs_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-subsection text-foreground mb-1", children: "PYQs — Don't Skip These" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mb-5", children: "Past year question papers are probably the single most useful thing you can study from. Trust me on this one." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3 mb-6", children: pyqTips.map((tip, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection$2, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "Don't Skip These" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "Past Year Questions" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-6" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed", children: "Past year question papers are probably the single most useful thing you can study from. Trust me on this one." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-4 mb-8", children: pyqTips.map((tip, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$2, { delay: i * 60, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "div",
             {
-              className: "flex items-start gap-3",
+              className: "flex items-start gap-4",
               "data-ocid": `resources.pyq_tip.${i + 1}`,
               children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mt-1 shrink-0 w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold font-display", children: i + 1 }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground leading-relaxed", children: tip })
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mt-1 shrink-0 w-7 h-7 border border-secondary/40 text-secondary flex items-center justify-center text-xs font-bold font-display", children: i + 1 }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground leading-relaxed", children: tip })
               ]
-            },
-            tip.slice(0, 20)
-          )) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 rounded-xl bg-accent/10 border border-accent/20", children: [
+            }
+          ) }, tip.slice(0, 20))) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$2, { delay: 200, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border-l-2 border-secondary/50 pl-5 py-4 bg-secondary/5", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-foreground mb-2", children: "📌 Where to get PYQs" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "text-sm text-muted-foreground space-y-1 list-disc list-inside", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Department WhatsApp / Telegram groups — best source" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Seniors from your branch — just ask, most will share" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "VTOP → Digital Library or Course Materials" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Department-shared Google Drives (ask seniors for links)" })
-            ] })
-          ] })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "text-sm text-muted-foreground space-y-1", children: [
+              "Department WhatsApp / Telegram groups — best source",
+              "Seniors from your branch — just ask, most will share",
+              "VTOP → Digital Library or Course Materials",
+              "Department-shared Google Drives (ask seniors for links)"
+            ].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-start gap-2", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-secondary shrink-0", children: "—" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item })
+            ] }, item)) })
+          ] }) })
         ] })
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-muted px-6 py-10",
+        className: "section-bg-muted px-6 py-16",
         "data-ocid": "resources.links_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-subsection text-foreground mb-2", children: "Useful Links" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mb-5", children: "Organized by what they're useful for. Use what applies to you — you don't need all of them." }),
-          linkCategories.map((cat) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-7", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-label mb-3", children: cat }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-3", children: platforms.filter((p) => p.category === cat).map((link, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection$2, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "Curated Links" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "Useful Platforms" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-6" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed", children: "Organized by what they're useful for. Use what applies to you — you don't need all of them." })
+          ] }),
+          linkCategories.map((cat, catIdx) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-10", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$2, { delay: catIdx * 50, children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-4", children: cat }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-3", children: platforms.filter((p) => p.category === cat).map((link, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$2, { delay: i * 60 + catIdx * 30, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
               "a",
               {
                 href: link.url,
                 target: "_blank",
                 rel: "noopener noreferrer",
                 "data-ocid": `resources.link.${cat.toLowerCase().replace(/\s+/g, "_")}.${i + 1}`,
-                className: "card-elevated rounded-xl p-4 flex items-start gap-3 hover:border-primary/40 hover:shadow-md transition-smooth group",
+                className: "border border-border/40 bg-card p-4 flex items-start gap-3 hover:border-secondary/50 transition-smooth group",
                 children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(
                     "span",
@@ -34666,54 +34719,70 @@ function Resources() {
                   ),
                   /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0 flex-1", children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-1 mb-0.5", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display font-semibold text-sm text-foreground group-hover:text-primary transition-colors truncate", children: link.name }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(ExternalLink, { className: "w-3 h-3 text-muted-foreground shrink-0" })
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display font-semibold text-sm text-foreground group-hover:text-secondary transition-colors truncate", children: link.name }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(ExternalLink, { className: "w-3 h-3 text-muted-foreground/50 shrink-0" })
                     ] }),
                     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground leading-relaxed", children: link.desc })
                   ] })
                 ]
-              },
-              link.name
-            )) })
+              }
+            ) }, link.name)) })
           ] }, cat))
         ] })
       }
     ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 py-8 border-t border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto flex items-start gap-3", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl shrink-0 mt-0.5", "aria-hidden": "true", children: "📌" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground leading-relaxed", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-foreground", children: "Bottom line: " }),
-        "Most of what you need is available for free — on VTOP, through seniors, or on the platforms listed here. The main thing is knowing where to look and actually using them instead of waiting until the week before exams."
-      ] })
-    ] }) })
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 py-12 border-t border-border/30", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$2, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border-l-2 border-secondary/50 pl-6 py-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground leading-relaxed", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-semibold text-foreground", children: [
+        "Bottom line:",
+        " "
+      ] }),
+      "Most of what you need is available for free — on VTOP, through seniors, or on the platforms listed here. The main thing is knowing where to look and actually using them instead of waiting until the week before exams."
+    ] }) }) }) }) })
   ] });
 }
-function BulletCard({ icon, title, items }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: icon }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: title })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: items.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      "li",
-      {
-        className: "flex items-start gap-2 text-sm text-foreground",
-        children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "•" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item })
-        ]
+function useScrollFade$1() {
+  const ref = reactExports.useRef(null);
+  const [visible, setVisible] = reactExports.useState(false);
+  reactExports.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
       },
-      item
-    )) })
-  ] }) });
+      { threshold: 0.05 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return { ref, visible };
+}
+function FadeSection$1({
+  children,
+  className = "",
+  delay = 0
+}) {
+  const { ref, visible } = useScrollFade$1();
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      ref,
+      className: `transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`,
+      style: { transitionDelay: `${delay}ms` },
+      children
+    }
+  );
 }
 const programs = [
   {
     id: "itp",
     icon: "✈️",
-    title: "International Transfer Program (ITP)",
+    title: "International Transfer Program",
+    abbr: "ITP",
     badge: "Transfer",
-    badgeVariant: "default",
     desc: "Allows you to transfer to a partner university abroad for a portion of your degree. You complete part of your B.Tech at VIT-AP and the rest at an international institution.",
     details: [
       "Credits earned abroad count towards your VIT-AP degree",
@@ -34725,9 +34794,9 @@ const programs = [
   {
     id: "sap",
     icon: "📅",
-    title: "Semester Abroad Program (SAP)",
+    title: "Semester Abroad Program",
+    abbr: "SAP",
     badge: "Exchange",
-    badgeVariant: "secondary",
     desc: "Study at a partner university for one semester, then return to VIT-AP. Credits transfer back so you don't fall behind on your degree timeline.",
     details: [
       "Typically available from the second or third year onwards",
@@ -34753,41 +34822,49 @@ const thingsToVerify = [
 ];
 function StudyAbroad() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Layout, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 py-10 border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", "data-ocid": "study_abroad.page_label", children: "Studying Abroad" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-hero text-foreground mb-4", children: "International Programs at VIT-AP" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base text-muted-foreground max-w-2xl mb-6", children: "If you're thinking about studying abroad at some point during your degree, VIT-AP does have options. They're not widely talked about, and not many students use them — but they exist. Here's what I know, and what you should verify directly before making any plans." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-2", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "🌍 International Transfer Program" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "📅 Semester Abroad Program" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "🤝 Global Partnerships" })
-      ] })
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 pt-20 pb-16 border-b border-border/30", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "chapter-label mb-4", "data-ocid": "study_abroad.page_label", children: "Chapter" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "text-hero text-foreground mb-6 fade-in-up", children: [
+        "STUDYING",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "ABROAD"
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-16 mb-8" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-1", children: "If you're thinking about studying abroad at some point during your degree, VIT-AP does have options. They're not widely talked about, and not many students use them — but they exist. Here's what I know, and what you should verify directly before making any plans." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-3 mt-8", children: [
+        "🌍 International Transfer Program",
+        "📅 Semester Abroad Program",
+        "🤝 Global Partnerships"
+      ].map((tag) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", className: "text-xs", children: tag }, tag)) })
     ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
+        className: "section-bg-muted px-6 py-16 border-b border-border/30",
         "data-ocid": "study_abroad.overview_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "The Starting Point" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-4", children: "International Relations Office" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-5", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection$1, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "The Starting Point" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "International Relations Office" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-8" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-6", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$1, { delay: 100, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-cinema h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-6", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mb-4", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: "🏛️" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: "What the IR Office Does" })
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-xl font-semibold text-foreground", children: "What the IR Office Does" })
               ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground mb-3", children: "VIT-AP has an International Relations Office that handles study abroad programs, international collaborations, and exchange initiatives. They're your first point of contact for anything related to studying outside India." }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: "In my experience, these offices can be slow to respond to emails — physically going in with your questions tends to work better. Go early in the academic year if you're seriously considering this." })
-            ] }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-3 leading-relaxed", children: "VIT-AP has an International Relations Office that handles study abroad programs, international collaborations, and exchange initiatives. They're your first point of contact for anything related to studying outside India." }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground leading-relaxed", children: "In my experience, these offices can be slow to respond to emails — physically going in with your questions tends to work better. Go early in the academic year if you're seriously considering this." })
+            ] }) }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$1, { delay: 200, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-cinema h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-6", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mb-4", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: "🌐" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: "Global Partnerships" })
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-xl font-semibold text-foreground", children: "Global Partnerships" })
               ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground mb-3", children: "VIT-AP has partnerships with universities across the world — Europe, North America, Asia, and beyond. The specific institutions change over time as new agreements are signed or existing ones lapse." }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: "Don't rely on old lists you find online. The IR office has the current partner list — always check with them directly." })
-            ] }) })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-3 leading-relaxed", children: "VIT-AP has partnerships with universities across the world — Europe, North America, Asia, and beyond. The specific institutions change over time as new agreements are signed or existing ones lapse." }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground leading-relaxed", children: "Don't rely on old lists you find online. The IR office has the current partner list — always check with them directly." })
+            ] }) }) })
           ] })
         ] })
       }
@@ -34795,70 +34872,89 @@ function StudyAbroad() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-light px-6 py-10 border-b border-border",
+        className: "section-bg-light px-6 py-16 border-b border-border/30",
         "data-ocid": "study_abroad.programs_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Your Options" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "The Two Main Programs" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-6", children: "There are two structured paths for studying abroad through VIT-AP. Both involve credit transfer, but they're quite different in scope and commitment." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-5", "data-ocid": "study_abroad.programs_list", children: programs.map((program, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Card,
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection$1, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "Your Options" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "The Two Main Programs" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-6" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed", children: "There are two structured paths for studying abroad through VIT-AP. Both involve credit transfer, but they're quite different in scope and commitment." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-6", "data-ocid": "study_abroad.programs_list", children: programs.map((program, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$1, { delay: i * 100, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
             {
-              className: "card-elevated",
+              className: "border border-border/40 bg-card p-7 transition-smooth hover:border-secondary/40",
               "data-ocid": `study_abroad.program.${i + 1}`,
-              children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-3 mb-3", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: program.icon }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: program.title })
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    Badge,
-                    {
-                      variant: program.badgeVariant,
-                      className: "text-xs shrink-0",
-                      children: program.badge
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-4", children: program.desc }),
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-start justify-between gap-3 mb-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-3xl", "aria-hidden": "true", children: program.icon }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-1", children: program.badge }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("h3", { className: "font-display text-2xl font-bold text-foreground", children: [
+                      program.abbr,
+                      " — ",
+                      program.title
+                    ] })
+                  ] })
+                ] }) }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-8 mb-4" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-5 leading-relaxed max-w-2xl", children: program.desc }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: program.details.map((detail) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "li",
                   {
-                    className: "flex items-start gap-2 text-sm text-foreground",
+                    className: "flex items-start gap-3 text-sm text-muted-foreground",
                     children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent mt-0.5 shrink-0", children: "→" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-secondary mt-0.5 shrink-0 font-bold", children: "→" }),
                       /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: detail })
                     ]
                   },
                   detail
                 )) })
-              ] })
-            },
-            program.id
-          )) })
+              ]
+            }
+          ) }, program.id)) })
         ] })
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
+        className: "section-bg-muted px-6 py-16 border-b border-border/30",
         "data-ocid": "study_abroad.benefits_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Why It's Worth Considering" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-6", children: "What You Actually Gain" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(BulletCard, { icon: "🎯", title: "The Real Benefits", items: benefits }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection$1, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "Why It's Worth Considering" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "What You Actually Gain" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-8" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-6", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$1, { delay: 100, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-border/40 bg-card p-6", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-xl font-semibold text-foreground mb-5", children: "The Real Benefits" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-3", children: benefits.map((benefit, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "li",
+                {
+                  className: "flex items-start gap-3 text-sm text-muted-foreground",
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-display font-bold text-secondary/70 text-base shrink-0 w-5", children: [
+                      i + 1,
+                      "."
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "leading-relaxed", children: benefit })
+                  ]
+                },
+                benefit
+              )) })
+            ] }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$1, { delay: 200, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-cinema h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-6", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mb-4", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: "💬" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: "My Honest Take" })
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-xl font-semibold text-foreground", children: "My Honest Take" })
               ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground mb-3", children: `If international exposure matters to your career goals or you're planning to do a Master's abroad, SAP is worth exploring. A semester abroad on your resume — with actual credits to show for it — looks different from just saying "I want to study abroad."` }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground mb-3", children: "ITP is more serious — it's essentially a partial degree change. Don't walk into it without thoroughly researching the specific university and program you'd be transferring into." }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: "The biggest hurdle is usually awareness. Most students don't know these programs exist until third year — by which point some deadlines have already passed." })
-            ] }) })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-3 leading-relaxed", children: `If international exposure matters to your career goals or you're planning to do a Master's abroad, SAP is worth exploring. A semester abroad on your resume — with actual credits to show for it — looks different from just saying "I want to study abroad."` }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-3 leading-relaxed", children: "ITP is more serious — it's essentially a partial degree change. Don't walk into it without thoroughly researching the specific university and program you'd be transferring into." }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground leading-relaxed", children: "The biggest hurdle is usually awareness. Most students don't know these programs exist until third year — by which point some deadlines have already passed." })
+            ] }) }) })
           ] })
         ] })
       }
@@ -34866,101 +34962,106 @@ function StudyAbroad() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-light px-6 py-10 border-b border-border",
+        className: "section-bg-light px-6 py-16 border-b border-border/30",
         "data-ocid": "study_abroad.verify_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Before You Decide" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-2", children: "What You Need to Verify Directly" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-6", children: "I can give you the overview, but the specifics — eligibility, deadlines, partner universities — change every year. These are the things you need to confirm with the IR office, not rely on a website." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection$1, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "Before You Decide" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "Verify Directly" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-6" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed", children: "I can give you the overview, but the specifics — eligibility, deadlines, partner universities — change every year. These are the things you need to confirm with the IR office, not rely on a website." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$1, { delay: 100, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "div",
             {
-              className: "bg-card border border-border rounded-xl p-5",
+              className: "border border-border/40 bg-card p-6 mb-6",
               "data-ocid": "study_abroad.verify_list",
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-3", children: thingsToVerify.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-4", children: thingsToVerify.map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "li",
                 {
-                  className: "flex items-start gap-3 text-sm text-foreground",
+                  className: "flex items-start gap-4 text-sm text-muted-foreground pb-4 border-b border-border/30 last:border-0 last:pb-0",
                   children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "shrink-0 mt-0.5 font-semibold text-primary font-mono text-xs w-4", children: [
-                      thingsToVerify.indexOf(item) + 1,
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-display font-bold text-secondary text-lg shrink-0 w-6", children: [
+                      i + 1,
                       "."
                     ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item })
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "leading-relaxed", children: item })
                   ]
                 },
                 item.slice(0, 40)
               )) })
             }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-muted/60 border border-border rounded-xl p-4 mt-5 flex items-start gap-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-base shrink-0", "aria-hidden": "true", children: "🔗" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-semibold text-foreground", children: [
-                "Official source:",
-                " "
-              ] }),
-              "Visit",
-              " ",
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "a",
-                {
-                  href: "https://vitap.ac.in/international-relations",
-                  target: "_blank",
-                  rel: "noopener noreferrer",
-                  className: "text-primary hover:underline font-medium",
-                  "data-ocid": "study_abroad.ir_link",
-                  children: "vitap.ac.in/international-relations"
-                }
-              ),
-              " ",
-              "or go in person to the International Relations Office on campus for current program details, the active partner university list, and application timelines. That page — or better, a direct conversation — is your most reliable source."
-            ] })
-          ] })
+          ) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$1, { delay: 200, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border-l-2 border-secondary/50 pl-5 py-3 bg-secondary/5", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-semibold text-foreground", children: [
+              "Official source:",
+              " "
+            ] }),
+            "Visit",
+            " ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "a",
+              {
+                href: "https://vitap.ac.in/international-relations",
+                target: "_blank",
+                rel: "noopener noreferrer",
+                className: "text-secondary hover:underline font-medium",
+                "data-ocid": "study_abroad.ir_link",
+                children: "vitap.ac.in/international-relations"
+              }
+            ),
+            " ",
+            "or go in person to the International Relations Office on campus for current program details, the active partner university list, and application timelines."
+          ] }) }) })
         ] })
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-muted px-6 py-8",
+        className: "section-bg-muted px-6 py-12",
         "data-ocid": "study_abroad.summary_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-4xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-primary/5 border border-primary/20 rounded-xl p-5", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-1", children: "Bottom Line" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground", children: "VIT-AP does have structured study abroad options — ITP for a partial degree transfer and SAP for a semester exchange, both with credit transfer back to VIT-AP. The university has international partnerships, and the programs are real. But they're not well-publicized, seats are limited, and the details change annually. If this matters to you, start asking in your second year — don't wait until third. Visit the IR office, check the official page, and talk to a senior who's actually done it. That's the fastest way to get accurate information." })
-        ] }) })
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection$1, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border-l-2 border-primary/60 pl-6 py-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Bottom Line" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground leading-relaxed max-w-3xl", children: "VIT-AP does have structured study abroad options — ITP for a partial degree transfer and SAP for a semester exchange, both with credit transfer back to VIT-AP. The university has international partnerships, and the programs are real. But they're not well-publicized, seats are limited, and the details change annually. If this matters to you, start asking in your second year — don't wait until third." })
+        ] }) }) })
       }
     )
   ] });
 }
-function GuideCard({ icon, title, items, accent = false }) {
+function useScrollFade() {
+  const ref = reactExports.useRef(null);
+  const [visible, setVisible] = reactExports.useState(false);
+  reactExports.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.05 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return { ref, visible };
+}
+function FadeSection({
+  children,
+  className = "",
+  delay = 0
+}) {
+  const { ref, visible } = useScrollFade();
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    Card,
+    "div",
     {
-      className: `card-elevated h-full ${accent ? "border-primary/30 bg-primary/5" : ""}`,
-      children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: icon }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: title })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: items.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          "li",
-          {
-            className: "flex items-start gap-2 text-sm text-foreground",
-            children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "span",
-                {
-                  className: `mt-0.5 shrink-0 ${accent ? "text-primary" : "text-accent"}`,
-                  children: "→"
-                }
-              ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item })
-            ]
-          },
-          item
-        )) })
-      ] })
+      ref,
+      className: `transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`,
+      style: { transitionDelay: `${delay}ms` },
+      children
     }
   );
 }
@@ -35034,248 +35135,51 @@ const outingRules = [
 ];
 function Survival() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Layout, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 py-10 border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", "data-ocid": "survival.page_label", children: "Survival Guides" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-hero text-foreground mb-4", children: "What I Wish Someone Had Told Me" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base text-muted-foreground max-w-2xl mb-6", children: "This is the stuff most students only figure out after they've already made the mistakes. I'm putting it here so you don't have to learn it the hard way — exams, attendance, outings, mentoring. Read this before your first week." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-2", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "📝 Exam Prep" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "📊 Attendance Tips" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "🗓️ Time Management" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "🧑‍🏫 Mentoring" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "text-xs px-3 py-1", children: "🚪 Outing Rules" })
-      ] })
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "section-bg-light px-6 pt-20 pb-16 border-b border-border/30", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "chapter-label mb-4", "data-ocid": "survival.page_label", children: "Chapter" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "text-hero text-foreground mb-6 fade-in-up", children: [
+        "SURVIVAL",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "GUIDE"
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-16 mb-8" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-1", children: "This is the stuff most students only figure out after they've already made the mistakes. I'm putting it here so you don't have to learn it the hard way — exams, attendance, outings, mentoring. Read this before your first week." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-3 mt-8", children: [
+        "📝 Exam Prep",
+        "📊 Attendance",
+        "🗓️ Time Management",
+        "🧑‍🏫 Mentoring",
+        "🚪 Outing Rules"
+      ].map((tag) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", className: "text-xs", children: tag }, tag)) })
     ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
-        "data-ocid": "survival.exam_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "What actually works" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-6", children: "Exams & Attendance" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-5", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              GuideCard,
-              {
-                icon: "📝",
-                title: "How to approach exams",
-                items: [
-                  "Start revising at least 2 weeks before finals — not the night before. I cannot stress this enough.",
-                  "PYQs are your best friend. Many questions repeat — use them.",
-                  "CAT exams (15 marks each) are easier to score in than the FAT. Don't underestimate them.",
-                  "Form study groups for tough subjects — explaining things out loud forces you to actually understand them",
-                  "Don't ignore assignments and quizzes — every mark counts toward your internal",
-                  "Understanding beats memorizing for higher grades, especially in subjects with numericals"
-                ]
-              }
-            ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              GuideCard,
-              {
-                icon: "📊",
-                title: "Managing attendance",
-                items: [
-                  "75% is the cutoff — but I'd aim for 85%+. You will get sick, you'll want to travel, things come up. Don't burn your buffer in month 1.",
-                  "Track it weekly on VTOP. Don't wait until it's critical.",
-                  "Calculate your 'safe bunk limit' per subject at the start of semester",
-                  "If you fall below 75%, approach your faculty proctor before the shortage becomes official",
-                  "Missing a class affects all students in that slot — be mindful if you're coordinating bunks"
-                ]
-              }
-            )
-          ] })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-light px-6 py-10 border-b border-border",
-        "data-ocid": "survival.mentoring_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "You have support — use it" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-6", children: "Your Proctor (Faculty Mentor)" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-5", children: "Every student gets assigned a faculty mentor called a Proctor. They're your go-to person for academic issues, leave applications, and attendance problems. In my experience, reaching out early is always better than waiting until things get messy." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-5", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              GuideCard,
-              {
-                icon: "🧑‍🏫",
-                title: "What your Proctor actually does",
-                items: [
-                  "Monitors your academic performance and flags concerns early",
-                  "Approves leave applications submitted via VTOP",
-                  "Keeps an eye on your attendance and can intervene if you're struggling",
-                  "Can refer you to personal counseling if you're going through something",
-                  "First point of contact for any hostel-related academic issues"
-                ]
-              }
-            ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              GuideCard,
-              {
-                icon: "📋",
-                title: "Leave & attendance relaxation",
-                accent: true,
-                items: [
-                  "Submit leave applications on VTOP at least 48 hours in advance",
-                  "Always attach supporting documents — no documents means no approval",
-                  "Up to 10% additional attendance relaxation may be granted for:",
-                  "  → Hospitalization (with discharge summary)",
-                  "  → Death of an immediate family member (death certificate required)",
-                  "  → Sibling's marriage (marriage invitation required)",
-                  "Documents are non-negotiable — the system doesn't make exceptions"
-                ]
-              }
-            )
-          ] })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
-        "data-ocid": "survival.outing_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Leaving campus" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-6", children: "Outing Rules" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-5", children: "Everything goes through VTOP — apply before you leave, not after. Carry your college ID and the approved outing pass whenever you step out. Trying to sneak out or come back late is not worth the trouble." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid md:grid-cols-2 gap-5", children: outingRules.map((rule) => /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-elevated", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: rule.icon }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-subsection", children: rule.type })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: rule.details.map((detail) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              "li",
-              {
-                className: "flex items-start gap-2 text-sm text-foreground",
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mt-0.5 shrink-0 text-accent", children: "→" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    "span",
-                    {
-                      className: detail.startsWith("Freshers are NOT") ? "text-destructive font-medium" : "",
-                      children: detail
-                    }
-                  )
-                ]
-              },
-              detail
-            )) })
-          ] }) }, rule.type)) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 bg-destructive/5 border border-destructive/20 rounded-xl px-5 py-3", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-foreground", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-semibold text-destructive", children: [
-              "Freshers, pay attention:",
-              " "
-            ] }),
-            "Weekend outings are blocked for your first 3 months. General outings still need both Proctor and warden approval during this period. Plan accordingly — don't assume you can just leave on a Sunday."
-          ] }) })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-light px-6 py-10 border-b border-border",
-        "data-ocid": "survival.time_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Don't wing it" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-6", children: "Time Management" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-5", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              GuideCard,
-              {
-                icon: "🗓️",
-                title: "Planning your week",
-                items: [
-                  "Plan your week every Sunday — takes 10 minutes and saves a lot of chaos",
-                  "Use FFCS to spread heavy subjects across different days rather than clustering them",
-                  "Reserve at least one day a week for focused study — not group chats and Netflix",
-                  "Avoid stacking two difficult courses back-to-back if your schedule allows it"
-                ]
-              }
-            ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              GuideCard,
-              {
-                icon: "⚡",
-                title: "Actually being productive",
-                items: [
-                  "Free slots between classes are valuable — use them in the library instead of the hostel",
-                  "Batch similar tasks: readings, assignments, and revision in one block",
-                  "Set your own deadlines 2 days before actual submission dates — things always come up",
-                  "Use a simple notes app or planner — relying on memory alone will eventually cost you"
-                ]
-              }
-            )
-          ] })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-muted px-6 py-10 border-b border-border",
-        "data-ocid": "survival.mistakes_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "I've seen this go wrong" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-6", children: "Mistakes to Avoid" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", "data-ocid": "survival.mistakes_list", children: commonMistakes.map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "div",
-            {
-              className: "bg-card border border-border rounded-xl px-5 py-4 shadow-sm flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4",
-              "data-ocid": `survival.mistake.${i + 1}`,
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 sm:w-56 shrink-0", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-destructive text-lg", "aria-hidden": "true", children: "✗" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-foreground font-display", children: item.mistake })
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-2 min-w-0", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    "span",
-                    {
-                      className: "text-accent text-lg shrink-0",
-                      "aria-hidden": "true",
-                      children: "→"
-                    }
-                  ),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: item.fix })
-                ] })
-              ]
-            },
-            item.mistake
-          )) })
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "section",
-      {
-        className: "section-bg-light px-6 py-10 border-b border-border",
+        className: "section-bg-muted px-6 py-16 border-b border-border/30",
         "data-ocid": "survival.stats_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Memorize these" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section mb-6", children: "Numbers That Actually Matter" }),
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "Memorize These" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "Numbers That Matter" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-8" })
+          ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "div",
             {
-              className: "grid sm:grid-cols-3 gap-4",
+              className: "grid sm:grid-cols-2 lg:grid-cols-3 gap-4",
               "data-ocid": "survival.numbers_list",
-              children: keyStats.map((stat, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              children: keyStats.map((stat, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection, { delay: i * 60, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "div",
                 {
-                  className: "bg-card border border-border rounded-xl p-4 text-center shadow-sm",
+                  className: "border border-border/40 bg-card p-6 text-center transition-smooth hover:border-secondary/40",
                   "data-ocid": `survival.stat.${i + 1}`,
                   children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-2xl mb-2", "aria-hidden": "true", children: stat.icon }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-2xl font-bold text-primary font-display", children: stat.value }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-1", children: stat.label })
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-2xl mb-3", "aria-hidden": "true", children: stat.icon }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-3xl font-black text-secondary", children: stat.value }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-2 leading-relaxed", children: stat.label })
                   ]
-                },
-                stat.value
-              ))
+                }
+              ) }, stat.value))
             }
           )
         ] })
@@ -35284,12 +35188,211 @@ function Survival() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "section",
       {
-        className: "section-bg-muted px-6 py-8",
+        className: "section-bg-light px-6 py-16 border-b border-border/30",
+        "data-ocid": "survival.exam_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "What Actually Works" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "Exams & Attendance" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-8" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid md:grid-cols-2 gap-6", children: [
+            {
+              icon: "📝",
+              title: "How to approach exams",
+              items: [
+                "Start revising at least 2 weeks before finals — not the night before. I cannot stress this enough.",
+                "PYQs are your best friend. Many questions repeat — use them.",
+                "CAT exams (15 marks each) are easier to score in than the FAT. Don't underestimate them.",
+                "Form study groups for tough subjects — explaining things out loud forces you to actually understand them",
+                "Don't ignore assignments and quizzes — every mark counts toward your internal"
+              ]
+            },
+            {
+              icon: "📊",
+              title: "Managing attendance",
+              items: [
+                "75% is the cutoff — but I'd aim for 85%+. You will get sick, you'll want to travel, things come up. Don't burn your buffer in month 1.",
+                "Track it weekly on VTOP. Don't wait until it's critical.",
+                "Calculate your 'safe bunk limit' per subject at the start of semester",
+                "If you fall below 75%, approach your faculty proctor before the shortage becomes official"
+              ]
+            }
+          ].map((group, gi) => /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection, { delay: gi * 100, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-cinema h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-6", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mb-4", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: group.icon }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-xl font-semibold text-foreground", children: group.title })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: group.items.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "li",
+              {
+                className: "flex items-start gap-2 text-sm text-muted-foreground leading-relaxed",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-secondary mt-0.5 shrink-0 font-bold", children: "→" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item })
+                ]
+              },
+              item
+            )) })
+          ] }) }) }, group.title)) })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "section-bg-muted px-6 py-16 border-b border-border/30",
+        "data-ocid": "survival.mentoring_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "You Have Support — Use It" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "Your Proctor" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-6" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed", children: "Every student gets assigned a faculty mentor called a Proctor. They're your go-to person for academic issues, leave applications, and attendance problems. In my experience, reaching out early is always better than waiting until things get messy." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid md:grid-cols-2 gap-6", children: [
+            {
+              icon: "🧑‍🏫",
+              title: "What your Proctor actually does",
+              items: [
+                "Monitors your academic performance and flags concerns early",
+                "Approves leave applications submitted via VTOP",
+                "Keeps an eye on your attendance and can intervene if you're struggling",
+                "Can refer you to personal counseling if you're going through something",
+                "First point of contact for any hostel-related academic issues"
+              ]
+            },
+            {
+              icon: "📋",
+              title: "Leave & attendance relaxation",
+              items: [
+                "Submit leave applications on VTOP at least 48 hours in advance",
+                "Always attach supporting documents — no documents means no approval",
+                "Up to 10% additional attendance relaxation may be granted for:",
+                "  → Hospitalization (with discharge summary)",
+                "  → Death of an immediate family member (death certificate required)",
+                "  → Sibling's marriage (marriage invitation required)"
+              ]
+            }
+          ].map((group, gi) => /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection, { delay: gi * 100, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-cinema h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-6", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mb-4", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: group.icon }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-xl font-semibold text-foreground", children: group.title })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: group.items.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "li",
+              {
+                className: "flex items-start gap-2 text-sm text-muted-foreground leading-relaxed",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-secondary mt-0.5 shrink-0 font-bold", children: "→" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item })
+                ]
+              },
+              item
+            )) })
+          ] }) }) }, group.title)) })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "section-bg-light px-6 py-16 border-b border-border/30",
+        "data-ocid": "survival.outing_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "Leaving Campus" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "Outing Rules" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-6" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed", children: "Everything goes through VTOP — apply before you leave, not after. Carry your college ID and the approved outing pass whenever you step out." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid md:grid-cols-2 gap-6", children: outingRules.map((rule, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection, { delay: i * 100, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "card-cinema h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-6", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mb-4", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", "aria-hidden": "true", children: rule.icon }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-xl font-semibold text-foreground", children: rule.type })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: rule.details.map((detail) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "li",
+              {
+                className: "flex items-start gap-2 text-sm text-muted-foreground leading-relaxed",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mt-0.5 shrink-0 text-secondary font-bold", children: "→" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "span",
+                    {
+                      className: detail.startsWith("Freshers are NOT") ? "text-destructive font-semibold" : "",
+                      children: detail
+                    }
+                  )
+                ]
+              },
+              detail
+            )) })
+          ] }) }) }, rule.type)) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection, { delay: 200, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-5 border-l-2 border-destructive/60 pl-5 py-3 bg-destructive/5", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-foreground", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-semibold text-destructive", children: [
+              "Freshers, pay attention:",
+              " "
+            ] }),
+            "Weekend outings are blocked for your first 3 months. General outings still need both Proctor and warden approval during this period. Plan accordingly — don't assume you can just leave on a Sunday."
+          ] }) }) })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "section-bg-muted px-6 py-16 border-b border-border/30",
+        "data-ocid": "survival.mistakes_section",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(FadeSection, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-3", children: "I've Seen This Go Wrong" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-section text-foreground mb-2", children: "Mistakes to Avoid" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "gold-underline w-12 mb-8" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", "data-ocid": "survival.mistakes_list", children: commonMistakes.map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection, { delay: i * 60, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: "border border-border/40 bg-card px-6 py-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 transition-smooth hover:border-border/60",
+              "data-ocid": `survival.mistake.${i + 1}`,
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 sm:w-52 shrink-0", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "span",
+                    {
+                      className: "text-destructive text-lg",
+                      "aria-hidden": "true",
+                      children: "✗"
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display font-semibold text-foreground text-sm", children: item.mistake })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-2 min-w-0", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "span",
+                    {
+                      className: "text-secondary text-lg shrink-0",
+                      "aria-hidden": "true",
+                      children: "→"
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground leading-relaxed", children: item.fix })
+                ] })
+              ]
+            }
+          ) }, item.mistake)) })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "section",
+      {
+        className: "section-bg-light px-6 py-12",
         "data-ocid": "survival.summary_section",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-4xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-primary/5 border border-primary/20 rounded-xl p-5", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-1", children: "Honestly" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground", children: "Most problems students face here are avoidable — attendance falling, marks dropping, missing deadlines. None of it is complicated. Track your attendance weekly, don't wait until CAT 2 to take academics seriously, stay in touch with your Proctor, and apply for outings properly. Do these things and you'll be ahead of most of your batch." })
-        ] }) })
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx(FadeSection, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border-l-2 border-secondary/50 pl-6 py-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-label mb-2", children: "Honestly" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground leading-relaxed max-w-3xl", children: "Most problems students face here are avoidable — attendance falling, marks dropping, missing deadlines. None of it is complicated. Track your attendance weekly, don't wait until CAT 2 to take academics seriously, stay in touch with your Proctor, and apply for outings properly. Do these things and you'll be ahead of most of your batch." })
+        ] }) }) })
       }
     )
   ] });

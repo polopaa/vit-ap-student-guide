@@ -68,8 +68,8 @@ export default {
         },
       },
       fontFamily: {
-        display: ["var(--font-display)", "serif"],
-        body: ["var(--font-body)", "sans-serif"],
+        display: ["Fraunces", "Georgia", "serif"],
+        body: ["Figtree", "Helvetica Neue", "sans-serif"],
         mono: ["var(--font-mono)", "monospace"],
       },
       borderRadius: {
@@ -78,9 +78,14 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       boxShadow: {
-        xs: "0 1px 2px 0 rgba(0,0,0,0.05)",
-        sm: "0 2px 4px 0 rgba(66, 130, 184, 0.08)",
-        md: "0 4px 12px 0 rgba(66, 130, 184, 0.12)",
+        xs: "0 1px 2px 0 rgba(0,0,0,0.3)",
+        sm: "0 4px 12px 0 rgba(0,0,0,0.4)",
+        md: "0 12px 32px 0 rgba(0,0,0,0.5)",
+        "lg-cinema": "0 24px 64px 0 rgba(0,0,0,0.6)",
+        "xl-cinema": "0 40px 100px 0 rgba(0,0,0,0.7)",
+        subtle: "0 2px 8px 0 rgba(0,0,0,0.25)",
+        "glow-gold": "0 0 40px rgba(212, 175, 55, 0.15)",
+        "glow-crimson": "0 0 40px rgba(155, 29, 29, 0.2)",
       },
       keyframes: {
         "accordion-down": {
@@ -91,10 +96,35 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "fade-in-up": {
+          "0%": { opacity: "0", transform: "translateY(2rem)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        "scroll-in": {
+          "0%": { opacity: "0", transform: "translateY(1.5rem)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "menu-open": {
+          "0%": { opacity: "0", transform: "scale(0.97)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        "slide-in-right": {
+          "0%": { opacity: "0", transform: "translateX(1.5rem)" },
+          "100%": { opacity: "1", transform: "translateX(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-in-up": "fade-in-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "fade-in": "fade-in 0.5s ease-out both",
+        "scroll-in": "scroll-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "menu-open": "menu-open 0.35s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "slide-in-right": "slide-in-right 0.5s cubic-bezier(0.22, 1, 0.36, 1) both",
       },
     },
   },

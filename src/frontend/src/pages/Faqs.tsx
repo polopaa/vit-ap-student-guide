@@ -5,6 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
+import { useEffect, useRef, useState } from "react";
 import { Layout } from "../components/Layout";
 
 interface FaqItem {
@@ -12,12 +13,49 @@ interface FaqItem {
   a: string;
   bullets?: string[];
 }
-
 interface FaqCategory {
   id: string;
   icon: string;
   label: string;
   items: FaqItem[];
+}
+
+function useScrollFade() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.05 },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return { ref, visible };
+}
+
+function FadeSection({
+  children,
+  className = "",
+  delay = 0,
+}: { children: React.ReactNode; className?: string; delay?: number }) {
+  const { ref, visible } = useScrollFade();
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
 }
 
 const faqData: FaqCategory[] = [
@@ -50,7 +88,7 @@ const faqData: FaqCategory[] = [
       },
       {
         q: "Is VIT-AP good for placements and career growth?",
-        a: "Decent — but don't expect the college to do the heavy lifting. Companies do come for campus placements, and the numbers aren't bad if you keep your CGPA above 7.5 and build relevant skills. The bigger wins I've seen are from students who used the campus ecosystem — clubs, coding competitions, hackathons, and internship drives — to build a real profile. If you're in tech, being around motivated peers and having access to events like Google Summer of Code participants, coding clubs, and IEEE chapters genuinely helps. The placement cell exists, but your profile matters more than their efforts.",
+        a: "Decent — but don't expect the college to do the heavy lifting. Companies do come for campus placements, and the numbers aren't bad if you keep your CGPA above 7.5 and build relevant skills. The bigger wins I've seen are from students who used the campus ecosystem — clubs, coding competitions, hackathons, and internship drives — to build a real profile. If you're in tech, being around motivated peers and having access to events like Google Summer of Code participants, coding clubs, and IEEE chapters genuinely helps.",
       },
       {
         q: "What are the biggest downsides I should know before joining?",
@@ -144,11 +182,11 @@ const faqData: FaqCategory[] = [
       },
       {
         q: "Are professors strict?",
-        a: "It varies — there's no single answer. Some professors are excellent and genuinely engaging; others are disorganized or hard to follow. What I'd flag is that professors here have significant control over your internals — quiz marks, assignment grades, CAT evaluations, and sometimes the general vibe of the class. Only FAT marks can be formally re-evaluated by another faculty member. For everything else, there's limited scope to raise concerns if something feels unfair. It's not unique to VIT-AP, but worth knowing going in.",
+        a: "It varies — there's no single answer. Some professors are excellent and genuinely engaging; others are disorganized or hard to follow. What I'd flag is that professors here have significant control over your internals — quiz marks, assignment grades, CAT evaluations, and sometimes the general vibe of the class. Only FAT marks can be formally re-evaluated by another faculty member. For everything else, there's limited scope to raise concerns if something feels unfair.",
       },
       {
         q: "What happens if I fail a subject or get a backlog?",
-        a: "Getting a backlog means you have to re-register and retake the full course — it costs around ₹6,000 per subject. Unlike some colleges where just turning up might get you through, professors here can and do fail students who aren't performing. The subject will show on your transcript, and it affects your CGPA. My advice: take every course seriously from day one, especially in first year when most students are still adjusting. A backlog in semester 1 is a frustrating way to start.",
+        a: "Getting a backlog means you have to re-register and retake the full course — it costs around ₹6,000 per subject. Unlike some colleges where just turning up might get you through, professors here can and do fail students who aren't performing. The subject will show on your transcript, and it affects your CGPA. My advice: take every course seriously from day one, especially in first year when most students are still adjusting.",
       },
     ],
   },
@@ -172,15 +210,15 @@ const faqData: FaqCategory[] = [
       },
       {
         q: "Is the campus Wi-Fi reliable?",
-        a: "It's okay — not great, not terrible. Wi-Fi covers most of the campus, and hostel rooms also have wired LAN ports which are noticeably more stable. In my experience, Wi-Fi during peak hours (evenings especially) can slow down significantly when everyone's online. If you're doing anything bandwidth-heavy like video calls or large downloads, a LAN cable is worth having. The infrastructure has improved over the years, but it's still not consistently reliable.",
+        a: "It's okay — not great, not terrible. Wi-Fi covers most of the campus, and hostel rooms also have wired LAN ports which are noticeably more stable. In my experience, Wi-Fi during peak hours (evenings especially) can slow down significantly when everyone's online. If you're doing anything bandwidth-heavy like video calls or large downloads, a LAN cable is worth having.",
       },
       {
         q: "Are clubs and activities worth joining?",
-        a: "Yes — and I genuinely mean that, not as a PR line. VIT-AP has a solid number of clubs across technical, cultural, sports, and social categories. Multiple clubs actively organize events and hackathons throughout the year. In my experience, the students who got the most out of this place were the ones who joined a club or two early on. It's how you meet interesting people, build skills outside the classroom, and have something concrete to put on your resume. Don't wait until third year to explore.",
+        a: "Yes — and I genuinely mean that, not as a PR line. VIT-AP has a solid number of clubs across technical, cultural, sports, and social categories. Multiple clubs actively organize events and hackathons throughout the year. In my experience, the students who got the most out of this place were the ones who joined a club or two early on. It's how you meet interesting people, build skills outside the classroom, and have something concrete to put on your resume.",
       },
       {
         q: "How are hackathons and events here?",
-        a: "Hackathons and events happen regularly on campus — though I'd say they're more frequent than they are large-scale. Campus-level competitions and club events run throughout the year, and they're a great starting point. Bigger programs like Google Summer of Code, Recon, and other national/international hackathons are things students participate in individually or in small teams — the campus doesn't run those, but there are communities here that prep and participate together. If you're serious about competitive programming or open source, you'll find your people.",
+        a: "Hackathons and events happen regularly on campus — though I'd say they're more frequent than they are large-scale. Campus-level competitions and club events run throughout the year, and they're a great starting point. Bigger programs like Google Summer of Code, Recon, and other national/international hackathons are things students participate in individually or in small teams — the campus doesn't run those, but there are communities here that prep and participate together.",
       },
       {
         q: "Can I study abroad from VIT-AP?",
@@ -205,16 +243,15 @@ export default function Faqs() {
 
   return (
     <Layout>
-      {/* Hero */}
-      <section className="section-bg-light px-6 py-10 border-b border-border">
-        <div className="max-w-3xl mx-auto">
-          <p className="text-label mb-2" data-ocid="faqs.section_label">
-            FAQs
+      {/* Chapter Hero */}
+      <section className="section-bg-light px-6 pt-20 pb-16 border-b border-border/30">
+        <div className="max-w-4xl mx-auto">
+          <p className="chapter-label mb-4" data-ocid="faqs.section_label">
+            Chapter
           </p>
-          <h2 className="text-hero text-foreground mb-3">
-            Questions I Wish I'd Asked Before Joining
-          </h2>
-          <p className="text-base text-muted-foreground">
+          <h1 className="text-hero text-foreground mb-6 fade-in-up">FAQ</h1>
+          <div className="gold-underline w-16 mb-8" />
+          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-1">
             {totalQuestions} honest answers to what you're probably wondering
             right now — whether this place is worth it, what daily life is
             actually like, and what no one puts in the brochure.
@@ -223,13 +260,13 @@ export default function Faqs() {
       </section>
 
       {/* Category nav */}
-      <section className="section-bg-muted px-6 py-4 border-b border-border sticky top-0 z-10">
-        <div className="max-w-3xl mx-auto flex flex-wrap gap-2">
+      <section className="section-bg-muted px-6 py-4 border-b border-border/30 sticky top-0 z-10 backdrop-blur-sm">
+        <div className="max-w-4xl mx-auto flex flex-wrap gap-2">
           {faqData.map((cat) => (
             <a
               key={cat.id}
               href={`#faq-${cat.id}`}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border border-border bg-background hover:bg-primary hover:text-primary-foreground hover:border-primary transition-smooth"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold tracking-widest uppercase border border-border/40 text-muted-foreground hover:border-secondary/50 hover:text-secondary transition-smooth"
               data-ocid={`faqs.category_link.${cat.id}`}
             >
               <span aria-hidden="true">{cat.icon}</span>
@@ -240,73 +277,89 @@ export default function Faqs() {
       </section>
 
       {/* FAQ sections */}
-      <div className="max-w-3xl mx-auto px-6">
+      <div className="max-w-4xl mx-auto px-6">
         {faqData.map((cat, catIdx) => (
           <section
             key={cat.id}
             id={`faq-${cat.id}`}
-            className={`py-8 ${catIdx < faqData.length - 1 ? "border-b border-border" : ""}`}
+            className={`py-14 ${catIdx < faqData.length - 1 ? "border-b border-border/30" : ""}`}
             data-ocid={`faqs.${cat.id}_section`}
           >
-            <div className="flex items-center gap-2 mb-4">
-              <span className="text-2xl" aria-hidden="true">
-                {cat.icon}
-              </span>
-              <h2 className="text-section">{cat.label}</h2>
-              <Badge variant="outline" className="ml-auto text-xs">
-                {cat.items.length} questions
-              </Badge>
-            </div>
+            <FadeSection>
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-xl" aria-hidden="true">
+                  {cat.icon}
+                </span>
+                <p className="text-label">{cat.label}</p>
+                <Badge variant="outline" className="ml-auto text-xs">
+                  {cat.items.length} questions
+                </Badge>
+              </div>
+              <h2 className="text-section text-foreground mb-2">{cat.label}</h2>
+              <div className="gold-underline w-12 mb-8" />
+            </FadeSection>
 
-            <Accordion type="multiple" className="space-y-2">
+            <Accordion type="multiple" className="space-y-0">
               {cat.items.map((item, i) => (
-                <AccordionItem
-                  key={item.q}
-                  value={`${cat.id}-${i}`}
-                  className="card-elevated rounded-lg px-4 border"
-                  data-ocid={`faqs.${cat.id}.item.${i + 1}`}
-                >
-                  <AccordionTrigger
-                    className="text-sm font-semibold text-foreground hover:no-underline py-4 text-left"
-                    data-ocid={`faqs.${cat.id}.trigger.${i + 1}`}
+                <FadeSection key={item.q} delay={i * 60}>
+                  <AccordionItem
+                    value={`${cat.id}-${i}`}
+                    className="border-b border-border/40 last:border-b-0"
+                    data-ocid={`faqs.${cat.id}.item.${i + 1}`}
                   >
-                    {item.q}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-sm text-muted-foreground pb-4 leading-relaxed">
-                    <p className="mb-2">{item.a}</p>
-                    {item.bullets && item.bullets.length > 0 && (
-                      <ul className="space-y-1 mt-2">
-                        {item.bullets.map((bullet) => (
-                          <li key={bullet} className="flex items-start gap-2">
-                            <span
-                              className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/60"
-                              aria-hidden="true"
-                            />
-                            <span>{bullet}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </AccordionContent>
-                </AccordionItem>
+                    <AccordionTrigger
+                      className="text-xl md:text-2xl font-display font-semibold py-6"
+                      data-ocid={`faqs.${cat.id}.trigger.${i + 1}`}
+                    >
+                      {item.q}
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <div className="pb-6 pl-1">
+                        <p className="text-muted-foreground text-sm leading-relaxed mb-3">
+                          {item.a}
+                        </p>
+                        {item.bullets && item.bullets.length > 0 && (
+                          <ul className="space-y-2 mt-3 border-l-2 border-secondary/30 pl-4">
+                            {item.bullets.map((bullet) => (
+                              <li
+                                key={bullet}
+                                className="flex items-start gap-2 text-sm text-muted-foreground"
+                              >
+                                <span className="text-secondary shrink-0 mt-0.5 font-bold">
+                                  —
+                                </span>
+                                <span>{bullet}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                </FadeSection>
               ))}
             </Accordion>
           </section>
         ))}
 
         {/* Summary */}
-        <section className="py-8" data-ocid="faqs.summary_section">
-          <div className="bg-primary/5 border border-primary/20 rounded-xl p-5">
-            <p className="text-label mb-1">One Last Thing</p>
-            <p className="text-sm text-foreground">
-              Everything here is based on real student experience — mine and
-              others I've talked to. Things change, rules get updated, and your
-              experience will be your own. If something here doesn't match what
-              you're hearing from the college officially, go with the official
-              source. But for the day-to-day reality of what it's like here?
-              This is as honest as it gets.
-            </p>
-          </div>
+        <section
+          className="py-12 border-t border-border/30"
+          data-ocid="faqs.summary_section"
+        >
+          <FadeSection>
+            <div className="border-l-2 border-secondary/50 pl-6 py-4">
+              <p className="text-label mb-2">One Last Thing</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Everything here is based on real student experience — mine and
+                others I've talked to. Things change, rules get updated, and
+                your experience will be your own. If something here doesn't
+                match what you're hearing from the college officially, go with
+                the official source. But for the day-to-day reality of what it's
+                like here? This is as honest as it gets.
+              </p>
+            </div>
+          </FadeSection>
         </section>
       </div>
     </Layout>

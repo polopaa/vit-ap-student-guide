@@ -1,43 +1,43 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { useEffect, useRef, useState } from "react";
 import { Layout } from "../components/Layout";
 
-interface GuideCardProps {
-  icon: string;
-  title: string;
-  items: string[];
-  accent?: boolean;
+function useScrollFade() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.05 },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return { ref, visible };
 }
 
-function GuideCard({ icon, title, items, accent = false }: GuideCardProps) {
+function FadeSection({
+  children,
+  className = "",
+  delay = 0,
+}: { children: React.ReactNode; className?: string; delay?: number }) {
+  const { ref, visible } = useScrollFade();
   return (
-    <Card
-      className={`card-elevated h-full ${accent ? "border-primary/30 bg-primary/5" : ""}`}
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
     >
-      <CardContent className="p-5">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="text-2xl" aria-hidden="true">
-            {icon}
-          </span>
-          <h3 className="text-subsection">{title}</h3>
-        </div>
-        <ul className="space-y-2">
-          {items.map((item) => (
-            <li
-              key={item}
-              className="flex items-start gap-2 text-sm text-foreground"
-            >
-              <span
-                className={`mt-0.5 shrink-0 ${accent ? "text-primary" : "text-accent"}`}
-              >
-                →
-              </span>
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
-      </CardContent>
-    </Card>
+      {children}
+    </div>
   );
 }
 
@@ -115,247 +115,35 @@ const outingRules = [
 export default function Survival() {
   return (
     <Layout>
-      {/* Hero */}
-      <section className="section-bg-light px-6 py-10 border-b border-border">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2" data-ocid="survival.page_label">
-            Survival Guides
+      {/* Chapter Hero */}
+      <section className="section-bg-light px-6 pt-20 pb-16 border-b border-border/30">
+        <div className="max-w-5xl mx-auto">
+          <p className="chapter-label mb-4" data-ocid="survival.page_label">
+            Chapter
           </p>
-          <h2 className="text-hero text-foreground mb-4">
-            What I Wish Someone Had Told Me
-          </h2>
-          <p className="text-base text-muted-foreground max-w-2xl mb-6">
+          <h1 className="text-hero text-foreground mb-6 fade-in-up">
+            SURVIVAL
+            <br />
+            GUIDE
+          </h1>
+          <div className="gold-underline w-16 mb-8" />
+          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-1">
             This is the stuff most students only figure out after they've
             already made the mistakes. I'm putting it here so you don't have to
             learn it the hard way — exams, attendance, outings, mentoring. Read
             this before your first week.
           </p>
-          <div className="flex flex-wrap gap-2">
-            <Badge variant="secondary" className="text-xs px-3 py-1">
-              📝 Exam Prep
-            </Badge>
-            <Badge variant="secondary" className="text-xs px-3 py-1">
-              📊 Attendance Tips
-            </Badge>
-            <Badge variant="secondary" className="text-xs px-3 py-1">
-              🗓️ Time Management
-            </Badge>
-            <Badge variant="secondary" className="text-xs px-3 py-1">
-              🧑‍🏫 Mentoring
-            </Badge>
-            <Badge variant="secondary" className="text-xs px-3 py-1">
-              🚪 Outing Rules
-            </Badge>
-          </div>
-        </div>
-      </section>
-
-      {/* Exam Prep + Attendance */}
-      <section
-        className="section-bg-muted px-6 py-10 border-b border-border"
-        data-ocid="survival.exam_section"
-      >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">What actually works</p>
-          <h2 className="text-section mb-6">Exams & Attendance</h2>
-          <div className="grid md:grid-cols-2 gap-5">
-            <GuideCard
-              icon="📝"
-              title="How to approach exams"
-              items={[
-                "Start revising at least 2 weeks before finals — not the night before. I cannot stress this enough.",
-                "PYQs are your best friend. Many questions repeat — use them.",
-                "CAT exams (15 marks each) are easier to score in than the FAT. Don't underestimate them.",
-                "Form study groups for tough subjects — explaining things out loud forces you to actually understand them",
-                "Don't ignore assignments and quizzes — every mark counts toward your internal",
-                "Understanding beats memorizing for higher grades, especially in subjects with numericals",
-              ]}
-            />
-            <GuideCard
-              icon="📊"
-              title="Managing attendance"
-              items={[
-                "75% is the cutoff — but I'd aim for 85%+. You will get sick, you'll want to travel, things come up. Don't burn your buffer in month 1.",
-                "Track it weekly on VTOP. Don't wait until it's critical.",
-                "Calculate your 'safe bunk limit' per subject at the start of semester",
-                "If you fall below 75%, approach your faculty proctor before the shortage becomes official",
-                "Missing a class affects all students in that slot — be mindful if you're coordinating bunks",
-              ]}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Student Mentoring */}
-      <section
-        className="section-bg-light px-6 py-10 border-b border-border"
-        data-ocid="survival.mentoring_section"
-      >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">You have support — use it</p>
-          <h2 className="text-section mb-6">Your Proctor (Faculty Mentor)</h2>
-          <p className="text-sm text-muted-foreground mb-5">
-            Every student gets assigned a faculty mentor called a Proctor.
-            They're your go-to person for academic issues, leave applications,
-            and attendance problems. In my experience, reaching out early is
-            always better than waiting until things get messy.
-          </p>
-          <div className="grid md:grid-cols-2 gap-5">
-            <GuideCard
-              icon="🧑‍🏫"
-              title="What your Proctor actually does"
-              items={[
-                "Monitors your academic performance and flags concerns early",
-                "Approves leave applications submitted via VTOP",
-                "Keeps an eye on your attendance and can intervene if you're struggling",
-                "Can refer you to personal counseling if you're going through something",
-                "First point of contact for any hostel-related academic issues",
-              ]}
-            />
-            <GuideCard
-              icon="📋"
-              title="Leave & attendance relaxation"
-              accent
-              items={[
-                "Submit leave applications on VTOP at least 48 hours in advance",
-                "Always attach supporting documents — no documents means no approval",
-                "Up to 10% additional attendance relaxation may be granted for:",
-                "  → Hospitalization (with discharge summary)",
-                "  → Death of an immediate family member (death certificate required)",
-                "  → Sibling's marriage (marriage invitation required)",
-                "Documents are non-negotiable — the system doesn't make exceptions",
-              ]}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Outing Rules */}
-      <section
-        className="section-bg-muted px-6 py-10 border-b border-border"
-        data-ocid="survival.outing_section"
-      >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">Leaving campus</p>
-          <h2 className="text-section mb-6">Outing Rules</h2>
-          <p className="text-sm text-muted-foreground mb-5">
-            Everything goes through VTOP — apply before you leave, not after.
-            Carry your college ID and the approved outing pass whenever you step
-            out. Trying to sneak out or come back late is not worth the trouble.
-          </p>
-          <div className="grid md:grid-cols-2 gap-5">
-            {outingRules.map((rule) => (
-              <Card key={rule.type} className="card-elevated">
-                <CardContent className="p-5">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-2xl" aria-hidden="true">
-                      {rule.icon}
-                    </span>
-                    <h3 className="text-subsection">{rule.type}</h3>
-                  </div>
-                  <ul className="space-y-2">
-                    {rule.details.map((detail) => (
-                      <li
-                        key={detail}
-                        className="flex items-start gap-2 text-sm text-foreground"
-                      >
-                        <span className="mt-0.5 shrink-0 text-accent">→</span>
-                        <span
-                          className={
-                            detail.startsWith("Freshers are NOT")
-                              ? "text-destructive font-medium"
-                              : ""
-                          }
-                        >
-                          {detail}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          <div className="mt-4 bg-destructive/5 border border-destructive/20 rounded-xl px-5 py-3">
-            <p className="text-sm text-foreground">
-              <span className="font-semibold text-destructive">
-                Freshers, pay attention:{" "}
-              </span>
-              Weekend outings are blocked for your first 3 months. General
-              outings still need both Proctor and warden approval during this
-              period. Plan accordingly — don't assume you can just leave on a
-              Sunday.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Time Management */}
-      <section
-        className="section-bg-light px-6 py-10 border-b border-border"
-        data-ocid="survival.time_section"
-      >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">Don't wing it</p>
-          <h2 className="text-section mb-6">Time Management</h2>
-          <div className="grid md:grid-cols-2 gap-5">
-            <GuideCard
-              icon="🗓️"
-              title="Planning your week"
-              items={[
-                "Plan your week every Sunday — takes 10 minutes and saves a lot of chaos",
-                "Use FFCS to spread heavy subjects across different days rather than clustering them",
-                "Reserve at least one day a week for focused study — not group chats and Netflix",
-                "Avoid stacking two difficult courses back-to-back if your schedule allows it",
-              ]}
-            />
-            <GuideCard
-              icon="⚡"
-              title="Actually being productive"
-              items={[
-                "Free slots between classes are valuable — use them in the library instead of the hostel",
-                "Batch similar tasks: readings, assignments, and revision in one block",
-                "Set your own deadlines 2 days before actual submission dates — things always come up",
-                "Use a simple notes app or planner — relying on memory alone will eventually cost you",
-              ]}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Common Mistakes */}
-      <section
-        className="section-bg-muted px-6 py-10 border-b border-border"
-        data-ocid="survival.mistakes_section"
-      >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">I've seen this go wrong</p>
-          <h2 className="text-section mb-6">Mistakes to Avoid</h2>
-          <div className="space-y-3" data-ocid="survival.mistakes_list">
-            {commonMistakes.map((item, i) => (
-              <div
-                key={item.mistake}
-                className="bg-card border border-border rounded-xl px-5 py-4 shadow-sm flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4"
-                data-ocid={`survival.mistake.${i + 1}`}
-              >
-                <div className="flex items-center gap-3 sm:w-56 shrink-0">
-                  <span className="text-destructive text-lg" aria-hidden="true">
-                    ✗
-                  </span>
-                  <p className="text-sm font-semibold text-foreground font-display">
-                    {item.mistake}
-                  </p>
-                </div>
-                <div className="flex items-start gap-2 min-w-0">
-                  <span
-                    className="text-accent text-lg shrink-0"
-                    aria-hidden="true"
-                  >
-                    →
-                  </span>
-                  <p className="text-sm text-muted-foreground">{item.fix}</p>
-                </div>
-              </div>
+          <div className="flex flex-wrap gap-3 mt-8">
+            {[
+              "📝 Exam Prep",
+              "📊 Attendance",
+              "🗓️ Time Management",
+              "🧑‍🏫 Mentoring",
+              "🚪 Outing Rules",
+            ].map((tag) => (
+              <Badge key={tag} variant="outline" className="text-xs">
+                {tag}
+              </Badge>
             ))}
           </div>
         </div>
@@ -363,32 +151,302 @@ export default function Survival() {
 
       {/* Key Numbers */}
       <section
-        className="section-bg-light px-6 py-10 border-b border-border"
+        className="section-bg-muted px-6 py-16 border-b border-border/30"
         data-ocid="survival.stats_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">Memorize these</p>
-          <h2 className="text-section mb-6">Numbers That Actually Matter</h2>
+        <div className="max-w-5xl mx-auto">
+          <FadeSection>
+            <p className="text-label mb-3">Memorize These</p>
+            <h2 className="text-section text-foreground mb-2">
+              Numbers That Matter
+            </h2>
+            <div className="gold-underline w-12 mb-8" />
+          </FadeSection>
           <div
-            className="grid sm:grid-cols-3 gap-4"
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
             data-ocid="survival.numbers_list"
           >
             {keyStats.map((stat, i) => (
-              <div
-                key={stat.value}
-                className="bg-card border border-border rounded-xl p-4 text-center shadow-sm"
-                data-ocid={`survival.stat.${i + 1}`}
-              >
-                <div className="text-2xl mb-2" aria-hidden="true">
-                  {stat.icon}
+              <FadeSection key={stat.value} delay={i * 60}>
+                <div
+                  className="border border-border/40 bg-card p-6 text-center transition-smooth hover:border-secondary/40"
+                  data-ocid={`survival.stat.${i + 1}`}
+                >
+                  <div className="text-2xl mb-3" aria-hidden="true">
+                    {stat.icon}
+                  </div>
+                  <p className="font-display text-3xl font-black text-secondary">
+                    {stat.value}
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
+                    {stat.label}
+                  </p>
                 </div>
-                <p className="text-2xl font-bold text-primary font-display">
-                  {stat.value}
-                </p>
-                <p className="text-xs text-muted-foreground mt-1">
-                  {stat.label}
-                </p>
-              </div>
+              </FadeSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Exam Prep + Attendance */}
+      <section
+        className="section-bg-light px-6 py-16 border-b border-border/30"
+        data-ocid="survival.exam_section"
+      >
+        <div className="max-w-5xl mx-auto">
+          <FadeSection>
+            <p className="text-label mb-3">What Actually Works</p>
+            <h2 className="text-section text-foreground mb-2">
+              Exams & Attendance
+            </h2>
+            <div className="gold-underline w-12 mb-8" />
+          </FadeSection>
+          <div className="grid md:grid-cols-2 gap-6">
+            {[
+              {
+                icon: "📝",
+                title: "How to approach exams",
+                items: [
+                  "Start revising at least 2 weeks before finals — not the night before. I cannot stress this enough.",
+                  "PYQs are your best friend. Many questions repeat — use them.",
+                  "CAT exams (15 marks each) are easier to score in than the FAT. Don't underestimate them.",
+                  "Form study groups for tough subjects — explaining things out loud forces you to actually understand them",
+                  "Don't ignore assignments and quizzes — every mark counts toward your internal",
+                ],
+              },
+              {
+                icon: "📊",
+                title: "Managing attendance",
+                items: [
+                  "75% is the cutoff — but I'd aim for 85%+. You will get sick, you'll want to travel, things come up. Don't burn your buffer in month 1.",
+                  "Track it weekly on VTOP. Don't wait until it's critical.",
+                  "Calculate your 'safe bunk limit' per subject at the start of semester",
+                  "If you fall below 75%, approach your faculty proctor before the shortage becomes official",
+                ],
+              },
+            ].map((group, gi) => (
+              <FadeSection key={group.title} delay={gi * 100}>
+                <Card className="card-cinema h-full">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="text-2xl" aria-hidden="true">
+                        {group.icon}
+                      </span>
+                      <h3 className="font-display text-xl font-semibold text-foreground">
+                        {group.title}
+                      </h3>
+                    </div>
+                    <ul className="space-y-2">
+                      {group.items.map((item) => (
+                        <li
+                          key={item}
+                          className="flex items-start gap-2 text-sm text-muted-foreground leading-relaxed"
+                        >
+                          <span className="text-secondary mt-0.5 shrink-0 font-bold">
+                            →
+                          </span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              </FadeSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Proctor */}
+      <section
+        className="section-bg-muted px-6 py-16 border-b border-border/30"
+        data-ocid="survival.mentoring_section"
+      >
+        <div className="max-w-5xl mx-auto">
+          <FadeSection>
+            <p className="text-label mb-3">You Have Support — Use It</p>
+            <h2 className="text-section text-foreground mb-2">Your Proctor</h2>
+            <div className="gold-underline w-12 mb-6" />
+            <p className="text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed">
+              Every student gets assigned a faculty mentor called a Proctor.
+              They're your go-to person for academic issues, leave applications,
+              and attendance problems. In my experience, reaching out early is
+              always better than waiting until things get messy.
+            </p>
+          </FadeSection>
+          <div className="grid md:grid-cols-2 gap-6">
+            {[
+              {
+                icon: "🧑‍🏫",
+                title: "What your Proctor actually does",
+                items: [
+                  "Monitors your academic performance and flags concerns early",
+                  "Approves leave applications submitted via VTOP",
+                  "Keeps an eye on your attendance and can intervene if you're struggling",
+                  "Can refer you to personal counseling if you're going through something",
+                  "First point of contact for any hostel-related academic issues",
+                ],
+              },
+              {
+                icon: "📋",
+                title: "Leave & attendance relaxation",
+                items: [
+                  "Submit leave applications on VTOP at least 48 hours in advance",
+                  "Always attach supporting documents — no documents means no approval",
+                  "Up to 10% additional attendance relaxation may be granted for:",
+                  "  → Hospitalization (with discharge summary)",
+                  "  → Death of an immediate family member (death certificate required)",
+                  "  → Sibling's marriage (marriage invitation required)",
+                ],
+              },
+            ].map((group, gi) => (
+              <FadeSection key={group.title} delay={gi * 100}>
+                <Card className="card-cinema h-full">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="text-2xl" aria-hidden="true">
+                        {group.icon}
+                      </span>
+                      <h3 className="font-display text-xl font-semibold text-foreground">
+                        {group.title}
+                      </h3>
+                    </div>
+                    <ul className="space-y-2">
+                      {group.items.map((item) => (
+                        <li
+                          key={item}
+                          className="flex items-start gap-2 text-sm text-muted-foreground leading-relaxed"
+                        >
+                          <span className="text-secondary mt-0.5 shrink-0 font-bold">
+                            →
+                          </span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              </FadeSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Outing Rules */}
+      <section
+        className="section-bg-light px-6 py-16 border-b border-border/30"
+        data-ocid="survival.outing_section"
+      >
+        <div className="max-w-5xl mx-auto">
+          <FadeSection>
+            <p className="text-label mb-3">Leaving Campus</p>
+            <h2 className="text-section text-foreground mb-2">Outing Rules</h2>
+            <div className="gold-underline w-12 mb-6" />
+            <p className="text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed">
+              Everything goes through VTOP — apply before you leave, not after.
+              Carry your college ID and the approved outing pass whenever you
+              step out.
+            </p>
+          </FadeSection>
+          <div className="grid md:grid-cols-2 gap-6">
+            {outingRules.map((rule, i) => (
+              <FadeSection key={rule.type} delay={i * 100}>
+                <Card className="card-cinema h-full">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="text-2xl" aria-hidden="true">
+                        {rule.icon}
+                      </span>
+                      <h3 className="font-display text-xl font-semibold text-foreground">
+                        {rule.type}
+                      </h3>
+                    </div>
+                    <ul className="space-y-2">
+                      {rule.details.map((detail) => (
+                        <li
+                          key={detail}
+                          className="flex items-start gap-2 text-sm text-muted-foreground leading-relaxed"
+                        >
+                          <span className="mt-0.5 shrink-0 text-secondary font-bold">
+                            →
+                          </span>
+                          <span
+                            className={
+                              detail.startsWith("Freshers are NOT")
+                                ? "text-destructive font-semibold"
+                                : ""
+                            }
+                          >
+                            {detail}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              </FadeSection>
+            ))}
+          </div>
+          <FadeSection delay={200}>
+            <div className="mt-5 border-l-2 border-destructive/60 pl-5 py-3 bg-destructive/5">
+              <p className="text-sm text-foreground">
+                <span className="font-semibold text-destructive">
+                  Freshers, pay attention:{" "}
+                </span>
+                Weekend outings are blocked for your first 3 months. General
+                outings still need both Proctor and warden approval during this
+                period. Plan accordingly — don't assume you can just leave on a
+                Sunday.
+              </p>
+            </div>
+          </FadeSection>
+        </div>
+      </section>
+
+      {/* Mistakes */}
+      <section
+        className="section-bg-muted px-6 py-16 border-b border-border/30"
+        data-ocid="survival.mistakes_section"
+      >
+        <div className="max-w-5xl mx-auto">
+          <FadeSection>
+            <p className="text-label mb-3">I've Seen This Go Wrong</p>
+            <h2 className="text-section text-foreground mb-2">
+              Mistakes to Avoid
+            </h2>
+            <div className="gold-underline w-12 mb-8" />
+          </FadeSection>
+          <div className="space-y-3" data-ocid="survival.mistakes_list">
+            {commonMistakes.map((item, i) => (
+              <FadeSection key={item.mistake} delay={i * 60}>
+                <div
+                  className="border border-border/40 bg-card px-6 py-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 transition-smooth hover:border-border/60"
+                  data-ocid={`survival.mistake.${i + 1}`}
+                >
+                  <div className="flex items-center gap-3 sm:w-52 shrink-0">
+                    <span
+                      className="text-destructive text-lg"
+                      aria-hidden="true"
+                    >
+                      ✗
+                    </span>
+                    <p className="font-display font-semibold text-foreground text-sm">
+                      {item.mistake}
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-2 min-w-0">
+                    <span
+                      className="text-secondary text-lg shrink-0"
+                      aria-hidden="true"
+                    >
+                      →
+                    </span>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {item.fix}
+                    </p>
+                  </div>
+                </div>
+              </FadeSection>
             ))}
           </div>
         </div>
@@ -396,21 +454,23 @@ export default function Survival() {
 
       {/* Summary */}
       <section
-        className="section-bg-muted px-6 py-8"
+        className="section-bg-light px-6 py-12"
         data-ocid="survival.summary_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-primary/5 border border-primary/20 rounded-xl p-5">
-            <p className="text-label mb-1">Honestly</p>
-            <p className="text-sm text-foreground">
-              Most problems students face here are avoidable — attendance
-              falling, marks dropping, missing deadlines. None of it is
-              complicated. Track your attendance weekly, don't wait until CAT 2
-              to take academics seriously, stay in touch with your Proctor, and
-              apply for outings properly. Do these things and you'll be ahead of
-              most of your batch.
-            </p>
-          </div>
+        <div className="max-w-5xl mx-auto">
+          <FadeSection>
+            <div className="border-l-2 border-secondary/50 pl-6 py-4">
+              <p className="text-label mb-2">Honestly</p>
+              <p className="text-sm text-muted-foreground leading-relaxed max-w-3xl">
+                Most problems students face here are avoidable — attendance
+                falling, marks dropping, missing deadlines. None of it is
+                complicated. Track your attendance weekly, don't wait until CAT
+                2 to take academics seriously, stay in touch with your Proctor,
+                and apply for outings properly. Do these things and you'll be
+                ahead of most of your batch.
+              </p>
+            </div>
+          </FadeSection>
         </div>
       </section>
     </Layout>

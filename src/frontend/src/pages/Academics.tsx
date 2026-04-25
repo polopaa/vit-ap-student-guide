@@ -1,150 +1,113 @@
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+import { useEffect, useRef } from "react";
 import { Layout } from "../components/Layout";
 
-function Note({ children }: { children: React.ReactNode }) {
+function useScrollReveal() {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("is-visible");
+          obs.unobserve(el);
+        }
+      },
+      { threshold: 0.1 },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return ref;
+}
+
+function Reveal({
+  children,
+  className = "",
+  delay = 0,
+}: { children: React.ReactNode; className?: string; delay?: number }) {
+  const ref = useScrollReveal();
   return (
-    <div className="mt-4 bg-primary/5 border border-primary/20 rounded-lg px-4 py-3 text-sm text-muted-foreground">
-      💡 {children}
+    <div
+      ref={ref}
+      className={`reveal-block ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
     </div>
   );
 }
 
-function SectionHeading({ children }: { children: React.ReactNode }) {
-  return (
-    <h4 className="text-sm font-semibold text-foreground mt-5 mb-2 uppercase tracking-wide text-primary/80">
-      {children}
-    </h4>
-  );
-}
-
-function StepList({ steps }: { steps: string[] }) {
-  return (
-    <ol className="space-y-2 mt-3">
-      {steps.map((step, i) => (
-        <li
-          key={step}
-          className="flex items-start gap-2 text-sm text-foreground"
-        >
-          <span className="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-primary/15 text-primary text-xs font-bold flex items-center justify-center">
-            {i + 1}
-          </span>
-          <span>{step}</span>
-        </li>
-      ))}
-    </ol>
-  );
-}
-
-function BulletList({
-  items,
-  accent = false,
-}: { items: string[]; accent?: boolean }) {
-  return (
-    <ul className="space-y-2 mt-3">
-      {items.map((item) => (
-        <li
-          key={item}
-          className="flex items-start gap-2 text-sm text-foreground"
-        >
-          <span
-            className={`mt-0.5 shrink-0 font-bold ${accent ? "text-accent" : "text-primary"}`}
-          >
-            •
-          </span>
-          <span>{item}</span>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-const letterGrades = [
+const evalItems = [
   {
-    grade: "S",
-    points: "10",
-    meaning: "Excellent — Pass",
-    variant: "default" as const,
+    code: "CAT-1",
+    marks: "15",
+    detail:
+      "~50 minutes. Scripts returned after so you can see what went wrong. Use that feedback.",
   },
   {
-    grade: "A",
-    points: "9",
-    meaning: "Very Good — Pass",
-    variant: "secondary" as const,
+    code: "CAT-2",
+    marks: "15",
+    detail:
+      "Same format and same weight as CAT-1. Held later in the semester. Treat it identically.",
   },
   {
-    grade: "B",
-    points: "8",
-    meaning: "Good — Pass",
-    variant: "secondary" as const,
+    code: "Assignments",
+    marks: "30",
+    detail:
+      "Minimum 3 digital assignments × 10 marks each. Spread across the semester — don't leave them for the last week.",
   },
   {
-    grade: "C",
-    points: "7",
-    meaning: "Average — Pass",
-    variant: "secondary" as const,
-  },
-  {
-    grade: "D",
-    points: "6",
-    meaning: "Satisfactory",
-    variant: "secondary" as const,
-  },
-  {
-    grade: "E",
-    points: "5",
-    meaning: "Passed (barely)",
-    variant: "secondary" as const,
-  },
-  {
-    grade: "F",
-    points: "0",
-    meaning: "Fail — must re-register",
-    variant: "destructive" as const,
-  },
-  {
-    grade: "N",
-    points: "0",
-    meaning: "Incomplete / Debarred",
-    variant: "destructive" as const,
-  },
-  {
-    grade: "W",
-    points: "—",
-    meaning: "Withdrawn (not in CGPA)",
-    variant: "outline" as const,
+    code: "FAT",
+    marks: "40",
+    detail:
+      "3 hours, centrally conducted. Your single biggest component. Missing it without valid reason is a serious problem.",
   },
 ];
 
-const attendanceImpact = [
+const semesterSteps = [
   {
-    pct: "≥ 80%",
-    status: "Safe",
-    consequence: "You're fine — keep it up",
-    color: "text-green-600 dark:text-green-400",
-    bg: "bg-green-500/10 border-green-500/25",
+    step: "01",
+    title: "Registration on VTOP",
+    body: "You pick your courses and time slots. Popular faculty fills up within minutes. In your first semester, this is done for you — the college assigns your slots.",
   },
   {
-    pct: "75–79%",
-    status: "Caution",
-    consequence: "One more absence and you could be barred from the next exam",
-    color: "text-yellow-600 dark:text-yellow-400",
-    bg: "bg-yellow-500/10 border-yellow-500/25",
+    step: "02",
+    title: "Classes Begin",
+    body: "Attendance is tracked from day one, per course. Don't skip early classes thinking they don't count yet. They do.",
   },
   {
-    pct: "< 75%",
-    status: "Debarred",
-    consequence: "You can't sit for the next CAT or FAT for that course",
-    color: "text-red-600 dark:text-red-400",
-    bg: "bg-red-500/10 border-red-500/25",
+    step: "03",
+    title: "CAT-1",
+    body: "Mid-semester, ~50 minutes, 15 marks. Scripts are returned — review them. These are your practice for CAT-2.",
   },
   {
-    pct: "Debarred from FAT",
-    status: "N Grade",
-    consequence: "You have to re-register the entire course next semester",
-    color: "text-red-700 dark:text-red-300",
-    bg: "bg-red-500/15 border-red-500/30",
+    step: "04",
+    title: "Digital Assignments",
+    body: "At least 3, worth 30 marks total. They run throughout the semester. Steady effort here, not a last-minute rush.",
   },
+  {
+    step: "05",
+    title: "CAT-2",
+    body: "Same format as CAT-1, 15 marks, held later in the semester. Treat it with the same seriousness as CAT-1.",
+  },
+  {
+    step: "06",
+    title: "FAT",
+    body: "Final Assessment Test — 3 hours, 40 marks, centrally conducted at semester end. The biggest single component.",
+  },
+];
+
+const letterGrades = [
+  { grade: "S", points: "10", meaning: "Excellent — Pass" },
+  { grade: "A", points: "9", meaning: "Very Good — Pass" },
+  { grade: "B", points: "8", meaning: "Good — Pass" },
+  { grade: "C", points: "7", meaning: "Average — Pass" },
+  { grade: "D", points: "6", meaning: "Satisfactory" },
+  { grade: "E", points: "5", meaning: "Passed (barely)" },
+  { grade: "F", points: "0", meaning: "Fail — must re-register" },
+  { grade: "N", points: "0", meaning: "Incomplete / Debarred" },
+  { grade: "W", points: "—", meaning: "Withdrawn (not in CGPA)" },
 ];
 
 const theorySlots: { time: string; slots: string[] }[] = [
@@ -173,215 +136,327 @@ const labSlots: { time: string; slots: string[] }[] = [
   { time: "14:00 – 15:50", slots: ["L37+L38", "L39+L40", "", "", "", ""] },
 ];
 
+const attendanceRows = [
+  {
+    pct: "≥ 80%",
+    status: "Safe",
+    consequence: "You're fine — keep it up",
+    accent: "secondary",
+  },
+  {
+    pct: "75–79%",
+    status: "Caution",
+    consequence: "One more absence could bar you from the next exam",
+    accent: "warning",
+  },
+  {
+    pct: "< 75%",
+    status: "Debarred",
+    consequence: "Cannot sit for next CAT or FAT for that course",
+    accent: "primary",
+  },
+  {
+    pct: "Debarred from FAT",
+    status: "N Grade",
+    consequence: "Must re-register the entire course next semester",
+    accent: "primary",
+  },
+];
+
 export default function Academics() {
   return (
     <Layout>
-      {/* Hero */}
-      <section className="section-bg-light px-6 py-10 border-b border-border">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2" data-ocid="academics.section_label">
-            Academics
-          </p>
-          <h2 className="text-hero text-foreground mb-3">
-            How Academics Actually Work at VIT-AP
-          </h2>
-          <p className="text-base text-muted-foreground max-w-2xl mb-4">
+      <style>{`
+        .reveal-block { opacity:0; transform:translateY(2rem); transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1); }
+        .reveal-block.is-visible { opacity:1; transform:translateY(0); }
+        @media(prefers-reduced-motion:reduce){.reveal-block{opacity:1;transform:none;transition:none;}}
+        .slot-tag { display:inline-block; padding:.15rem .5rem; font-size:.7rem; font-weight:700; letter-spacing:.05em; }
+      `}</style>
+
+      {/* ── Chapter Hero ── */}
+      <section className="bg-background min-h-[60vh] flex items-end px-6 pb-16 pt-32 relative overflow-hidden">
+        <div
+          className="absolute inset-0 bg-grain opacity-20 pointer-events-none"
+          aria-hidden="true"
+        />
+        <div className="max-w-5xl mx-auto w-full">
+          <div className="fade-in-up fade-in-up-delay-1">
+            <span className="chapter-label">Chapter III</span>
+          </div>
+          <h1
+            className="fade-in-up fade-in-up-delay-2 font-display font-black text-foreground leading-none tracking-tighter mt-4 mb-6"
+            style={{ fontSize: "clamp(3rem, 9vw, 7.5rem)" }}
+            data-ocid="academics.chapter_title"
+          >
+            ACAD-
+            <br />
+            <span style={{ color: "oklch(var(--primary))" }}>EMICS</span>
+          </h1>
+          <p className="fade-in-up fade-in-up-delay-3 font-body italic text-muted-foreground text-xl max-w-2xl">
             I'll walk you through how the semester runs, what the exams are
             like, how grades are decided, and what you actually need to watch
-            out for. No jargon — just what you need to know before you walk in.
+            out for.
           </p>
-          <div className="flex flex-wrap gap-2">
-            <Badge variant="secondary" className="text-xs px-3 py-1">
-              🗂️ FFCS from Semester 2
-            </Badge>
-            <Badge variant="secondary" className="text-xs px-3 py-1">
-              📝 CAT-1 + CAT-2 + FAT
-            </Badge>
-            <Badge variant="secondary" className="text-xs px-3 py-1">
-              📊 Relative Grading
-            </Badge>
-          </div>
+          <div className="fade-in-up fade-in-up-delay-4 chapter-divider mt-8 w-24" />
         </div>
       </section>
 
-      {/* Semester flow */}
+      {/* ── How a Semester Works ── */}
       <section
-        className="section-bg-muted px-6 py-10 border-b border-border"
+        className="px-6 py-20 border-t border-border"
+        style={{ background: "oklch(0.10 0.008 60)" }}
         data-ocid="academics.overview_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">How a Semester Works</p>
-          <h2 className="text-section mb-4">Your Semester, Step by Step</h2>
-          <Card className="card-elevated">
-            <CardContent className="p-6">
-              <StepList
-                steps={[
-                  "Registration opens on VTOP — you pick your courses and time slots. Popular faculty and slots fill up within minutes, so have a backup plan ready. (In your first semester, this part is done for you — the college assigns your slots.)",
-                  "Classes begin. Attendance is tracked from day one — each course is tracked separately. Don't skip early classes thinking they don't count yet.",
-                  "CAT-1 happens mid-semester. It's worth 15 marks — roughly 50 minutes. Your scripts are returned after so you can see where you went wrong.",
-                  "CAT-2 comes later in the semester. Same format and same weightage as CAT-1 — 15 marks, ~50 minutes. Treat it with the same seriousness.",
-                  "Digital Assignments run throughout the semester — at least 3, worth 30 marks total. Don't leave these for the last week.",
-                  "FAT (Final Assessment Test) — 3 hours, conducted centrally at the end of the semester. This is your biggest single component at 40 marks. Missing it without valid reason is a serious problem.",
-                ]}
-              />
-              <Note>
-                Your internal marks — CAT-1 + CAT-2 + Assignments = 60 marks —
-                plus your FAT (40 marks) = 100 total. Grades are assigned
-                relative to how your class performs, not a fixed percentage
-                cutoff.
-              </Note>
-            </CardContent>
-          </Card>
+        <div className="max-w-5xl mx-auto">
+          <Reveal>
+            <p className="text-label mb-4">The flow</p>
+            <h2 className="text-section text-foreground mb-12">
+              Your Semester,
+              <br />
+              Step by Step
+            </h2>
+          </Reveal>
+          <div className="space-y-0 border-t border-border">
+            {semesterSteps.map((s, i) => (
+              <Reveal key={s.step} delay={i * 60}>
+                <div className="flex gap-8 py-8 border-b border-border">
+                  <span
+                    className="font-display font-black text-5xl leading-none shrink-0 w-16 text-right"
+                    style={{ color: "oklch(var(--primary) / 0.25)" }}
+                  >
+                    {s.step}
+                  </span>
+                  <div>
+                    <h3 className="font-display font-bold text-xl text-foreground mb-2">
+                      {s.title}
+                    </h3>
+                    <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                      {s.body}
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal delay={100}>
+            <div
+              className="mt-8 border-l-2 pl-5 py-2"
+              style={{ borderColor: "oklch(var(--secondary))" }}
+            >
+              <p className="font-body text-sm text-muted-foreground">
+                Internals (CAT-1 + CAT-2 + Assignments = 60 marks) + FAT (40
+                marks) = 100 total. Grades are assigned relative to how your
+                class performs — not a fixed percentage cutoff.
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Evaluation breakdown */}
+      {/* ── Marks Breakdown ── */}
       <section
-        className="section-bg-light px-6 py-10 border-b border-border"
+        className="bg-background px-6 py-20 border-t border-border"
         data-ocid="academics.evaluation_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">Marks Breakdown</p>
-          <h2 className="text-section mb-2">What's Worth What</h2>
-          <p className="text-sm text-muted-foreground mb-5">
-            Here's how the 100 marks are split. Knowing this early helps you
-            prioritize.
-          </p>
-          <div className="space-y-3" data-ocid="academics.eval_list">
-            {[
-              {
-                label: "CAT-1",
-                marks: "15",
-                detail:
-                  "~50 minutes, closed book. Scripts returned after — review them, they help.",
-                bg: "bg-primary/8 border-primary/20",
-                ocid: "academics.eval.cat1",
-              },
-              {
-                label: "CAT-2",
-                marks: "15",
-                detail:
-                  "Same format as CAT-1 — ~50 minutes, closed book, held later in the semester.",
-                bg: "bg-primary/8 border-primary/20",
-                ocid: "academics.eval.cat2",
-              },
-              {
-                label: "Digital Assignments",
-                marks: "30",
-                detail:
-                  "Minimum 3 assignments × 10 marks each. Spread across the semester — do them on time.",
-                bg: "bg-muted border-border",
-                ocid: "academics.eval.da",
-              },
-              {
-                label: "FAT (Final Exam)",
-                marks: "40",
-                detail:
-                  "3 hours, closed book, centrally conducted. The single biggest component — don't underestimate it.",
-                bg: "bg-muted border-border",
-                ocid: "academics.eval.fat",
-              },
-              {
-                label: "Total",
-                marks: "100",
-                detail:
-                  "Your grade is relative to your class — performing near the average gets you a C/D range.",
-                bg: "bg-primary/5 border-primary/30",
-                ocid: "academics.eval.total",
-              },
-            ].map((row) => (
-              <div
-                key={row.label}
-                className={`flex flex-wrap items-center gap-3 px-4 py-3 rounded-lg border ${row.bg}`}
-                data-ocid={row.ocid}
+        <div className="max-w-5xl mx-auto">
+          <Reveal>
+            <p className="text-label mb-4">What's worth what</p>
+            <h2 className="text-section text-foreground mb-3">
+              Marks
+              <br />
+              Breakdown
+            </h2>
+            <p className="font-body text-muted-foreground mb-12 max-w-xl">
+              Knowing this early helps you prioritise. Here's how the 100 marks
+              are split.
+            </p>
+          </Reveal>
+          <div className="border-t border-border">
+            {evalItems.map((row, i) => (
+              <Reveal
+                key={row.code}
+                delay={i * 70}
+                data-ocid={`academics.eval.${row.code.toLowerCase().replace("-", "")}`}
               >
-                <span className="text-sm font-semibold text-foreground min-w-0 flex-1">
-                  {row.label}
-                </span>
-                <Badge variant="outline" className="font-mono shrink-0">
-                  {row.marks} marks
-                </Badge>
-                <span className="text-xs text-muted-foreground w-full sm:w-auto sm:flex-1">
-                  {row.detail}
-                </span>
-              </div>
+                <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center py-8 border-b border-border">
+                  <div className="sm:w-32 shrink-0">
+                    <span
+                      className="font-display font-black text-3xl"
+                      style={{
+                        color:
+                          i < 2
+                            ? "oklch(var(--primary))"
+                            : "oklch(var(--foreground))",
+                      }}
+                    >
+                      {row.code}
+                    </span>
+                  </div>
+                  <div
+                    className="shrink-0 text-right"
+                    style={{ color: "oklch(var(--secondary))" }}
+                  >
+                    <span className="font-display font-black text-5xl leading-none">
+                      {row.marks}
+                    </span>
+                    <span className="font-body text-xs text-muted-foreground ml-1 align-middle">
+                      marks
+                    </span>
+                  </div>
+                  <div
+                    className="w-px h-8 shrink-0 hidden sm:block"
+                    style={{ background: "oklch(var(--border))" }}
+                  />
+                  <p className="font-body text-sm text-muted-foreground leading-relaxed flex-1">
+                    {row.detail}
+                  </p>
+                </div>
+              </Reveal>
             ))}
+            <Reveal delay={200}>
+              <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center py-8">
+                <div className="sm:w-32 shrink-0">
+                  <span className="font-display font-black text-3xl text-foreground">
+                    TOTAL
+                  </span>
+                </div>
+                <div style={{ color: "oklch(var(--secondary))" }}>
+                  <span className="font-display font-black text-5xl leading-none">
+                    100
+                  </span>
+                  <span className="font-body text-xs text-muted-foreground ml-1 align-middle">
+                    marks
+                  </span>
+                </div>
+                <div
+                  className="w-px h-8 shrink-0 hidden sm:block"
+                  style={{ background: "oklch(var(--border))" }}
+                />
+                <p className="font-body text-sm text-muted-foreground leading-relaxed flex-1">
+                  Your grade is relative to your class — performing near the
+                  average gets you a C/D range.
+                </p>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* FFCS */}
+      {/* ── FFCS Section ── */}
       <section
-        className="section-bg-muted px-6 py-10 border-b border-border"
+        className="px-6 py-20 border-t border-border"
+        style={{ background: "oklch(0.10 0.008 60)" }}
         data-ocid="academics.ffcs_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">Timetable System</p>
-          <h2 className="text-section mb-4">
-            FFCS — How You Pick Your Courses
-          </h2>
-          <Card className="card-elevated">
-            <CardContent className="p-6">
-              <p className="text-sm text-muted-foreground mb-3">
+        <div className="max-w-5xl mx-auto">
+          <Reveal>
+            <p className="text-label mb-4">Timetable system</p>
+            <h2 className="text-section text-foreground mb-3">
+              FFCS &amp;
+              <br />
+              How It Works
+            </h2>
+          </Reveal>
+          <div className="grid md:grid-cols-2 gap-16 mt-10">
+            <Reveal>
+              <p className="font-body text-muted-foreground leading-relaxed mb-6">
                 FFCS — Fully Flexible Credit System — means you build your own
                 timetable. Every student picks their own time slots during the
                 registration window on VTOP. No two students need to have the
-                same schedule. In your first semester, the college handles this
-                for you — FFCS kicks in from semester 2.
+                same schedule.
               </p>
-              <BulletList
-                items={[
-                  "Each course has multiple slot options (A1, B1, C1, etc.) — fixed time blocks spread across the week",
+              <p className="font-body text-muted-foreground leading-relaxed">
+                <strong className="text-foreground">
+                  Your first semester is the exception.
+                </strong>{" "}
+                The college assigns your slots for you — FFCS kicks in from
+                semester 2. And trust me, once you have the control, you'll
+                appreciate it.
+              </p>
+            </Reveal>
+            <Reveal delay={80}>
+              <ul className="space-y-5">
+                {[
+                  "Each course has multiple slot options (A1, B1, C1…) — fixed time blocks spread across the week",
                   "Theory and lab are registered separately with different slot codes",
-                  "You can avoid 8am slots if you want — but popular faculty and convenient timings fill up within minutes of the window opening",
+                  "You can avoid 8 AM slots if you want — but popular faculty fills up within minutes",
                   "Minimum: 16 credits per semester. Maximum: 27 credits",
                   "No one will remind you — registration is entirely your responsibility",
-                ]}
-              />
-              <Note>
-                Before registration opens, note your top 3 slot choices per
-                course. The window can close before you figure it out for the
-                first time — trust me on this one.
-              </Note>
-            </CardContent>
-          </Card>
+                ].map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-start gap-4 text-sm font-body text-muted-foreground"
+                  >
+                    <span
+                      className="shrink-0 mt-1 w-4 h-4 border flex items-center justify-center"
+                      style={{ borderColor: "oklch(var(--secondary) / 0.4)" }}
+                    >
+                      <span
+                        style={{ color: "oklch(var(--secondary))" }}
+                        className="text-xs"
+                      >
+                        ✓
+                      </span>
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div
+                className="mt-6 border-l-2 pl-4 py-1"
+                style={{ borderColor: "oklch(var(--secondary))" }}
+              >
+                <p className="font-body text-xs text-muted-foreground">
+                  Before registration opens, note your top 3 slot choices per
+                  course. The window can close before you figure it out for the
+                  first time.
+                </p>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 
-      {/* Slot Timetable */}
+      {/* ── Slot Timetable ── */}
       <section
-        className="section-bg-light px-6 py-10 border-b border-border"
+        className="bg-background px-6 py-20 border-t border-border"
         data-ocid="academics.timetable_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">First Semester</p>
-          <h2 className="text-section mb-2">Your Assigned Timetable</h2>
-          <p className="text-sm text-muted-foreground mb-5">
-            In your first sem, you won't get to pick your slots — the college
-            assigns them. FFCS kicks in from second sem, and trust me, you'll
-            appreciate the control once you have it. This is the slot structure
-            you'll follow as a fresher.
-          </p>
+        <div className="max-w-5xl mx-auto">
+          <Reveal>
+            <p className="text-label mb-4">First semester</p>
+            <h2 className="text-section text-foreground mb-3">
+              Your Assigned
+              <br />
+              Timetable
+            </h2>
+            <p className="font-body text-muted-foreground mb-10 max-w-xl">
+              In your first sem, you won't get to pick your slots — the college
+              assigns them. This is the slot structure you'll follow as a
+              fresher.
+            </p>
+          </Reveal>
 
           {/* Theory Slots */}
-          <Card className="card-elevated mb-4">
-            <CardContent className="p-5">
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">
-                Theory Slots — Monday to Friday
-              </p>
+          <Reveal delay={50}>
+            <div className="mb-10">
+              <p className="text-label mb-4">Theory Slots — Monday to Friday</p>
               <div className="overflow-x-auto">
-                <table className="w-full text-xs border-collapse">
+                <table
+                  className="w-full border-collapse"
+                  style={{ borderColor: "oklch(var(--border))" }}
+                >
                   <thead>
-                    <tr className="bg-muted">
-                      <th className="py-2 px-3 font-semibold text-muted-foreground border border-border text-left min-w-[90px]">
+                    <tr style={{ background: "oklch(0.12 0.01 60)" }}>
+                      <th className="py-3 px-4 text-left font-mono text-xs text-muted-foreground border border-border min-w-[110px]">
                         Time
                       </th>
-                      {["Mon", "Tue", "Wed", "Thu", "Fri"].map((day) => (
+                      {["Mon", "Tue", "Wed", "Thu", "Fri"].map((d) => (
                         <th
-                          key={day}
-                          className="py-2 px-3 font-semibold text-muted-foreground border border-border text-center min-w-[64px]"
+                          key={d}
+                          className="py-3 px-4 text-center font-display font-bold text-sm text-foreground border border-border min-w-[72px]"
                         >
-                          {day}
+                          {d}
                         </th>
                       ))}
                     </tr>
@@ -390,24 +465,35 @@ export default function Academics() {
                     {theorySlots.map((row, i) => (
                       <tr
                         key={row.time}
-                        className={
-                          i % 2 === 0 ? "bg-background" : "bg-muted/30"
-                        }
+                        style={{
+                          background:
+                            i % 2 === 0
+                              ? "oklch(var(--background))"
+                              : "oklch(0.10 0.008 60)",
+                        }}
                       >
-                        <td className="py-2 px-3 border border-border font-mono text-xs text-muted-foreground whitespace-nowrap">
+                        <td className="py-3 px-4 font-mono text-xs text-muted-foreground border border-border whitespace-nowrap">
                           {row.time}
                         </td>
                         {row.slots.map((slot, j) => (
                           <td
                             key={`theory-${row.time}-${j}`}
-                            className="py-2 px-3 border border-border text-center"
+                            className="py-3 px-4 border border-border text-center"
                           >
                             {slot ? (
-                              <span className="inline-block bg-primary/10 text-primary font-semibold rounded px-2 py-0.5 text-xs">
+                              <span
+                                className="slot-tag font-display font-bold"
+                                style={{
+                                  background: "oklch(var(--primary) / 0.12)",
+                                  color: "oklch(var(--primary))",
+                                  border:
+                                    "1px solid oklch(var(--primary) / 0.3)",
+                                }}
+                              >
                                 {slot}
                               </span>
                             ) : (
-                              <span className="text-muted-foreground/40">
+                              <span className="text-muted-foreground opacity-30">
                                 —
                               </span>
                             )}
@@ -418,32 +504,30 @@ export default function Academics() {
                   </tbody>
                 </table>
               </div>
-              <p className="text-xs text-muted-foreground mt-3">
+              <p className="font-body text-xs text-muted-foreground mt-3">
                 T-slots (TA1–TG1) are tutorial slots that come with some theory
-                courses — think of them as extra class hours.
+                courses — extra class hours.
               </p>
-            </CardContent>
-          </Card>
+            </div>
+          </Reveal>
 
           {/* Lab Slots */}
-          <Card className="card-elevated mb-4">
-            <CardContent className="p-5">
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">
-                Lab Slots — Monday to Saturday
-              </p>
+          <Reveal delay={100}>
+            <div>
+              <p className="text-label mb-4">Lab Slots — Monday to Saturday</p>
               <div className="overflow-x-auto">
-                <table className="w-full text-xs border-collapse">
+                <table className="w-full border-collapse">
                   <thead>
-                    <tr className="bg-muted">
-                      <th className="py-2 px-3 font-semibold text-muted-foreground border border-border text-left min-w-[90px]">
+                    <tr style={{ background: "oklch(0.12 0.01 60)" }}>
+                      <th className="py-3 px-4 text-left font-mono text-xs text-muted-foreground border border-border min-w-[110px]">
                         Time
                       </th>
-                      {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
+                      {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => (
                         <th
-                          key={day}
-                          className="py-2 px-3 font-semibold text-muted-foreground border border-border text-center min-w-[64px]"
+                          key={d}
+                          className="py-3 px-4 text-center font-display font-bold text-sm text-foreground border border-border min-w-[72px]"
                         >
-                          {day}
+                          {d}
                         </th>
                       ))}
                     </tr>
@@ -452,24 +536,35 @@ export default function Academics() {
                     {labSlots.map((row, i) => (
                       <tr
                         key={row.time}
-                        className={
-                          i % 2 === 0 ? "bg-background" : "bg-muted/30"
-                        }
+                        style={{
+                          background:
+                            i % 2 === 0
+                              ? "oklch(var(--background))"
+                              : "oklch(0.10 0.008 60)",
+                        }}
                       >
-                        <td className="py-2 px-3 border border-border font-mono text-xs text-muted-foreground whitespace-nowrap">
+                        <td className="py-3 px-4 font-mono text-xs text-muted-foreground border border-border whitespace-nowrap">
                           {row.time}
                         </td>
                         {row.slots.map((slot, j) => (
                           <td
                             key={`lab-${row.time}-${j}`}
-                            className="py-2 px-3 border border-border text-center"
+                            className="py-3 px-4 border border-border text-center"
                           >
                             {slot ? (
-                              <span className="inline-block bg-accent/10 text-accent font-semibold rounded px-1.5 py-0.5 text-xs">
+                              <span
+                                className="slot-tag font-display font-bold"
+                                style={{
+                                  background: "oklch(var(--secondary) / 0.08)",
+                                  color: "oklch(var(--secondary))",
+                                  border:
+                                    "1px solid oklch(var(--secondary) / 0.25)",
+                                }}
+                              >
                                 {slot}
                               </span>
                             ) : (
-                              <span className="text-muted-foreground/40">
+                              <span className="text-muted-foreground opacity-30">
                                 —
                               </span>
                             )}
@@ -480,241 +575,273 @@ export default function Academics() {
                   </tbody>
                 </table>
               </div>
-              <p className="text-xs text-muted-foreground mt-3">
-                Lab slots are 2 hours each. Your lab course will occupy two
+              <p className="font-body text-xs text-muted-foreground mt-3">
+                Lab slots are 2 hours each. Your lab course occupies two
                 consecutive L-slots (e.g., L1+L2).
               </p>
-            </CardContent>
-          </Card>
-
-          <Note>
-            From semester 2, FFCS lets you build your own timetable — you choose
-            the theory and lab slots that work for your schedule. No two
-            students need to have the same timetable, and that flexibility is
-            genuinely one of the better aspects of studying here.
-          </Note>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Attendance */}
+      {/* ── Attendance ── */}
       <section
-        className="section-bg-muted px-6 py-10 border-b border-border"
+        className="px-6 py-20 border-t border-border"
+        style={{ background: "oklch(0.10 0.008 60)" }}
         data-ocid="academics.attendance_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">Attendance</p>
-          <h2 className="text-section mb-4">
-            Don't Play Games With Attendance
-          </h2>
-          <Card className="card-elevated">
-            <CardContent className="p-6">
-              <p className="text-sm text-muted-foreground mb-3">
-                75% is the minimum — don't treat it as a target. I'd aim for at
-                least 85% to give yourself a real buffer. Here's what you need
-                to know:
-              </p>
-              <BulletList
-                items={[
-                  "75% attendance per course — each course is tracked separately, not combined",
-                  "That 25% buffer covers everything: illness, travel, personal reasons, events. There is no separate medical leave.",
-                  "Drop below 75% → you're barred from the next CAT or FAT for that specific course",
-                  "Barred from FAT → you get an N grade → you have to re-register the entire course next semester",
-                  "If your CGPA is ≥ 9.0 and you have no backlogs, you're exempt from attendance rules (not applicable in summer semester)",
-                ]}
-              />
-              <SectionHeading>What the Numbers Mean</SectionHeading>
-              <div className="space-y-2">
-                {attendanceImpact.map((row) => (
-                  <div
-                    key={row.pct}
-                    className={`flex flex-wrap items-center gap-3 px-4 py-3 rounded-lg border ${row.bg}`}
+        <div className="max-w-5xl mx-auto">
+          <Reveal>
+            <p className="text-label mb-4">Attendance rules</p>
+            <h2 className="text-section text-foreground mb-3">
+              Don't Play
+              <br />
+              Games With This
+            </h2>
+            <p className="font-body text-muted-foreground mb-12 max-w-xl">
+              75% is the minimum — don't treat it as a target. Aim for 85%+ to
+              give yourself a real buffer. Each course is tracked separately,
+              not combined.
+            </p>
+          </Reveal>
+          <div className="border-t border-border">
+            {attendanceRows.map((row, i) => (
+              <Reveal key={row.pct} delay={i * 60}>
+                <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center py-6 border-b border-border">
+                  <code
+                    className="font-mono font-black text-xl shrink-0 sm:w-44"
+                    style={{
+                      color:
+                        row.accent === "secondary"
+                          ? "oklch(var(--secondary))"
+                          : "oklch(var(--primary))",
+                    }}
                   >
-                    <code
-                      className={`font-mono text-sm font-bold w-36 shrink-0 ${row.color}`}
-                    >
-                      {row.pct}
-                    </code>
-                    <Badge
-                      variant="outline"
-                      className={`text-xs ${row.color} border-current`}
-                    >
-                      {row.status}
-                    </Badge>
-                    <span className="text-sm text-foreground">
-                      {row.consequence}
-                    </span>
-                  </div>
-                ))}
-              </div>
-              <Note>
-                Check your attendance on VTOP at least once a week. Don't wait
-                until you're already below 75% — by then it's usually too late
-                to recover without consequences.
-              </Note>
-            </CardContent>
-          </Card>
+                    {row.pct}
+                  </code>
+                  <span
+                    className="font-display font-bold text-sm uppercase tracking-wide shrink-0 sm:w-24"
+                    style={{
+                      color:
+                        row.accent === "secondary"
+                          ? "oklch(var(--secondary))"
+                          : "oklch(var(--primary))",
+                    }}
+                  >
+                    {row.status}
+                  </span>
+                  <p className="font-body text-sm text-muted-foreground">
+                    {row.consequence}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal delay={150}>
+            <div
+              className="mt-6 border-l-2 pl-4 py-1"
+              style={{ borderColor: "oklch(var(--secondary))" }}
+            >
+              <p className="font-body text-xs text-muted-foreground">
+                Check your attendance on VTOP at least once a week. By the time
+                you're at 74%, it's usually too late.
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Grading */}
+      {/* ── Grading ── */}
       <section
-        className="section-bg-light px-6 py-10 border-b border-border"
+        className="bg-background px-6 py-20 border-t border-border"
         data-ocid="academics.grading_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">Grades & GPA</p>
-          <h2 className="text-section mb-4">How Your Grade Is Decided</h2>
-          <Card className="card-elevated">
-            <CardContent className="p-6">
-              <p className="text-sm text-muted-foreground mb-4">
-                VIT-AP uses{" "}
-                <strong className="text-foreground">relative grading</strong>{" "}
-                for most theory courses. Your grade depends on how you performed
-                compared to everyone else in your class — not on hitting a fixed
-                percentage. This means a 70% score might get you a B in one
-                batch and a C in another. It works both ways.
-              </p>
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm border-collapse">
-                  <thead>
-                    <tr>
-                      <th className="py-2 px-3 font-semibold text-muted-foreground bg-muted border-b border-border text-left">
-                        Grade
-                      </th>
-                      <th className="py-2 px-3 font-semibold text-muted-foreground bg-muted border-b border-border text-right">
-                        Points
-                      </th>
-                      <th className="py-2 px-3 font-semibold text-muted-foreground bg-muted border-b border-border text-left">
-                        What it means
-                      </th>
+        <div className="max-w-5xl mx-auto">
+          <Reveal>
+            <p className="text-label mb-4">Grades &amp; GPA</p>
+            <h2 className="text-section text-foreground mb-3">
+              How Your
+              <br />
+              Grade Is Decided
+            </h2>
+            <p className="font-body text-muted-foreground mb-10 max-w-xl">
+              VIT-AP uses{" "}
+              <strong className="text-foreground">relative grading</strong> for
+              most theory courses. Your grade depends on how you performed
+              compared to everyone else in your class — not a fixed percentage.
+              A 70% score might get you a B in one batch and a C in another. It
+              works both ways.
+            </p>
+          </Reveal>
+          <Reveal delay={60}>
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr
+                    style={{
+                      background: "oklch(0.12 0.01 60)",
+                      borderBottom: "1px solid oklch(var(--border))",
+                    }}
+                  >
+                    <th className="py-3 px-6 text-left font-display font-bold text-sm text-foreground">
+                      Grade
+                    </th>
+                    <th className="py-3 px-6 text-right font-display font-bold text-sm text-foreground">
+                      Points
+                    </th>
+                    <th className="py-3 px-6 text-left font-display font-bold text-sm text-foreground">
+                      What it means
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {letterGrades.map((row, i) => (
+                    <tr
+                      key={row.grade}
+                      style={{
+                        background:
+                          i % 2 === 0
+                            ? "oklch(var(--background))"
+                            : "oklch(0.10 0.008 60)",
+                      }}
+                      className="border-b border-border"
+                    >
+                      <td className="py-3 px-6">
+                        <span
+                          className="font-display font-black text-2xl"
+                          style={{
+                            color:
+                              row.grade === "F" || row.grade === "N"
+                                ? "oklch(var(--primary))"
+                                : row.grade === "S" || row.grade === "A"
+                                  ? "oklch(var(--secondary))"
+                                  : "oklch(var(--foreground))",
+                          }}
+                        >
+                          {row.grade}
+                        </span>
+                      </td>
+                      <td className="py-3 px-6 text-right font-mono font-bold text-foreground">
+                        {row.points}
+                      </td>
+                      <td className="py-3 px-6 font-body text-sm text-muted-foreground">
+                        {row.meaning}
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {letterGrades.map((row) => (
-                      <tr
-                        key={row.grade}
-                        className="hover:bg-muted/40 transition-colors"
-                      >
-                        <td className="py-2 px-3 border-b border-border/60">
-                          <Badge
-                            variant={row.variant}
-                            className="font-mono w-8 justify-center"
-                          >
-                            {row.grade}
-                          </Badge>
-                        </td>
-                        <td className="py-2 px-3 border-b border-border/60 text-right font-mono text-foreground">
-                          {row.points}
-                        </td>
-                        <td className="py-2 px-3 border-b border-border/60 text-foreground">
-                          {row.meaning}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <div className="bg-muted rounded-lg px-4 py-3 font-mono text-sm mt-4">
-                <span className="text-muted-foreground">CGPA = </span>
-                <span className="text-foreground font-semibold">
-                  Σ(Credits × Grade Points) ÷ Σ(Total Credits)
-                </span>
-              </div>
-              <BulletList
-                items={[
-                  "CGPA is calculated across all semesters — F grades drag it down and stay in the calculation",
-                  "To convert to percentage: CGPA × 10 (e.g., CGPA 8.5 = 85%)",
-                  "Most placement companies have CGPA cutoffs — typically 6.5 or 7.0. Keep that in mind from day one.",
-                ]}
-              />
-            </CardContent>
-          </Card>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div
+              className="mt-6 p-5 border border-border font-mono text-sm"
+              style={{ background: "oklch(0.10 0.008 60)" }}
+            >
+              <span className="text-muted-foreground">CGPA = </span>
+              <span className="text-foreground font-bold">
+                Σ(Credits × Grade Points) ÷ Σ(Total Credits)
+              </span>
+            </div>
+            <div
+              className="mt-4 border-l-2 pl-4 py-1"
+              style={{ borderColor: "oklch(var(--secondary))" }}
+            >
+              <p className="font-body text-xs text-muted-foreground">
+                Most placement companies have CGPA cutoffs — typically 6.5 or
+                7.0. Keep that in mind from day one. Converting to percentage:
+                CGPA × 10.
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Backlogs */}
+      {/* ── Backlogs ── */}
       <section
-        className="section-bg-muted px-6 py-10 border-b border-border"
+        className="px-6 py-20 border-t border-border"
+        style={{ background: "oklch(0.10 0.008 60)" }}
         data-ocid="academics.backlogs_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">Backlogs</p>
-          <h2 className="text-section mb-2">If You Fail a Course</h2>
-          <p className="text-sm text-muted-foreground mb-5">
-            Honestly, a backlog isn't the end of the world — but it's expensive
-            and inconvenient. Here's what happens in each case.
-          </p>
-          <div className="grid sm:grid-cols-2 gap-4">
-            <Card className="card-elevated" data-ocid="academics.fail_card">
-              <CardContent className="p-5">
-                <p className="font-semibold text-foreground mb-2">
-                  ❌ F Grade — Full Failure
-                </p>
-                <ul className="space-y-1 text-sm text-foreground">
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent mt-0.5 shrink-0">•</span>You
-                    failed the course overall
+        <div className="max-w-5xl mx-auto">
+          <Reveal>
+            <p className="text-label mb-4">If you fail</p>
+            <h2 className="text-section text-foreground mb-3">Backlogs</h2>
+            <p className="font-body text-muted-foreground mb-10 max-w-xl">
+              A backlog isn't the end of the world — but it's expensive and
+              inconvenient.
+            </p>
+          </Reveal>
+          <div className="grid md:grid-cols-2 gap-px bg-border">
+            <Reveal className="bg-background">
+              <div className="p-8 h-full" data-ocid="academics.fail_card">
+                <div
+                  className="w-8 h-px mb-6"
+                  style={{ background: "oklch(var(--primary))" }}
+                />
+                <h3 className="font-display font-bold text-xl text-foreground mb-4">
+                  F Grade — Full Failure
+                </h3>
+                <ul className="space-y-3 font-body text-sm text-muted-foreground">
+                  <li>You failed the course overall</li>
+                  <li>Must re-register the full course in a future semester</li>
+                  <li>
+                    Re-registration fee applies — around ₹6,000. It's not cheap
                   </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent mt-0.5 shrink-0">•</span>Must
-                    re-register the full course in a future semester
+                  <li>F stays in your CGPA calculation until you clear it</li>
+                </ul>
+              </div>
+            </Reveal>
+            <Reveal delay={80} className="bg-background">
+              <div className="p-8 h-full" data-ocid="academics.n_grade_card">
+                <div
+                  className="w-8 h-px mb-6"
+                  style={{ background: "oklch(var(--secondary))" }}
+                />
+                <h3 className="font-display font-bold text-xl text-foreground mb-4">
+                  N Grade — Incomplete
+                </h3>
+                <ul className="space-y-3 font-body text-sm text-muted-foreground">
+                  <li>
+                    You were barred from an exam due to low attendance, or
+                    missed the FAT
                   </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent mt-0.5 shrink-0">•</span>A
-                    re-registration fee applies — it's not cheap
+                  <li>
+                    Can re-register only the failed component, not the full
+                    course
+                  </li>
+                  <li>Re-registration fee still applies</li>
+                  <li>
+                    Clear it fast — placement filters often catch open backlogs
                   </li>
                 </ul>
-              </CardContent>
-            </Card>
-            <Card className="card-elevated" data-ocid="academics.n_grade_card">
-              <CardContent className="p-5">
-                <p className="font-semibold text-foreground mb-2">
-                  ⚠️ N Grade — Incomplete
-                </p>
-                <ul className="space-y-1 text-sm text-foreground">
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent mt-0.5 shrink-0">•</span>You
-                    were barred from an exam due to low attendance, or missed
-                    the FAT
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent mt-0.5 shrink-0">•</span>Can
-                    re-register only the failed component — not the full course
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent mt-0.5 shrink-0">•</span>A
-                    re-registration fee still applies
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
+              </div>
+            </Reveal>
           </div>
-          <Note>
-            Many placement companies filter out candidates with active backlogs.
-            Clear them as early as you can — Summer and Weekend semesters exist
-            specifically for this purpose. Don't let them pile up.
-          </Note>
         </div>
       </section>
 
-      {/* Summary */}
+      {/* ── Summary ── */}
       <section
-        className="section-bg-light px-6 py-8"
+        className="bg-background px-6 py-16 border-t border-border"
         data-ocid="academics.summary_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-primary/5 border border-primary/20 rounded-xl p-5">
-            <p className="text-label mb-1">The Short Version</p>
-            <p className="text-sm text-foreground">
-              Each semester: CAT-1 (15) + CAT-2 (15) + Assignments (30) + FAT
-              (40) = 100 marks total. Maintain 75%+ attendance per course — I'd
-              honestly aim higher. Grades are relative to your class, not a
-              fixed cutoff. Your first semester slots are assigned by the
-              college; from semester two, FFCS gives you the flexibility to
-              build your own schedule. Keep your CGPA above 7.0 and clear any
-              backlogs fast — placement eligibility depends on it.
-            </p>
-          </div>
+        <div className="max-w-5xl mx-auto">
+          <Reveal>
+            <div
+              className="border-l-4 pl-8 py-2"
+              style={{ borderColor: "oklch(var(--secondary))" }}
+            >
+              <p className="text-label mb-3">The short version</p>
+              <p className="font-body text-lg text-muted-foreground leading-relaxed max-w-3xl">
+                Each semester: CAT-1 (15) + CAT-2 (15) + Assignments (30) + FAT
+                (40) = 100 marks. Maintain 75%+ attendance per course — aim
+                higher. Grades are relative to your class. Your first semester
+                slots are assigned by the college; from semester two, FFCS gives
+                you the flexibility to build your own schedule. Keep your CGPA
+                above 7.0 and clear any backlogs fast — placement eligibility
+                depends on it.
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
     </Layout>

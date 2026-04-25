@@ -1,657 +1,545 @@
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+import { useEffect, useRef } from "react";
 import { Layout } from "../components/Layout";
 
-interface InfoCardProps {
-  icon: string;
-  title: string;
-  items: string[];
+function useScrollReveal() {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("is-visible");
+          obs.unobserve(el);
+        }
+      },
+      { threshold: 0.1 },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return ref;
 }
 
-function InfoCard({ icon, title, items }: InfoCardProps) {
+function Reveal({
+  children,
+  className = "",
+  delay = 0,
+}: { children: React.ReactNode; className?: string; delay?: number }) {
+  const ref = useScrollReveal();
   return (
-    <Card className="card-elevated h-full">
-      <CardContent className="p-5">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="text-2xl" aria-hidden="true">
-            {icon}
-          </span>
-          <h3 className="text-subsection">{title}</h3>
-        </div>
-        <ul className="space-y-2">
-          {items.map((item) => (
-            <li
-              key={item}
-              className="flex items-start gap-2 text-sm text-foreground"
-            >
-              <span className="text-accent mt-0.5 shrink-0">•</span>
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
-      </CardContent>
-    </Card>
+    <div
+      ref={ref}
+      className={`reveal-block ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
   );
 }
 
-interface TransportCardProps {
-  icon: string;
-  mode: string;
-  tag: string;
-  tagVariant: "secondary" | "outline" | "default" | "destructive";
-  details: string[];
-  ocid?: string;
-}
-
-function TransportCard({
-  icon,
-  mode,
-  tag,
-  tagVariant,
-  details,
-  ocid,
-}: TransportCardProps) {
-  return (
-    <Card className="card-elevated h-full" data-ocid={ocid}>
-      <CardContent className="p-5">
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl" aria-hidden="true">
-              {icon}
-            </span>
-            <h3 className="text-subsection">{mode}</h3>
-          </div>
-          <Badge variant={tagVariant} className="text-xs shrink-0">
-            {tag}
-          </Badge>
-        </div>
-        <ul className="space-y-2">
-          {details.map((d) => (
-            <li
-              key={d}
-              className="flex items-start gap-2 text-sm text-foreground"
-            >
-              <span className="text-accent mt-0.5 shrink-0">•</span>
-              <span>{d}</span>
-            </li>
-          ))}
-        </ul>
-      </CardContent>
-    </Card>
-  );
-}
-
-// Fresh pros and cons — derived from real student experience, not copy-pasted
 const negatives = [
-  "Gym access is genuinely frustrating if fitness matters to you. The hostel gyms are only open 5–8am and 5–8pm — miss those windows and you're out of luck. The paid gym books up fast; if you wait a week after joining, you might not get a slot at all.",
-  "In your first semester, you have zero control over your schedule. The college assigns your slots — you don't pick anything. FFCS (the flexible system everyone talks about) only kicks in from semester two. Just know that going in.",
-  "By week six or seven, you'll be ordering Swiggy almost daily. The mess food isn't terrible — it's just the same rotation every week. Honestly, monotony is the real issue, not quality.",
-  "If you miss even one quiz, it can hurt you more than you'd expect. There's no standardized re-test policy — it's entirely the professor's call whether one happens. I've seen students lose a full grade because of one missed quiz with no make-up.",
-  "Food Street and Rock Plaza are the main food spots, but the campus population is huge relative to the capacity. During peak hours — right after class — expect a wait or expect to miss out. It gets better once you figure out the timing.",
+  {
+    title: "The campus is a work in progress",
+    body: "I don't say this to complain — it's just true. Construction is ongoing, some areas are dusty and rough, and facilities that are 'coming soon' have been coming soon for a while. If a polished campus matters to you, temper your expectations.",
+  },
+  {
+    title: "Management can be slow and opaque",
+    body: "University administration isn't known for being efficient or transparent. Getting things resolved — whether it's a grade issue, a hostel change, or an official letter — can take longer than it should. Learn to follow up persistently.",
+  },
+  {
+    title: "Backlogs are expensive — and strict",
+    body: "If you get an F in a subject, re-registering it costs around ₹6,000. And unlike colleges where showing up and writing something gets you through, professors here can be strict. I've seen students fail when they expected to pass. Take backlogs seriously.",
+  },
+  {
+    title: "Professors have a lot of power over your grade",
+    body: "Your internals, CAT marks, and sometimes FAT evaluations are all in their hands. There's limited recourse if you feel something is unfair — only the FAT can be formally re-evaluated. This is true of most colleges, but there's even less room to push back here.",
+  },
+  {
+    title: "Missing a quiz can hurt more than you think",
+    body: "Quizzes and CATs often carry similar weightage. Whether a re-test happens if you miss one is entirely up to the faculty. I've seen students lose a full grade over one missed quiz with no makeup offered. There's no standardised policy.",
+  },
 ];
 
 const positives = [
-  "There's a health center and a small pharmacy right on campus. It's nothing fancy, but for a fever, cold medicine, or a basic consultation — you won't have to leave campus. When you're sick and just want to rest, this matters more than you'd think.",
-  "Night canteens and petty shops inside the hostels are genuinely a lifesaver. At 11pm when you're hungry and the mess is closed, those shops are right there. I relied on them more than I expected, especially during exam season.",
-  "Swiggy delivers to campus and local freelance delivery options are available too. The food ecosystem around campus is decent enough to fill the gaps when the mess gets old — and it will get old.",
-  "There's a room for almost every budget. 2-bed AC rooms, dormitories with 15–20 students, apartment-style options — you can pick what makes sense for you financially. Not many colleges give you this much flexibility on housing.",
-  "Once semester two starts, FFCS actually gives you real control over your timetable. You can avoid 8am slots, cluster your classes, get long weekends — it takes some planning, but it's genuinely one of the better things about studying here.",
-];
-
-const realityCards = [
   {
-    icon: "🌡️",
-    title: "Classrooms — What to Expect",
-    items: [
-      "Honestly, most classrooms don't have AC. In March–May, it gets uncomfortable — I'd say bring a handheld fan if you're heat-sensitive",
-      "Whiteboards and projectors in all classrooms — nothing fancy, but functional",
-      "Labs are air-conditioned, which is a relief",
-      "You get used to it, but fair warning: the heat is real",
-    ],
+    title: "A genuinely diverse student body",
+    body: "Students come from all over India. If you're open to it, you'll meet people from completely different backgrounds and languages. That kind of exposure is actually valuable — and rarer than it sounds.",
   },
   {
-    icon: "🏋️",
-    title: "Gym & Fitness",
-    items: [
-      "Free hostel gyms are available in most blocks — basic equipment, but it works",
-      "Gym timings are 5–8am and 5–8pm only. If you're not a morning person, your window is tight",
-      "The paid campus gym is better equipped but costs ₹1,200/month and slots go fast",
-      "My advice: go sign up for the paid gym in the first week if fitness is a priority",
-    ],
+    title: "Minimal physical bullying, in my experience",
+    body: "In three years here, I haven't witnessed the kind of ragging or bullying that's common in some colleges. Conflicts happen — that's normal — but staying calm and mature keeps you out of most of it.",
   },
   {
-    icon: "🏸",
-    title: "Sports & Recreation",
-    items: [
-      "Badminton courts exist — but you have to be on time, every time. Show up 10 minutes late and someone else has your slot",
-      "Indoor activity room has TT, carrom, chess — it's small, so expect to wait during peak hours",
-      "Basketball, volleyball, football, and cricket courts are available and generally less crowded",
-      "Outdoor courts are your best bet for a casual game without too much hassle",
-    ],
+    title: "Genuinely driven people, if you look for them",
+    body: "There are students here who are serious about what they're building — in tech, research, creative fields. Find them early. They'll help you, challenge you, and show you what's actually possible.",
   },
   {
-    icon: "📶",
-    title: "Day-to-Day Campus Life",
-    items: [
-      "Campus Wi-Fi is there but speeds vary a lot by hostel block — in my experience, don't rely on it for heavy downloads",
-      "VTOP is your single point for everything: attendance, grades, timetable, registration",
-      "Campus is walkable, but summer heat makes it tiring — figure out the covered routes early",
-      "Night canteens in select hostels are open late — great for post-study snack runs",
-    ],
+    title: "Real networking opportunities",
+    body: "The student community is large and diverse enough that you can build meaningful connections across departments and years. Who you know here will matter more than you expect when you're looking for your first opportunity.",
+  },
+  {
+    title: "A flexible dress code",
+    body: "Full pants and a sleeved shirt is essentially all that's required. Compared to stricter campuses, this is a genuine relief for day-to-day comfort.",
   },
 ];
 
-const keyDistances = [
-  { place: "Vijayawada City Center", distance: "20 km" },
-  { place: "Vijayawada Railway Station", distance: "17 km" },
-  { place: "Vijayawada International Airport", distance: "38 km" },
-  { place: "Guntur City Center", distance: "33 km" },
-  { place: "Guntur Railway Station", distance: "32 km" },
+const realityItems = [
+  {
+    label: "Classrooms",
+    detail:
+      "Most don't have AC. In summer it gets genuinely uncomfortable. Whiteboards, projectors — functional but basic. Labs are AC'd. You'll get used to it.",
+  },
+  {
+    label: "Gym Access",
+    detail:
+      "Free hostel gym: 5–8 AM and 5–8 PM only. Paid campus gym: ₹1,200/month — go sign up in the first week or you won't get a slot.",
+  },
+  {
+    label: "Sports & Recreation",
+    detail:
+      "Badminton courts exist but timing is competitive. Indoor activity room has TT, carrom, chess — small space. Basketball, football, cricket courts are generally accessible.",
+  },
+  {
+    label: "Campus Wi-Fi",
+    detail:
+      "Available but inconsistent by hostel block. Don't rely on it for anything important. Get an Airtel or BSNL SIM as a backup.",
+  },
+  {
+    label: "Health Center",
+    detail:
+      "On-campus, useful for basic consultations, fever, stomach issues, sick certificates. They'll refer you out for anything serious.",
+  },
+  {
+    label: "Pharmacy",
+    detail:
+      "Small campus pharmacy — paracetamol, antacids, ORS basics are there. Limited for specific prescriptions.",
+  },
 ];
 
-const transportOptions: TransportCardProps[] = [
+const transportOptions = [
   {
-    icon: "🚌",
     mode: "University Shuttle",
     tag: "Free",
-    tagVariant: "secondary",
-    ocid: "about.transport.item.1",
-    details: [
-      "Every Sunday — departs 10:00 AM to 12:00 PM towards Vijayawada",
-      "Return: 4:30 PM – 6:30 PM back to campus",
-      "Students only — carry your ID card",
-      "I used this almost every weekend. Check VTOP for schedule updates",
-    ],
+    details:
+      "Every Sunday, Vijayawada. Departs 10 AM – 12 PM, returns 4:30 – 6:30 PM. Bring your ID card. I used this almost every weekend.",
   },
   {
-    icon: "🚍",
     mode: "APSRTC Bus",
-    tag: "Budget",
-    tagVariant: "outline",
-    ocid: "about.transport.item.2",
-    details: [
-      "Direct bus to Vijayawada: ~₹35",
-      "Via Guntur: ₹35 + ₹50 connecting bus",
-      "Departs from main road near campus",
-      "Best for regular, low-cost travel — not the fastest, but gets the job done",
-    ],
+    tag: "~₹35",
+    details:
+      "Direct to Vijayawada. Via Guntur is ₹35 + ₹50 connecting. Best for regular, low-cost travel — not the fastest.",
   },
   {
-    icon: "🚐",
     mode: "Shared Vans / Autos",
-    tag: "Shared",
-    tagVariant: "outline",
-    ocid: "about.transport.item.3",
-    details: [
-      "~₹150 per person to Vijayawada",
-      "Faster than the bus, less frequent",
-      "Available near the campus gate",
-      "Good call when you're carrying luggage",
-    ],
+    tag: "~₹150",
+    details:
+      "To Vijayawada. Faster than bus, less frequent. Available near the campus gate. Good when you're carrying luggage.",
   },
   {
-    icon: "🚖",
     mode: "Private Cabs (Ola / Uber)",
-    tag: "Convenient",
-    tagVariant: "secondary",
-    ocid: "about.transport.item.4",
-    details: [
-      "To Vijayawada Railway Station: ₹400–600",
-      "To Vijayawada Airport: ₹700–1,000",
-      "Only real option for early morning flights or late-night travel",
-      "Book in advance — availability near campus can be patchy",
-    ],
+    tag: "₹400–1,000",
+    details:
+      "To Vijayawada Railway Station: ₹400–600. To Airport: ₹700–1,000. Only real option for early flights or late-night travel.",
+  },
+];
+
+const clubsData = [
+  {
+    cat: "Technical",
+    desc: "Coding, robotics, AI/ML, IoT — most active clubs are here",
+  },
+  {
+    cat: "Cultural",
+    desc: "Music, dance, drama, fine arts — VITopia is the flagship fest",
+  },
+  {
+    cat: "Social",
+    desc: "NSS and community service — if you want to do something beyond campus",
+  },
+  {
+    cat: "Sports",
+    desc: "Inter-hostel and inter-college competitions throughout the year",
   },
 ];
 
 export default function About() {
   return (
     <Layout>
-      {/* Hero */}
-      <section className="section-bg-light px-6 py-10 border-b border-border">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2" data-ocid="about.section_label">
-            About VIT-AP
-          </p>
-          <h2 className="text-hero text-foreground mb-4">
-            Should You Join VIT-AP?
-          </h2>
-          <p className="text-base text-muted-foreground max-w-2xl mb-6">
+      <style>{`
+        .reveal-block { opacity:0; transform:translateY(2rem); transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1); }
+        .reveal-block.is-visible { opacity:1; transform:translateY(0); }
+        @media(prefers-reduced-motion:reduce){.reveal-block{opacity:1;transform:none;transition:none;}}
+      `}</style>
+
+      {/* ── Chapter Hero ── */}
+      <section className="bg-background min-h-[60vh] flex items-end px-6 pb-16 pt-32 relative overflow-hidden">
+        <div
+          className="absolute inset-0 bg-grain opacity-20 pointer-events-none"
+          aria-hidden="true"
+        />
+        <div
+          className="absolute right-0 top-0 bottom-0 w-px opacity-20 pointer-events-none"
+          style={{ background: "oklch(var(--secondary))" }}
+          aria-hidden="true"
+        />
+        <div className="max-w-5xl mx-auto w-full">
+          <div className="fade-in-up fade-in-up-delay-1">
+            <span className="chapter-label">Chapter I</span>
+          </div>
+          <h1
+            className="fade-in-up fade-in-up-delay-2 font-display font-black text-foreground leading-none tracking-tighter mt-4 mb-6"
+            style={{ fontSize: "clamp(3rem, 9vw, 7.5rem)" }}
+            data-ocid="about.chapter_title"
+          >
+            ABOUT
+            <br />
+            <span style={{ color: "oklch(var(--primary))" }}>VIT-AP</span>
+          </h1>
+          <p className="fade-in-up fade-in-up-delay-3 font-body italic text-muted-foreground text-xl max-w-2xl">
             I'm not going to sell this place to you. Here's what I actually
-            think about VIT-AP — based on my time here — so you can decide for
-            yourself whether it's the right fit.
+            think — based on my time here — so you can decide for yourself
+            whether it's the right fit.
           </p>
-          <div className="flex flex-wrap gap-2">
-            <Badge variant="secondary" className="text-xs px-3 py-1">
-              📍 Amaravati, AP
-            </Badge>
-            <Badge variant="secondary" className="text-xs px-3 py-1">
-              🎓 Est. 2017
-            </Badge>
-            <Badge variant="secondary" className="text-xs px-3 py-1">
-              🏛️ Deemed University
-            </Badge>
-            <Badge variant="secondary" className="text-xs px-3 py-1">
-              📚 B.Tech, M.Tech, MBA, MCA, PhD
-            </Badge>
-          </div>
+          <div className="fade-in-up fade-in-up-delay-4 chapter-divider mt-8 w-24" />
         </div>
       </section>
 
-      {/* Quick snapshot */}
+      {/* ── Quick Overview ── */}
       <section
-        className="section-bg-muted px-6 py-8 border-b border-border"
-        data-ocid="about.snapshot_section"
+        className="px-6 py-20 border-t border-border"
+        style={{ background: "oklch(0.10 0.008 60)" }}
+        data-ocid="about.overview_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">Quick Overview</p>
-          <h2 className="text-section mb-4">What VIT-AP Is</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            <ul className="space-y-3">
-              {[
-                "Private deemed university on a 200-acre campus in Amaravati — it's big, but still growing",
-                "Part of the VIT Group — same FFCS system, similar academic culture to VIT Vellore",
-                "Placement-focused — companies visit regularly; that's one of the genuine selling points",
-              ].map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-2 text-sm text-foreground"
-                >
-                  <span className="text-primary mt-0.5 shrink-0 font-bold">
-                    →
+        <div className="max-w-5xl mx-auto">
+          <Reveal>
+            <p className="text-label mb-4">What it is</p>
+            <h2 className="text-section text-foreground mb-10">The Setup</h2>
+          </Reveal>
+          <div className="grid md:grid-cols-3 gap-px bg-border">
+            {[
+              {
+                n: "01",
+                h: "VIT Group",
+                b: "Private deemed university in Amaravati — part of the VIT Group, same FFCS system as VIT Vellore. Placement-focused; companies visit regularly.",
+              },
+              {
+                n: "02",
+                h: "200 Acres",
+                b: "Big campus, still developing. Full hostel campus — almost everyone lives on-campus all semester.",
+              },
+              {
+                n: "03",
+                h: "FFCS from Sem 2",
+                b: "First semester: college assigns your slots. From semester two, you build your own timetable. It's one of the better aspects of studying here.",
+              },
+            ].map((item, i) => (
+              <Reveal key={item.n} delay={i * 80} className="bg-background">
+                <div className="p-8 h-full">
+                  <span
+                    className="font-display text-4xl font-black mb-4 block"
+                    style={{ color: "oklch(var(--primary) / 0.35)" }}
+                  >
+                    {item.n}
                   </span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <ul className="space-y-3">
-              {[
-                "FFCS from semester 2 — you build your own timetable. First semester is assigned for you.",
-                "Full hostel campus — almost everyone lives on campus all semester",
-                "Active student clubs: technical, cultural, sports, and social — worth joining early",
-              ].map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-2 text-sm text-foreground"
-                >
-                  <span className="text-primary mt-0.5 shrink-0 font-bold">
-                    →
-                  </span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
+                  <h3 className="font-display font-bold text-xl text-foreground mb-3">
+                    {item.h}
+                  </h3>
+                  <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                    {item.b}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Reality cards */}
+      {/* ── Campus Reality ── */}
       <section
-        className="section-bg-light px-6 py-10 border-b border-border"
+        className="bg-background px-6 py-20 border-t border-border"
         data-ocid="about.reality_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">The Real Picture</p>
-          <h2 className="text-section mb-2">
-            What Campus Life Is Actually Like
-          </h2>
-          <p className="text-sm text-muted-foreground mb-6">
-            Stuff I wish someone had told me before I joined — not what the
-            brochure says.
-          </p>
-          <div className="grid md:grid-cols-2 gap-5">
-            {realityCards.map((card) => (
-              <InfoCard key={card.title} {...card} />
+        <div className="max-w-5xl mx-auto">
+          <Reveal>
+            <p className="text-label mb-4">The real picture</p>
+            <h2 className="text-section text-foreground mb-3">
+              What Campus Is
+              <br />
+              <em>Actually</em> Like
+            </h2>
+            <p className="font-body text-muted-foreground mb-12 max-w-xl">
+              Stuff I wish someone had told me before I joined — not what the
+              brochure says.
+            </p>
+          </Reveal>
+          <div className="space-y-0 border-t border-border">
+            {realityItems.map((item, i) => (
+              <Reveal key={item.label} delay={i * 60}>
+                <div className="flex flex-col sm:flex-row gap-4 py-6 border-b border-border">
+                  <div className="sm:w-48 shrink-0">
+                    <span className="font-display font-bold text-base text-foreground">
+                      {item.label}
+                    </span>
+                  </div>
+                  <div
+                    className="sm:w-px shrink-0"
+                    style={{ background: "oklch(var(--secondary) / 0.25)" }}
+                    aria-hidden="true"
+                  />
+                  <p className="font-body text-sm text-muted-foreground leading-relaxed flex-1">
+                    {item.detail}
+                  </p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Location */}
+      {/* ── Location & Transport ── */}
       <section
-        className="section-bg-muted px-6 py-10 border-b border-border"
-        data-ocid="about.location_section"
-      >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">Getting Here</p>
-          <h2 className="text-section mb-6">Location & Address</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card className="card-elevated">
-              <CardContent className="p-5">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="text-2xl" aria-hidden="true">
-                    📍
-                  </span>
-                  <h3 className="text-subsection">Campus Address</h3>
-                </div>
-                <address className="not-italic text-sm text-foreground leading-relaxed mb-4">
-                  G-30, Inavolu,
-                  <br />
-                  beside AP Secretariat,
-                  <br />
-                  Guntur District,
-                  <br />
-                  Andhra Pradesh – 522237
-                </address>
-                <div className="bg-muted/50 rounded-lg px-4 py-3">
-                  <p className="text-xs text-muted-foreground mb-1">
-                    Campus Area
-                  </p>
-                  <p className="text-sm font-semibold text-foreground">
-                    200 Acres
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="card-elevated">
-              <CardContent className="p-5">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="text-2xl" aria-hidden="true">
-                    🗺️
-                  </span>
-                  <h3 className="text-subsection">Key Distances</h3>
-                </div>
-                <ul className="space-y-3">
-                  {keyDistances.map((d) => (
-                    <li
-                      key={d.place}
-                      className="flex items-center justify-between text-sm"
-                      data-ocid={`about.distance.${d.place.toLowerCase().replace(/\s+/g, "-")}`}
-                    >
-                      <span className="text-foreground">{d.place}</span>
-                      <Badge
-                        variant="outline"
-                        className="text-xs font-mono shrink-0 ml-2"
-                      >
-                        {d.distance}
-                      </Badge>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Transportation */}
-      <section
-        className="section-bg-light px-6 py-10 border-b border-border"
+        className="px-6 py-20 border-t border-border"
+        style={{ background: "oklch(0.10 0.008 60)" }}
         data-ocid="about.transport_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">Getting Around</p>
-          <h2 className="text-section mb-2">How to Get In and Out of Campus</h2>
-          <p className="text-sm text-muted-foreground mb-6">
-            You're about 20 km from Vijayawada city. Here's what I used and what
-            worked.
-          </p>
-          <div className="grid md:grid-cols-2 gap-5">
-            {transportOptions.map((t) => (
-              <TransportCard key={t.mode} {...t} />
+        <div className="max-w-5xl mx-auto">
+          <Reveal>
+            <p className="text-label mb-4">Getting here & around</p>
+            <h2 className="text-section text-foreground mb-3">
+              Location &<br />
+              Transport
+            </h2>
+            <p className="font-body text-muted-foreground mb-4 max-w-xl">
+              You're about 20 km from Vijayawada city. The campus address is
+              G-30, Inavolu, beside AP Secretariat, Guntur District — 522237.
+              Here's what I used.
+            </p>
+          </Reveal>
+
+          <div className="grid md:grid-cols-2 gap-px bg-border mt-10">
+            {transportOptions.map((t, i) => (
+              <Reveal key={t.mode} delay={i * 70} className="bg-background">
+                <div
+                  className="p-8 h-full"
+                  data-ocid={`about.transport.item.${i + 1}`}
+                >
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <h3 className="font-display font-bold text-lg text-foreground">
+                      {t.mode}
+                    </h3>
+                    <span
+                      className="text-xs font-mono font-bold shrink-0 border px-2 py-1"
+                      style={{
+                        color: "oklch(var(--secondary))",
+                        borderColor: "oklch(var(--secondary) / 0.3)",
+                      }}
+                    >
+                      {t.tag}
+                    </span>
+                  </div>
+                  <div
+                    className="w-8 h-px mb-4"
+                    style={{ background: "oklch(var(--primary))" }}
+                  />
+                  <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                    {t.details}
+                  </p>
+                </div>
+              </Reveal>
             ))}
           </div>
-          <p className="text-xs text-muted-foreground mt-4">
-            💡 Honestly, the free Sunday shuttle to Vijayawada is underrated —
-            use it. For early morning trains or flights, book a cab the night
-            before; availability at the gate can be unpredictable.
-          </p>
+          <Reveal delay={100}>
+            <div
+              className="mt-8 border-l-2 pl-5 py-2"
+              style={{ borderColor: "oklch(var(--secondary))" }}
+            >
+              <p className="font-body text-sm text-muted-foreground">
+                The free Sunday shuttle to Vijayawada is underrated — use it.
+                For early morning trains or flights, book a cab the night
+                before; availability at the gate can be unpredictable.
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Campus Facilities */}
+      {/* ── Clubs & Events ── */}
       <section
-        className="section-bg-muted px-6 py-10 border-b border-border"
-        data-ocid="about.facilities_section"
+        className="bg-background px-6 py-20 border-t border-border"
+        data-ocid="about.clubs_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">On-Campus Support</p>
-          <h2 className="text-section mb-6">Health & Medical Facilities</h2>
-          <div className="grid md:grid-cols-2 gap-5">
-            <Card className="card-elevated">
-              <CardContent className="p-5">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-2xl" aria-hidden="true">
-                    🏥
-                  </span>
-                  <h3 className="text-subsection">Health Center</h3>
-                </div>
-                <p className="text-sm text-foreground">
-                  There's an on-campus health center and in my experience it's
-                  more useful than it sounds. For a fever, stomach issue, or
-                  basic consultation — you don't need to leave campus. They also
-                  issue sick certificates, which matters for attendance. For
-                  anything serious, they'll refer you to a hospital in
-                  Vijayawada.
-                </p>
-              </CardContent>
-            </Card>
+        <div className="max-w-5xl mx-auto">
+          <Reveal>
+            <p className="text-label mb-4">Campus life</p>
+            <h2 className="text-section text-foreground mb-3">
+              Clubs, Events
+              <br />
+              &amp; Hackathons
+            </h2>
+            <p className="font-body text-muted-foreground mb-12 max-w-xl">
+              Joining a club in your first semester is one of the better
+              decisions you can make. It's where you'll meet people outside your
+              department and build connections that actually last.
+            </p>
+          </Reveal>
 
-            <Card className="card-elevated">
-              <CardContent className="p-5">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-2xl" aria-hidden="true">
-                    💊
-                  </span>
-                  <h3 className="text-subsection">Campus Pharmacy</h3>
-                </div>
-                <p className="text-sm text-foreground">
-                  There's a small pharmacy on campus — paracetamol, antacids,
-                  ORS, the basics are all there. It's limited, so for specific
-                  prescriptions you may still need to go off-campus. But for
-                  common stuff at odd hours, it saves you a trip.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Clubs & Fests */}
-      <section
-        className="section-bg-light px-6 py-10 border-b border-border"
-        data-ocid="about.campus_life_section"
-      >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">Campus Life</p>
-          <h2 className="text-section mb-2">Clubs, Events & Hackathons</h2>
-          <p className="text-sm text-muted-foreground mb-6">
-            Honestly, joining a club in your first semester is one of the better
-            decisions you can make. It's where you'll meet people outside your
-            department and build connections that actually last.
-          </p>
-          <div className="grid md:grid-cols-2 gap-5 mb-5">
-            <Card className="card-elevated">
-              <CardContent className="p-5">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-2xl" aria-hidden="true">
-                    🎉
-                  </span>
-                  <h3 className="text-subsection">
-                    Annual Cultural Fest — VITopia
+          <div className="grid sm:grid-cols-2 gap-px bg-border mb-10">
+            {clubsData.map((c, i) => (
+              <Reveal key={c.cat} delay={i * 60} className="bg-background">
+                <div className="p-8 h-full">
+                  <h3 className="font-display font-bold text-base text-foreground mb-2">
+                    {c.cat}
                   </h3>
+                  <p className="font-body text-sm text-muted-foreground">
+                    {c.desc}
+                  </p>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  VIT-AP's flagship inter-college cultural festival. Students
-                  from across India come for it — competitions in music, dance,
-                  drama, art, and more. It's genuinely one of the better
-                  experiences of your time here if you get involved.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="card-elevated">
-              <CardContent className="p-5">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-2xl" aria-hidden="true">
-                    🤝
-                  </span>
-                  <h3 className="text-subsection">Student Clubs</h3>
-                </div>
-                <ul className="space-y-2">
-                  {[
-                    "Technical — coding, robotics, AI/ML, IoT",
-                    "Cultural — music, dance, drama, fine arts",
-                    "Social — NSS, community service",
-                    "Sports — inter-hostel and inter-college competitions",
-                  ].map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start gap-2 text-sm text-foreground"
-                    >
-                      <span className="text-accent mt-0.5 shrink-0">•</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
+              </Reveal>
+            ))}
           </div>
 
-          <div className="grid md:grid-cols-2 gap-5">
-            <Card className="card-elevated">
-              <CardContent className="p-5">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-2xl" aria-hidden="true">
-                    💻
-                  </span>
-                  <h3 className="text-subsection">
-                    On-Campus Hackathons & Events
-                  </h3>
-                </div>
-                <p className="text-sm text-muted-foreground mb-3">
-                  Hackathons and events happen regularly on campus — though they
-                  may not always be large-scale. Most are organized by student
-                  clubs: workshops, coding competitions, project showcases, and
-                  small hackathons throughout the year.
-                </p>
-                <p className="text-sm text-foreground">
-                  If you want to be involved, joining a club early is the
-                  fastest way in. That's how most people find out about events
+          <Reveal delay={80}>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <p className="text-label mb-3">On-campus events</p>
+                <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                  Hackathons and events happen regularly — though they may not
+                  always be large-scale. Most are organised by student clubs:
+                  workshops, coding competitions, project showcases, small
+                  hackathons throughout the year. Joining a club early is the
+                  fastest way in — that's how most people hear about events
                   before they're publicly announced.
                 </p>
-              </CardContent>
-            </Card>
-
-            <Card className="card-elevated">
-              <CardContent className="p-5">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-2xl" aria-hidden="true">
-                    🌐
-                  </span>
-                  <h3 className="text-subsection">
-                    External Competitions — GSoC, CTFs & More
-                  </h3>
-                </div>
-                <p className="text-sm text-muted-foreground mb-3">
-                  Bigger programs — Google Summer of Code (GSoC), competitive
-                  hackathons, CTFs, reconnaissance competitions — don't happen
-                  on campus. You participate individually or in small teams,
-                  online or by traveling to the venue.
+              </div>
+              <div>
+                <p className="text-label mb-3">External programs</p>
+                <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                  Bigger programs — Google Summer of Code, CTFs, recon
+                  competitions — don't happen on campus. You participate
+                  individually or in small teams. The college doesn't organise
+                  these, but students do participate. Find seniors who've done
+                  it — they'll tell you exactly how the process works.
                 </p>
-                <p className="text-sm text-foreground">
-                  The college doesn't organize these, but students do
-                  participate. In my experience, the real shortcut is finding
-                  seniors who've done it — they'll tell you exactly how to get
-                  started and what the process actually looks like.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Pros & Cons */}
+      {/* ── Pros & Cons ── */}
       <section
-        className="section-bg-muted px-6 py-10 border-b border-border"
+        className="px-6 py-20 border-t border-border"
+        style={{ background: "oklch(0.10 0.008 60)" }}
         data-ocid="about.pros_cons_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-label mb-2">My Honest Verdict</p>
-          <h2 className="text-section mb-2">
-            What I Think Works and What Doesn't
-          </h2>
-          <p className="text-sm text-muted-foreground mb-6">
-            This is based on real experience, not marketing. Take it as advice
-            from someone who's been through it.
-          </p>
-          <div className="grid md:grid-cols-2 gap-6">
+        <div className="max-w-5xl mx-auto">
+          <Reveal>
+            <p className="text-label mb-4">My honest verdict</p>
+            <h2 className="text-section text-foreground mb-12">
+              What Works &amp;
+              <br />
+              What Doesn't
+            </h2>
+          </Reveal>
+
+          <div className="grid md:grid-cols-2 gap-12">
             {/* Negatives */}
-            <Card className="card-elevated h-full border-destructive/20">
-              <CardContent className="p-5">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="text-2xl" aria-hidden="true">
-                    ⚠️
-                  </span>
-                  <h3 className="text-subsection text-foreground">
+            <Reveal>
+              <div>
+                <div className="flex items-center gap-4 mb-8">
+                  <h3 className="font-display font-bold text-2xl text-foreground">
                     Things that will bother you
                   </h3>
+                  <div
+                    className="flex-1 h-px"
+                    style={{ background: "oklch(var(--primary) / 0.3)" }}
+                  />
                 </div>
-                <ol className="space-y-4">
+                <ol className="space-y-8">
                   {negatives.map((item, i) => (
-                    <li
-                      key={item.slice(0, 40)}
-                      className="flex items-start gap-3 text-sm text-foreground"
-                    >
-                      <span className="shrink-0 mt-0.5 font-semibold text-destructive/80 font-mono text-xs w-4">
-                        {i + 1}.
+                    <li key={item.title} className="flex gap-5">
+                      <span
+                        className="font-display font-black text-3xl leading-none shrink-0 mt-1"
+                        style={{ color: "oklch(var(--primary) / 0.4)" }}
+                      >
+                        {i + 1}
                       </span>
-                      <span className="leading-relaxed">{item}</span>
+                      <div>
+                        <h4 className="font-display font-bold text-base text-foreground mb-1">
+                          {item.title}
+                        </h4>
+                        <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                          {item.body}
+                        </p>
+                      </div>
                     </li>
                   ))}
                 </ol>
-              </CardContent>
-            </Card>
+              </div>
+            </Reveal>
 
             {/* Positives */}
-            <Card className="card-elevated h-full border-primary/20">
-              <CardContent className="p-5">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="text-2xl" aria-hidden="true">
-                    ✅
-                  </span>
-                  <h3 className="text-subsection text-foreground">
+            <Reveal delay={100}>
+              <div>
+                <div className="flex items-center gap-4 mb-8">
+                  <h3 className="font-display font-bold text-2xl text-foreground">
                     Things that genuinely work
                   </h3>
+                  <div
+                    className="flex-1 h-px"
+                    style={{ background: "oklch(var(--secondary) / 0.3)" }}
+                  />
                 </div>
-                <ol className="space-y-4">
+                <ol className="space-y-8">
                   {positives.map((item, i) => (
-                    <li
-                      key={item.slice(0, 40)}
-                      className="flex items-start gap-3 text-sm text-foreground"
-                    >
-                      <span className="shrink-0 mt-0.5 font-semibold text-primary font-mono text-xs w-4">
-                        {i + 1}.
+                    <li key={item.title} className="flex gap-5">
+                      <span
+                        className="font-display font-black text-3xl leading-none shrink-0 mt-1"
+                        style={{ color: "oklch(var(--secondary) / 0.5)" }}
+                      >
+                        {i + 1}
                       </span>
-                      <span className="leading-relaxed">{item}</span>
+                      <div>
+                        <h4 className="font-display font-bold text-base text-foreground mb-1">
+                          {item.title}
+                        </h4>
+                        <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                          {item.body}
+                        </p>
+                      </div>
                     </li>
                   ))}
                 </ol>
-              </CardContent>
-            </Card>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Summary */}
+      {/* ── Summary Verdict ── */}
       <section
-        className="section-bg-light px-6 py-8"
-        data-ocid="about.summary_section"
+        className="bg-background px-6 py-16 border-t border-border"
+        data-ocid="about.verdict_section"
       >
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-primary/5 border border-primary/20 rounded-xl p-5">
-            <p className="text-label mb-1">My Take</p>
-            <p className="text-sm text-foreground">
-              VIT-AP is a placement-focused engineering college on a 200-acre
-              campus in Amaravati — about 20 km from Vijayawada. The academic
-              system has its quirks, the food gets repetitive, and the campus is
-              still developing. But if you're someone who's willing to be
-              proactive — join clubs, manage your time, build your own network —
-              you'll get a lot out of it. It's not a perfect college. It's a
-              decent one with real opportunities, if you use them.
-            </p>
-          </div>
+        <div className="max-w-5xl mx-auto">
+          <Reveal>
+            <div
+              className="border-l-4 pl-8 py-2"
+              style={{ borderColor: "oklch(var(--secondary))" }}
+            >
+              <p className="text-label mb-3">My take</p>
+              <p className="font-body text-lg text-muted-foreground leading-relaxed max-w-3xl">
+                VIT-AP is a placement-focused engineering college on a 200-acre
+                campus in Amaravati. The academic system has its quirks, the
+                food gets repetitive, and the campus is still developing. But if
+                you're willing to be proactive — join clubs, manage your time,
+                build your own network — you'll get a lot out of it. It's not a
+                perfect college. It's a decent one with real opportunities, if
+                you use them.
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
     </Layout>
