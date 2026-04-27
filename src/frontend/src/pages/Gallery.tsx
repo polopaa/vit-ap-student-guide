@@ -44,13 +44,13 @@ function saveImages(images: GalleryImage[]): void {
 function EmptyState({ isAdmin }: { isAdmin: boolean }) {
   return (
     <div
-      className="flex flex-col items-center justify-center py-28 px-6 text-center"
+      className="flex flex-col items-center justify-center py-24 px-6 text-center"
       data-ocid="gallery.empty_state"
     >
-      <div className="w-20 h-20 border border-border/40 flex items-center justify-center mb-6">
-        <Camera className="w-10 h-10 text-muted-foreground/50" />
+      <div className="w-16 h-16 rounded-2xl bg-muted/60 flex items-center justify-center mb-5 border border-border">
+        <Camera className="w-8 h-8 text-muted-foreground/50" />
       </div>
-      <h3 className="font-display text-2xl font-semibold text-foreground mb-3">
+      <h3 className="font-display text-xl font-semibold text-foreground mb-2">
         Nothing here yet
       </h3>
       <p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
@@ -78,28 +78,28 @@ function ImageCard({
   return (
     <button
       type="button"
-      className="group relative w-full overflow-hidden border border-border/40 bg-card cursor-pointer transition-all duration-500 hover:border-secondary/50 text-left"
+      className="group relative w-full overflow-hidden bg-card border border-border rounded-xl cursor-pointer transition-smooth hover:shadow-card text-left"
       data-ocid={`gallery.item.${index}`}
       onClick={onClick}
       aria-label={`View photo: ${image.caption || image.tag}`}
     >
-      <div className="aspect-[4/3] overflow-hidden bg-muted/20">
+      <div className="aspect-[4/3] overflow-hidden bg-muted/30">
         <img
           src={image.dataUrl}
           alt={image.caption || image.tag}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-90 group-hover:brightness-100"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
         />
       </div>
-      <div className="p-4 border-t border-border/30">
+      <div className="p-4 border-t border-border">
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0 flex-1">
             {image.caption && (
-              <p className="font-display text-sm font-semibold text-foreground truncate">
+              <p className="font-display text-sm font-semibold text-foreground truncate mb-1">
                 {image.caption}
               </p>
             )}
-            <Badge variant="outline" className="text-xs mt-1">
+            <Badge variant="outline" className="text-xs">
               {image.tag}
             </Badge>
           </div>
@@ -107,7 +107,7 @@ function ImageCard({
             <Button
               variant="ghost"
               size="icon"
-              className="h-7 w-7 shrink-0 text-muted-foreground hover:text-destructive hover:border-destructive/40"
+              className="h-7 w-7 shrink-0 text-muted-foreground hover:text-destructive"
               onClick={(e) => {
                 e.stopPropagation();
                 onDelete(image.id);
@@ -149,9 +149,9 @@ function AdminLoginDialog({
         className="max-w-sm"
         data-ocid="gallery.admin_login_dialog"
       >
-        <div className="flex flex-col gap-6 pt-2">
+        <div className="flex flex-col gap-5 pt-2">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 border border-primary/40 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
               <Lock className="w-5 h-5 text-primary" />
             </div>
             <div>
@@ -167,7 +167,7 @@ function AdminLoginDialog({
             <div className="flex flex-col gap-2">
               <Label
                 htmlFor="admin-password"
-                className="text-xs text-muted-foreground uppercase tracking-widest"
+                className="text-xs text-muted-foreground"
               >
                 Password
               </Label>
@@ -245,9 +245,7 @@ function UploadDialog({
     const file = e.target.files?.[0];
     if (!file || !file.type.startsWith("image/")) return;
     const reader = new FileReader();
-    reader.onload = (ev) => {
-      setPreview(ev.target?.result as string);
-    };
+    reader.onload = (ev) => setPreview(ev.target?.result as string);
     reader.readAsDataURL(file);
   }
 
@@ -257,9 +255,7 @@ function UploadDialog({
     const file = e.dataTransfer.files?.[0];
     if (!file || !file.type.startsWith("image/")) return;
     const reader = new FileReader();
-    reader.onload = (ev) => {
-      setPreview(ev.target?.result as string);
-    };
+    reader.onload = (ev) => setPreview(ev.target?.result as string);
     reader.readAsDataURL(file);
   }, []);
 
@@ -288,10 +284,10 @@ function UploadDialog({
             <button
               type="button"
               className={[
-                "border-2 border-dashed transition-smooth flex flex-col items-center justify-center p-6 cursor-pointer min-h-[140px] w-full",
+                "border-2 border-dashed rounded-xl flex flex-col items-center justify-center p-6 cursor-pointer min-h-[140px] w-full transition-smooth",
                 dragging
-                  ? "border-secondary/60 bg-secondary/5"
-                  : "border-border/40 hover:border-secondary/40 hover:bg-muted/20",
+                  ? "border-primary bg-primary/5"
+                  : "border-border hover:border-primary/50 hover:bg-muted/30",
               ].join(" ")}
               onDragOver={(e) => {
                 e.preventDefault();
@@ -315,13 +311,13 @@ function UploadDialog({
                 <img
                   src={preview}
                   alt="Preview"
-                  className="max-h-32 object-contain"
+                  className="max-h-32 object-contain rounded-lg"
                 />
               ) : (
                 <>
-                  <Upload className="w-8 h-8 text-muted-foreground/50 mb-2" />
+                  <Upload className="w-7 h-7 text-muted-foreground/50 mb-2" />
                   <p className="text-sm text-muted-foreground text-center">
-                    <span className="text-secondary font-medium">
+                    <span className="text-primary font-medium">
                       Click to select
                     </span>{" "}
                     or drag and drop
@@ -349,7 +345,7 @@ function UploadDialog({
             <div className="flex flex-col gap-2">
               <Label
                 htmlFor="caption"
-                className="text-xs text-muted-foreground uppercase tracking-widest"
+                className="text-xs text-muted-foreground"
               >
                 Caption / Location name
               </Label>
@@ -362,9 +358,7 @@ function UploadDialog({
               />
             </div>
             <div className="flex flex-col gap-2">
-              <Label className="text-xs text-muted-foreground uppercase tracking-widest">
-                Category
-              </Label>
+              <Label className="text-xs text-muted-foreground">Category</Label>
               <div className="flex flex-wrap gap-2">
                 {uploadTags.map((t) => (
                   <button
@@ -372,10 +366,10 @@ function UploadDialog({
                     type="button"
                     onClick={() => setTag(t)}
                     className={[
-                      "px-3 py-1 text-xs font-medium tracking-wider uppercase border transition-smooth",
+                      "px-3 py-1.5 text-xs font-medium rounded-full border transition-smooth",
                       tag === t
-                        ? "bg-primary/20 text-primary border-primary/50"
-                        : "bg-transparent text-muted-foreground border-border/40 hover:border-secondary/40 hover:text-secondary",
+                        ? "bg-primary/10 text-primary border-primary/30"
+                        : "text-muted-foreground border-border hover:border-primary/30 hover:text-primary",
                     ].join(" ")}
                     data-ocid={`gallery.tag_button.${t.toLowerCase().replace(" ", "_")}`}
                   >
@@ -416,7 +410,7 @@ function LightboxDialog({
   return (
     <Dialog open={!!image} onOpenChange={(v) => !v && onClose()}>
       <DialogContent
-        className="max-w-4xl p-0 overflow-hidden bg-black border-border/30"
+        className="max-w-4xl p-0 overflow-hidden bg-foreground border-border/30"
         data-ocid="gallery.lightbox_dialog"
       >
         {image && (
@@ -479,20 +473,26 @@ export default function Gallery() {
 
   return (
     <Layout>
-      {/* Chapter Hero */}
-      <section className="section-bg-light px-6 pt-20 pb-16 border-b border-border/30">
+      {/* Page Header */}
+      <section
+        className="bg-background border-b border-border px-6 pt-12 pb-10"
+        data-ocid="gallery.page_header"
+      >
         <div className="max-w-5xl mx-auto">
-          <p className="chapter-label mb-4" data-ocid="gallery.page_label">
-            Chapter
+          <p
+            className="chapter-label mb-3 fade-in-up"
+            data-ocid="gallery.page_label"
+          >
+            From students
           </p>
-          <h1 className="text-hero text-foreground mb-6 fade-in-up">GALLERY</h1>
-          <div className="gold-underline w-16 mb-8" />
-          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-1">
-            Photos of campus, hostels, food areas, and key spots — so you
-            actually know what you're walking into. I'll keep adding more as I
-            take them.
+          <h1 className="text-hero text-foreground mb-4 fade-in-up fade-in-up-delay-1">
+            Campus Gallery
+          </h1>
+          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-2">
+            Real photos from real students. Campus, hostels, food areas, and key
+            spots — so you actually know what you're walking into.
           </p>
-          <div className="flex flex-wrap items-center gap-3 mt-8">
+          <div className="flex flex-wrap items-center gap-3 mt-6 fade-in-up fade-in-up-delay-3">
             <Badge variant="secondary" className="text-xs">
               📸 {images.length} photo{images.length !== 1 ? "s" : ""}
             </Badge>
@@ -532,7 +532,7 @@ export default function Gallery() {
 
       {/* Filter tabs */}
       {images.length > 0 && (
-        <section className="section-bg-muted px-6 py-4 border-b border-border/30 sticky top-0 z-10 backdrop-blur-sm">
+        <section className="bg-muted/30 px-6 py-4 border-b border-border sticky top-14 z-10 backdrop-blur-sm">
           <div className="max-w-5xl mx-auto">
             <div
               className="flex flex-wrap gap-2"
@@ -548,10 +548,8 @@ export default function Gallery() {
                   aria-selected={activeTag === tag}
                   onClick={() => setActiveTag(tag)}
                   className={[
-                    "px-4 py-1.5 text-xs font-semibold tracking-widest uppercase border transition-smooth",
-                    activeTag === tag
-                      ? "bg-primary/20 text-primary border-primary/50"
-                      : "bg-transparent text-muted-foreground border-border/40 hover:border-secondary/40 hover:text-secondary",
+                    "px-4 py-1.5 rounded-full text-sm font-medium border transition-smooth",
+                    activeTag === tag ? "pill-tab-active" : "pill-tab-inactive",
                   ].join(" ")}
                   data-ocid={`gallery.filter.${tag.toLowerCase().replace(" ", "_")}`}
                 >
@@ -570,7 +568,7 @@ export default function Gallery() {
 
       {/* Grid */}
       <section
-        className="section-bg-light px-6 py-12"
+        className="bg-background px-6 py-10"
         data-ocid="gallery.grid_section"
       >
         <div className="max-w-5xl mx-auto">
@@ -605,7 +603,7 @@ export default function Gallery() {
                 </p>
                 <button
                   type="button"
-                  className="text-sm text-secondary hover:underline"
+                  className="text-sm text-primary hover:underline"
                   onClick={() => setActiveTag("All")}
                 >
                   View all photos

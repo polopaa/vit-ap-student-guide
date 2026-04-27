@@ -26,7 +26,7 @@ function useScrollFade() {
   return { ref, visible };
 }
 
-function FadeSection({
+function Fade({
   children,
   className = "",
   delay = 0,
@@ -35,7 +35,7 @@ function FadeSection({
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`}
+      className={`transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -51,8 +51,8 @@ interface StepCardProps {
 
 function StepCard({ step, title, desc }: StepCardProps) {
   return (
-    <div className="flex items-start gap-4 border border-border/40 bg-card px-5 py-4 transition-smooth hover:border-border/60">
-      <div className="w-8 h-8 border border-secondary/40 text-secondary flex items-center justify-center text-sm font-bold font-display shrink-0">
+    <div className="flex items-start gap-4 bg-card border border-border rounded-xl px-5 py-4 transition-smooth hover:shadow-card shadow-subtle">
+      <div className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-sm font-bold font-display shrink-0">
         {step}
       </div>
       <div>
@@ -176,36 +176,53 @@ const attendanceZones = [
     threshold: "≥ 80%",
     label: "Safe Zone",
     sublabel: "You're good — just keep attending normally",
-    colorClass: "text-secondary",
+    style: {
+      color: "oklch(0.45 0.12 160)",
+      bg: "oklch(0.97 0.02 160)",
+      border: "oklch(0.85 0.06 160)",
+    },
   },
   {
-    threshold: "75 – 79%",
+    threshold: "75–79%",
     label: "Caution Zone",
     sublabel: "One or two more absences and you're at risk — be careful",
-    colorClass: "text-yellow-400",
+    style: {
+      color: "oklch(0.5 0.12 80)",
+      bg: "oklch(0.98 0.015 80)",
+      border: "oklch(0.88 0.07 80)",
+    },
   },
   {
-    threshold: "65 – 74%",
+    threshold: "65–74%",
     label: "Danger Zone",
     sublabel: "Likely debarred from next exam — talk to your proctor now",
-    colorClass: "text-orange-400",
+    style: {
+      color: "oklch(0.55 0.15 50)",
+      bg: "oklch(0.98 0.01 50)",
+      border: "oklch(0.88 0.06 50)",
+    },
   },
   {
     threshold: "< 65%",
     label: "Critical",
     sublabel:
       "Already debarred from exam — you may need to re-register the subject",
-    colorClass: "text-destructive",
+    style: {
+      color: "oklch(0.5 0.18 25)",
+      bg: "oklch(0.97 0.015 25)",
+      border: "oklch(0.88 0.07 25)",
+    },
   },
 ];
 
 const marksComponents = [
-  { component: "CAT-I", marks: "15", note: "~50 min exam" },
-  { component: "CAT-II", marks: "15", note: "~50 min exam" },
+  { component: "CAT-I", marks: "15", note: "~50 min exam", highlight: false },
+  { component: "CAT-II", marks: "15", note: "~50 min exam", highlight: false },
   {
     component: "Digital Assignments (DA)",
     marks: "30",
     note: "Min 3 assignments × 10 marks",
+    highlight: false,
   },
   {
     component: "Total Internal (CAM)",
@@ -217,6 +234,7 @@ const marksComponents = [
     component: "FAT (Final Exam)",
     marks: "40",
     note: "3-hour exam conducted by CoE",
+    highlight: false,
   },
   { component: "Grand Total", marks: "100", note: "—", highlight: true },
 ];
@@ -250,29 +268,34 @@ const deliveryInfo = [
     icon: "📍",
     label: "Official Campus Address",
     desc: "G-30, Inavolu, beside AP Secretariat, Guntur District, AP – 522237",
+    isAddress: true,
   },
 ];
 
 export default function Portals() {
   return (
     <Layout>
-      {/* Chapter Hero */}
-      <section className="section-bg-light px-6 pt-20 pb-16 border-b border-border/30">
+      {/* Page Header */}
+      <section
+        className="bg-background border-b border-border px-6 pt-12 pb-10"
+        data-ocid="portals.page_header"
+      >
         <div className="max-w-5xl mx-auto">
-          <p className="chapter-label mb-4" data-ocid="portals.page_label">
-            Chapter
+          <p
+            className="chapter-label mb-3 fade-in-up"
+            data-ocid="portals.page_label"
+          >
+            VTOP & Portals
           </p>
-          <h1 className="text-hero text-foreground mb-6 fade-in-up">
-            SYSTEMS &<br />
-            PORTALS
+          <h1 className="text-hero text-foreground mb-4 fade-in-up fade-in-up-delay-1">
+            Systems & Portals
           </h1>
-          <div className="gold-underline w-16 mb-8" />
-          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-1">
+          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-2">
             Everything academic — registering courses, checking attendance,
             viewing marks, paying fees — runs through VTOP. Learn it early and
             you'll save yourself a lot of confusion.
           </p>
-          <div className="flex flex-wrap gap-3 mt-8 items-center">
+          <div className="flex flex-wrap gap-3 mt-6 items-center fade-in-up fade-in-up-delay-3">
             <Badge variant="secondary" className="text-xs">
               🖥️ VTOP Portal
             </Badge>
@@ -295,34 +318,33 @@ export default function Portals() {
 
       {/* VTOP Overview */}
       <section
-        className="section-bg-muted px-6 py-16 border-b border-border/30"
+        className="bg-muted/30 px-6 py-16 border-b border-border"
         data-ocid="portals.vtop_section"
       >
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
-            <p className="text-label mb-3">Main Portal</p>
+          <Fade>
+            <p className="text-label mb-3">Main portal</p>
             <h2 className="text-section text-foreground mb-2">
               VTOP — What Each Section Does
             </h2>
-            <div className="gold-underline w-12 mb-6" />
-            <p className="text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed">
+            <p className="font-body text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed">
               URL:{" "}
-              <span className="font-mono text-secondary">vtop.vitap.ac.in</span>{" "}
-              — Use desktop or laptop for anything important. The mobile browser
+              <span className="font-mono text-primary">vtop.vitap.ac.in</span> —
+              Use desktop or laptop for anything important. The mobile browser
               version is unreliable, especially during registration.
             </p>
-          </FadeSection>
+          </Fade>
           <div
-            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6"
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6"
             data-ocid="portals.features_list"
           >
             {vtopFeatures.map((f, i) => (
-              <FadeSection key={f.label} delay={i * 50}>
+              <Fade key={f.label} delay={i * 40}>
                 <div
-                  className="border border-border/40 bg-card p-4 flex items-start gap-3 transition-smooth hover:border-border/60"
+                  className="bg-card border border-border rounded-xl p-4 flex items-start gap-3 transition-smooth hover:shadow-card shadow-subtle h-full"
                   data-ocid={`portals.feature.${i + 1}`}
                 >
-                  <span className="text-2xl shrink-0" aria-hidden="true">
+                  <span className="text-xl shrink-0" aria-hidden="true">
                     {f.icon}
                   </span>
                   <div>
@@ -334,67 +356,71 @@ export default function Portals() {
                     </p>
                   </div>
                 </div>
-              </FadeSection>
+              </Fade>
             ))}
           </div>
-          <FadeSection delay={200}>
-            <div className="border-l-2 border-secondary/50 pl-5 py-3 bg-secondary/5">
-              <p className="text-sm text-muted-foreground">
-                <span className="font-semibold text-secondary">
-                  Login credentials{" "}
-                </span>
-                are handed out during admission. If you lose access, head to the
-                IT help desk on campus — they'll reset it for you.
-              </p>
+          <Fade delay={200}>
+            <div className="callout-teal">
+              <span className="font-semibold">Login credentials </span>
+              are handed out during admission. If you lose access, head to the
+              IT help desk on campus — they'll reset it for you.
             </div>
-          </FadeSection>
+          </Fade>
         </div>
       </section>
 
       {/* Attendance */}
       <section
-        className="section-bg-light px-6 py-16 border-b border-border/30"
+        className="bg-background px-6 py-16 border-b border-border"
         data-ocid="portals.attendance_section"
       >
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
-            <p className="text-label mb-3">Step-by-Step</p>
+          <Fade>
+            <p className="text-label mb-3">Step-by-step</p>
             <h2 className="text-section text-foreground mb-2">
               Checking Attendance
             </h2>
-            <div className="gold-underline w-12 mb-6" />
-            <p className="text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed">
+            <p className="font-body text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed">
               Attendance updates daily after class. Do this every week — not
               once a month when it's already too late.
             </p>
-          </FadeSection>
-          <div className="space-y-3 mb-10" data-ocid="portals.attendance_steps">
+          </Fade>
+          <div
+            className="space-y-2.5 mb-10"
+            data-ocid="portals.attendance_steps"
+          >
             {attendanceSteps.map((s, i) => (
-              <FadeSection key={s.title} delay={i * 50}>
+              <Fade key={s.title} delay={i * 50}>
                 <StepCard {...s} />
-              </FadeSection>
+              </Fade>
             ))}
           </div>
-          <FadeSection delay={100}>
-            <p className="text-label mb-4">Where You Stand</p>
-          </FadeSection>
+          <Fade delay={100}>
+            <p className="text-label mb-4">Where you stand</p>
+          </Fade>
           <div
-            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3"
             data-ocid="portals.attendance_zones"
           >
             {attendanceZones.map((zone, i) => (
-              <FadeSection key={zone.threshold} delay={i * 60}>
+              <Fade key={zone.threshold} delay={i * 60}>
                 <div
-                  className="border border-border/40 bg-card p-5 transition-smooth hover:border-border/60"
+                  className="rounded-xl border p-5 h-full"
                   data-ocid={`portals.attendance_zone.${i + 1}`}
+                  style={{
+                    background: zone.style.bg,
+                    borderColor: zone.style.border,
+                  }}
                 >
                   <p
-                    className={`font-display text-2xl font-black ${zone.colorClass}`}
+                    className="font-display text-2xl font-black"
+                    style={{ color: zone.style.color }}
                   >
                     {zone.threshold}
                   </p>
                   <p
-                    className={`font-display text-sm font-semibold mt-1 ${zone.colorClass}`}
+                    className="font-display text-sm font-semibold mt-1"
+                    style={{ color: zone.style.color }}
                   >
                     {zone.label}
                   </p>
@@ -402,7 +428,7 @@ export default function Portals() {
                     {zone.sublabel}
                   </p>
                 </div>
-              </FadeSection>
+              </Fade>
             ))}
           </div>
         </div>
@@ -410,32 +436,31 @@ export default function Portals() {
 
       {/* Marks */}
       <section
-        className="section-bg-muted px-6 py-16 border-b border-border/30"
+        className="bg-muted/30 px-6 py-16 border-b border-border"
         data-ocid="portals.marks_section"
       >
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
-            <p className="text-label mb-3">Step-by-Step</p>
+          <Fade>
+            <p className="text-label mb-3">Step-by-step</p>
             <h2 className="text-section text-foreground mb-2">
               Viewing Your Marks
             </h2>
-            <div className="gold-underline w-12 mb-6" />
-            <p className="text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed">
+            <p className="font-body text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed">
               CAT-I and CAT-II marks get uploaded shortly after each exam. If
               something looks wrong, raise it during the objection window —
               after that, your options are very limited.
             </p>
-          </FadeSection>
-          <div className="space-y-3 mb-10" data-ocid="portals.marks_steps">
+          </Fade>
+          <div className="space-y-2.5 mb-10" data-ocid="portals.marks_steps">
             {marksSteps.map((s, i) => (
-              <FadeSection key={s.title} delay={i * 50}>
+              <Fade key={s.title} delay={i * 50}>
                 <StepCard {...s} />
-              </FadeSection>
+              </Fade>
             ))}
           </div>
-          <FadeSection delay={100}>
+          <Fade delay={100}>
             <div
-              className="border border-border/40 bg-card p-6"
+              className="bg-card border border-border rounded-2xl p-6 shadow-subtle"
               data-ocid="portals.marks_breakdown"
             >
               <p className="text-label mb-5">Grade Breakdown — Total: 100</p>
@@ -443,16 +468,37 @@ export default function Portals() {
                 {marksComponents.map((row, i) => (
                   <div
                     key={row.component}
-                    className={`text-center p-4 border transition-smooth ${row.highlight ? "border-secondary/40 bg-secondary/5" : "border-border/30 bg-background/40"}`}
+                    className="text-center p-4 rounded-xl border transition-smooth"
+                    style={
+                      row.highlight
+                        ? {
+                            background: "oklch(0.97 0.015 200)",
+                            borderColor: "oklch(0.85 0.06 200)",
+                          }
+                        : {
+                            background: "oklch(var(--muted) / 0.4)",
+                            borderColor: "oklch(var(--border))",
+                          }
+                    }
                     data-ocid={`portals.marks_component.${i + 1}`}
                   >
                     <p
-                      className={`font-display text-3xl font-black ${row.highlight ? "text-secondary" : "text-foreground"}`}
+                      className="font-display text-3xl font-black"
+                      style={{
+                        color: row.highlight
+                          ? "oklch(var(--primary))"
+                          : "oklch(var(--foreground))",
+                      }}
                     >
                       {row.marks}
                     </p>
                     <p
-                      className={`font-display text-sm font-semibold mt-1 ${row.highlight ? "text-secondary" : "text-foreground"}`}
+                      className="font-display text-sm font-semibold mt-1"
+                      style={{
+                        color: row.highlight
+                          ? "oklch(var(--primary))"
+                          : "oklch(var(--foreground))",
+                      }}
                     >
                       {row.component}
                     </p>
@@ -462,50 +508,44 @@ export default function Portals() {
                   </div>
                 ))}
               </div>
-              <div className="mt-5 border-l-2 border-secondary/50 pl-5 py-3 bg-secondary/5">
-                <p className="text-xs text-muted-foreground">
-                  <span className="font-semibold text-secondary">
-                    Important to know:{" "}
-                  </span>
-                  You need at least 50% in the internal component (CAM) AND at
-                  least 50% overall to pass. Bombing your internals and banking
-                  on FAT alone won't work — I've seen people learn this the hard
-                  way.
-                </p>
+              <div className="mt-5 callout-teal">
+                <span className="font-semibold">Important to know: </span>
+                You need at least 50% in the internal component (CAM) AND at
+                least 50% overall to pass. Bombing your internals and banking on
+                FAT alone won't work — I've seen people learn this the hard way.
               </div>
             </div>
-          </FadeSection>
+          </Fade>
         </div>
       </section>
 
       {/* VTOP Tips */}
       <section
-        className="section-bg-light px-6 py-16 border-b border-border/30"
+        className="bg-background px-6 py-16 border-b border-border"
         data-ocid="portals.student_tips_section"
       >
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
-            <p className="text-label mb-3">From Experience</p>
-            <h2 className="text-section text-foreground mb-2">
+          <Fade>
+            <p className="text-label mb-3">From experience</p>
+            <h2 className="text-section text-foreground mb-8">
               Things Worth Knowing
             </h2>
-            <div className="gold-underline w-12 mb-8" />
-          </FadeSection>
+          </Fade>
           <div className="grid md:grid-cols-2 gap-3">
             {vtopTips.map((tip, i) => (
-              <FadeSection key={tip} delay={i * 60}>
+              <Fade key={tip} delay={i * 60}>
                 <div
-                  className="flex items-start gap-3 border border-border/40 bg-card px-5 py-4 transition-smooth hover:border-border/60"
+                  className="flex items-start gap-3 bg-card border border-border rounded-xl px-5 py-4 transition-smooth hover:shadow-card shadow-subtle"
                   data-ocid={`portals.tip.${i + 1}`}
                 >
-                  <span className="text-secondary font-bold text-base shrink-0 mt-0.5">
+                  <span className="text-primary font-bold text-sm shrink-0 mt-0.5">
                     →
                   </span>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     {tip}
                   </p>
                 </div>
-              </FadeSection>
+              </Fade>
             ))}
           </div>
         </div>
@@ -513,18 +553,17 @@ export default function Portals() {
 
       {/* Do & Don't */}
       <section
-        className="section-bg-muted px-6 py-16 border-b border-border/30"
+        className="bg-muted/30 px-6 py-16 border-b border-border"
         data-ocid="portals.tips_section"
       >
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
-            <p className="text-label mb-3">Honest Advice</p>
-            <h2 className="text-section text-foreground mb-2">
+          <Fade>
+            <p className="text-label mb-3">Honest advice</p>
+            <h2 className="text-section text-foreground mb-8">
               Do This / Don't Do This
             </h2>
-            <div className="gold-underline w-12 mb-8" />
-          </FadeSection>
-          <div className="grid md:grid-cols-2 gap-6">
+          </Fade>
+          <div className="grid md:grid-cols-2 gap-5">
             {[
               {
                 icon: "✅",
@@ -537,7 +576,7 @@ export default function Portals() {
                   "Use desktop for course registration — mobile often errors",
                   "Save your Proctor's contact number from day one",
                 ],
-                accent: true,
+                isPositive: true,
               },
               {
                 icon: "⚠️",
@@ -549,30 +588,41 @@ export default function Portals() {
                   "Using mobile browser during course registration",
                   "Forgetting to log out on shared or lab computers",
                 ],
-                accent: false,
+                isPositive: false,
               },
             ].map((group, gi) => (
-              <FadeSection key={group.title} delay={gi * 100}>
-                <Card className="card-cinema h-full">
+              <Fade key={group.title} delay={gi * 100}>
+                <Card className="h-full shadow-subtle border-border">
                   <CardContent className="p-6">
                     <div className="flex items-center gap-3 mb-4">
                       <span className="text-2xl" aria-hidden="true">
                         {group.icon}
                       </span>
-                      <h3 className="font-display text-xl font-semibold text-foreground">
+                      <h3 className="font-display text-lg font-semibold text-foreground">
                         {group.title}
                       </h3>
                     </div>
-                    <ul className="space-y-2">
+                    <ul className="space-y-2.5">
                       {group.items.map((item) => (
                         <li
                           key={item}
-                          className="flex items-start gap-2 text-sm text-muted-foreground"
+                          className="flex items-start gap-2.5 text-sm text-muted-foreground"
                         >
                           <span
-                            className={`mt-0.5 shrink-0 font-bold ${group.accent ? "text-secondary" : "text-destructive"}`}
+                            className={`mt-0.5 shrink-0 w-4 h-4 rounded-full flex items-center justify-center text-[10px] ${group.isPositive ? "" : ""}`}
+                            style={
+                              group.isPositive
+                                ? {
+                                    background: "oklch(0.97 0.02 150)",
+                                    color: "oklch(0.4 0.1 150)",
+                                  }
+                                : {
+                                    background: "oklch(0.97 0.015 25)",
+                                    color: "oklch(0.5 0.15 25)",
+                                  }
+                            }
                           >
-                            {group.accent ? "✓" : "✗"}
+                            {group.isPositive ? "✓" : "✗"}
                           </span>
                           <span>{item}</span>
                         </li>
@@ -580,7 +630,7 @@ export default function Portals() {
                     </ul>
                   </CardContent>
                 </Card>
-              </FadeSection>
+              </Fade>
             ))}
           </div>
         </div>
@@ -588,30 +638,40 @@ export default function Portals() {
 
       {/* Deliveries */}
       <section
-        className="section-bg-light px-6 py-16 border-b border-border/30"
+        className="bg-background px-6 py-16 border-b border-border"
         data-ocid="portals.delivery_section"
       >
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
-            <p className="text-label mb-3">Getting Stuff Delivered</p>
+          <Fade>
+            <p className="text-label mb-3">Getting stuff delivered</p>
             <h2 className="text-section text-foreground mb-2">
               Online Shopping & Deliveries
             </h2>
-            <div className="gold-underline w-12 mb-6" />
-            <p className="text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed">
+            <p className="font-body text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed">
               Amazon and Flipkart deliver to campus without issues. For food,
               Swiggy works — Zomato generally doesn't. Use the address below for
               all orders.
             </p>
-          </FadeSection>
+          </Fade>
           <div
-            className="grid sm:grid-cols-2 gap-4 mb-6"
+            className="grid sm:grid-cols-2 gap-4 mb-5"
             data-ocid="portals.delivery_list"
           >
             {deliveryInfo.map((item, i) => (
-              <FadeSection key={item.label} delay={i * 60}>
+              <Fade key={item.label} delay={i * 60}>
                 <div
-                  className={`border p-5 flex items-start gap-3 transition-smooth hover:border-border/60 ${item.label === "Official Campus Address" ? "border-secondary/30 bg-secondary/5 col-span-full sm:col-span-2" : "border-border/40 bg-card"}`}
+                  className={[
+                    "rounded-xl border p-5 flex items-start gap-3 transition-smooth hover:shadow-card shadow-subtle",
+                    item.isAddress ? "sm:col-span-2" : "bg-card border-border",
+                  ].join(" ")}
+                  style={
+                    item.isAddress
+                      ? {
+                          background: "oklch(0.97 0.015 200)",
+                          borderColor: "oklch(0.85 0.06 200)",
+                        }
+                      : {}
+                  }
                   data-ocid={`portals.delivery_item.${i + 1}`}
                 >
                   <span className="text-2xl shrink-0" aria-hidden="true">
@@ -622,17 +682,17 @@ export default function Portals() {
                       {item.label}
                     </p>
                     <p
-                      className={`text-xs mt-0.5 leading-relaxed ${item.label === "Official Campus Address" ? "text-secondary font-mono" : "text-muted-foreground"}`}
+                      className={`text-xs mt-0.5 leading-relaxed ${item.isAddress ? "text-primary font-mono" : "text-muted-foreground"}`}
                     >
                       {item.desc}
                     </p>
                   </div>
                 </div>
-              </FadeSection>
+              </Fade>
             ))}
           </div>
-          <FadeSection delay={200}>
-            <div className="border border-border/40 bg-card p-5">
+          <Fade delay={200}>
+            <div className="bg-card border border-border rounded-xl p-5 shadow-subtle">
               <p className="font-display font-semibold text-foreground text-sm mb-3">
                 A few things that'll save you hassle
               </p>
@@ -645,9 +705,9 @@ export default function Portals() {
                 ].map((tip) => (
                   <li
                     key={tip}
-                    className="flex items-start gap-2 text-sm text-muted-foreground"
+                    className="flex items-start gap-2.5 text-sm text-muted-foreground"
                   >
-                    <span className="text-secondary mt-0.5 shrink-0 font-bold">
+                    <span className="text-primary mt-0.5 shrink-0 font-bold">
                       →
                     </span>
                     <span>{tip}</span>
@@ -655,27 +715,30 @@ export default function Portals() {
                 ))}
               </ul>
             </div>
-          </FadeSection>
+          </Fade>
         </div>
       </section>
 
       {/* Summary */}
       <section
-        className="section-bg-muted px-6 py-12"
+        className="bg-muted/30 px-6 py-12"
         data-ocid="portals.summary_section"
       >
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
-            <div className="border-l-2 border-primary/60 pl-6 py-4">
-              <p className="text-label mb-2">The Short Version</p>
-              <p className="text-sm text-muted-foreground leading-relaxed max-w-3xl">
+          <Fade>
+            <div
+              className="bg-card border border-border rounded-2xl p-6 shadow-subtle"
+              style={{ borderLeft: "4px solid oklch(var(--primary) / 0.6)" }}
+            >
+              <p className="text-label mb-2">The short version</p>
+              <p className="font-body text-sm text-muted-foreground leading-relaxed max-w-3xl">
                 VTOP is your academic control center — check it weekly for
                 attendance, marks, and deadlines. Don't wait for problems to
                 surface; stay on top of it from day one and you'll avoid 90% of
                 the stress most students create for themselves.
               </p>
             </div>
-          </FadeSection>
+          </Fade>
         </div>
       </section>
     </Layout>

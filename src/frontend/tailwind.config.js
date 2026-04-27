@@ -68,7 +68,7 @@ export default {
         },
       },
       fontFamily: {
-        display: ["Fraunces", "Georgia", "serif"],
+        display: ["DM Sans", "Helvetica Neue", "sans-serif"],
         body: ["Figtree", "Helvetica Neue", "sans-serif"],
         mono: ["var(--font-mono)", "monospace"],
       },
@@ -78,14 +78,13 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       boxShadow: {
-        xs: "0 1px 2px 0 rgba(0,0,0,0.3)",
-        sm: "0 4px 12px 0 rgba(0,0,0,0.4)",
-        md: "0 12px 32px 0 rgba(0,0,0,0.5)",
-        "lg-cinema": "0 24px 64px 0 rgba(0,0,0,0.6)",
-        "xl-cinema": "0 40px 100px 0 rgba(0,0,0,0.7)",
-        subtle: "0 2px 8px 0 rgba(0,0,0,0.25)",
-        "glow-gold": "0 0 40px rgba(212, 175, 55, 0.15)",
-        "glow-crimson": "0 0 40px rgba(155, 29, 29, 0.2)",
+        xs: "0 1px 2px 0 rgba(0,0,0,0.08)",
+        sm: "0 2px 8px 0 rgba(0,0,0,0.1)",
+        md: "0 4px 16px 0 rgba(0,0,0,0.12)",
+        lg: "0 8px 24px 0 rgba(0,0,0,0.15)",
+        "xl": "0 12px 32px 0 rgba(0,0,0,0.18)",
+        subtle: "0 1px 3px 0 rgba(0,0,0,0.08)",
+        "none": "none",
       },
       keyframes: {
         "accordion-down": {

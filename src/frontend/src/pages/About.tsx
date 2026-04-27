@@ -1,36 +1,37 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Layout } from "../components/Layout";
 
-function useScrollReveal() {
+function useScrollFade() {
   const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          el.classList.add("is-visible");
-          obs.unobserve(el);
+          setVisible(true);
+          obs.disconnect();
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.08 },
     );
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
-  return ref;
+  return { ref, visible };
 }
 
-function Reveal({
+function Fade({
   children,
   className = "",
   delay = 0,
 }: { children: React.ReactNode; className?: string; delay?: number }) {
-  const ref = useScrollReveal();
+  const { ref, visible } = useScrollFade();
   return (
     <div
       ref={ref}
-      className={`reveal-block ${className}`}
+      className={`transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -40,47 +41,47 @@ function Reveal({
 
 const negatives = [
   {
-    title: "The campus is a work in progress",
-    body: "I don't say this to complain — it's just true. Construction is ongoing, some areas are dusty and rough, and facilities that are 'coming soon' have been coming soon for a while. If a polished campus matters to you, temper your expectations.",
+    title: "The campus is still very much under construction",
+    body: "Walk around during your first week and you'll see it. Dust, machinery, incomplete buildings — it's been 'developing' for a while. Don't let the brochure photos set your expectations.",
   },
   {
-    title: "Management can be slow and opaque",
-    body: "University administration isn't known for being efficient or transparent. Getting things resolved — whether it's a grade issue, a hostel change, or an official letter — can take longer than it should. Learn to follow up persistently.",
+    title: "University administration moves slowly",
+    body: "Getting anything done through official channels — a grade query, a hostel change, an official letter — requires patience and follow-up. Go in person, bring copies of everything, and don't expect a quick resolution.",
   },
   {
-    title: "Backlogs are expensive — and strict",
-    body: "If you get an F in a subject, re-registering it costs around ₹6,000. And unlike colleges where showing up and writing something gets you through, professors here can be strict. I've seen students fail when they expected to pass. Take backlogs seriously.",
+    title: "Backlogs cost you real money and real time",
+    body: "Re-registering a failed subject costs around ₹6,000. And unlike colleges where just showing up might get you through, some professors here are strict. I've seen students fail when they were counting on passing. Don't take that risk.",
   },
   {
-    title: "Professors have a lot of power over your grade",
-    body: "Your internals, CAT marks, and sometimes FAT evaluations are all in their hands. There's limited recourse if you feel something is unfair — only the FAT can be formally re-evaluated. This is true of most colleges, but there's even less room to push back here.",
+    title: "Professors have a lot of control over your internals",
+    body: "Quizzes, assignments, CAT marks — it all goes through them. Only FAT marks can be formally re-evaluated. For everything else, your options to contest are limited. It's the reality of most colleges, just worth knowing upfront.",
   },
   {
-    title: "Missing a quiz can hurt more than you think",
-    body: "Quizzes and CATs often carry similar weightage. Whether a re-test happens if you miss one is entirely up to the faculty. I've seen students lose a full grade over one missed quiz with no makeup offered. There's no standardised policy.",
+    title: "One missed quiz can drop your grade significantly",
+    body: "Quizzes and CATs carry similar weightage in many courses. Whether a makeup is offered is entirely up to the faculty. There's no standard policy. I've seen students lose a full grade over one missed quiz — no makeup, no explanation.",
   },
 ];
 
 const positives = [
   {
-    title: "A genuinely diverse student body",
-    body: "Students come from all over India. If you're open to it, you'll meet people from completely different backgrounds and languages. That kind of exposure is actually valuable — and rarer than it sounds.",
+    title: "Students come from all over India",
+    body: "This is actually one of the better things about VIT-AP. You'll meet people from genuinely different backgrounds and states. If you're open to it, that exposure is valuable in ways that are hard to measure.",
   },
   {
     title: "Minimal physical bullying, in my experience",
-    body: "In three years here, I haven't witnessed the kind of ragging or bullying that's common in some colleges. Conflicts happen — that's normal — but staying calm and mature keeps you out of most of it.",
+    body: "In three years, I haven't seen ragging or serious physical confrontations. Conflicts happen — that's normal. But the campus environment is relatively safe. Use common sense, and you'll be fine.",
   },
   {
-    title: "Genuinely driven people, if you look for them",
-    body: "There are students here who are serious about what they're building — in tech, research, creative fields. Find them early. They'll help you, challenge you, and show you what's actually possible.",
+    title: "There are driven students here — find them",
+    body: "If you go looking, you'll find people who are genuinely serious about tech, research, or whatever they're building. These are the people worth knowing. They'll push you in a good way and share things freely.",
   },
   {
-    title: "Real networking opportunities",
-    body: "The student community is large and diverse enough that you can build meaningful connections across departments and years. Who you know here will matter more than you expect when you're looking for your first opportunity.",
+    title: "Networking opportunities are real",
+    body: "The student body is large and mixed enough that you can build useful connections across departments and years. Who you know here matters — more than most people expect — when it comes to your first opportunity.",
   },
   {
-    title: "A flexible dress code",
-    body: "Full pants and a sleeved shirt is essentially all that's required. Compared to stricter campuses, this is a genuine relief for day-to-day comfort.",
+    title: "Dress code is relaxed",
+    body: "Full pants and a sleeved shirt is basically all that's required. Compared to stricter colleges, this is a genuine comfort. You don't have to worry about your wardrobe every morning.",
   },
 ];
 
@@ -88,17 +89,17 @@ const realityItems = [
   {
     label: "Classrooms",
     detail:
-      "Most don't have AC. In summer it gets genuinely uncomfortable. Whiteboards, projectors — functional but basic. Labs are AC'd. You'll get used to it.",
+      "Most don't have AC. In summer it gets genuinely uncomfortable — Vijayawada heat is no joke. Labs are AC'd. Whiteboards and projectors are functional but basic. You'll get used to it.",
   },
   {
-    label: "Gym Access",
+    label: "Gym",
     detail:
       "Free hostel gym: 5–8 AM and 5–8 PM only. Paid campus gym: ₹1,200/month — go sign up in the first week or you won't get a slot.",
   },
   {
     label: "Sports & Recreation",
     detail:
-      "Badminton courts exist but timing is competitive. Indoor activity room has TT, carrom, chess — small space. Basketball, football, cricket courts are generally accessible.",
+      "Badminton courts exist but access is competitive. Indoor activity room has TT, carrom, chess — small space. Basketball, football, cricket courts are generally accessible.",
   },
   {
     label: "Campus Wi-Fi",
@@ -108,12 +109,12 @@ const realityItems = [
   {
     label: "Health Center",
     detail:
-      "On-campus, useful for basic consultations, fever, stomach issues, sick certificates. They'll refer you out for anything serious.",
+      "On campus — useful for basic consultations, fever, stomach issues, sick certificates. They'll refer you out for anything serious.",
   },
   {
     label: "Pharmacy",
     detail:
-      "Small campus pharmacy — paracetamol, antacids, ORS basics are there. Limited for specific prescriptions.",
+      "Small campus pharmacy. Paracetamol, antacids, ORS basics are there. Limited for specific prescriptions.",
   },
 ];
 
@@ -122,7 +123,7 @@ const transportOptions = [
     mode: "University Shuttle",
     tag: "Free",
     details:
-      "Every Sunday, Vijayawada. Departs 10 AM – 12 PM, returns 4:30 – 6:30 PM. Bring your ID card. I used this almost every weekend.",
+      "Every Sunday to Vijayawada. Departs 10 AM – 12 PM, returns 4:30 – 6:30 PM. Bring your ID card. I used this almost every weekend.",
   },
   {
     mode: "APSRTC Bus",
@@ -147,260 +148,270 @@ const transportOptions = [
 const clubsData = [
   {
     cat: "Technical",
-    desc: "Coding, robotics, AI/ML, IoT — most active clubs are here",
+    desc: "Coding, robotics, AI/ML, IoT — most of the active clubs are here. Join one in your first week.",
   },
   {
     cat: "Cultural",
-    desc: "Music, dance, drama, fine arts — VITopia is the flagship fest",
+    desc: "Music, dance, drama, fine arts — VITopia is the flagship fest. Worth experiencing at least once.",
   },
   {
     cat: "Social",
-    desc: "NSS and community service — if you want to do something beyond campus",
+    desc: "NSS and community service — if you want to do something that reaches beyond the campus.",
   },
   {
     cat: "Sports",
-    desc: "Inter-hostel and inter-college competitions throughout the year",
+    desc: "Inter-hostel and inter-college competitions throughout the year.",
   },
 ];
 
 export default function About() {
   return (
     <Layout>
-      <style>{`
-        .reveal-block { opacity:0; transform:translateY(2rem); transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1); }
-        .reveal-block.is-visible { opacity:1; transform:translateY(0); }
-        @media(prefers-reduced-motion:reduce){.reveal-block{opacity:1;transform:none;transition:none;}}
-      `}</style>
-
-      {/* ── Chapter Hero ── */}
-      <section className="bg-background min-h-[60vh] flex items-end px-6 pb-16 pt-32 relative overflow-hidden">
-        <div
-          className="absolute inset-0 bg-grain opacity-20 pointer-events-none"
-          aria-hidden="true"
-        />
-        <div
-          className="absolute right-0 top-0 bottom-0 w-px opacity-20 pointer-events-none"
-          style={{ background: "oklch(var(--secondary))" }}
-          aria-hidden="true"
-        />
-        <div className="max-w-5xl mx-auto w-full">
-          <div className="fade-in-up fade-in-up-delay-1">
-            <span className="chapter-label">Chapter I</span>
-          </div>
+      {/* Page Header */}
+      <section
+        className="bg-background border-b border-border px-6 pt-12 pb-10"
+        data-ocid="about.page_header"
+      >
+        <div className="max-w-5xl mx-auto">
+          <p className="chapter-label mb-3 fade-in-up">About the College</p>
           <h1
-            className="fade-in-up fade-in-up-delay-2 font-display font-black text-foreground leading-none tracking-tighter mt-4 mb-6"
-            style={{ fontSize: "clamp(3rem, 9vw, 7.5rem)" }}
-            data-ocid="about.chapter_title"
+            className="text-hero text-foreground mb-4 fade-in-up fade-in-up-delay-1"
+            data-ocid="about.page_title"
           >
-            ABOUT
-            <br />
-            <span style={{ color: "oklch(var(--primary))" }}>VIT-AP</span>
+            About VIT-AP
           </h1>
-          <p className="fade-in-up fade-in-up-delay-3 font-body italic text-muted-foreground text-xl max-w-2xl">
-            I'm not going to sell this place to you. Here's what I actually
-            think — based on my time here — so you can decide for yourself
-            whether it's the right fit.
+          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-2">
+            Here's what the college actually looks like from the inside — not
+            the brochure version. I'm not going to sell this place to you. Make
+            your own call.
           </p>
-          <div className="fade-in-up fade-in-up-delay-4 chapter-divider mt-8 w-24" />
         </div>
       </section>
 
-      {/* ── Quick Overview ── */}
+      {/* Overall Rating Card */}
       <section
-        className="px-6 py-20 border-t border-border"
-        style={{ background: "oklch(0.10 0.008 60)" }}
+        className="bg-muted/30 px-6 py-10 border-b border-border"
+        data-ocid="about.rating_section"
+      >
+        <div className="max-w-5xl mx-auto">
+          <Fade>
+            <div className="bg-card border border-border rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center gap-6 shadow-card">
+              <div className="flex items-center gap-4 shrink-0">
+                <div
+                  className="w-20 h-20 rounded-2xl flex flex-col items-center justify-center font-display font-bold"
+                  style={{
+                    background: "oklch(0.96 0.04 80)",
+                    border: "2px solid oklch(0.88 0.08 80)",
+                    color: "oklch(0.45 0.12 70)",
+                  }}
+                >
+                  <span className="text-3xl leading-none">6.5</span>
+                  <span className="text-xs font-medium opacity-70">/10</span>
+                </div>
+                <div>
+                  <p className="font-display font-bold text-lg text-foreground">
+                    Overall Rating
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Based on student experience
+                  </p>
+                </div>
+              </div>
+              <div className="h-px sm:h-16 sm:w-px bg-border w-full sm:w-auto shrink-0" />
+              <p className="text-base text-foreground font-body leading-relaxed">
+                <span className="font-semibold">Honestly?</span> It's an average
+                college. Not bad, not amazing. What you get out of it depends
+                almost entirely on what you put in. Students who stay proactive
+                — join clubs, build things, manage their time — tend to do well.
+                Those who wait to be pushed usually don't.
+              </p>
+            </div>
+          </Fade>
+        </div>
+      </section>
+
+      {/* Quick Overview */}
+      <section
+        className="bg-background px-6 py-16 border-b border-border"
         data-ocid="about.overview_section"
       >
         <div className="max-w-5xl mx-auto">
-          <Reveal>
-            <p className="text-label mb-4">What it is</p>
-            <h2 className="text-section text-foreground mb-10">The Setup</h2>
-          </Reveal>
-          <div className="grid md:grid-cols-3 gap-px bg-border">
+          <Fade>
+            <p className="text-label mb-3">The basics</p>
+            <h2 className="text-section text-foreground mb-8">
+              Quick Overview
+            </h2>
+          </Fade>
+          <div className="grid md:grid-cols-3 gap-4">
             {[
               {
                 n: "01",
                 h: "VIT Group",
-                b: "Private deemed university in Amaravati — part of the VIT Group, same FFCS system as VIT Vellore. Placement-focused; companies visit regularly.",
+                b: "Private deemed university in Amaravati, part of the VIT Group. Same FFCS system as VIT Vellore. Placement-focused; companies visit campus regularly.",
               },
               {
                 n: "02",
-                h: "200 Acres",
-                b: "Big campus, still developing. Full hostel campus — almost everyone lives on-campus all semester.",
+                h: "200-Acre Campus",
+                b: "Large campus, still developing. Almost everyone lives on campus all semester — it's a full residential setup.",
               },
               {
                 n: "03",
                 h: "FFCS from Sem 2",
-                b: "First semester: college assigns your slots. From semester two, you build your own timetable. It's one of the better aspects of studying here.",
+                b: "First semester: management assigns your slots. From second semester, you build your own timetable through VTOP. It's one of the genuinely good parts of studying here.",
               },
             ].map((item, i) => (
-              <Reveal key={item.n} delay={i * 80} className="bg-background">
-                <div className="p-8 h-full">
+              <Fade key={item.n} delay={i * 80}>
+                <div
+                  className="bg-card border border-border rounded-xl p-6 h-full shadow-subtle transition-smooth hover:shadow-card"
+                  data-ocid={`about.overview_card.${i + 1}`}
+                >
                   <span
-                    className="font-display text-4xl font-black mb-4 block"
-                    style={{ color: "oklch(var(--primary) / 0.35)" }}
+                    className="font-display text-3xl font-black mb-3 block"
+                    style={{ color: "oklch(var(--primary) / 0.25)" }}
                   >
                     {item.n}
                   </span>
-                  <h3 className="font-display font-bold text-xl text-foreground mb-3">
+                  <h3 className="font-display font-bold text-base text-foreground mb-2">
                     {item.h}
                   </h3>
                   <p className="font-body text-sm text-muted-foreground leading-relaxed">
                     {item.b}
                   </p>
                 </div>
-              </Reveal>
+              </Fade>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Campus Reality ── */}
+      {/* Campus Reality */}
       <section
-        className="bg-background px-6 py-20 border-t border-border"
+        className="bg-muted/30 px-6 py-16 border-b border-border"
         data-ocid="about.reality_section"
       >
         <div className="max-w-5xl mx-auto">
-          <Reveal>
-            <p className="text-label mb-4">The real picture</p>
-            <h2 className="text-section text-foreground mb-3">
-              What Campus Is
-              <br />
-              <em>Actually</em> Like
+          <Fade>
+            <p className="text-label mb-3">What it's actually like</p>
+            <h2 className="text-section text-foreground mb-2">
+              Campus Reality
             </h2>
-            <p className="font-body text-muted-foreground mb-12 max-w-xl">
+            <p className="font-body text-muted-foreground mb-10 max-w-xl">
               Stuff I wish someone had told me before I joined — not what the
               brochure says.
             </p>
-          </Reveal>
-          <div className="space-y-0 border-t border-border">
+          </Fade>
+          <div className="bg-card border border-border rounded-2xl overflow-hidden shadow-subtle">
             {realityItems.map((item, i) => (
-              <Reveal key={item.label} delay={i * 60}>
-                <div className="flex flex-col sm:flex-row gap-4 py-6 border-b border-border">
-                  <div className="sm:w-48 shrink-0">
-                    <span className="font-display font-bold text-base text-foreground">
+              <Fade key={item.label} delay={i * 50}>
+                <div
+                  className={`flex flex-col sm:flex-row gap-4 px-6 py-5 ${i < realityItems.length - 1 ? "border-b border-border" : ""}`}
+                >
+                  <div className="sm:w-36 shrink-0">
+                    <span className="font-display font-semibold text-sm text-foreground">
                       {item.label}
                     </span>
                   </div>
-                  <div
-                    className="sm:w-px shrink-0"
-                    style={{ background: "oklch(var(--secondary) / 0.25)" }}
-                    aria-hidden="true"
-                  />
+                  <div className="w-px bg-border hidden sm:block shrink-0" />
                   <p className="font-body text-sm text-muted-foreground leading-relaxed flex-1">
                     {item.detail}
                   </p>
                 </div>
-              </Reveal>
+              </Fade>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Location & Transport ── */}
+      {/* Location & Transport */}
       <section
-        className="px-6 py-20 border-t border-border"
-        style={{ background: "oklch(0.10 0.008 60)" }}
+        className="bg-background px-6 py-16 border-b border-border"
         data-ocid="about.transport_section"
       >
         <div className="max-w-5xl mx-auto">
-          <Reveal>
-            <p className="text-label mb-4">Getting here & around</p>
-            <h2 className="text-section text-foreground mb-3">
-              Location &<br />
-              Transport
+          <Fade>
+            <p className="text-label mb-3">Getting here & around</p>
+            <h2 className="text-section text-foreground mb-2">
+              Location & Transport
             </h2>
-            <p className="font-body text-muted-foreground mb-4 max-w-xl">
-              You're about 20 km from Vijayawada city. The campus address is
-              G-30, Inavolu, beside AP Secretariat, Guntur District — 522237.
-              Here's what I used.
+            <p className="font-body text-muted-foreground mb-3 max-w-xl">
+              You're about 20 km from Vijayawada city. Campus address: G-30,
+              Inavolu, beside AP Secretariat, Guntur District – 522237. Here's
+              what I used.
             </p>
-          </Reveal>
-
-          <div className="grid md:grid-cols-2 gap-px bg-border mt-10">
+          </Fade>
+          <div className="grid md:grid-cols-2 gap-4 mt-8">
             {transportOptions.map((t, i) => (
-              <Reveal key={t.mode} delay={i * 70} className="bg-background">
+              <Fade key={t.mode} delay={i * 70}>
                 <div
-                  className="p-8 h-full"
+                  className="bg-card border border-border rounded-xl p-5 h-full shadow-subtle transition-smooth hover:shadow-card"
                   data-ocid={`about.transport.item.${i + 1}`}
                 >
                   <div className="flex items-start justify-between gap-3 mb-3">
-                    <h3 className="font-display font-bold text-lg text-foreground">
+                    <h3 className="font-display font-semibold text-base text-foreground">
                       {t.mode}
                     </h3>
                     <span
-                      className="text-xs font-mono font-bold shrink-0 border px-2 py-1"
+                      className="text-xs font-display font-bold shrink-0 px-2.5 py-1 rounded-full"
                       style={{
-                        color: "oklch(var(--secondary))",
-                        borderColor: "oklch(var(--secondary) / 0.3)",
+                        background: "oklch(var(--primary) / 0.08)",
+                        color: "oklch(var(--primary))",
+                        border: "1px solid oklch(var(--primary) / 0.2)",
                       }}
                     >
                       {t.tag}
                     </span>
                   </div>
-                  <div
-                    className="w-8 h-px mb-4"
-                    style={{ background: "oklch(var(--primary))" }}
-                  />
                   <p className="font-body text-sm text-muted-foreground leading-relaxed">
                     {t.details}
                   </p>
                 </div>
-              </Reveal>
+              </Fade>
             ))}
           </div>
-          <Reveal delay={100}>
-            <div
-              className="mt-8 border-l-2 pl-5 py-2"
-              style={{ borderColor: "oklch(var(--secondary))" }}
-            >
-              <p className="font-body text-sm text-muted-foreground">
-                The free Sunday shuttle to Vijayawada is underrated — use it.
-                For early morning trains or flights, book a cab the night
-                before; availability at the gate can be unpredictable.
-              </p>
+          <Fade delay={120}>
+            <div className="mt-6 callout-teal">
+              <p className="font-semibold mb-1">💡 My tip</p>
+              The free Sunday shuttle to Vijayawada is underrated — use it. For
+              early morning trains or flights, book a cab the night before;
+              availability at the gate can be unpredictable.
             </div>
-          </Reveal>
+          </Fade>
         </div>
       </section>
 
-      {/* ── Clubs & Events ── */}
+      {/* Clubs & Events */}
       <section
-        className="bg-background px-6 py-20 border-t border-border"
+        className="bg-muted/30 px-6 py-16 border-b border-border"
         data-ocid="about.clubs_section"
       >
         <div className="max-w-5xl mx-auto">
-          <Reveal>
-            <p className="text-label mb-4">Campus life</p>
+          <Fade>
+            <p className="text-label mb-3">Campus life</p>
             <h2 className="text-section text-foreground mb-3">
-              Clubs, Events
-              <br />
-              &amp; Hackathons
+              Clubs, Events & Hackathons
             </h2>
-            <p className="font-body text-muted-foreground mb-12 max-w-xl">
+            <p className="font-body text-muted-foreground mb-10 max-w-xl">
               Joining a club in your first semester is one of the better
               decisions you can make. It's where you'll meet people outside your
               department and build connections that actually last.
             </p>
-          </Reveal>
-
-          <div className="grid sm:grid-cols-2 gap-px bg-border mb-10">
+          </Fade>
+          <div className="grid sm:grid-cols-2 gap-4 mb-10">
             {clubsData.map((c, i) => (
-              <Reveal key={c.cat} delay={i * 60} className="bg-background">
-                <div className="p-8 h-full">
-                  <h3 className="font-display font-bold text-base text-foreground mb-2">
+              <Fade key={c.cat} delay={i * 60}>
+                <div className="bg-card border border-border rounded-xl p-5 h-full shadow-subtle">
+                  <h3 className="font-display font-semibold text-sm text-foreground mb-1.5">
                     {c.cat}
                   </h3>
                   <p className="font-body text-sm text-muted-foreground">
                     {c.desc}
                   </p>
                 </div>
-              </Reveal>
+              </Fade>
             ))}
           </div>
-
-          <Reveal delay={80}>
-            <div className="grid md:grid-cols-2 gap-8">
+          <Fade delay={100}>
+            <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <p className="text-label mb-3">On-campus events</p>
                 <p className="font-body text-sm text-muted-foreground leading-relaxed">
@@ -423,53 +434,57 @@ export default function About() {
                 </p>
               </div>
             </div>
-          </Reveal>
+          </Fade>
         </div>
       </section>
 
-      {/* ── Pros & Cons ── */}
+      {/* Pros & Cons */}
       <section
-        className="px-6 py-20 border-t border-border"
-        style={{ background: "oklch(0.10 0.008 60)" }}
+        className="bg-background px-6 py-16 border-b border-border"
         data-ocid="about.pros_cons_section"
       >
         <div className="max-w-5xl mx-auto">
-          <Reveal>
-            <p className="text-label mb-4">My honest verdict</p>
-            <h2 className="text-section text-foreground mb-12">
-              What Works &amp;
-              <br />
-              What Doesn't
+          <Fade>
+            <p className="text-label mb-3">My honest verdict</p>
+            <h2 className="text-section text-foreground mb-10">
+              What Works & What Doesn't
             </h2>
-          </Reveal>
-
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Negatives */}
-            <Reveal>
-              <div>
-                <div className="flex items-center gap-4 mb-8">
-                  <h3 className="font-display font-bold text-2xl text-foreground">
+          </Fade>
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Cons */}
+            <Fade>
+              <div
+                className="bg-card border border-border rounded-2xl p-6 shadow-subtle h-full"
+                style={{ borderLeft: "3px solid oklch(0.7 0.15 25)" }}
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center text-sm"
+                    style={{
+                      background: "oklch(0.97 0.015 25)",
+                      color: "oklch(0.5 0.15 25)",
+                    }}
+                  >
+                    ✕
+                  </div>
+                  <h3 className="font-display font-bold text-base text-foreground">
                     Things that will bother you
                   </h3>
-                  <div
-                    className="flex-1 h-px"
-                    style={{ background: "oklch(var(--primary) / 0.3)" }}
-                  />
                 </div>
-                <ol className="space-y-8">
+                <ol className="space-y-5">
                   {negatives.map((item, i) => (
-                    <li key={item.title} className="flex gap-5">
+                    <li key={item.title} className="flex gap-4">
                       <span
-                        className="font-display font-black text-3xl leading-none shrink-0 mt-1"
-                        style={{ color: "oklch(var(--primary) / 0.4)" }}
+                        className="font-display font-black text-2xl leading-none shrink-0 mt-0.5"
+                        style={{ color: "oklch(0.75 0.12 25)" }}
                       >
                         {i + 1}
                       </span>
                       <div>
-                        <h4 className="font-display font-bold text-base text-foreground mb-1">
+                        <h4 className="font-display font-semibold text-sm text-foreground mb-1">
                           {item.title}
                         </h4>
-                        <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                        <p className="font-body text-xs text-muted-foreground leading-relaxed">
                           {item.body}
                         </p>
                       </div>
@@ -477,34 +492,41 @@ export default function About() {
                   ))}
                 </ol>
               </div>
-            </Reveal>
-
-            {/* Positives */}
-            <Reveal delay={100}>
-              <div>
-                <div className="flex items-center gap-4 mb-8">
-                  <h3 className="font-display font-bold text-2xl text-foreground">
+            </Fade>
+            {/* Pros */}
+            <Fade delay={100}>
+              <div
+                className="bg-card border border-border rounded-2xl p-6 shadow-subtle h-full"
+                style={{ borderLeft: "3px solid oklch(0.6 0.13 160)" }}
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center text-sm"
+                    style={{
+                      background: "oklch(0.97 0.02 150)",
+                      color: "oklch(0.4 0.1 150)",
+                    }}
+                  >
+                    ✓
+                  </div>
+                  <h3 className="font-display font-bold text-base text-foreground">
                     Things that genuinely work
                   </h3>
-                  <div
-                    className="flex-1 h-px"
-                    style={{ background: "oklch(var(--secondary) / 0.3)" }}
-                  />
                 </div>
-                <ol className="space-y-8">
+                <ol className="space-y-5">
                   {positives.map((item, i) => (
-                    <li key={item.title} className="flex gap-5">
+                    <li key={item.title} className="flex gap-4">
                       <span
-                        className="font-display font-black text-3xl leading-none shrink-0 mt-1"
-                        style={{ color: "oklch(var(--secondary) / 0.5)" }}
+                        className="font-display font-black text-2xl leading-none shrink-0 mt-0.5"
+                        style={{ color: "oklch(0.65 0.1 160)" }}
                       >
                         {i + 1}
                       </span>
                       <div>
-                        <h4 className="font-display font-bold text-base text-foreground mb-1">
+                        <h4 className="font-display font-semibold text-sm text-foreground mb-1">
                           {item.title}
                         </h4>
-                        <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                        <p className="font-body text-xs text-muted-foreground leading-relaxed">
                           {item.body}
                         </p>
                       </div>
@@ -512,24 +534,24 @@ export default function About() {
                   ))}
                 </ol>
               </div>
-            </Reveal>
+            </Fade>
           </div>
         </div>
       </section>
 
-      {/* ── Summary Verdict ── */}
+      {/* Summary Verdict */}
       <section
-        className="bg-background px-6 py-16 border-t border-border"
+        className="bg-muted/30 px-6 py-12"
         data-ocid="about.verdict_section"
       >
         <div className="max-w-5xl mx-auto">
-          <Reveal>
+          <Fade>
             <div
-              className="border-l-4 pl-8 py-2"
-              style={{ borderColor: "oklch(var(--secondary))" }}
+              className="bg-card border border-border rounded-2xl p-6 shadow-subtle"
+              style={{ borderLeft: "4px solid oklch(var(--primary) / 0.6)" }}
             >
               <p className="text-label mb-3">My take</p>
-              <p className="font-body text-lg text-muted-foreground leading-relaxed max-w-3xl">
+              <p className="font-body text-base text-muted-foreground leading-relaxed max-w-3xl">
                 VIT-AP is a placement-focused engineering college on a 200-acre
                 campus in Amaravati. The academic system has its quirks, the
                 food gets repetitive, and the campus is still developing. But if
@@ -539,7 +561,7 @@ export default function About() {
                 you use them.
               </p>
             </div>
-          </Reveal>
+          </Fade>
         </div>
       </section>
     </Layout>

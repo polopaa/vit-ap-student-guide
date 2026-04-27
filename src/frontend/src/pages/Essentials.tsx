@@ -33,7 +33,7 @@ function useScrollFade() {
   return { ref, visible };
 }
 
-function FadeSection({
+function Fade({
   children,
   className = "",
   delay = 0,
@@ -42,7 +42,7 @@ function FadeSection({
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`}
+      className={`transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -50,11 +50,11 @@ function FadeSection({
   );
 }
 
-function CalloutBox({ text }: { text: string }) {
+function AmberCallout({ title, text }: { title?: string; text: string }) {
   return (
-    <div className="border-l-2 border-secondary/50 pl-5 py-3 mt-8 bg-secondary/5">
-      <p className="text-label mb-1">My Take</p>
-      <p className="text-sm text-muted-foreground leading-relaxed">{text}</p>
+    <div className="callout-amber mt-6">
+      {title && <p className="font-semibold mb-1">{title}</p>}
+      <p>{text}</p>
     </div>
   );
 }
@@ -66,12 +66,15 @@ function ChecklistGroup({
   ocid,
 }: { icon: string; title: string; items: string[]; ocid?: string }) {
   return (
-    <div className="border border-border/40 bg-card p-5" data-ocid={ocid}>
-      <div className="flex items-center gap-2 mb-4">
+    <div
+      className="bg-card border border-border rounded-xl p-5 h-full shadow-subtle"
+      data-ocid={ocid}
+    >
+      <div className="flex items-center gap-2.5 mb-4">
         <span className="text-xl" aria-hidden="true">
           {icon}
         </span>
-        <h3 className="font-display text-base font-semibold text-foreground">
+        <h3 className="font-display text-sm font-semibold text-foreground">
           {title}
         </h3>
       </div>
@@ -79,9 +82,17 @@ function ChecklistGroup({
         {items.map((item) => (
           <li
             key={item}
-            className="flex items-start gap-2 text-xs text-muted-foreground"
+            className="flex items-start gap-2.5 text-xs text-muted-foreground"
           >
-            <span className="text-secondary mt-0.5 shrink-0 font-bold">—</span>
+            <span
+              className="mt-0.5 shrink-0 w-4 h-4 rounded-full flex items-center justify-center text-[10px]"
+              style={{
+                background: "oklch(var(--primary) / 0.1)",
+                color: "oklch(var(--primary))",
+              }}
+            >
+              ✓
+            </span>
             <span>{item}</span>
           </li>
         ))}
@@ -93,23 +104,26 @@ function ChecklistGroup({
 export default function Essentials() {
   return (
     <Layout>
-      {/* Chapter Hero */}
-      <section className="section-bg-light px-6 pt-20 pb-16 border-b border-border/30">
+      {/* Page Header */}
+      <section
+        className="bg-background border-b border-border px-6 pt-12 pb-10"
+        data-ocid="essentials.page_header"
+      >
         <div className="max-w-5xl mx-auto">
-          <p className="chapter-label mb-4" data-ocid="essentials.page_label">
-            Chapter
+          <p
+            className="chapter-label mb-3 fade-in-up"
+            data-ocid="essentials.page_label"
+          >
+            Move-In Guide
           </p>
-          <h1 className="text-hero text-foreground mb-6 fade-in-up">
-            ESSENTIALS
+          <h1 className="text-hero text-foreground mb-4 fade-in-up fade-in-up-delay-1">
+            Essentials & Packing
           </h1>
-          <div className="gold-underline w-16 mb-8" />
-          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-1">
-            I've been through move-in day and I know how chaotic it can get.
-            This is everything I wish someone had laid out clearly for me —
-            documents, what to pack, what to skip, and what to just buy on
-            campus.
+          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-2">
+            Don't overthink it — here's what you actually need for move-in day.
+            I've been through it and I know how chaotic it can get.
           </p>
-          <div className="flex flex-wrap gap-3 mt-8">
+          <div className="flex flex-wrap gap-2 mt-6 fade-in-up fade-in-up-delay-3">
             {[
               "📄 Documents",
               "🎒 Packing",
@@ -126,67 +140,71 @@ export default function Essentials() {
 
       {/* Documents */}
       <section
-        className="section-bg-muted px-6 py-16 border-b border-border/30"
+        className="bg-muted/30 px-6 py-16 border-b border-border"
         data-ocid="essentials.documents_section"
       >
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
-            <p className="text-label mb-3">Before You Leave Home</p>
+          <Fade>
+            <p className="text-label mb-3">Before you leave home</p>
             <h2 className="text-section text-foreground mb-2">
               Documents — Don't Skip This
             </h2>
-            <div className="gold-underline w-12 mb-6" />
-            <p className="text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed">
+            <p className="font-body text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed">
               Don't forget your originals — not just photocopies. Bring
               originals plus at least 10 photocopies of every document. You'll
-              be asked for documents multiple times in the first week alone.
+              be asked multiple times in the first week alone.
             </p>
-          </FadeSection>
-          <div className="grid md:grid-cols-2 gap-6">
-            <FadeSection delay={100}>
+          </Fade>
+          <div className="grid md:grid-cols-2 gap-5">
+            <Fade delay={100}>
               <Card
-                className="card-cinema h-full"
+                className="h-full shadow-subtle border-border"
                 data-ocid="essentials.docs_originals_card"
               >
                 <CardContent className="p-6">
-                  <div className="flex items-center gap-3 mb-4">
+                  <div className="flex items-center gap-3 mb-5">
                     <span className="text-2xl" aria-hidden="true">
                       📄
                     </span>
-                    <h3 className="font-display text-xl font-semibold text-foreground">
+                    <h3 className="font-display text-lg font-semibold text-foreground">
                       Original Documents
                     </h3>
                   </div>
-                  <ul className="space-y-2">
+                  <ul className="space-y-2.5">
                     {originalDocuments.map((doc) => (
                       <li
                         key={doc}
-                        className="flex items-start gap-2 text-sm text-muted-foreground"
+                        className="flex items-start gap-2.5 text-sm text-muted-foreground"
                       >
-                        <span className="text-secondary mt-0.5 shrink-0 font-bold">
-                          —
+                        <span
+                          className="mt-0.5 shrink-0 w-4 h-4 rounded-full flex items-center justify-center text-[10px]"
+                          style={{
+                            background: "oklch(var(--primary) / 0.1)",
+                            color: "oklch(var(--primary))",
+                          }}
+                        >
+                          ✓
                         </span>
                         <span>{doc}</span>
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-5 border-t border-border/40 pt-4">
+                  <div className="mt-5 pt-4 border-t border-border">
                     <p className="text-xs text-muted-foreground">
                       <span className="font-semibold text-foreground">
                         Also bring:{" "}
                       </span>
-                      10 photocopies of every document above. Keep them in a
-                      separate folder from your originals.
+                      10 photocopies of every document. Keep them in a separate
+                      folder from your originals.
                     </p>
                   </div>
                 </CardContent>
               </Card>
-            </FadeSection>
-
-            <div className="flex flex-col gap-5">
-              <FadeSection delay={200}>
+            </Fade>
+            <div className="flex flex-col gap-4">
+              <Fade delay={200}>
                 <Card
-                  className="card-cinema"
+                  className="shadow-subtle border-border"
                   data-ocid="essentials.docs_nri_card"
                 >
                   <CardContent className="p-6">
@@ -195,7 +213,7 @@ export default function Essentials() {
                         🌍
                       </span>
                       <div>
-                        <h3 className="font-display text-lg font-semibold text-foreground">
+                        <h3 className="font-display text-base font-semibold text-foreground">
                           NRI / Foreign Students
                         </h3>
                         <p className="text-xs text-muted-foreground">
@@ -207,10 +225,16 @@ export default function Essentials() {
                       {nriDocuments.map((doc) => (
                         <li
                           key={doc}
-                          className="flex items-start gap-2 text-sm text-muted-foreground"
+                          className="flex items-start gap-2.5 text-sm text-muted-foreground"
                         >
-                          <span className="text-secondary mt-0.5 shrink-0 font-bold">
-                            —
+                          <span
+                            className="mt-0.5 shrink-0 w-4 h-4 rounded-full flex items-center justify-center text-[10px]"
+                            style={{
+                              background: "oklch(var(--primary) / 0.1)",
+                              color: "oklch(var(--primary))",
+                            }}
+                          >
+                            ✓
                           </span>
                           <span>{doc}</span>
                         </li>
@@ -218,20 +242,16 @@ export default function Essentials() {
                     </ul>
                   </CardContent>
                 </Card>
-              </FadeSection>
-              <FadeSection delay={300}>
-                <div className="border-l-2 border-secondary/50 pl-5 py-3 bg-secondary/5">
-                  <p className="text-xs font-semibold text-secondary mb-1">
-                    💡 Practical Tip
-                  </p>
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    Use a dedicated folder and keep one full set of photocopies
-                    completely separate from your originals. In my experience,
-                    you'll be asked for documents at hostel check-in, fee
-                    counter, and registration — sometimes all on the same day.
-                  </p>
+              </Fade>
+              <Fade delay={300}>
+                <div className="callout-teal">
+                  <p className="font-semibold mb-1">💡 Practical tip</p>
+                  Use a dedicated folder and keep one full set of photocopies
+                  completely separate from your originals. In my experience,
+                  you'll be asked for documents at hostel check-in, fee counter,
+                  and registration — sometimes all on the same day.
                 </div>
-              </FadeSection>
+              </Fade>
             </div>
           </div>
         </div>
@@ -239,42 +259,48 @@ export default function Essentials() {
 
       {/* Move-In Notes */}
       <section
-        className="section-bg-light px-6 py-16 border-b border-border/30"
+        className="bg-background px-6 py-16 border-b border-border"
         data-ocid="essentials.movein_section"
       >
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
+          <Fade>
             <p className="text-label mb-3">
-              Things That Catch People Off Guard
+              Things that catch people off guard
             </p>
             <h2 className="text-section text-foreground mb-2">Move-In Day</h2>
-            <div className="gold-underline w-12 mb-6" />
-            <p className="text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed">
+            <p className="font-body text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed">
               These are the things I wish someone had told me before I showed
-              up. Read through these before you start packing — it'll save you
-              stress.
+              up. Read through before you start packing — it'll save you stress.
             </p>
-          </FadeSection>
+          </Fade>
           <div
-            className="flex flex-col gap-4"
+            className="flex flex-col gap-3"
             data-ocid="essentials.movein_list"
           >
             {moveInNotes.map((note, i) => (
-              <FadeSection key={note.title} delay={i * 80}>
+              <Fade key={note.title} delay={i * 70}>
                 <div
                   className={[
-                    "border p-5 flex items-start gap-4 transition-smooth hover:border-secondary/40",
+                    "rounded-xl border p-5 flex items-start gap-4 transition-smooth hover:shadow-card",
                     note.highlight
-                      ? "border-secondary/30 bg-secondary/5"
-                      : "border-border/40 bg-card",
+                      ? "border-amber-200 bg-amber-50"
+                      : "bg-card border-border shadow-subtle",
                   ].join(" ")}
                   data-ocid={`essentials.movein_note.${i + 1}`}
+                  style={
+                    note.highlight
+                      ? {
+                          background: "oklch(0.98 0.015 80)",
+                          borderColor: "oklch(0.88 0.07 80)",
+                        }
+                      : {}
+                  }
                 >
                   <span className="text-2xl shrink-0 mt-0.5" aria-hidden="true">
                     {note.icon}
                   </span>
                   <div className="min-w-0">
-                    <p className="font-display font-semibold text-foreground mb-1">
+                    <p className="font-display font-semibold text-sm text-foreground mb-1">
                       {note.title}
                     </p>
                     <p className="text-xs text-muted-foreground leading-relaxed">
@@ -282,7 +308,7 @@ export default function Essentials() {
                     </p>
                   </div>
                 </div>
-              </FadeSection>
+              </Fade>
             ))}
           </div>
         </div>
@@ -290,74 +316,74 @@ export default function Essentials() {
 
       {/* Packing Checklist */}
       <section
-        className="section-bg-muted px-6 py-16 border-b border-border/30"
+        className="bg-muted/30 px-6 py-16 border-b border-border"
         data-ocid="essentials.packing_section"
       >
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
-            <p className="text-label mb-3">Pack Before You Leave</p>
+          <Fade>
+            <p className="text-label mb-3">Pack before you leave</p>
             <h2 className="text-section text-foreground mb-2">
               What to Actually Bring
             </h2>
-            <div className="gold-underline w-12 mb-6" />
-            <p className="text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed">
+            <p className="font-body text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed">
               Vijayawada is hot — pack accordingly. Get these sorted before you
               leave home. Shops near campus aren't always convenient or cheap.
             </p>
-          </FadeSection>
+          </Fade>
           <div
             className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
             data-ocid="essentials.packing_list"
           >
             {packingGroups.map((group, i) => (
-              <FadeSection key={group.title} delay={i * 60}>
+              <Fade key={group.title} delay={i * 60}>
                 <ChecklistGroup
                   icon={group.icon}
                   title={group.title}
                   items={group.items}
                   ocid={`essentials.packing_card.${i + 1}`}
                 />
-              </FadeSection>
+              </Fade>
             ))}
           </div>
-          <FadeSection delay={200}>
-            <CalloutBox text="Pack for all seasons but prepare mainly for heat — Vijayawada is no joke in summer. Bring your personal care basics, bedding, and an ISI-marked extension board. Don't skip the medicine kit. And remember — mattresses, buckets, and room basics are available at campus stalls during move-in week." />
-          </FadeSection>
+          <Fade delay={200}>
+            <AmberCallout
+              title="🎒 Before you zip up that bag"
+              text="Pack for all seasons but prepare mainly for heat — Vijayawada is no joke in summer. Bring your personal care basics, bedding, and an ISI-marked extension board. Don't skip the medicine kit. Mattresses, buckets, and room basics are available at campus stalls during move-in week — you don't need to haul them from home."
+            />
+          </Fade>
         </div>
       </section>
 
       {/* Tech Essentials */}
       <section
-        className="section-bg-light px-6 py-16 border-b border-border/30"
+        className="bg-background px-6 py-16 border-b border-border"
         data-ocid="essentials.tech_section"
       >
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
-            <p className="text-label mb-3">Before You Buy Anything</p>
+          <Fade>
+            <p className="text-label mb-3">Before you buy anything</p>
             <h2 className="text-section text-foreground mb-2">
               Tech — What You Need
             </h2>
-            <div className="gold-underline w-12 mb-6" />
-            <p className="text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed">
-              For college, I'd go with at least an i5 / Ryzen 7 processor, 16GB
-              RAM, and a 512GB SSD. Anything less and you'll feel it by third
-              year — especially when running IDEs, VMs, and browser tabs all at
-              once.
+            <p className="font-body text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed">
+              For college, I'd go with at least an i5 / Ryzen 7 processor, 16 GB
+              RAM, and a 512 GB SSD. Anything less and you'll feel it by third
+              year — especially running IDEs, VMs, and browser tabs all at once.
             </p>
-          </FadeSection>
-          <div className="grid md:grid-cols-2 gap-6">
-            <FadeSection delay={100}>
+          </Fade>
+          <div className="grid md:grid-cols-2 gap-5">
+            <Fade delay={100}>
               <Card
-                className="card-cinema h-full"
+                className="h-full shadow-subtle border-border"
                 data-ocid="essentials.tech_laptop_card"
               >
                 <CardContent className="p-6">
-                  <div className="flex items-center gap-3 mb-4">
+                  <div className="flex items-center gap-3 mb-5">
                     <span className="text-2xl" aria-hidden="true">
                       💻
                     </span>
                     <div>
-                      <h3 className="font-display text-xl font-semibold text-foreground">
+                      <h3 className="font-display text-lg font-semibold text-foreground">
                         Laptop — Minimum Specs
                       </h3>
                       <p className="text-xs text-muted-foreground">
@@ -369,28 +395,28 @@ export default function Essentials() {
                     {laptopSpecs.map((spec) => (
                       <li
                         key={spec.label}
-                        className="flex items-start gap-3 text-sm border-b border-border/30 pb-2 last:border-0"
+                        className="flex items-start gap-3 text-sm border-b border-border pb-2.5 last:border-0 last:pb-0"
                       >
                         <span className="text-muted-foreground shrink-0 w-24 text-xs pt-0.5 font-mono">
                           {spec.label}
                         </span>
-                        <span className="text-foreground font-medium">
+                        <span className="text-foreground font-semibold">
                           {spec.value}
                         </span>
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-4 pt-4 border-t border-border/40">
-                    <p className="text-xs font-semibold text-secondary mb-2">
+                  <div className="mt-4 pt-4 border-t border-border">
+                    <p className="text-xs font-semibold text-primary mb-2">
                       Nice to Have
                     </p>
-                    <ul className="space-y-1">
+                    <ul className="space-y-1.5">
                       {laptopExtras.map((item) => (
                         <li
                           key={item}
                           className="flex items-start gap-2 text-xs text-muted-foreground"
                         >
-                          <span className="text-secondary mt-0.5 shrink-0">
+                          <span className="text-primary mt-0.5 shrink-0">
                             +
                           </span>
                           <span>{item}</span>
@@ -400,12 +426,11 @@ export default function Essentials() {
                   </div>
                 </CardContent>
               </Card>
-            </FadeSection>
-
-            <div className="flex flex-col gap-5">
-              <FadeSection delay={200}>
+            </Fade>
+            <div className="flex flex-col gap-4">
+              <Fade delay={200}>
                 <Card
-                  className="card-cinema"
+                  className="shadow-subtle border-border"
                   data-ocid="essentials.tech_phone_card"
                 >
                   <CardContent className="p-6">
@@ -413,11 +438,11 @@ export default function Essentials() {
                       <span className="text-2xl" aria-hidden="true">
                         📱
                       </span>
-                      <h3 className="font-display text-xl font-semibold text-foreground">
+                      <h3 className="font-display text-lg font-semibold text-foreground">
                         Phone
                       </h3>
                     </div>
-                    <ul className="space-y-2">
+                    <ul className="space-y-2.5">
                       {[
                         "Any Android or iOS with 128 GB+ storage will do",
                         "Power bank — 10,000 mAh or above. Long days on campus drain your phone fast.",
@@ -425,10 +450,16 @@ export default function Essentials() {
                       ].map((item) => (
                         <li
                           key={item}
-                          className="flex items-start gap-2 text-sm text-muted-foreground"
+                          className="flex items-start gap-2.5 text-sm text-muted-foreground"
                         >
-                          <span className="text-secondary mt-0.5 shrink-0">
-                            —
+                          <span
+                            className="mt-0.5 shrink-0 w-4 h-4 rounded-full flex items-center justify-center text-[10px]"
+                            style={{
+                              background: "oklch(var(--primary) / 0.1)",
+                              color: "oklch(var(--primary))",
+                            }}
+                          >
+                            ✓
                           </span>
                           <span>{item}</span>
                         </li>
@@ -436,10 +467,10 @@ export default function Essentials() {
                     </ul>
                   </CardContent>
                 </Card>
-              </FadeSection>
-              <FadeSection delay={300}>
+              </Fade>
+              <Fade delay={300}>
                 <Card
-                  className="card-cinema"
+                  className="shadow-subtle border-border"
                   data-ocid="essentials.tech_calculator_card"
                 >
                   <CardContent className="p-6">
@@ -448,7 +479,7 @@ export default function Essentials() {
                         🧮
                       </span>
                       <div>
-                        <h3 className="font-display text-lg font-semibold text-foreground">
+                        <h3 className="font-display text-base font-semibold text-foreground">
                           Scientific Calculator
                         </h3>
                         <p className="text-xs text-muted-foreground">
@@ -470,25 +501,31 @@ export default function Essentials() {
                     </ul>
                   </CardContent>
                 </Card>
-              </FadeSection>
+              </Fade>
             </div>
           </div>
-          <FadeSection delay={200}>
-            <CalloutBox text="A laptop meeting those minimum specs is non-negotiable — don't compromise on it. Get a Casio fx-991 series calculator before joining; you'll need it for exams. And bring a power bank — long days on campus with classes, labs, and club activities will drain your phone by evening." />
-          </FadeSection>
+          <Fade delay={200}>
+            <AmberCallout
+              title="💻 Tech checklist"
+              text="A laptop meeting those minimum specs is non-negotiable — don't compromise on it. Get a Casio fx-991 series calculator before joining; you'll need it for exams. And bring a power bank — long days on campus with classes, labs, and club activities will drain your phone by evening."
+            />
+          </Fade>
         </div>
       </section>
 
       {/* Summary */}
       <section
-        className="section-bg-muted px-6 py-12"
+        className="bg-muted/30 px-6 py-12"
         data-ocid="essentials.summary_section"
       >
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
-            <div className="border-l-2 border-primary/60 pl-6 py-4">
-              <p className="text-label mb-2">Before You Pack</p>
-              <p className="text-sm text-muted-foreground leading-relaxed max-w-3xl">
+          <Fade>
+            <div
+              className="bg-card border border-border rounded-2xl p-6 shadow-subtle"
+              style={{ borderLeft: "4px solid oklch(var(--primary) / 0.6)" }}
+            >
+              <p className="text-label mb-2">Before you pack</p>
+              <p className="font-body text-sm text-muted-foreground leading-relaxed max-w-3xl">
                 Arrive with all original documents and at least 10 photocopies
                 of each — you'll need them more than you expect. Mattresses
                 aren't provided, but don't stress about hauling one from home —
@@ -498,7 +535,7 @@ export default function Essentials() {
                 basics, bedding, and a medicine kit.
               </p>
             </div>
-          </FadeSection>
+          </Fade>
         </div>
       </section>
     </Layout>

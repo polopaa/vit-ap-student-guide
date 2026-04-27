@@ -1,4 +1,3 @@
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useRef, useState } from "react";
 import { Layout } from "../components/Layout";
@@ -24,7 +23,7 @@ function useScrollFade() {
   return { ref, visible };
 }
 
-function FadeSection({
+function Fade({
   children,
   className = "",
   delay = 0,
@@ -33,7 +32,7 @@ function FadeSection({
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`}
+      className={`transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -48,6 +47,9 @@ const programs = [
     title: "International Transfer Program",
     abbr: "ITP",
     badge: "Transfer",
+    badgeColor: "oklch(0.97 0.015 200)",
+    badgeBorder: "oklch(0.88 0.06 200)",
+    badgeText: "oklch(0.45 0.1 200)",
     desc: "Allows you to transfer to a partner university abroad for a portion of your degree. You complete part of your B.Tech at VIT-AP and the rest at an international institution.",
     details: [
       "Credits earned abroad count towards your VIT-AP degree",
@@ -62,6 +64,9 @@ const programs = [
     title: "Semester Abroad Program",
     abbr: "SAP",
     badge: "Exchange",
+    badgeColor: "oklch(0.97 0.02 150)",
+    badgeBorder: "oklch(0.88 0.06 150)",
+    badgeText: "oklch(0.4 0.1 150)",
     desc: "Study at a partner university for one semester, then return to VIT-AP. Credits transfer back so you don't fall behind on your degree timeline.",
     details: [
       "Typically available from the second or third year onwards",
@@ -91,33 +96,38 @@ const thingsToVerify = [
 export default function StudyAbroad() {
   return (
     <Layout>
-      {/* Chapter Hero */}
-      <section className="section-bg-light px-6 pt-20 pb-16 border-b border-border/30">
+      {/* Page Header */}
+      <section
+        className="bg-background border-b border-border px-6 pt-12 pb-10"
+        data-ocid="study_abroad.page_header"
+      >
         <div className="max-w-5xl mx-auto">
-          <p className="chapter-label mb-4" data-ocid="study_abroad.page_label">
-            Chapter
+          <p
+            className="chapter-label mb-3 fade-in-up"
+            data-ocid="study_abroad.page_label"
+          >
+            International Programs
           </p>
-          <h1 className="text-hero text-foreground mb-6 fade-in-up">
-            STUDYING
-            <br />
-            ABROAD
+          <h1 className="text-hero text-foreground mb-4 fade-in-up fade-in-up-delay-1">
+            Studying Abroad
           </h1>
-          <div className="gold-underline w-16 mb-8" />
-          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-1">
-            If you're thinking about studying abroad at some point during your
-            degree, VIT-AP does have options. They're not widely talked about,
-            and not many students use them — but they exist. Here's what I know,
-            and what you should verify directly before making any plans.
+          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-2">
+            VIT-AP has international programs — here's honestly what you need to
+            know. They exist, they're real, but they're not widely talked about.
+            Most students find out too late.
           </p>
-          <div className="flex flex-wrap gap-3 mt-8">
+          <div className="flex flex-wrap gap-2 mt-6 fade-in-up fade-in-up-delay-3">
             {[
               "🌍 International Transfer Program",
               "📅 Semester Abroad Program",
               "🤝 Global Partnerships",
             ].map((tag) => (
-              <Badge key={tag} variant="outline" className="text-xs">
+              <span
+                key={tag}
+                className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border border-border text-muted-foreground bg-muted/30"
+              >
                 {tag}
-              </Badge>
+              </span>
             ))}
           </div>
         </div>
@@ -125,26 +135,25 @@ export default function StudyAbroad() {
 
       {/* IR Office */}
       <section
-        className="section-bg-muted px-6 py-16 border-b border-border/30"
+        className="bg-muted/30 px-6 py-16 border-b border-border"
         data-ocid="study_abroad.overview_section"
       >
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
-            <p className="text-label mb-3">The Starting Point</p>
-            <h2 className="text-section text-foreground mb-2">
+          <Fade>
+            <p className="text-label mb-3">The starting point</p>
+            <h2 className="text-section text-foreground mb-8">
               International Relations Office
             </h2>
-            <div className="gold-underline w-12 mb-8" />
-          </FadeSection>
-          <div className="grid md:grid-cols-2 gap-6">
-            <FadeSection delay={100}>
-              <Card className="card-cinema h-full">
+          </Fade>
+          <div className="grid md:grid-cols-2 gap-5">
+            <Fade delay={100}>
+              <Card className="h-full shadow-subtle border-border">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="text-2xl" aria-hidden="true">
                       🏛️
                     </span>
-                    <h3 className="font-display text-xl font-semibold text-foreground">
+                    <h3 className="font-display text-lg font-semibold text-foreground">
                       What the IR Office Does
                     </h3>
                   </div>
@@ -162,15 +171,15 @@ export default function StudyAbroad() {
                   </p>
                 </CardContent>
               </Card>
-            </FadeSection>
-            <FadeSection delay={200}>
-              <Card className="card-cinema h-full">
+            </Fade>
+            <Fade delay={200}>
+              <Card className="h-full shadow-subtle border-border">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="text-2xl" aria-hidden="true">
                       🌐
                     </span>
-                    <h3 className="font-display text-xl font-semibold text-foreground">
+                    <h3 className="font-display text-lg font-semibold text-foreground">
                       Global Partnerships
                     </h3>
                   </div>
@@ -186,60 +195,71 @@ export default function StudyAbroad() {
                   </p>
                 </CardContent>
               </Card>
-            </FadeSection>
+            </Fade>
           </div>
         </div>
       </section>
 
       {/* Programs */}
       <section
-        className="section-bg-light px-6 py-16 border-b border-border/30"
+        className="bg-background px-6 py-16 border-b border-border"
         data-ocid="study_abroad.programs_section"
       >
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
-            <p className="text-label mb-3">Your Options</p>
+          <Fade>
+            <p className="text-label mb-3">Your options</p>
             <h2 className="text-section text-foreground mb-2">
               The Two Main Programs
             </h2>
-            <div className="gold-underline w-12 mb-6" />
-            <p className="text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed">
+            <p className="font-body text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed">
               There are two structured paths for studying abroad through VIT-AP.
               Both involve credit transfer, but they're quite different in scope
               and commitment.
             </p>
-          </FadeSection>
-          <div className="space-y-6" data-ocid="study_abroad.programs_list">
+          </Fade>
+          <div className="space-y-5" data-ocid="study_abroad.programs_list">
             {programs.map((program, i) => (
-              <FadeSection key={program.id} delay={i * 100}>
+              <Fade key={program.id} delay={i * 100}>
                 <div
-                  className="border border-border/40 bg-card p-7 transition-smooth hover:border-secondary/40"
+                  className="bg-card border border-border rounded-2xl p-7 transition-smooth hover:shadow-card"
                   data-ocid={`study_abroad.program.${i + 1}`}
                 >
-                  <div className="flex items-start justify-between gap-3 mb-4">
-                    <div className="flex items-center gap-3">
-                      <span className="text-3xl" aria-hidden="true">
-                        {program.icon}
+                  <div className="flex items-start gap-4 mb-4">
+                    <span className="text-3xl" aria-hidden="true">
+                      {program.icon}
+                    </span>
+                    <div>
+                      <span
+                        className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mb-2"
+                        style={{
+                          background: program.badgeColor,
+                          border: `1px solid ${program.badgeBorder}`,
+                          color: program.badgeText,
+                        }}
+                      >
+                        {program.badge}
                       </span>
-                      <div>
-                        <p className="text-label mb-1">{program.badge}</p>
-                        <h3 className="font-display text-2xl font-bold text-foreground">
-                          {program.abbr} — {program.title}
-                        </h3>
-                      </div>
+                      <h3 className="font-display text-xl font-bold text-foreground">
+                        {program.abbr} — {program.title}
+                      </h3>
                     </div>
                   </div>
-                  <div className="gold-underline w-8 mb-4" />
                   <p className="text-sm text-muted-foreground mb-5 leading-relaxed max-w-2xl">
                     {program.desc}
                   </p>
-                  <ul className="space-y-2">
+                  <ul className="space-y-2.5">
                     {program.details.map((detail) => (
                       <li
                         key={detail}
                         className="flex items-start gap-3 text-sm text-muted-foreground"
                       >
-                        <span className="text-secondary mt-0.5 shrink-0 font-bold">
+                        <span
+                          className="mt-0.5 shrink-0 w-4 h-4 rounded-full flex items-center justify-center text-[10px]"
+                          style={{
+                            background: "oklch(var(--primary) / 0.1)",
+                            color: "oklch(var(--primary))",
+                          }}
+                        >
                           →
                         </span>
                         <span>{detail}</span>
@@ -247,7 +267,7 @@ export default function StudyAbroad() {
                     ))}
                   </ul>
                 </div>
-              </FadeSection>
+              </Fade>
             ))}
           </div>
         </div>
@@ -255,21 +275,20 @@ export default function StudyAbroad() {
 
       {/* Benefits */}
       <section
-        className="section-bg-muted px-6 py-16 border-b border-border/30"
+        className="bg-muted/30 px-6 py-16 border-b border-border"
         data-ocid="study_abroad.benefits_section"
       >
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
-            <p className="text-label mb-3">Why It's Worth Considering</p>
-            <h2 className="text-section text-foreground mb-2">
+          <Fade>
+            <p className="text-label mb-3">Why it's worth considering</p>
+            <h2 className="text-section text-foreground mb-8">
               What You Actually Gain
             </h2>
-            <div className="gold-underline w-12 mb-8" />
-          </FadeSection>
-          <div className="grid md:grid-cols-2 gap-6">
-            <FadeSection delay={100}>
-              <div className="border border-border/40 bg-card p-6">
-                <h3 className="font-display text-xl font-semibold text-foreground mb-5">
+          </Fade>
+          <div className="grid md:grid-cols-2 gap-5">
+            <Fade delay={100}>
+              <div className="bg-card border border-border rounded-2xl p-6 shadow-subtle h-full">
+                <h3 className="font-display text-base font-semibold text-foreground mb-5">
                   The Real Benefits
                 </h3>
                 <ul className="space-y-3">
@@ -278,7 +297,7 @@ export default function StudyAbroad() {
                       key={benefit}
                       className="flex items-start gap-3 text-sm text-muted-foreground"
                     >
-                      <span className="font-display font-bold text-secondary/70 text-base shrink-0 w-5">
+                      <span className="font-display font-bold text-primary text-sm shrink-0 w-5">
                         {i + 1}.
                       </span>
                       <span className="leading-relaxed">{benefit}</span>
@@ -286,15 +305,15 @@ export default function StudyAbroad() {
                   ))}
                 </ul>
               </div>
-            </FadeSection>
-            <FadeSection delay={200}>
-              <Card className="card-cinema h-full">
+            </Fade>
+            <Fade delay={200}>
+              <Card className="h-full shadow-subtle border-border">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="text-2xl" aria-hidden="true">
                       💬
                     </span>
-                    <h3 className="font-display text-xl font-semibold text-foreground">
+                    <h3 className="font-display text-lg font-semibold text-foreground">
                       My Honest Take
                     </h3>
                   </div>
@@ -318,42 +337,41 @@ export default function StudyAbroad() {
                   </p>
                 </CardContent>
               </Card>
-            </FadeSection>
+            </Fade>
           </div>
         </div>
       </section>
 
       {/* What to Verify */}
       <section
-        className="section-bg-light px-6 py-16 border-b border-border/30"
+        className="bg-background px-6 py-16 border-b border-border"
         data-ocid="study_abroad.verify_section"
       >
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
-            <p className="text-label mb-3">Before You Decide</p>
+          <Fade>
+            <p className="text-label mb-3">Before you decide</p>
             <h2 className="text-section text-foreground mb-2">
               Verify Directly
             </h2>
-            <div className="gold-underline w-12 mb-6" />
-            <p className="text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed">
+            <p className="font-body text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed">
               I can give you the overview, but the specifics — eligibility,
               deadlines, partner universities — change every year. These are the
               things you need to confirm with the IR office, not rely on a
               website.
             </p>
-          </FadeSection>
-          <FadeSection delay={100}>
+          </Fade>
+          <Fade delay={100}>
             <div
-              className="border border-border/40 bg-card p-6 mb-6"
+              className="bg-card border border-border rounded-2xl p-6 mb-5 shadow-subtle"
               data-ocid="study_abroad.verify_list"
             >
               <ul className="space-y-4">
                 {thingsToVerify.map((item, i) => (
                   <li
                     key={item.slice(0, 40)}
-                    className="flex items-start gap-4 text-sm text-muted-foreground pb-4 border-b border-border/30 last:border-0 last:pb-0"
+                    className="flex items-start gap-4 text-sm text-muted-foreground pb-4 border-b border-border last:border-0 last:pb-0"
                   >
-                    <span className="font-display font-bold text-secondary text-lg shrink-0 w-6">
+                    <span className="font-display font-bold text-primary text-base shrink-0 w-6">
                       {i + 1}.
                     </span>
                     <span className="leading-relaxed">{item}</span>
@@ -361,42 +379,41 @@ export default function StudyAbroad() {
                 ))}
               </ul>
             </div>
-          </FadeSection>
-          <FadeSection delay={200}>
-            <div className="border-l-2 border-secondary/50 pl-5 py-3 bg-secondary/5">
-              <p className="text-sm text-muted-foreground">
-                <span className="font-semibold text-foreground">
-                  Official source:{" "}
-                </span>
-                Visit{" "}
-                <a
-                  href="https://vitap.ac.in/international-relations"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-secondary hover:underline font-medium"
-                  data-ocid="study_abroad.ir_link"
-                >
-                  vitap.ac.in/international-relations
-                </a>{" "}
-                or go in person to the International Relations Office on campus
-                for current program details, the active partner university list,
-                and application timelines.
-              </p>
+          </Fade>
+          <Fade delay={200}>
+            <div className="callout-teal">
+              <span className="font-semibold">Official source: </span>
+              Visit{" "}
+              <a
+                href="https://vitap.ac.in/international-relations"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline font-medium"
+                data-ocid="study_abroad.ir_link"
+              >
+                vitap.ac.in/international-relations
+              </a>{" "}
+              or go in person to the International Relations Office on campus
+              for current program details, the active partner university list,
+              and application timelines.
             </div>
-          </FadeSection>
+          </Fade>
         </div>
       </section>
 
       {/* Summary */}
       <section
-        className="section-bg-muted px-6 py-12"
+        className="bg-muted/30 px-6 py-12"
         data-ocid="study_abroad.summary_section"
       >
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
-            <div className="border-l-2 border-primary/60 pl-6 py-4">
-              <p className="text-label mb-2">Bottom Line</p>
-              <p className="text-sm text-muted-foreground leading-relaxed max-w-3xl">
+          <Fade>
+            <div
+              className="bg-card border border-border rounded-2xl p-6 shadow-subtle"
+              style={{ borderLeft: "4px solid oklch(var(--primary) / 0.6)" }}
+            >
+              <p className="text-label mb-2">Bottom line</p>
+              <p className="font-body text-sm text-muted-foreground leading-relaxed max-w-3xl">
                 VIT-AP does have structured study abroad options — ITP for a
                 partial degree transfer and SAP for a semester exchange, both
                 with credit transfer back to VIT-AP. The university has
@@ -406,7 +423,7 @@ export default function StudyAbroad() {
                 second year — don't wait until third.
               </p>
             </div>
-          </FadeSection>
+          </Fade>
         </div>
       </section>
     </Layout>

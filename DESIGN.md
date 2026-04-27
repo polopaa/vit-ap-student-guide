@@ -2,73 +2,74 @@
 
 ## Direction
 
-Dark Editorial Cinema — Bold, commanding, luxe interface inspired by donmolinico.es. Deep near-black backgrounds, large serif typography, crimson + gold accents, full-screen chapters, minimal navigation.
+Clean Modern Light — Stripe-inspired layout, Notion-style content blocks, Zomato casual tone. Light backgrounds, teal accents, amber highlights for ratings. Personal, conversational student guide aesthetic.
 
 ## Tone
 
-Cinematic, sophisticated, authoritative — magazine editorial aesthetic; chapter-based storytelling; luxe without pretense; bold typography as primary design element.
+Clean, trustworthy, human — like a senior honestly advising a junior. Stripe's clarity and spacing, Notion's readability and structure, Zomato's casual reviews and ratings.
 
 ## Differentiation
 
-Each section is a visual "chapter" with its own composition; full-screen hero sections; bold serif headings commanding the page; minimal navigation (hamburger + logo); smooth scroll animations; crimson/gold accent hierarchy.
+Zomato-style rating badges (6/10) and pro/con callout cards for each major section; clean card grid layout; teal CTA accent; amber accent for ratings/highlights; smooth, accessible hover states.
 
 ## Color Palette
 
-| Token      | OKLCH           | Role                                   |
-| ---------- | --------------- | -------------------------------------- |
-| background | 0.05 0.01 230   | Deep near-black primary                |
-| foreground | 0.92 0.01 230   | Cream/off-white text                   |
-| card       | 0.08 0.01 230   | Slightly lighter card containers       |
-| primary    | 0.35 0.18 25    | Crimson/maroon (Navarra red) accent    |
-| secondary  | 0.65 0.14 55    | Gold/amber highlights & dividers       |
-| muted      | 0.15 0.01 230   | Muted dark text, subtle elements       |
-| destructive| 0.55 0.22 25    | Warning state (warm red)               |
+| Token       | OKLCH           | Role                                   |
+| ----------- | --------------- | -------------------------------------- |
+| background  | 0.99 0.002 280  | Soft off-white primary                 |
+| foreground  | 0.25 0.02 280   | Dark charcoal text                     |
+| card        | 1.0 0.0 0       | Pure white card containers             |
+| primary     | 0.55 0.12 200   | Teal CTA accent (trust-building)       |
+| secondary   | 0.72 0.12 70    | Amber/orange for ratings               |
+| muted       | 0.93 0.01 280   | Light gray subtle UI                   |
+| destructive | 0.55 0.22 25    | Warning state (red)                    |
 
 ## Typography
 
-- Display: Fraunces — bold serif for heroic headings, section titles, emphasis
-- Body: Figtree — paragraphs, UI labels, body copy at 16px
-- Mono: Geist Mono — code, technical content
-- Scale: Hero `text-5xl md:text-7xl`, H2 `text-3xl md:text-5xl`, H3 `text-xl md:text-2xl`, body `text-base`
+- Display: DM Sans — clean sans-serif for section headers and emphasis
+- Body: Figtree — readable body copy and UI labels at 16px base
+- Mono: Geist Mono — code and technical content
+- Scale: Hero `text-5xl md:text-7xl`, H2 `text-2xl md:text-3xl`, H3 `text-lg md:text-xl`, body `text-base`
 
 ## Elevation & Depth
 
-Cinematic depth: full-width sections with deep shadows (20px 60px at 0.5 opacity), card elevation subtle (4px 12px at 0.3 opacity), header flat. Gold accent lines create visual rhythm between chapters.
+Subtle soft shadows on cards (2–8px, 0.08–0.15 opacity), soft hover lift, light gray background creates depth through minimal layering.
 
 ## Structural Zones
 
-| Zone    | Background | Border | Notes |
-| ------- | ---------- | ------ | ----- |
-| Header  | background | none   | Minimal: logo + hamburger, sticky, no background change |
-| Hero    | background | none   | Full-screen, centered bold typography, deep depth |
-| Chapters| background | divider| Full-width sections, gold chapter dividers, varied composition |
-| Footer  | card | border-t | Slightly elevated background with top border |
+| Zone    | Background | Border  | Notes                                 |
+| ------- | ---------- | ------- | ------------------------------------- |
+| Header  | background | border  | Sticky, clean logo + nav, no fill     |
+| Hero    | background | none    | Full-width intro with teal CTA        |
+| Cards   | card       | border  | White cards on gray background, hover |
+| Sections| background | divider | Clean grid of content blocks          |
+| Footer  | muted      | border-t| Light gray with top border            |
 
 ## Spacing & Rhythm
 
-Full-screen immersion: 64px+ section gaps, 40px hero padding, 32px chapter padding, 6px accent accents. Gold dividers create chapter breaks; negative space dominates.
+8pt grid: 16px section gaps, 24px card padding, 12px internal spacing. Clean white cards with soft shadows on light gray background. Spacious layout with clear breathing room.
 
 ## Component Patterns
 
-- Buttons: primary (crimson bg, cream text, no radius), secondary (gold bg, dark text), hover (shadow-lg-cinema)
-- Cards: minimal borders, dark card bg, subtle shadow, gold accent top edge optional
-- Headings: bold Fraunces serif, gold accent underline optional, tracking-tight
-- Lists: minimal bullets, 24px spacing, gold accent bullets optional
+- Buttons: teal background, white text, soft shadow on hover, 8px radius
+- Cards: white background, light border, soft shadow, 12px radius, hover lift
+- Rating badges: 48px circular, amber background, dark text (Zomato-style)
+- Pro/Con callouts: inline colored borders (green for pros, red for cons), 12px radius
 
 ## Motion
 
-- Entrance: fade-in-up (0.6s ease-out) on scroll, staggered sections
-- Hover: subtle lift (2px shadow increase), 0.2s smooth
-- Scroll: chapters fade in as viewport enters, smooth parallax optional
+- Entrance: fade-in-up 0.6s on scroll, staggered sections
+- Hover: shadow lift, 0.3s smooth transition
+- Scroll: subtle fade, no parallax
 
 ## Constraints
 
-- Full-width backgrounds only (no max-width containers for sections)
-- Minimal navigation (hamburger + logo only)
-- Text contrast minimum AA+ (all foreground on background ≥7:1)
-- Mobile breakpoints: 640px (sm), 768px (md), 1024px (lg)
-- No decorative elements except chapter dividers
+- Light mode primary (no dark toggle required)
+- 8pt baseline grid throughout
+- AA+ contrast on all text (≥7:1 foreground on background)
+- Mobile first: 640px (sm), 768px (md), 1024px (lg)
+- Soft shadows only — no harsh/aggressive depth
 
 ## Signature Detail
 
-Bold serif typography filling full-screen hero sections, punctuated by crimson accents and gold chapter dividers, creates a commanding editorial presence. Minimal navigation keeps focus on content storytelling.
+Zomato-style rating badges paired with pro/con callout cards create an honest, review-focused aesthetic that positions the site as peer-to-peer advice, not institutional marketing.

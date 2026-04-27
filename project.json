@@ -1,27 +1,24 @@
 {
-  "overview": "VIT-AP Student Hub is a bold, cinematic student guide for freshers and prospective students at VIT-AP University. Styled like a premium editorial magazine — dark backgrounds, bold serif typography, crimson and gold accents — it presents honest, personal advice about academics, hostel life, food, events, and studying abroad. Written in a senior-to-junior voice, it helps students decide whether VIT-AP is right for them.",
+  "overview": "VIT-AP Student Hub is an honest, student-written guide to VIT-AP University — designed for freshers and prospective students who want real talk, not a college brochure. Written in a personal senior-to-junior tone with section ratings, pros/cons, survival tips, and practical advice on academics, hostel life, food, placements, and more.",
   "features": [
-    "Cinematic dark editorial design inspired by donmolinico.es",
-    "Full-screen hero section with bold display typography",
-    "Chapter-like sections for each topic area",
-    "Smooth scroll animations and transitions",
-    "Minimal sticky navigation with dark theme",
-    "Complete VIT-AP student guide: academics, hostel, food, essentials, events, studying abroad",
-    "Admin gallery for campus photos",
-    "Bold accordion FAQs for prospective students",
-    "Pros & Cons section in split editorial layout",
-    "Sample mess menu and hostel pricing"
+    "Hero with honest 'Should you join VIT-AP?' framing",
+    "Zomato-style ratings (e.g. 6/10) with pros and cons per section",
+    "Survival Guide with expectations vs reality and senior wisdom",
+    "Student review cards with raw, honest testimonials",
+    "Clean Stripe-inspired layout with Notion-style content blocks",
+    "Sections: Academics, Hostel, Food, Campus Life, Placements, FAQs",
+    "Photo gallery with admin upload capability",
+    "Study Abroad program info (ITP and SAP)",
+    "Fully responsive mobile-friendly design"
   ],
   "category": "education",
   "tags": [
-    "student-guide",
+    "college-guide",
+    "student-life",
     "vit-ap",
-    "university",
-    "editorial-design",
-    "dark-theme",
-    "freshers",
-    "hostel",
-    "academics"
+    "honest-reviews",
+    "freshers-guide",
+    "university"
   ],
-  "last_updated": "2026-04-25T09:59:55.135Z"
+  "last_updated": "2026-04-27T21:00:31.051Z"
 }

@@ -24,7 +24,7 @@ function useScrollFade() {
   return { ref, visible };
 }
 
-function FadeSection({
+function Fade({
   children,
   className = "",
   delay = 0,
@@ -33,7 +33,7 @@ function FadeSection({
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`}
+      className={`transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -151,20 +151,22 @@ const pyqTips = [
 export default function Resources() {
   return (
     <Layout>
-      {/* Chapter Hero */}
-      <section className="section-bg-light px-6 pt-20 pb-16 border-b border-border/30">
+      {/* Page Header */}
+      <section
+        className="bg-background border-b border-border px-6 pt-12 pb-10"
+        data-ocid="resources.page_header"
+      >
         <div className="max-w-5xl mx-auto">
-          <p className="chapter-label mb-4">Chapter</p>
-          <h1 className="text-hero text-foreground mb-6 fade-in-up">
-            RESOURCES
+          <p className="chapter-label mb-3 fade-in-up">Study Resources</p>
+          <h1 className="text-hero text-foreground mb-4 fade-in-up fade-in-up-delay-1">
+            Resources
           </h1>
-          <div className="gold-underline w-16 mb-8" />
-          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-1">
+          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-2">
             Not a random list of links — these are things I or people I know
             have actually used. Bookmark what makes sense for your year and
             situation.
           </p>
-          <div className="mt-8">
+          <div className="mt-6 fade-in-up fade-in-up-delay-3">
             <Badge variant="secondary" className="text-xs">
               📁 Resources & Materials
             </Badge>
@@ -174,26 +176,25 @@ export default function Resources() {
 
       {/* Notes */}
       <section
-        className="section-bg-muted px-6 py-16 border-b border-border/30"
+        className="bg-muted/30 px-6 py-16 border-b border-border"
         data-ocid="resources.notes_section"
       >
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
-            <p className="text-label mb-3">Where to Find Notes</p>
+          <Fade>
+            <p className="text-label mb-3">Where to find notes</p>
             <h2 className="text-section text-foreground mb-2">
               Study Material
             </h2>
-            <div className="gold-underline w-12 mb-6" />
-            <p className="text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed">
+            <p className="font-body text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed">
               Finding good notes is a skill in itself — here's how most students
               actually do it.
             </p>
-          </FadeSection>
+          </Fade>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {notesTips.map((item, i) => (
-              <FadeSection key={item.icon} delay={i * 60}>
+              <Fade key={item.icon} delay={i * 60}>
                 <div
-                  className="border border-border/40 bg-card p-5 flex items-start gap-4 transition-smooth hover:border-secondary/40"
+                  className="bg-card border border-border rounded-xl p-5 flex items-start gap-4 transition-smooth hover:shadow-card shadow-subtle"
                   data-ocid={`resources.notes_tip.${i + 1}`}
                 >
                   <span className="text-xl shrink-0 mt-0.5" aria-hidden="true">
@@ -203,7 +204,7 @@ export default function Resources() {
                     {item.tip}
                   </p>
                 </div>
-              </FadeSection>
+              </Fade>
             ))}
           </div>
         </div>
@@ -211,44 +212,41 @@ export default function Resources() {
 
       {/* PYQs */}
       <section
-        className="section-bg-light px-6 py-16 border-b border-border/30"
+        className="bg-background px-6 py-16 border-b border-border"
         data-ocid="resources.pyqs_section"
       >
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
-            <p className="text-label mb-3">Don't Skip These</p>
+          <Fade>
+            <p className="text-label mb-3">Don't skip these</p>
             <h2 className="text-section text-foreground mb-2">
               Past Year Questions
             </h2>
-            <div className="gold-underline w-12 mb-6" />
-            <p className="text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed">
+            <p className="font-body text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed">
               Past year question papers are probably the single most useful
               thing you can study from. Trust me on this one.
             </p>
-          </FadeSection>
-          <div className="space-y-4 mb-8">
+          </Fade>
+          <div className="space-y-3.5 mb-8">
             {pyqTips.map((tip, i) => (
-              <FadeSection key={tip.slice(0, 20)} delay={i * 60}>
+              <Fade key={tip.slice(0, 20)} delay={i * 60}>
                 <div
                   className="flex items-start gap-4"
                   data-ocid={`resources.pyq_tip.${i + 1}`}
                 >
-                  <span className="mt-1 shrink-0 w-7 h-7 border border-secondary/40 text-secondary flex items-center justify-center text-xs font-bold font-display">
+                  <span className="mt-0.5 shrink-0 w-7 h-7 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-xs font-bold font-display">
                     {i + 1}
                   </span>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     {tip}
                   </p>
                 </div>
-              </FadeSection>
+              </Fade>
             ))}
           </div>
-          <FadeSection delay={200}>
-            <div className="border-l-2 border-secondary/50 pl-5 py-4 bg-secondary/5">
-              <p className="text-sm font-semibold text-foreground mb-2">
-                📌 Where to get PYQs
-              </p>
-              <ul className="text-sm text-muted-foreground space-y-1">
+          <Fade delay={200}>
+            <div className="callout-teal">
+              <p className="font-semibold mb-2">📌 Where to get PYQs</p>
+              <ul className="text-sm space-y-1.5">
                 {[
                   "Department WhatsApp / Telegram groups — best source",
                   "Seniors from your branch — just ask, most will share",
@@ -256,49 +254,48 @@ export default function Resources() {
                   "Department-shared Google Drives (ask seniors for links)",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2">
-                    <span className="text-secondary shrink-0">—</span>
+                    <span className="text-primary shrink-0 font-bold">—</span>
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
-          </FadeSection>
+          </Fade>
         </div>
       </section>
 
       {/* Links */}
       <section
-        className="section-bg-muted px-6 py-16"
+        className="bg-muted/30 px-6 py-16"
         data-ocid="resources.links_section"
       >
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
-            <p className="text-label mb-3">Curated Links</p>
+          <Fade>
+            <p className="text-label mb-3">Curated links</p>
             <h2 className="text-section text-foreground mb-2">
               Useful Platforms
             </h2>
-            <div className="gold-underline w-12 mb-6" />
-            <p className="text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed">
+            <p className="font-body text-sm text-muted-foreground mb-8 max-w-xl leading-relaxed">
               Organized by what they're useful for. Use what applies to you —
               you don't need all of them.
             </p>
-          </FadeSection>
+          </Fade>
           {linkCategories.map((cat, catIdx) => (
             <div key={cat} className="mb-10">
-              <FadeSection delay={catIdx * 50}>
+              <Fade delay={catIdx * 50}>
                 <p className="text-label mb-4">{cat}</p>
-              </FadeSection>
+              </Fade>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {platforms
                   .filter((p) => p.category === cat)
                   .map((link, i) => (
-                    <FadeSection key={link.name} delay={i * 60 + catIdx * 30}>
+                    <Fade key={link.name} delay={i * 60 + catIdx * 30}>
                       <a
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
                         data-ocid={`resources.link.${cat.toLowerCase().replace(/\s+/g, "_")}.${i + 1}`}
-                        className="border border-border/40 bg-card p-4 flex items-start gap-3 hover:border-secondary/50 transition-smooth group"
+                        className="bg-card border border-border rounded-xl p-4 flex items-start gap-3 hover:shadow-card shadow-subtle transition-smooth group"
                       >
                         <span
                           className="text-xl shrink-0 mt-0.5"
@@ -308,7 +305,7 @@ export default function Resources() {
                         </span>
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-1 mb-0.5">
-                            <p className="font-display font-semibold text-sm text-foreground group-hover:text-secondary transition-colors truncate">
+                            <p className="font-display font-semibold text-sm text-foreground group-hover:text-primary transition-smooth truncate">
                               {link.name}
                             </p>
                             <ExternalLink className="w-3 h-3 text-muted-foreground/50 shrink-0" />
@@ -318,7 +315,7 @@ export default function Resources() {
                           </p>
                         </div>
                       </a>
-                    </FadeSection>
+                    </Fade>
                   ))}
               </div>
             </div>
@@ -327,11 +324,14 @@ export default function Resources() {
       </section>
 
       {/* Summary */}
-      <section className="section-bg-light px-6 py-12 border-t border-border/30">
+      <section className="bg-background px-6 py-12 border-t border-border">
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
-            <div className="border-l-2 border-secondary/50 pl-6 py-4">
-              <p className="text-sm text-muted-foreground leading-relaxed">
+          <Fade>
+            <div
+              className="bg-card border border-border rounded-2xl p-6 shadow-subtle"
+              style={{ borderLeft: "4px solid oklch(var(--primary) / 0.6)" }}
+            >
+              <p className="font-body text-sm text-muted-foreground leading-relaxed">
                 <span className="font-semibold text-foreground">
                   Bottom line:{" "}
                 </span>
@@ -341,7 +341,7 @@ export default function Resources() {
                 until the week before exams.
               </p>
             </div>
-          </FadeSection>
+          </Fade>
         </div>
       </section>
     </Layout>

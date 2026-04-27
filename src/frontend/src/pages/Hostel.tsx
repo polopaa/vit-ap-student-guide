@@ -103,6 +103,7 @@ interface PricingRow {
   nonVeg: string;
   special: string;
 }
+
 const pricingRows: PricingRow[] = [
   {
     room: "2 Bed AC",
@@ -251,10 +252,10 @@ const pricingRows: PricingRow[] = [
 ];
 
 const messTimings = [
-  { meal: "Breakfast", time: "7:15 – 9:00 AM" },
-  { meal: "Lunch", time: "12:30 – 2:15 PM" },
-  { meal: "Snacks", time: "4:45 – 6:15 PM" },
-  { meal: "Dinner", time: "7:30 – 9:00 PM" },
+  { meal: "Breakfast", time: "7:15 – 9:00 AM", icon: "🌅" },
+  { meal: "Lunch", time: "12:30 – 2:15 PM", icon: "☀️" },
+  { meal: "Snacks", time: "4:45 – 6:15 PM", icon: "🍵" },
+  { meal: "Dinner", time: "7:30 – 9:00 PM", icon: "🌙" },
 ];
 
 const dailyRoutine = [
@@ -272,17 +273,17 @@ const dailyRoutine = [
     activity: "Evening snacks, sports, club activities — get outside",
   },
   {
-    time: "5:00–8:00 PM",
-    activity: "Hostel gym window — the only free time slot",
+    time: "5–8 PM",
+    activity: "Hostel gym window — free, in every hostel block",
   },
   {
-    time: "7:30–9:00 PM",
-    activity: "Dinner — go before 8:30 if you want decent options",
+    time: "7:30 PM",
+    activity: "Dinner opens — go before 8:30 if you want decent options",
   },
   {
     time: "8:30 PM",
     activity:
-      "Curfew — be back inside your hostel. Ladies hostel strictly enforced.",
+      "Curfew — be inside your hostel. Ladies hostel strictly enforced.",
   },
   {
     time: "10:30 PM",
@@ -292,101 +293,236 @@ const dailyRoutine = [
   { time: "12:00 AM", activity: "Night canteen closes. Quiet hours." },
 ];
 
+const pros = [
+  "Everything you need is on campus — mostly self-sufficient",
+  "Room options from 2-bed to dorm — suits different budgets",
+  "Night canteen (10:30 PM–12 AM) is genuinely a lifesaver",
+  "Gyms in every hostel block — free access",
+  "Health center on campus — no need to leave for basic issues",
+];
+
+const cons = [
+  "Curfew at 8:30 PM — ladies hostel is strict about this",
+  "Lots of fines for small violations — adds up fast",
+  "Mess quality varies by hostel — luck of the draw",
+  "Petty shops close at night — plan ahead",
+  "Rules are real, and enforcement is inconsistent but present",
+];
+
+const facilities = [
+  {
+    label: "24/7 Security",
+    detail:
+      "Security is present at all times. Nightly attendance checks in hostels — yes, they do come around.",
+  },
+  {
+    label: "Campus Wi-Fi",
+    detail:
+      "Available across campus but speeds vary by block. Get an Airtel or BSNL SIM as backup — trust me.",
+  },
+  {
+    label: "Hostel Gym (Free)",
+    detail:
+      "In every hostel block. Open 5:00–8:00 AM and 5:00–8:00 PM only. Those are your two windows.",
+  },
+  {
+    label: "Campus Gym (Paid)",
+    detail:
+      "Better equipment at Rock Plaza 1st floor (near AB-2). ₹1,200/month — fills up fast, sign up in week one.",
+  },
+  {
+    label: "Petty Shops",
+    detail:
+      "Daily essentials and snacks in every hostel block. Open during the day. Closed at night.",
+  },
+  {
+    label: "Night Canteen",
+    detail:
+      "Open 10:30 PM – 12:00 AM in selected hostels. Genuinely useful when you're hungry after curfew.",
+  },
+  {
+    label: "Health Center",
+    detail:
+      "On-campus, 24/7 for emergencies. Fever, stomach issues, basic consultation — no need to leave campus.",
+  },
+  {
+    label: "Campus Pharmacy",
+    detail:
+      "Small pharmacy — paracetamol, antacids, ORS basics. Limited for specific prescriptions.",
+  },
+  {
+    label: "Laundry",
+    detail:
+      "Manual washing available plus paid washing machines. You'll figure out your preference in week one.",
+  },
+  { label: "ATM", detail: "Bank ATM available on campus." },
+];
+
 export default function Hostel() {
   return (
     <Layout>
       <style>{`
-        .reveal-block { opacity:0; transform:translateY(2rem); transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1); }
+        .reveal-block { opacity:0; transform:translateY(1.5rem); transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1); }
         .reveal-block.is-visible { opacity:1; transform:translateY(0); }
         @media(prefers-reduced-motion:reduce){.reveal-block{opacity:1;transform:none;transition:none;}}
       `}</style>
 
-      {/* ── Chapter Hero ── */}
-      <section className="bg-background min-h-[60vh] flex items-end px-6 pb-16 pt-32 relative overflow-hidden">
-        <div
-          className="absolute inset-0 bg-grain opacity-20 pointer-events-none"
-          aria-hidden="true"
-        />
-        <div className="max-w-5xl mx-auto w-full">
+      {/* ── Page Header ── */}
+      <section
+        className="bg-card border-b border-border pt-28 pb-12 px-6"
+        data-ocid="hostel.page_header"
+      >
+        <div className="max-w-5xl mx-auto">
           <div className="fade-in-up fade-in-up-delay-1">
-            <span className="chapter-label">Chapter IV</span>
+            <span className="text-label">Hostel &amp; Daily Life</span>
           </div>
           <h1
-            className="fade-in-up fade-in-up-delay-2 font-display font-black text-foreground leading-none tracking-tighter mt-4 mb-6"
-            style={{ fontSize: "clamp(3rem, 9vw, 7.5rem)" }}
-            data-ocid="hostel.chapter_title"
+            className="fade-in-up fade-in-up-delay-2 font-display font-bold text-foreground mt-3 mb-4"
+            style={{ fontSize: "clamp(2rem, 5vw, 3.25rem)", lineHeight: 1.15 }}
+            data-ocid="hostel.page_title"
           >
-            HOSTEL &amp;
-            <br />
-            <span style={{ color: "oklch(var(--primary))" }}>DAILY LIFE</span>
+            Hostel life at VIT-AP — the honest version
           </h1>
-          <p className="fade-in-up fade-in-up-delay-3 font-body italic text-muted-foreground text-xl max-w-2xl">
-            Hostel, rooms, food, facilities — I'll tell you what to expect and
-            what to watch out for. The basics are solid; some things will
-            frustrate you. Here's the honest version.
+          <p className="fade-in-up fade-in-up-delay-3 font-body text-muted-foreground text-lg max-w-2xl leading-relaxed">
+            Honestly, hostel life at VIT-AP is what you make of it. The rooms
+            are functional, the facilities are there if you use them, but the
+            rules can feel strict — especially in the ladies' hostels.
           </p>
-          <div className="fade-in-up fade-in-up-delay-4 chapter-divider mt-8 w-24" />
         </div>
       </section>
 
-      {/* ── Hostel Blocks Overview ── */}
+      {/* ── Rating Card ── */}
       <section
-        className="px-6 py-20 border-t border-border"
-        style={{ background: "oklch(0.10 0.008 60)" }}
+        className="bg-background px-6 py-10"
+        data-ocid="hostel.rating_section"
+      >
+        <div className="max-w-5xl mx-auto">
+          <Reveal>
+            <div className="card-clean p-6 md:p-8">
+              <div className="flex flex-col md:flex-row md:items-start gap-6">
+                <div className="flex items-center gap-4 shrink-0">
+                  <div className="rating-badge w-16 h-16 text-xl font-bold">
+                    6/10
+                  </div>
+                  <div>
+                    <p className="font-display font-semibold text-foreground text-base">
+                      Hostel
+                    </p>
+                    <p className="font-body text-sm text-muted-foreground mt-0.5">
+                      hit or miss, but liveable
+                    </p>
+                  </div>
+                </div>
+                <div className="hidden md:block w-px self-stretch bg-border" />
+                <div className="flex-1 grid sm:grid-cols-2 gap-4">
+                  <div className="callout-pro" data-ocid="hostel.pros_card">
+                    <p className="font-display font-semibold mb-2 text-sm">
+                      What works
+                    </p>
+                    <ul className="space-y-1.5">
+                      {pros.map((p) => (
+                        <li
+                          key={p}
+                          className="flex items-start gap-2 text-xs leading-relaxed"
+                        >
+                          <span className="shrink-0 mt-0.5">✓</span>
+                          {p}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="callout-con" data-ocid="hostel.cons_card">
+                    <p className="font-display font-semibold mb-2 text-sm">
+                      What doesn't
+                    </p>
+                    <ul className="space-y-1.5">
+                      {cons.map((c) => (
+                        <li
+                          key={c}
+                          className="flex items-start gap-2 text-xs leading-relaxed"
+                        >
+                          <span className="shrink-0 mt-0.5">✗</span>
+                          {c}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── Hostel Blocks ── */}
+      <section
+        className="bg-muted/30 px-6 py-14 border-t border-border"
         data-ocid="hostel.overview_section"
       >
         <div className="max-w-5xl mx-auto">
           <Reveal>
-            <p className="text-label mb-4">Housing overview</p>
-            <h2 className="text-section text-foreground mb-3">
-              The Hostel
-              <br />
-              Blocks
+            <span className="text-label">Housing overview</span>
+            <h2 className="text-section text-foreground mt-2 mb-6">
+              The hostel blocks
             </h2>
-            <p className="font-body text-muted-foreground mb-12 max-w-xl">
-              Boys and girls are in separate blocks. Each block has its own
-              mess, gym, and petty shop.
-            </p>
           </Reveal>
-          <div className="grid md:grid-cols-2 gap-px bg-border">
-            <Reveal className="bg-background">
-              <div className="p-8 h-full" data-ocid="hostel.block_card.1">
-                <div
-                  className="w-8 h-px mb-6"
-                  style={{ background: "oklch(var(--primary))" }}
-                />
-                <h3 className="font-display font-bold text-2xl text-foreground mb-2">
-                  Men's Hostels
-                </h3>
-                <p
-                  className="text-label mb-4"
-                  style={{ color: "oklch(var(--secondary))" }}
-                >
-                  MH1 – MH6
-                </p>
+          <div className="grid md:grid-cols-2 gap-4">
+            <Reveal>
+              <div
+                className="card-clean p-6 h-full"
+                data-ocid="hostel.block_card.1"
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div
+                    className="w-2 h-2 rounded-full"
+                    style={{ background: "oklch(var(--primary))" }}
+                  />
+                  <h3 className="font-display font-semibold text-xl text-foreground">
+                    Men's Hostels
+                  </h3>
+                  <span
+                    className="ml-auto text-xs font-mono px-2 py-0.5 rounded border"
+                    style={{
+                      color: "oklch(var(--primary))",
+                      borderColor: "oklch(var(--primary) / 0.3)",
+                      background: "oklch(var(--primary) / 0.07)",
+                    }}
+                  >
+                    MH1 – MH6
+                  </span>
+                </div>
                 <p className="font-body text-sm text-muted-foreground leading-relaxed">
                   6 blocks operational. MH7 under construction — campus is still
-                  expanding. Each block has its own dedicated mess, gym, petty
-                  shop, and night canteen (select blocks). Rules are enforced
-                  but comparatively more lenient than ladies' hostels.
+                  expanding. Each block has its own mess, gym, petty shop, and
+                  night canteen (select blocks). Rules exist but are
+                  comparatively more lenient than ladies' hostels.
                 </p>
               </div>
             </Reveal>
-            <Reveal delay={80} className="bg-background">
-              <div className="p-8 h-full" data-ocid="hostel.block_card.2">
-                <div
-                  className="w-8 h-px mb-6"
-                  style={{ background: "oklch(var(--secondary))" }}
-                />
-                <h3 className="font-display font-bold text-2xl text-foreground mb-2">
-                  Ladies' Hostels
-                </h3>
-                <p
-                  className="text-label mb-4"
-                  style={{ color: "oklch(var(--secondary))" }}
-                >
-                  LH1 – LH3
-                </p>
+            <Reveal delay={80}>
+              <div
+                className="card-clean p-6 h-full"
+                data-ocid="hostel.block_card.2"
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div
+                    className="w-2 h-2 rounded-full"
+                    style={{ background: "oklch(var(--secondary))" }}
+                  />
+                  <h3 className="font-display font-semibold text-xl text-foreground">
+                    Ladies' Hostels
+                  </h3>
+                  <span
+                    className="ml-auto text-xs font-mono px-2 py-0.5 rounded border"
+                    style={{
+                      color: "oklch(var(--secondary))",
+                      borderColor: "oklch(var(--secondary) / 0.3)",
+                      background: "oklch(var(--secondary) / 0.07)",
+                    }}
+                  >
+                    LH1 – LH3
+                  </span>
+                </div>
                 <p className="font-body text-sm text-muted-foreground leading-relaxed">
                   3 blocks operational. LH4 under construction. Authorities are
                   strict — curfew is enforced consistently. If you're in LH,
@@ -401,59 +537,57 @@ export default function Hostel() {
 
       {/* ── Room Types ── */}
       <section
-        className="bg-background px-6 py-20 border-t border-border"
+        className="bg-background px-6 py-14 border-t border-border"
         data-ocid="hostel.rooms_section"
       >
         <div className="max-w-5xl mx-auto">
           <Reveal>
-            <p className="text-label mb-4">Room options</p>
-            <h2 className="text-section text-foreground mb-3">Room Types</h2>
-            <p className="font-body text-muted-foreground mb-4 max-w-xl">
+            <span className="text-label">Room options</span>
+            <h2 className="text-section text-foreground mt-2 mb-2">
+              Room types
+            </h2>
+            <p className="font-body text-muted-foreground mb-2 max-w-xl text-sm">
               All rooms come furnished — bed with mattress, study table,
               cupboard with locker, study lamp, plug board, and bookshelf.
               Common washrooms per floor (not attached).
             </p>
-            <p className="font-body text-muted-foreground mb-12 max-w-xl">
-              Every sharing type comes in AC and Non-AC. The AC rooms cost more,
-              but during summer, trust me, they're worth it.
+            <p className="font-body text-muted-foreground mb-8 max-w-xl text-sm">
+              Every sharing type comes in AC and Non-AC. AC rooms cost more, but
+              during summer, they're worth every rupee.
             </p>
           </Reveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {roomTypes.map((room, i) => (
-              <Reveal
-                key={room.beds}
-                delay={Math.min(i * 40, 300)}
-                className="bg-background"
-              >
+              <Reveal key={room.beds} delay={Math.min(i * 40, 300)}>
                 <div
-                  className="p-6 h-full"
+                  className="card-clean p-5 h-full"
                   data-ocid={`hostel.room_type.${i + 1}`}
                 >
                   <div className="flex items-start justify-between gap-3 mb-3">
-                    <h3 className="font-display font-bold text-lg text-foreground">
+                    <h3 className="font-display font-semibold text-base text-foreground">
                       {room.beds}
                     </h3>
                     <span
-                      className="text-xs font-mono shrink-0 border px-2 py-1 mt-0.5"
+                      className="text-xs font-mono shrink-0 border px-2 py-0.5 rounded"
                       style={{
                         color:
                           room.tag === "Apartment"
                             ? "oklch(var(--secondary))"
-                            : "oklch(var(--foreground) / 0.5)",
+                            : "oklch(var(--muted-foreground))",
                         borderColor:
                           room.tag === "Apartment"
-                            ? "oklch(var(--secondary) / 0.4)"
+                            ? "oklch(var(--secondary) / 0.35)"
                             : "oklch(var(--border))",
+                        background:
+                          room.tag === "Apartment"
+                            ? "oklch(var(--secondary) / 0.07)"
+                            : "transparent",
                       }}
                     >
                       {room.tag}
                     </span>
                   </div>
-                  <div
-                    className="w-6 h-px mb-3"
-                    style={{ background: "oklch(var(--primary) / 0.4)" }}
-                  />
-                  <p className="font-body text-sm text-muted-foreground">
+                  <p className="font-body text-sm text-muted-foreground leading-relaxed">
                     {room.note}
                   </p>
                 </div>
@@ -465,55 +599,48 @@ export default function Hostel() {
 
       {/* ── Pricing Table ── */}
       <section
-        className="px-6 py-20 border-t border-border"
-        style={{ background: "oklch(0.10 0.008 60)" }}
+        className="bg-muted/30 px-6 py-14 border-t border-border"
         data-ocid="hostel.pricing_section"
       >
         <div className="max-w-5xl mx-auto">
           <Reveal>
-            <p className="text-label mb-4">What it costs</p>
-            <h2 className="text-section text-foreground mb-3">
-              Hostel Fees
-              <br />
-              AY 2025–26
+            <span className="text-label">What it costs</span>
+            <h2 className="text-section text-foreground mt-2 mb-2">
+              Hostel fees — AY 2025–26
             </h2>
-            <p className="font-body text-muted-foreground mb-4 max-w-xl">
+            <p className="font-body text-muted-foreground mb-2 max-w-xl text-sm">
               Combined Fall + Winter semesters — the full academic year. Mess
               plan is bundled with your room.
             </p>
             <div
-              className="border-l-2 pl-4 mb-10"
-              style={{ borderColor: "oklch(var(--primary) / 0.5)" }}
+              className="mb-6 rounded-xl px-5 py-3 border text-xs font-body text-muted-foreground"
+              style={{
+                background: "oklch(0.97 0.015 25 / 0.5)",
+                borderColor: "oklch(0.88 0.05 25 / 0.5)",
+              }}
             >
-              <p className="font-body text-xs text-muted-foreground">
-                Always double-check on the official VIT-AP admission or hostel
-                portal before you pay — fees can change year to year.
-              </p>
+              Always verify on the official VIT-AP admission or hostel portal
+              before paying — fees can change year to year.
             </div>
           </Reveal>
           <Reveal delay={60}>
-            <div className="overflow-x-auto" data-ocid="hostel.pricing_table">
+            <div
+              className="overflow-x-auto rounded-xl border border-border"
+              data-ocid="hostel.pricing_table"
+            >
               <table className="w-full border-collapse">
                 <thead>
-                  <tr
-                    style={{
-                      borderBottom: "1px solid oklch(var(--border))",
-                      background: "oklch(0.08 0.008 60)",
-                    }}
-                  >
-                    <th className="py-4 px-5 text-left font-display font-bold text-sm text-foreground">
+                  <tr className="bg-muted/50 border-b border-border">
+                    <th className="py-3 px-5 text-left font-display font-semibold text-sm text-foreground">
                       Room Type
                     </th>
-                    <th
-                      className="py-4 px-5 text-right font-display font-bold text-sm"
-                      style={{ color: "oklch(var(--secondary))" }}
-                    >
+                    <th className="py-3 px-5 text-right font-display font-semibold text-sm text-foreground">
                       Veg
                     </th>
-                    <th className="py-4 px-5 text-right font-display font-bold text-sm text-foreground">
+                    <th className="py-3 px-5 text-right font-display font-semibold text-sm text-foreground">
                       Non-Veg
                     </th>
-                    <th className="py-4 px-5 text-right font-display font-bold text-sm text-foreground">
+                    <th className="py-3 px-5 text-right font-display font-semibold text-sm text-foreground">
                       Special
                     </th>
                   </tr>
@@ -522,21 +649,15 @@ export default function Hostel() {
                   {pricingRows.map((row, i) => (
                     <tr
                       key={row.room}
-                      className="border-b border-border transition-colors"
-                      style={{
-                        background:
-                          i % 2 === 0
-                            ? "oklch(var(--background))"
-                            : "oklch(0.10 0.008 60)",
-                      }}
+                      className={`border-b border-border ${i % 2 === 0 ? "bg-card" : "bg-muted/20"}`}
                       data-ocid={`hostel.pricing_row.${i + 1}`}
                     >
                       <td className="py-3 px-5 font-body text-sm text-foreground">
                         {row.room}
                       </td>
                       <td
-                        className="py-3 px-5 text-right font-mono text-xs"
-                        style={{ color: "oklch(var(--secondary))" }}
+                        className="py-3 px-5 text-right font-mono text-xs font-semibold"
+                        style={{ color: "oklch(0.45 0.14 150)" }}
                       >
                         ₹{row.veg}
                       </td>
@@ -551,47 +672,42 @@ export default function Hostel() {
                 </tbody>
               </table>
             </div>
-            <div
-              className="mt-6 border-l-2 pl-4 py-1"
-              style={{ borderColor: "oklch(var(--secondary))" }}
-            >
-              <p className="font-body text-xs text-muted-foreground">
-                Most affordable: 15–20 Bed Dorm NAC from ₹92,700/year (veg).
-                Most premium: 2 Bed APT AC at ₹2,70,700/year (special mess). AC
-                rooms cost roughly ₹56,000 more per year than NAC — worth it for
-                the comfort, especially in summer.
-              </p>
-            </div>
+            <p className="font-body text-xs text-muted-foreground mt-3">
+              Most affordable: 15–20 Bed Dorm NAC from ₹92,700/year (veg). Most
+              premium: 2 Bed APT AC at ₹2,70,700/year (special mess). AC rooms
+              cost roughly ₹56,000 more per year than NAC.
+            </p>
           </Reveal>
         </div>
       </section>
 
       {/* ── Mess Timings ── */}
       <section
-        className="bg-background px-6 py-20 border-t border-border"
+        className="bg-background px-6 py-14 border-t border-border"
         data-ocid="hostel.mess_section"
       >
         <div className="max-w-5xl mx-auto">
           <Reveal>
-            <p className="text-label mb-4">Food system</p>
-            <h2 className="text-section text-foreground mb-12">
-              Mess Timings
-              <br />
-              &amp; Plans
+            <span className="text-label">Food system</span>
+            <h2 className="text-section text-foreground mt-2 mb-8">
+              Mess timings &amp; plans
             </h2>
           </Reveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border mb-12">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             {messTimings.map((m, i) => (
-              <Reveal key={m.meal} delay={i * 60} className="bg-background">
+              <Reveal key={m.meal} delay={i * 60}>
                 <div
-                  className="p-8 text-center"
+                  className="card-clean p-6 text-center"
                   data-ocid={`hostel.mess_timing.${i + 1}`}
                 >
-                  <p className="font-display font-black text-2xl text-foreground mb-2">
+                  <div className="text-2xl mb-3" aria-hidden="true">
+                    {m.icon}
+                  </div>
+                  <p className="font-display font-semibold text-base text-foreground mb-2">
                     {m.meal}
                   </p>
                   <div
-                    className="w-6 h-px mx-auto mb-3"
+                    className="w-6 h-px mx-auto mb-2"
                     style={{ background: "oklch(var(--secondary))" }}
                   />
                   <p className="font-mono text-xs text-muted-foreground">
@@ -602,41 +718,31 @@ export default function Hostel() {
             ))}
           </div>
           <Reveal delay={80}>
-            <div className="grid md:grid-cols-3 gap-px bg-border">
+            <div className="grid md:grid-cols-3 gap-4">
               {[
                 {
                   plan: "Veg Mess",
                   desc: "Vegetarian-only menu. Most widely available across hostel blocks.",
-                  accent: false,
                 },
                 {
                   plan: "Non-Veg Mess",
                   desc: "Non-veg dishes on select days — chicken/paneer 4 days/week, eggs daily.",
-                  accent: false,
                 },
                 {
                   plan: "Special Mess",
                   desc: "More variety, generally better quality. Worth it if the mess is your primary food source.",
-                  accent: true,
+                  highlight: true,
                 },
               ].map((p, i) => (
                 <div
                   key={p.plan}
-                  className="bg-background p-6"
+                  className="card-clean p-5"
                   data-ocid={`hostel.mess_plan.${i + 1}`}
                 >
-                  <div
-                    className="w-6 h-px mb-4"
-                    style={{
-                      background: p.accent
-                        ? "oklch(var(--secondary))"
-                        : "oklch(var(--primary) / 0.5)",
-                    }}
-                  />
-                  <h3 className="font-display font-bold text-base text-foreground mb-2">
+                  <h3 className="font-display font-semibold text-sm text-foreground mb-2">
                     {p.plan}
                   </h3>
-                  <p className="font-body text-sm text-muted-foreground">
+                  <p className="font-body text-sm text-muted-foreground leading-relaxed">
                     {p.desc}
                   </p>
                 </div>
@@ -645,15 +751,16 @@ export default function Hostel() {
           </Reveal>
           <Reveal delay={100}>
             <div
-              className="mt-8 border-l-2 pl-4 py-1"
-              style={{ borderColor: "oklch(var(--secondary))" }}
+              className="mt-5 rounded-xl px-5 py-4 border text-sm font-body text-muted-foreground"
+              style={{
+                background: "oklch(var(--secondary) / 0.06)",
+                borderColor: "oklch(var(--secondary) / 0.25)",
+              }}
             >
-              <p className="font-body text-sm text-muted-foreground leading-relaxed">
-                Food quality varies by hostel block and caterer. The food isn't
-                bad — it's just repetitive. By month two, most students
-                supplement with Swiggy or local delivery. Miss a meal window and
-                the mess is closed — timings are strict.
-              </p>
+              Food quality varies by hostel block and caterer. The food isn't
+              bad — it's just repetitive. By month two, most students supplement
+              with Swiggy or local delivery. Miss a meal window and the mess is
+              closed — timings are strict.
             </div>
           </Reveal>
         </div>
@@ -661,37 +768,31 @@ export default function Hostel() {
 
       {/* ── Daily Routine ── */}
       <section
-        className="px-6 py-20 border-t border-border"
-        style={{ background: "oklch(0.10 0.008 60)" }}
+        className="bg-muted/30 px-6 py-14 border-t border-border"
         data-ocid="hostel.routine_section"
       >
         <div className="max-w-5xl mx-auto">
           <Reveal>
-            <p className="text-label mb-4">A typical day</p>
-            <h2 className="text-section text-foreground mb-3">
-              What Your
-              <br />
-              Day Looks Like
+            <span className="text-label">A typical day</span>
+            <h2 className="text-section text-foreground mt-2 mb-2">
+              What your day looks like
             </h2>
-            <p className="font-body text-muted-foreground mb-12 max-w-xl">
+            <p className="font-body text-muted-foreground mb-8 max-w-xl text-sm">
               This isn't a rigid schedule — it's roughly how the day flows when
-              you're actually living on campus. Your classes vary, but mess
-              timings and hostel hours are fixed.
+              you're living on campus. Your classes vary, but mess timings and
+              hostel hours are fixed.
             </p>
           </Reveal>
-          <div
-            className="space-y-0 border-t border-border"
-            data-ocid="hostel.routine_list"
-          >
+          <div className="space-y-2" data-ocid="hostel.routine_list">
             {dailyRoutine.map((slot, i) => (
               <Reveal key={slot.time} delay={i * 40}>
                 <div
-                  className="flex gap-8 py-5 border-b border-border"
+                  className="card-clean flex gap-5 px-5 py-4 items-start"
                   data-ocid={`hostel.routine.${i + 1}`}
                 >
                   <span
-                    className="font-mono text-xs shrink-0 w-24 mt-1"
-                    style={{ color: "oklch(var(--secondary))" }}
+                    className="font-mono text-xs shrink-0 w-20 mt-0.5 font-semibold"
+                    style={{ color: "oklch(var(--primary))" }}
                   >
                     {slot.time}
                   </span>
@@ -707,79 +808,145 @@ export default function Hostel() {
 
       {/* ── Rules & Fines ── */}
       <section
-        className="bg-background px-6 py-20 border-t border-border"
+        className="bg-background px-6 py-14 border-t border-border"
         data-ocid="hostel.rules_section"
       >
         <div className="max-w-5xl mx-auto">
           <Reveal>
-            <p className="text-label mb-4">Things to know upfront</p>
-            <h2 className="text-section text-foreground mb-3">
-              Rules, Curfew
-              <br />
-              &amp; Fines
+            <span className="text-label">Things to know upfront</span>
+            <h2 className="text-section text-foreground mt-2 mb-2">
+              Rules, curfew &amp; fines
             </h2>
-            <p className="font-body text-muted-foreground mb-12 max-w-xl">
+            <p className="font-body text-muted-foreground mb-8 max-w-xl text-sm">
               I'll be honest — the rules at VIT-AP are real, and so are the
               fines. Knowing this as a fresher will save you a lot of money and
               trouble.
             </p>
           </Reveal>
-          <div className="grid md:grid-cols-2 gap-px bg-border">
-            <Reveal className="bg-background">
-              <div className="p-8 h-full" data-ocid="hostel.curfew_card">
+          <div className="grid md:grid-cols-2 gap-4">
+            <Reveal>
+              <div
+                className="card-clean p-6 h-full"
+                data-ocid="hostel.curfew_card"
+              >
                 <div
-                  className="w-8 h-px mb-6"
-                  style={{ background: "oklch(var(--primary))" }}
-                />
-                <h3 className="font-display font-bold text-xl text-foreground mb-6">
-                  Curfew — 8:30 PM
-                </h3>
-                <ul className="space-y-4 font-body text-sm text-muted-foreground">
-                  <li>Be back inside your hostel by 8:30 PM</li>
-                  <li>
-                    <strong className="text-foreground">Ladies hostel:</strong>{" "}
-                    Strictly enforced, consistently. Treat it as non-negotiable
-                    from day one.
+                  className="inline-flex items-center gap-2 text-xs font-display font-semibold mb-4 px-3 py-1 rounded-full"
+                  style={{
+                    background: "oklch(0.97 0.015 25 / 0.7)",
+                    color: "oklch(0.45 0.18 25)",
+                    border: "1px solid oklch(0.88 0.05 25)",
+                  }}
+                >
+                  🕗 Curfew — 8:30 PM
+                </div>
+                <ul className="space-y-3 font-body text-sm text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <span
+                      className="shrink-0 mt-0.5"
+                      style={{ color: "oklch(0.5 0.2 25)" }}
+                    >
+                      ✗
+                    </span>
+                    Be back inside your hostel by 8:30 PM
                   </li>
-                  <li>
-                    <strong className="text-foreground">Men's hostels:</strong>{" "}
-                    More lenient in practice — but the rule still exists and
-                    getting caught has consequences.
+                  <li className="flex items-start gap-2">
+                    <span
+                      className="shrink-0 mt-0.5"
+                      style={{ color: "oklch(0.5 0.2 25)" }}
+                    >
+                      ✗
+                    </span>
+                    <span>
+                      <strong className="text-foreground">
+                        Ladies hostel:
+                      </strong>{" "}
+                      Strictly enforced, consistently. Treat it as
+                      non-negotiable from day one.
+                    </span>
                   </li>
-                  <li>
-                    Night canteens open at 10:30 PM in select hostels —
-                    late-night food is still accessible without leaving the
-                    building.
+                  <li className="flex items-start gap-2">
+                    <span
+                      className="shrink-0 mt-0.5"
+                      style={{ color: "oklch(0.5 0.14 150)" }}
+                    >
+                      ✓
+                    </span>
+                    <span>
+                      <strong className="text-foreground">
+                        Men's hostels:
+                      </strong>{" "}
+                      More lenient in practice — but the rule still exists and
+                      getting caught has consequences.
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span
+                      className="shrink-0 mt-0.5"
+                      style={{ color: "oklch(0.5 0.14 150)" }}
+                    >
+                      ✓
+                    </span>
+                    Night canteens open at 10:30 PM — late-night food without
+                    leaving the building.
                   </li>
                 </ul>
               </div>
             </Reveal>
-            <Reveal delay={80} className="bg-background">
-              <div className="p-8 h-full" data-ocid="hostel.fines_card">
+            <Reveal delay={80}>
+              <div
+                className="card-clean p-6 h-full"
+                data-ocid="hostel.fines_card"
+              >
                 <div
-                  className="w-8 h-px mb-6"
-                  style={{ background: "oklch(var(--secondary))" }}
-                />
-                <h3 className="font-display font-bold text-xl text-foreground mb-6">
-                  Campus Fines
-                </h3>
-                <ul className="space-y-4 font-body text-sm text-muted-foreground">
-                  <li>
-                    VIT-AP has a lot of fines — for hostel violations, being out
-                    after curfew, dress code issues, and more. They add up fast.
+                  className="inline-flex items-center gap-2 text-xs font-display font-semibold mb-4 px-3 py-1 rounded-full"
+                  style={{
+                    background: "oklch(0.97 0.015 25 / 0.7)",
+                    color: "oklch(0.45 0.18 25)",
+                    border: "1px solid oklch(0.88 0.05 25)",
+                  }}
+                >
+                  ⚠️ Campus Fines
+                </div>
+                <ul className="space-y-3 font-body text-sm text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <span
+                      className="shrink-0 mt-0.5"
+                      style={{ color: "oklch(0.5 0.2 25)" }}
+                    >
+                      ✗
+                    </span>
+                    VIT-AP has a lot of fines — hostel violations, curfew, dress
+                    code, and more. They add up fast.
                   </li>
-                  <li>
+                  <li className="flex items-start gap-2">
+                    <span
+                      className="shrink-0 mt-0.5"
+                      style={{ color: "oklch(0.5 0.2 25)" }}
+                    >
+                      ✗
+                    </span>
                     Petty shops close at night — not 24/7. Plan ahead; don't be
                     surprised when they're shut at 10 PM.
                   </li>
-                  <li>
+                  <li className="flex items-start gap-2">
+                    <span
+                      className="shrink-0 mt-0.5"
+                      style={{ color: "oklch(0.5 0.2 25)" }}
+                    >
+                      ✗
+                    </span>
                     Many freshers get caught off-guard in their first month.
-                    Read the hostel handbook when you arrive — it lists all
-                    violation categories.
+                    Read the hostel handbook when you arrive.
                   </li>
-                  <li>
-                    In my experience, knowing the rules early saves you real
-                    money.
+                  <li className="flex items-start gap-2">
+                    <span
+                      className="shrink-0 mt-0.5"
+                      style={{ color: "oklch(0.5 0.14 150)" }}
+                    >
+                      ✓
+                    </span>
+                    Knowing the rules early saves you real money. In my
+                    experience, it's worth reading through them.
                   </li>
                 </ul>
               </div>
@@ -790,83 +957,37 @@ export default function Hostel() {
 
       {/* ── Facilities ── */}
       <section
-        className="px-6 py-20 border-t border-border"
-        style={{ background: "oklch(0.10 0.008 60)" }}
+        className="bg-muted/30 px-6 py-14 border-t border-border"
         data-ocid="hostel.facilities_section"
       >
         <div className="max-w-5xl mx-auto">
           <Reveal>
-            <p className="text-label mb-4">What's available</p>
-            <h2 className="text-section text-foreground mb-12">
-              Hostel Facilities
+            <span className="text-label">What's available</span>
+            <h2 className="text-section text-foreground mt-2 mb-8">
+              Hostel facilities
             </h2>
           </Reveal>
-          <div className="space-y-0 border-t border-border">
-            {[
-              {
-                label: "24/7 Security",
-                detail:
-                  "Security at all times. Nightly attendance checks in hostels — yes, they do actually come around.",
-              },
-              {
-                label: "Campus Wi-Fi",
-                detail:
-                  "Available across campus but speeds vary by block. Get an Airtel or BSNL SIM as backup — trust me on this.",
-              },
-              {
-                label: "Hostel Gym (Free)",
-                detail:
-                  "In every hostel block. Open 5:00–8:00 AM and 5:00–8:00 PM only. Those are your only windows.",
-              },
-              {
-                label: "Campus Gym (Paid)",
-                detail:
-                  "Better equipment at Rock Plaza 1st floor (near AB-2). ₹1,200/month — goes fast, sign up in week one.",
-              },
-              {
-                label: "Petty Shops",
-                detail:
-                  "Daily essentials and snacks in every hostel block. Open during the day. Closed at night.",
-              },
-              {
-                label: "Night Canteen",
-                detail:
-                  "Open 10:30 PM – 12:00 AM in selected hostels. Genuinely useful when you're hungry after curfew.",
-              },
-              {
-                label: "Health Center",
-                detail:
-                  "On-campus, 24/7 for emergencies. For fever, stomach issue, basic consultation — you don't need to leave campus.",
-              },
-              {
-                label: "Campus Pharmacy",
-                detail:
-                  "Small pharmacy — paracetamol, antacids, ORS basics. Limited for specific prescriptions.",
-              },
-              {
-                label: "Laundry",
-                detail:
-                  "Manual washing available plus paid washing machines. You'll figure out your preference in the first week.",
-              },
-              { label: "ATM", detail: "Bank ATM available on campus." },
-            ].map((fac, i) => (
-              <Reveal key={fac.label} delay={i * 40}>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {facilities.map((fac, i) => (
+              <Reveal key={fac.label} delay={Math.min(i * 40, 240)}>
                 <div
-                  className="flex flex-col sm:flex-row gap-6 py-6 border-b border-border"
+                  className="card-clean p-5 flex gap-4"
                   data-ocid={`hostel.facility.${i + 1}`}
                 >
-                  <div className="sm:w-48 shrink-0">
-                    <span className="font-display font-bold text-base text-foreground">
-                      {fac.label}
-                    </span>
+                  <div className="shrink-0 mt-1">
+                    <div
+                      className="w-2 h-2 rounded-full"
+                      style={{ background: "oklch(var(--primary) / 0.5)" }}
+                    />
                   </div>
-                  <div
-                    className="w-px shrink-0 hidden sm:block"
-                    style={{ background: "oklch(var(--secondary) / 0.2)" }}
-                  />
-                  <p className="font-body text-sm text-muted-foreground leading-relaxed">
-                    {fac.detail}
-                  </p>
+                  <div>
+                    <p className="font-display font-semibold text-sm text-foreground mb-1">
+                      {fac.label}
+                    </p>
+                    <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                      {fac.detail}
+                    </p>
+                  </div>
                 </div>
               </Reveal>
             ))}
@@ -876,25 +997,29 @@ export default function Hostel() {
 
       {/* ── Summary ── */}
       <section
-        className="bg-background px-6 py-16 border-t border-border"
+        className="bg-card px-6 py-12 border-t border-border"
         data-ocid="hostel.summary_section"
       >
         <div className="max-w-5xl mx-auto">
           <Reveal>
             <div
-              className="border-l-4 pl-8 py-2"
-              style={{ borderColor: "oklch(var(--secondary))" }}
+              className="rounded-xl p-6"
+              style={{
+                background: "oklch(var(--primary) / 0.04)",
+                border: "1px solid oklch(var(--primary) / 0.15)",
+                borderLeft: "4px solid oklch(var(--primary))",
+              }}
             >
               <p className="text-label mb-3">My overall take</p>
-              <p className="font-body text-lg text-muted-foreground leading-relaxed max-w-3xl">
+              <p className="font-body text-base text-muted-foreground leading-relaxed max-w-3xl">
                 Hostel life at VIT-AP is self-sufficient — everything you need
-                is on campus. 9 active blocks, room options from 2-bed to large
+                is on campus. 9 active blocks, rooms from 2-bed to large
                 dormitories, bundled mess plans. Curfew at 8:30 PM — ladies
                 hostel strict, men's more relaxed but still enforced. Mess food
                 gets repetitive but Swiggy works and the night canteen fills
                 gaps. Health center and pharmacy mean you don't need to leave
                 for minor issues. Not luxury — but functional, and you'll get
-                used to it faster than you'd think.
+                used to it faster than you think.
               </p>
             </div>
           </Reveal>

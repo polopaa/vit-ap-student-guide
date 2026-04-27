@@ -23,7 +23,7 @@ function useScrollFade() {
   return { ref, visible };
 }
 
-function FadeSection({
+function Fade({
   children,
   className = "",
   delay = 0,
@@ -32,7 +32,7 @@ function FadeSection({
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`}
+      className={`transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -113,32 +113,57 @@ const trends = [
   },
 ];
 
-const demandColors: Record<string, string> = {
-  "Very High": "text-primary border-primary/50 bg-primary/15",
-  High: "text-secondary border-secondary/50 bg-secondary/10",
-  Medium: "text-foreground/70 border-border/50 bg-muted/30",
-  "Low–Medium": "text-muted-foreground border-border/40 bg-muted/20",
-  Low: "text-muted-foreground/60 border-border/30 bg-muted/10",
+type DemandLevel = "Very High" | "High" | "Medium" | "Low–Medium" | "Low";
+const demandBadgeStyle: Record<
+  DemandLevel,
+  { bg: string; border: string; text: string }
+> = {
+  "Very High": {
+    bg: "oklch(0.97 0.015 200)",
+    border: "oklch(0.85 0.06 200)",
+    text: "oklch(0.4 0.1 200)",
+  },
+  High: {
+    bg: "oklch(0.97 0.02 150)",
+    border: "oklch(0.85 0.06 150)",
+    text: "oklch(0.4 0.1 150)",
+  },
+  Medium: {
+    bg: "oklch(0.98 0.015 80)",
+    border: "oklch(0.88 0.07 80)",
+    text: "oklch(0.45 0.1 70)",
+  },
+  "Low–Medium": {
+    bg: "oklch(0.98 0.008 60)",
+    border: "oklch(0.91 0.006 240)",
+    text: "oklch(0.55 0.008 240)",
+  },
+  Low: {
+    bg: "oklch(0.97 0.008 240)",
+    border: "oklch(0.91 0.006 240)",
+    text: "oklch(0.6 0.008 240)",
+  },
 };
 
 export default function Data() {
   return (
     <Layout>
-      {/* Chapter Hero */}
-      <section className="section-bg-light px-6 pt-20 pb-16 border-b border-border/30">
+      {/* Page Header */}
+      <section
+        className="bg-background border-b border-border px-6 pt-12 pb-10"
+        data-ocid="data.page_header"
+      >
         <div className="max-w-5xl mx-auto">
-          <p className="chapter-label mb-4">Chapter</p>
-          <h1 className="text-hero text-foreground mb-6 fade-in-up">
-            DATA &<br />
-            INSIGHTS
+          <p className="chapter-label mb-3 fade-in-up">Numbers & Trends</p>
+          <h1 className="text-hero text-foreground mb-4 fade-in-up fade-in-up-delay-1">
+            Data & Insights
           </h1>
-          <div className="gold-underline w-16 mb-8" />
-          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-1">
+          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-2">
             If you're deciding which branch to pick — or trying to understand
             what the placement landscape looks like — this is the honest version
             of what I know. These are trends, not guarantees.
           </p>
-          <div className="mt-8">
+          <div className="mt-6 fade-in-up fade-in-up-delay-3">
             <Badge variant="secondary" className="text-xs">
               📊 Insider Numbers
             </Badge>
@@ -148,69 +173,78 @@ export default function Data() {
 
       {/* Cutoffs */}
       <section
-        className="section-bg-muted px-6 py-16 border-b border-border/30"
+        className="bg-muted/30 px-6 py-16 border-b border-border"
         data-ocid="data.cutoffs_section"
       >
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
-            <p className="text-label mb-3">Admission Cutoffs by Branch</p>
+          <Fade>
+            <p className="text-label mb-3">Admission cutoffs by branch</p>
             <h2 className="text-section text-foreground mb-2">
               Branch Cutoffs
             </h2>
-            <div className="gold-underline w-12 mb-6" />
-            <p className="text-xs text-muted-foreground mb-8 leading-relaxed">
+            <p className="font-body text-xs text-muted-foreground mb-8 leading-relaxed">
               Based on VITEEE rank — these are historical trends. They shift
               every year depending on how many students apply and how the exam
               goes.
             </p>
-          </FadeSection>
-          <FadeSection delay={100}>
-            <div className="overflow-x-auto border border-border/40">
-              <table
-                className="w-full text-sm bg-card"
-                data-ocid="data.cutoffs_table"
-              >
+          </Fade>
+          <Fade delay={100}>
+            <div
+              className="overflow-x-auto rounded-2xl border border-border shadow-subtle"
+              data-ocid="data.cutoffs_table"
+            >
+              <table className="w-full text-sm bg-card">
                 <thead>
-                  <tr className="border-b border-border/50">
-                    <th className="text-left px-5 py-4 font-display font-bold text-foreground tracking-wide">
+                  <tr className="border-b border-border bg-muted/30">
+                    <th className="text-left px-5 py-4 font-display font-semibold text-foreground text-sm">
                       Branch
                     </th>
-                    <th className="text-left px-5 py-4 font-display font-bold text-foreground tracking-wide">
+                    <th className="text-left px-5 py-4 font-display font-semibold text-foreground text-sm">
                       Demand
                     </th>
-                    <th className="text-left px-5 py-4 font-display font-bold text-foreground tracking-wide">
+                    <th className="text-left px-5 py-4 font-display font-semibold text-foreground text-sm">
                       Typical Rank
                     </th>
-                    <th className="text-left px-5 py-4 font-display font-bold text-foreground tracking-wide hidden md:table-cell">
+                    <th className="text-left px-5 py-4 font-display font-semibold text-foreground text-sm hidden md:table-cell">
                       My Take
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {cutoffItems.map((row, i) => (
-                    <tr
-                      key={row.branch}
-                      className="border-b border-border/30 last:border-0 hover:bg-muted/20 transition-colors"
-                      data-ocid={`data.cutoff_row.${i + 1}`}
-                    >
-                      <td className="px-5 py-4 font-display font-semibold text-foreground">
-                        {row.branch}
-                      </td>
-                      <td className="px-5 py-4">
-                        <span
-                          className={`text-xs font-bold tracking-widest uppercase border px-2.5 py-1 ${demandColors[row.demand] ?? "text-muted-foreground border-border/40"}`}
-                        >
-                          {row.demand}
-                        </span>
-                      </td>
-                      <td className="px-5 py-4 font-mono text-sm text-secondary font-bold">
-                        {row.rank}
-                      </td>
-                      <td className="px-5 py-4 text-xs text-muted-foreground hidden md:table-cell max-w-xs leading-relaxed">
-                        {row.note}
-                      </td>
-                    </tr>
-                  ))}
+                  {cutoffItems.map((row, i) => {
+                    const style =
+                      demandBadgeStyle[row.demand as DemandLevel] ??
+                      demandBadgeStyle.Low;
+                    return (
+                      <tr
+                        key={row.branch}
+                        className="border-b border-border last:border-0 hover:bg-muted/20 transition-colors"
+                        data-ocid={`data.cutoff_row.${i + 1}`}
+                      >
+                        <td className="px-5 py-4 font-display font-semibold text-foreground text-sm">
+                          {row.branch}
+                        </td>
+                        <td className="px-5 py-4">
+                          <span
+                            className="text-xs font-semibold px-2.5 py-1 rounded-full border"
+                            style={{
+                              background: style.bg,
+                              borderColor: style.border,
+                              color: style.text,
+                            }}
+                          >
+                            {row.demand}
+                          </span>
+                        </td>
+                        <td className="px-5 py-4 font-mono text-sm font-bold text-primary">
+                          {row.rank}
+                        </td>
+                        <td className="px-5 py-4 text-xs text-muted-foreground hidden md:table-cell max-w-xs leading-relaxed">
+                          {row.note}
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
@@ -219,56 +253,58 @@ export default function Data() {
               For CSE, you want to be well under 10k to be safe — don't cut it
               close.
             </p>
-          </FadeSection>
+          </Fade>
         </div>
       </section>
 
       {/* Trends */}
       <section
-        className="section-bg-light px-6 py-16 border-b border-border/30"
+        className="bg-background px-6 py-16 border-b border-border"
         data-ocid="data.trends_section"
       >
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
-            <p className="text-label mb-3">What I've Seen</p>
+          <Fade>
+            <p className="text-label mb-3">What I've seen</p>
             <h2 className="text-section text-foreground mb-2">
               Placement Observations
             </h2>
-            <div className="gold-underline w-12 mb-6" />
-            <p className="text-xs text-muted-foreground mb-8 leading-relaxed">
+            <p className="font-body text-xs text-muted-foreground mb-8 leading-relaxed">
               These aren't official stats — they're patterns I've noticed over
               time. Take them as context, not guarantees.
             </p>
-          </FadeSection>
+          </Fade>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {trends.map((t, i) => (
-              <FadeSection key={t.title} delay={i * 70}>
+              <Fade key={t.title} delay={i * 70}>
                 <div
-                  className="border border-border/40 bg-card p-6 transition-smooth hover:border-secondary/40 h-full"
+                  className="bg-card border border-border rounded-xl p-6 transition-smooth hover:shadow-card shadow-subtle h-full"
                   data-ocid={`data.trend_card.${i + 1}`}
                 >
                   <span className="text-3xl mb-4 block" aria-hidden="true">
                     {t.icon}
                   </span>
-                  <p className="font-display font-bold text-foreground mb-2 leading-tight">
+                  <p className="font-display font-bold text-foreground text-sm mb-2 leading-tight">
                     {t.title}
                   </p>
                   <p className="text-xs text-muted-foreground leading-relaxed">
                     {t.desc}
                   </p>
                 </div>
-              </FadeSection>
+              </Fade>
             ))}
           </div>
         </div>
       </section>
 
       {/* Summary */}
-      <section className="section-bg-muted px-6 py-12">
+      <section className="bg-muted/30 px-6 py-12">
         <div className="max-w-5xl mx-auto">
-          <FadeSection>
-            <div className="border-l-2 border-secondary/50 pl-6 py-4">
-              <p className="text-sm text-muted-foreground leading-relaxed">
+          <Fade>
+            <div
+              className="bg-card border border-border rounded-2xl p-6 shadow-subtle"
+              style={{ borderLeft: "4px solid oklch(var(--primary) / 0.6)" }}
+            >
+              <p className="font-body text-sm text-muted-foreground leading-relaxed">
                 <span className="font-semibold text-foreground">
                   Honestly, my advice:{" "}
                 </span>
@@ -280,7 +316,7 @@ export default function Data() {
                 but it doesn't carry you.
               </p>
             </div>
-          </FadeSection>
+          </Fade>
         </div>
       </section>
     </Layout>

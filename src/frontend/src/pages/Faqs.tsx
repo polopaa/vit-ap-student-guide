@@ -4,7 +4,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Badge } from "@/components/ui/badge";
 import { useEffect, useRef, useState } from "react";
 import { Layout } from "../components/Layout";
 
@@ -41,7 +40,7 @@ function useScrollFade() {
   return { ref, visible };
 }
 
-function FadeSection({
+function Fade({
   children,
   className = "",
   delay = 0,
@@ -50,7 +49,7 @@ function FadeSection({
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`}
+      className={`transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -236,6 +235,7 @@ const faqData: FaqCategory[] = [
 ];
 
 export default function Faqs() {
+  const [activeCategory, setActiveCategory] = useState("should-i-join");
   const totalQuestions = faqData.reduce(
     (sum, cat) => sum + cat.items.length,
     0,
@@ -243,15 +243,22 @@ export default function Faqs() {
 
   return (
     <Layout>
-      {/* Chapter Hero */}
-      <section className="section-bg-light px-6 pt-20 pb-16 border-b border-border/30">
+      {/* Page Header */}
+      <section
+        className="bg-background border-b border-border px-6 pt-12 pb-10"
+        data-ocid="faqs.page_header"
+      >
         <div className="max-w-4xl mx-auto">
-          <p className="chapter-label mb-4" data-ocid="faqs.section_label">
-            Chapter
+          <p
+            className="chapter-label mb-3 fade-in-up"
+            data-ocid="faqs.section_label"
+          >
+            Real questions, honest answers
           </p>
-          <h1 className="text-hero text-foreground mb-6 fade-in-up">FAQ</h1>
-          <div className="gold-underline w-16 mb-8" />
-          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-1">
+          <h1 className="text-hero text-foreground mb-4 fade-in-up fade-in-up-delay-1">
+            Frequently Asked Questions
+          </h1>
+          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed fade-in-up fade-in-up-delay-2">
             {totalQuestions} honest answers to what you're probably wondering
             right now — whether this place is worth it, what daily life is
             actually like, and what no one puts in the brochure.
@@ -259,14 +266,23 @@ export default function Faqs() {
         </div>
       </section>
 
-      {/* Category nav */}
-      <section className="section-bg-muted px-6 py-4 border-b border-border/30 sticky top-0 z-10 backdrop-blur-sm">
+      {/* Category pill tabs */}
+      <section
+        className="bg-muted/30 px-6 py-4 border-b border-border sticky top-14 z-10 backdrop-blur-sm"
+        data-ocid="faqs.category_nav"
+      >
         <div className="max-w-4xl mx-auto flex flex-wrap gap-2">
           {faqData.map((cat) => (
             <a
               key={cat.id}
               href={`#faq-${cat.id}`}
-              className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold tracking-widest uppercase border border-border/40 text-muted-foreground hover:border-secondary/50 hover:text-secondary transition-smooth"
+              onClick={() => setActiveCategory(cat.id)}
+              className={[
+                "inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-medium border transition-smooth",
+                activeCategory === cat.id
+                  ? "pill-tab-active"
+                  : "pill-tab-inactive",
+              ].join(" ")}
               data-ocid={`faqs.category_link.${cat.id}`}
             >
               <span aria-hidden="true">{cat.icon}</span>
@@ -282,33 +298,33 @@ export default function Faqs() {
           <section
             key={cat.id}
             id={`faq-${cat.id}`}
-            className={`py-14 ${catIdx < faqData.length - 1 ? "border-b border-border/30" : ""}`}
+            className={`py-14 ${catIdx < faqData.length - 1 ? "border-b border-border" : ""}`}
             data-ocid={`faqs.${cat.id}_section`}
           >
-            <FadeSection>
+            <Fade>
               <div className="flex items-center gap-3 mb-2">
                 <span className="text-xl" aria-hidden="true">
                   {cat.icon}
                 </span>
                 <p className="text-label">{cat.label}</p>
-                <Badge variant="outline" className="ml-auto text-xs">
+                <span className="ml-auto text-xs font-medium px-2.5 py-0.5 rounded-full border text-muted-foreground border-border">
                   {cat.items.length} questions
-                </Badge>
+                </span>
               </div>
               <h2 className="text-section text-foreground mb-2">{cat.label}</h2>
-              <div className="gold-underline w-12 mb-8" />
-            </FadeSection>
+              <div className="gold-underline w-10 mb-8" />
+            </Fade>
 
             <Accordion type="multiple" className="space-y-0">
               {cat.items.map((item, i) => (
-                <FadeSection key={item.q} delay={i * 60}>
+                <Fade key={item.q} delay={i * 50}>
                   <AccordionItem
                     value={`${cat.id}-${i}`}
-                    className="border-b border-border/40 last:border-b-0"
+                    className="border-b border-border/60 last:border-b-0"
                     data-ocid={`faqs.${cat.id}.item.${i + 1}`}
                   >
                     <AccordionTrigger
-                      className="text-xl md:text-2xl font-display font-semibold py-6"
+                      className="text-base md:text-lg font-display font-semibold py-5 text-left hover:text-primary transition-smooth"
                       data-ocid={`faqs.${cat.id}.trigger.${i + 1}`}
                     >
                       {item.q}
@@ -319,14 +335,20 @@ export default function Faqs() {
                           {item.a}
                         </p>
                         {item.bullets && item.bullets.length > 0 && (
-                          <ul className="space-y-2 mt-3 border-l-2 border-secondary/30 pl-4">
+                          <ul className="space-y-2 mt-3 pl-1">
                             {item.bullets.map((bullet) => (
                               <li
                                 key={bullet}
-                                className="flex items-start gap-2 text-sm text-muted-foreground"
+                                className="flex items-start gap-3 text-sm text-muted-foreground"
                               >
-                                <span className="text-secondary shrink-0 mt-0.5 font-bold">
-                                  —
+                                <span
+                                  className="shrink-0 mt-1 w-4 h-4 rounded-full flex items-center justify-center text-[10px]"
+                                  style={{
+                                    background: "oklch(var(--primary) / 0.1)",
+                                    color: "oklch(var(--primary))",
+                                  }}
+                                >
+                                  →
                                 </span>
                                 <span>{bullet}</span>
                               </li>
@@ -336,7 +358,7 @@ export default function Faqs() {
                       </div>
                     </AccordionContent>
                   </AccordionItem>
-                </FadeSection>
+                </Fade>
               ))}
             </Accordion>
           </section>
@@ -344,12 +366,12 @@ export default function Faqs() {
 
         {/* Summary */}
         <section
-          className="py-12 border-t border-border/30"
+          className="py-12 border-t border-border"
           data-ocid="faqs.summary_section"
         >
-          <FadeSection>
-            <div className="border-l-2 border-secondary/50 pl-6 py-4">
-              <p className="text-label mb-2">One Last Thing</p>
+          <Fade>
+            <div className="bg-muted/30 rounded-2xl p-6 border border-border">
+              <p className="text-label mb-2">One last thing</p>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Everything here is based on real student experience — mine and
                 others I've talked to. Things change, rules get updated, and
@@ -359,7 +381,7 @@ export default function Faqs() {
                 like here? This is as honest as it gets.
               </p>
             </div>
-          </FadeSection>
+          </Fade>
         </section>
       </div>
     </Layout>

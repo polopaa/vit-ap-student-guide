@@ -4,96 +4,60 @@
 
 @layer base {
   :root {
-    --font-display: "Fraunces";
+    --font-display: "DM Sans";
     --font-body: "Figtree";
     --font-mono: "Geist Mono";
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    /* Dark cinematic palette — all values in OKLCH L C H format */
-    /* Background: deep near-black warm */
-    --background: 0.08 0.008 60;
-    /* Foreground: warm cream */
-    --foreground: 0.93 0.018 80;
+    /* Background: warm off-white — readable, non-clinical */
+    --background: 0.985 0.003 100;
+    /* Foreground: dark charcoal */
+    --foreground: 0.22 0.008 240;
 
-    /* Card: slightly lighter dark surface */
-    --card: 0.11 0.01 60;
-    --card-foreground: 0.93 0.018 80;
+    /* Card: pure white */
+    --card: 1.0 0.0 0;
+    --card-foreground: 0.22 0.008 240;
 
-    --popover: 0.13 0.01 60;
-    --popover-foreground: 0.93 0.018 80;
+    --popover: 1.0 0.0 0;
+    --popover-foreground: 0.22 0.008 240;
 
-    /* Primary: deep crimson/maroon */
-    --primary: 0.42 0.17 18;
-    --primary-foreground: 0.95 0.01 80;
+    /* Primary: teal — trust, CTAs, links */
+    --primary: 0.54 0.12 200;
+    --primary-foreground: 1.0 0.0 0;
 
-    /* Secondary: warm gold */
-    --secondary: 0.72 0.12 75;
-    --secondary-foreground: 0.12 0.01 60;
+    /* Secondary: amber — ratings, highlights, badges */
+    --secondary: 0.72 0.13 70;
+    --secondary-foreground: 0.22 0.008 240;
 
-    /* Muted: dark surface with slight warmth */
-    --muted: 0.14 0.008 60;
-    --muted-foreground: 0.58 0.018 70;
+    /* Muted: light gray — subtle backgrounds */
+    --muted: 0.94 0.006 240;
+    --muted-foreground: 0.55 0.008 240;
 
-    /* Accent: gold highlight */
-    --accent: 0.72 0.12 75;
-    --accent-foreground: 0.12 0.01 60;
+    /* Accent: same amber as secondary for consistency */
+    --accent: 0.72 0.13 70;
+    --accent-foreground: 0.22 0.008 240;
 
-    --destructive: 0.5 0.2 20;
-    --destructive-foreground: 0.95 0.01 80;
+    --destructive: 0.53 0.22 25;
+    --destructive-foreground: 1.0 0.0 0;
 
-    --border: 0.2 0.01 60;
-    --input: 0.16 0.01 60;
-    --ring: 0.72 0.12 75;
+    --border: 0.91 0.006 240;
+    --input: 0.94 0.006 240;
+    --ring: 0.54 0.12 200;
 
-    --chart-1: 0.42 0.17 18;
-    --chart-2: 0.72 0.12 75;
-    --chart-3: 0.55 0.14 45;
-    --chart-4: 0.93 0.018 80;
+    --chart-1: 0.54 0.12 200;
+    --chart-2: 0.72 0.13 70;
+    --chart-3: 0.54 0.18 150;
+    --chart-4: 0.5 0.2 25;
     --chart-5: 0.6 0.1 200;
 
-    --sidebar: 0.08 0.008 60;
-    --sidebar-foreground: 0.93 0.018 80;
-    --sidebar-primary: 0.42 0.17 18;
-    --sidebar-primary-foreground: 0.95 0.01 80;
-    --sidebar-accent: 0.72 0.12 75;
-    --sidebar-accent-foreground: 0.12 0.01 60;
-    --sidebar-border: 0.2 0.01 60;
-    --sidebar-ring: 0.72 0.12 75;
-  }
-
-  .dark {
-    --background: 0.08 0.008 60;
-    --foreground: 0.93 0.018 80;
-    --card: 0.11 0.01 60;
-    --card-foreground: 0.93 0.018 80;
-    --popover: 0.13 0.01 60;
-    --popover-foreground: 0.93 0.018 80;
-    --primary: 0.42 0.17 18;
-    --primary-foreground: 0.95 0.01 80;
-    --secondary: 0.72 0.12 75;
-    --secondary-foreground: 0.12 0.01 60;
-    --muted: 0.14 0.008 60;
-    --muted-foreground: 0.58 0.018 70;
-    --accent: 0.72 0.12 75;
-    --accent-foreground: 0.12 0.01 60;
-    --destructive: 0.5 0.2 20;
-    --destructive-foreground: 0.95 0.01 80;
-    --border: 0.2 0.01 60;
-    --input: 0.16 0.01 60;
-    --ring: 0.72 0.12 75;
-    --chart-1: 0.42 0.17 18;
-    --chart-2: 0.72 0.12 75;
-    --chart-3: 0.55 0.14 45;
-    --chart-4: 0.93 0.018 80;
-    --chart-5: 0.6 0.1 200;
-    --sidebar: 0.08 0.008 60;
-    --sidebar-foreground: 0.93 0.018 80;
-    --sidebar-primary: 0.42 0.17 18;
-    --sidebar-primary-foreground: 0.95 0.01 80;
-    --sidebar-accent: 0.72 0.12 75;
-    --sidebar-accent-foreground: 0.12 0.01 60;
-    --sidebar-border: 0.2 0.01 60;
-    --sidebar-ring: 0.72 0.12 75;
+    --sidebar: 0.985 0.003 100;
+    --sidebar-foreground: 0.22 0.008 240;
+    --sidebar-primary: 0.54 0.12 200;
+    --sidebar-primary-foreground: 1.0 0.0 0;
+    --sidebar-accent: 0.72 0.13 70;
+    --sidebar-accent-foreground: 0.22 0.008 240;
+    --sidebar-border: 0.91 0.006 240;
+    --sidebar-ring: 0.54 0.12 200;
   }
 
   * {
@@ -101,7 +65,7 @@
   }
 
   html {
-    color-scheme: dark;
+    color-scheme: light;
     scroll-behavior: smooth;
   }
 
@@ -109,6 +73,18 @@
     @apply bg-background text-foreground antialiased;
     font-family: "Figtree", "Helvetica Neue", sans-serif;
   }
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("/assets/fonts/DMSans.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Figtree";
+  src: url("/assets/fonts/Figtree.woff2") format("woff2");
+  font-display: swap;
 }
 
 @font-face {
@@ -120,7 +96,7 @@
 @layer utilities {
   /* Typography */
   .font-display {
-    font-family: "Fraunces", "Georgia", serif;
+    font-family: "DM Sans", "Helvetica Neue", sans-serif;
   }
   .font-body {
     font-family: "Figtree", "Helvetica Neue", sans-serif;
@@ -131,26 +107,26 @@
 
   /* Text scale */
   .text-hero {
-    font-family: "Fraunces", "Georgia", serif;
-    @apply text-5xl sm:text-6xl md:text-8xl font-black tracking-tight leading-none;
+    font-family: "DM Sans", sans-serif;
+    @apply text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-tight;
   }
   .text-section {
-    font-family: "Fraunces", "Georgia", serif;
-    @apply text-3xl md:text-5xl font-bold tracking-tight leading-tight;
+    font-family: "DM Sans", sans-serif;
+    @apply text-2xl md:text-3xl font-semibold tracking-tight leading-snug;
   }
   .text-subsection {
-    font-family: "Fraunces", "Georgia", serif;
-    @apply text-xl md:text-2xl font-semibold tracking-tight;
+    font-family: "DM Sans", sans-serif;
+    @apply text-lg md:text-xl font-semibold tracking-tight;
   }
   .text-label {
     font-family: "Figtree", sans-serif;
-    @apply text-xs font-semibold tracking-[0.2em] uppercase;
-    color: oklch(var(--secondary));
+    @apply text-xs font-semibold tracking-widest uppercase;
+    color: oklch(var(--muted-foreground));
   }
 
   /* Transitions */
   .transition-smooth {
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -164,7 +140,7 @@
 
   /* Animations */
   .fade-in-up {
-    animation: fade-in-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: fade-in-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     opacity: 0;
   }
   .fade-in-up-delay-1 {
@@ -179,14 +155,11 @@
   .fade-in-up-delay-4 {
     animation-delay: 0.4s;
   }
-  .fade-in-up-delay-5 {
-    animation-delay: 0.5s;
-  }
 
   @keyframes fade-in-up {
     from {
       opacity: 0;
-      transform: translateY(2rem);
+      transform: translateY(1.5rem);
     }
     to {
       opacity: 1;
@@ -194,71 +167,157 @@
     }
   }
 
+  @keyframes menu-open {
+    from {
+      opacity: 0;
+      transform: scale(0.96) translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  .animate-menu-open {
+    animation: menu-open 0.15s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
   .scroll-fade {
     transition: opacity 0.5s ease-out, transform 0.5s ease-out;
   }
 
-  /* Layout utilities */
-  .full-screen-hero {
-    @apply min-h-screen flex items-center justify-center relative overflow-hidden;
+  /* Layout */
+  .container-clean {
+    @apply max-w-5xl mx-auto px-6 sm:px-8;
   }
 
-  /* Dividers & accents */
-  .chapter-divider {
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      oklch(var(--secondary) / 0.4),
-      transparent
-    );
-  }
-
-  .accent-underline {
-    border-bottom: 2px solid oklch(var(--primary));
-  }
-
-  .gold-underline {
-    border-bottom: 2px solid oklch(var(--secondary));
-  }
-
-  /* Chapter label style (like donmolinico) */
-  .chapter-label {
-    font-family: "Fraunces", "Georgia", serif;
-    color: oklch(var(--primary));
-    @apply text-sm font-bold tracking-[0.15em] uppercase italic;
-  }
-
-  /* Card styles */
-  .card-cinema {
-    @apply bg-card border border-border;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  }
-
-  /* Section alternation */
+  /* Section backgrounds — light design system */
   .section-bg-light {
     @apply bg-background;
   }
   .section-bg-muted {
-    background-color: oklch(0.12 0.01 60);
+    @apply bg-muted/30;
   }
   .section-bg-card {
     @apply bg-card;
   }
 
-  /* Nav link hover */
-  .nav-link-cinematic {
-    font-family: "Fraunces", "Georgia", serif;
-    @apply text-4xl sm:text-5xl font-bold leading-tight transition-smooth;
-    color: oklch(var(--foreground) / 0.7);
+  /* Shadows */
+  .shadow-subtle {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
   }
-  .nav-link-cinematic:hover {
-    color: oklch(var(--foreground));
-    padding-left: 0.5rem;
+  .shadow-card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
   }
 
-  /* Noise texture overlay via pseudo-element trick (just a subtle grain) */
-  .bg-grain {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  /* Card — clean white, Notion-style */
+  .card-clean {
+    @apply bg-card rounded-xl border border-border shadow-subtle transition-smooth;
+  }
+  .card-clean:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+  }
+
+  /* Card — cinema style for compatibility */
+  .card-cinema {
+    @apply bg-card border border-border transition-smooth rounded-lg;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+  }
+  .card-cinema:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Chapter label */
+  .chapter-label {
+    font-family: "Figtree", sans-serif;
+    @apply text-xs font-semibold tracking-widest uppercase;
+    color: oklch(var(--primary));
+  }
+
+  /* Gold/teal underline accent */
+  .gold-underline {
+    height: 3px;
+    border-radius: 2px;
+    background: oklch(var(--primary) / 0.6);
+  }
+
+  /* Rating badge — Zomato-style amber pill */
+  .rating-badge {
+    @apply inline-flex items-center justify-center w-12 h-12 rounded-full font-display font-bold text-base;
+    background: oklch(var(--secondary) / 0.15);
+    color: oklch(var(--secondary));
+    border: 1.5px solid oklch(var(--secondary) / 0.3);
+  }
+
+  /* Pro/Con callouts */
+  .callout-pro {
+    @apply rounded-xl p-4 text-sm;
+    background: oklch(0.97 0.02 150);
+    border: 1px solid oklch(0.88 0.06 150);
+    color: oklch(0.35 0.08 150);
+  }
+  .callout-con {
+    @apply rounded-xl p-4 text-sm;
+    background: oklch(0.97 0.015 25);
+    border: 1px solid oklch(0.88 0.05 25);
+    color: oklch(0.4 0.1 25);
+  }
+
+  /* Amber callout box */
+  .callout-amber {
+    @apply rounded-xl p-4 text-sm;
+    background: oklch(0.98 0.015 80);
+    border: 1px solid oklch(0.88 0.07 80);
+    color: oklch(0.4 0.1 70);
+  }
+
+  /* Teal callout box */
+  .callout-teal {
+    @apply rounded-xl p-4 text-sm;
+    background: oklch(0.97 0.015 200);
+    border: 1px solid oklch(0.88 0.06 200);
+    color: oklch(0.4 0.1 200);
+  }
+
+  /* Page header — replaces dark chapter heroes */
+  .page-header {
+    @apply bg-background border-b border-border px-6 pt-12 pb-10;
+  }
+
+  /* Section spacing */
+  .section-spacing {
+    @apply py-16 sm:py-20 md:py-28;
+  }
+
+  /* Hero heading */
+  .hero-heading {
+    @apply text-5xl sm:text-6xl md:text-7xl font-bold text-foreground leading-tight;
+    font-family: "DM Sans", sans-serif;
+  }
+
+  /* Subtle divider */
+  .divider-subtle {
+    height: 1px;
+    background: oklch(var(--border));
+  }
+
+  /* Teal link style */
+  .link-primary {
+    color: oklch(var(--primary));
+    @apply transition-smooth underline-offset-4 hover:underline;
+  }
+
+  /* Pill tab — FAQ style */
+  .pill-tab {
+    @apply px-4 py-1.5 rounded-full text-sm font-medium transition-smooth border;
+  }
+  .pill-tab-active {
+    background: oklch(var(--primary) / 0.1);
+    color: oklch(var(--primary));
+    border-color: oklch(var(--primary) / 0.3);
+  }
+  .pill-tab-inactive {
+    @apply bg-transparent text-muted-foreground border-border hover:text-foreground;
   }
 }
